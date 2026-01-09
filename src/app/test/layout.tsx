@@ -13,7 +13,7 @@ function cebabCaseToPascalCase(str: string) {
  * 하위 디렉토리를 읽은 후 그 이름과 PascalCase로 변환한 이름을 반환합니다.
  */
 async function getTestPages() {
-  const testDir = path.join(process.cwd(), 'app', 'test');
+  const testDir = path.join(process.cwd(), 'src', 'app', 'test');
   try {
     const dirents = await fs.readdir(testDir, { withFileTypes: true });
     const dirs = dirents
