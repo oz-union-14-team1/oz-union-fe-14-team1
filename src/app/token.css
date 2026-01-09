@@ -1,0 +1,76 @@
+@theme {
+  /* ===== BASE COLORS ===== */
+  --color-background: #222222;
+  --color-text-light: #fbfbfb;
+  --color-text-dark: #2b2b2b;
+
+  /* ===== MAIN COLORS ===== */
+  --color-main-purple: #6467f1;
+  --color-main-violet: #8b5cf6;
+  --color-main-fuchsia: #a855f7;
+
+  /* ===== SUB COLORS ===== */
+  --color-sub-cyan: #22d3ee;
+  --color-sub-indigo: #6366f1;
+
+  /* ===== GRADIENTS ===== */
+  --gradient-main: linear-gradient(to right, #6467f1, #8b5cf6, #a855f7);
+  --gradient-sub: linear-gradient(to right, #22d3ee, #6366f1);
+
+  /* ===== TYPOGRAPHY ===== */
+  --font-family-base: 'Pretendard', sans-serif;
+
+  --font-size-description: 2rem; /* 32px */
+  --font-size-title: 1.25rem; /* 20px */
+  --font-size-subtitle: 1.125rem; /* 18px */
+  --font-size-body: 1rem; /* 16px */
+  --font-size-small: 0.875rem; /* 14px */
+  --font-size-xsmall: 0.75rem; /* 12px */
+
+  /* ===== RADIUS ===== */
+  --radius-default: 6px;
+  --radius-lg: 20px;
+
+  /* ===== BUTTON COLORS ===== */
+
+  /* Main (Violet) */
+  --color-btn-main-default: var(--color-violet-500);
+  --color-btn-main-hover: var(--color-violet-600);
+  --color-btn-main-active: var(--color-violet-400);
+  --color-btn-main-disabled: var(--color-violet-200);
+
+  /* Sub (Cyan) */
+  --color-btn-sub-default: var(--color-cyan-300);
+  --color-btn-sub-hover: var(--color-cyan-400);
+  --color-btn-sub-active: var(--color-cyan-200);
+  --color-btn-sub-disabled: var(--color-cyan-100);
+
+  /* Outline */
+  --color-btn-outline-stroke: #7b7b7b;
+  --color-btn-outline-hover-fill: var(--color-neutral-100);
+  --color-btn-outline-active-fill: var(--color-neutral-300);
+  --color-btn-outline-disabled-stroke: var(--color-neutral-100);
+
+  /* Gray */
+  --color-btn-gray-default: var(--color-neutral-200);
+  --color-btn-gray-hover: var(--color-neutral-100);
+  --color-btn-gray-active: var(--color-neutral-300);
+  --color-btn-gray-disabled: var(--color-neutral-100);
+
+  /* Disabled Text (공통) */
+  --color-btn-disabled-text: var(--color-neutral-200);
+  --color-btn-gray-disabled-text: var(--color-neutral-300);
+
+  /* ===== TOAST COLORS ===== */
+  --color-toast-error: #ef4444;
+  --color-toast-success: #8b5cf6;
+  --color-toast-warning: var(--color-cyan-300);
+
+  /* ===== LAYOUT ===== */
+  --width-container: 1380px;
+
+  /* spacing으로 px-*, py-* 등으로 사용 가능 */
+  --spacing-mobile: 16px;
+  --spacing-tablet: 32px;
+  --spacing-desktop: 40px;
+}
