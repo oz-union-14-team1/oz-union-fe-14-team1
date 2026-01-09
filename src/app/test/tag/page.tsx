@@ -24,7 +24,7 @@ export default function TagTestPage() {
     <div className="p-10">
       <h1 className="text-title mb-6">Tag 컴포넌트 테스트</h1>
 
-      <div className="flex flex-wrap gap-4">
+      <div className="flex gap-4">
         {TAGS.map((tag) => (
           <Tag
             key={tag.id}
