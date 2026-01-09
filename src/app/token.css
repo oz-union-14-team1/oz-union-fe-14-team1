@@ -65,4 +65,12 @@
   --color-toast-error: #ef4444;
   --color-toast-success: #8b5cf6;
   --color-toast-warning: var(--color-cyan-300);
+
+  /* ===== LAYOUT ===== */
+  --width-container: 1380px;
+
+  /* spacing으로 px-*, py-* 등으로 사용 가능 */
+  --spacing-mobile: 16px;
+  --spacing-tablet: 32px;
+  --spacing-desktop: 40px;
 }
