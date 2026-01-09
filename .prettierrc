@@ -7,6 +7,6 @@
   "printWidth": 80,
   "bracketSpacing": true,
   "endOfLine": "lf",
-  "tailwindStylesheet": "./app/globals.css",
+  "tailwindStylesheet": "./src/app/globals.css",
   "plugins": ["prettier-plugin-tailwindcss"]
 }
