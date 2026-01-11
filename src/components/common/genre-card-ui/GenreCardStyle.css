@@ -1,0 +1,17 @@
+.genre-card {
+  transition: all 0.2s ease;
+}
+
+.genre-card-default {
+  border: 1px solid transparent;
+}
+
+.genre-card-default:hover {
+  transform: scale(1.02);
+}
+
+.genre-card-selected {
+  background-color: rgba(139, 92, 246, 0.15);
+  border: 1px solid #8b5cf6;
+  box-shadow: 0 4px 24px rgba(139, 92, 246, 0.5);
+}
