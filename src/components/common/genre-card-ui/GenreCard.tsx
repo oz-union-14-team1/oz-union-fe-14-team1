@@ -1,14 +1,26 @@
 import { cn } from '@/utils/cn'
 import { Check } from 'lucide-react'
-import './GenreCardStyle.css'
 import Image from 'next/image'
-import { ComponentPropsWithoutRef } from 'react'
 
 type GenreCardProps = {
   name: string
   imgUrl: string
   isSelected?: boolean
-} & ComponentPropsWithoutRef<'button'>
+} & React.ComponentPropsWithoutRef<'button'>
+
+const baseGenreCardStyle = [
+  'rounded-radius-default relative h-40 w-33.75 overflow-hidden',
+  'transition-all duration-200 ease-out',
+  'border border-transparent',
+]
+
+const defaultGenreCardStyle = ['hover:scale-[1.02]']
+
+const selectedGenreCardStyle = [
+  'bg-violet-500/15',
+  'border-violet-500',
+  'shadow-[0_4px_24px_rgba(139,92,246,0.5)]',
+]
 
 export default function GenreCard({
   name,
@@ -21,9 +33,8 @@ export default function GenreCard({
     <button
       aria-pressed={isSelected}
       className={cn(
-        'rounded-radius-default relative h-40 w-33.75 overflow-hidden',
-        'transition-all',
-        isSelected ? 'genre-card-selected' : 'genre-card-default',
+        baseGenreCardStyle,
+        isSelected ? selectedGenreCardStyle : defaultGenreCardStyle,
         className
       )}
       {...rest}
