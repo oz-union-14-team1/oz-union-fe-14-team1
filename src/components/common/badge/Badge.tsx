@@ -1,11 +1,13 @@
 import type { VariantProps } from 'class-variance-authority'
-import { cn } from '../../../utils/cn'
+import { cn } from '@/utils'
 import { badgeVariants } from './badgeStyle'
+import { ComponentPropsWithoutRef, ReactNode } from 'react'
 
-export type BadgeProps = React.ComponentPropsWithoutRef<'span'> &
+type BadgeProps = ComponentPropsWithoutRef<'span'> &
   VariantProps<typeof badgeVariants> & {
-    children: React.ReactNode
+    children: ReactNode
   }
+
 /**
  * 상태 컴포넌트
  * @param variant - 뱃지 스타일
@@ -15,10 +17,10 @@ export default function Badge({
   className,
   variant,
   children,
-  ...rest
+  ...props
 }: BadgeProps) {
   return (
-    <span className={cn(badgeVariants({ variant }), className)} {...rest}>
+    <span className={cn(badgeVariants({ variant }), className)} {...props}>
       {children}
     </span>
   )
