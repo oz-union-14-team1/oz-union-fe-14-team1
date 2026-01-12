@@ -1,9 +1,3 @@
-import Button from '../components/common/button/Button'
-
 export default function Home() {
-  return (
-    <div>
-      <Button variant="gray" label="버튼" />
-    </div>
-  )
+  return <div>메인 페이지입니다.</div>
 }
