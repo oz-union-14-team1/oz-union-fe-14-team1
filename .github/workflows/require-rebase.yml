@@ -1,0 +1,30 @@
+name: Require rebase onto dev
+
+on:
+  pull_request:
+    branches:
+      - dev
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check-rebase:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Fetch dev branch
+        run: git fetch origin dev
+
+      - name: Check if dev is ancestor
+        run: |
+          if git merge-base --is-ancestor origin/dev HEAD; then
+            echo "PR branch is up to date with dev."
+          else
+            echo "::error::PR branch is not rebased onto latest dev."
+            echo "Please rebase your branch onto dev."
+            exit 1
+          fi
