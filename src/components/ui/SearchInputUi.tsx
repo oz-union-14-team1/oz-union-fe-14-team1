@@ -20,9 +20,9 @@ export default function SearchInputUi({
   selectedFilters: number[]
 }) {
   return (
-    <div className="relative hidden items-center gap-[10px] md:flex">
+    <div className="relative hidden items-center gap-2.5 md:flex">
       <SearchInput
-        className="w-[288px]"
+        className="w-72"
         value={searchInputValue}
         onChange={handleSearchChange}
         onKeyDown={handleKeyDown}
@@ -35,7 +35,7 @@ export default function SearchInputUi({
         aria-label={isFilterOpen ? '필터 닫기' : '필터 열기'}
         onClick={() => setIsFilterOpen(!isFilterOpen)}
         className={cn(
-          'pointer-events-auto relative h-10 w-10 rounded-default transition-all duration-200',
+          'pointer-events-auto relative size-10 rounded-default transition-all duration-200',
           'flex shrink-0 items-center justify-center',
           selectedFilters.length > 0
             ? 'bg-linear-to-r from-main-purple via-main-violet to-main-fuchsia'
@@ -44,9 +44,7 @@ export default function SearchInputUi({
       >
         <Funnel
           fill="currentColor"
-          size={22}
-          strokeWidth={0}
-          className="text-text-light"
+          className="size-5.5 stroke-0 text-text-light"
         />
       </button>
     </div>

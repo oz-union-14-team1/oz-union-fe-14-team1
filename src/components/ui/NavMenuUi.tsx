@@ -11,11 +11,7 @@ const NAV_MENU = [
 export default function NavMenuUi() {
   const pathname = usePathname()
   return (
-    <nav
-      className="flex items-center gap-4 text-base font-bold whitespace-nowrap text-text-light lg:gap-6"
-      role="navigation"
-      aria-label="주요 메뉴"
-    >
+    <nav className="flex items-center gap-4 text-base font-bold whitespace-nowrap text-text-light lg:gap-6">
       {NAV_MENU.map((menu) => {
         const isActive = pathname === menu.href
 

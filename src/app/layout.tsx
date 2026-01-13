@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="pt-[85px] antialiased">
+      <body>
         <Suspense>
           <Header />
         </Suspense>
