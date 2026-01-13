@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
+// import { Suspense } from 'react'
 import './globals.css'
-import Header from '@/components/layout/Header'
+import { Header } from '@/components/layout'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
