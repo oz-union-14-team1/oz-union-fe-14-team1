@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
+import { Header } from '@/components/layout'
 import './globals.css'
-
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -14,9 +15,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`antialiased`}
-      >
+      <body>
+        <Suspense>
+          <Header />
+        </Suspense>
         {children}
       </body>
     </html>
