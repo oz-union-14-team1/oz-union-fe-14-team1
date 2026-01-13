@@ -14,8 +14,8 @@ export default function Header() {
   } = useSearchInputUi()
   return (
     <>
-      <header className="sticky top-0 right-0 left-0 z-50 flex h-21 w-full items-center bg-background shadow-2xl">
-        <div className="flex w-full max-w-(--width-container) items-center justify-between gap-4 px-4 md:mx-auto lg:gap-6">
+      <header className="fixed top-0 right-0 left-0 z-50 flex h-[85px] w-full items-center bg-background shadow-2xl">
+        <div className="flex w-full max-w-[1412px] items-center justify-between gap-4 px-4 md:mx-auto lg:gap-6">
           <div className="flex shrink-0 items-center gap-4 lg:gap-6">
             <LogoUi />
             <NavMenuUi />
