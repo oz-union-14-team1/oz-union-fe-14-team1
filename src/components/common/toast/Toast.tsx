@@ -37,7 +37,7 @@ const Toast = ({ type, message }: ToastProps) => {
     >
       {/* 아이콘 영역 */}
       <div
-        className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-white ${style.iconBg}`}
+        className={`flex h-8 w-8 items-center justify-center rounded-full font-bold text-white ${style.iconBg} ${style.iconBg}`}
       >
         {style.icon}
       </div>
