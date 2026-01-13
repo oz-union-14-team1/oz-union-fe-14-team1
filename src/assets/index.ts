@@ -1,4 +1,4 @@
-import LogoIcon from '@/assets/icon/LogoIcon.svg'
-import LogoTextIcon from '@/assets/icon/LogoTextIcon.svg'
+import LogoImg from '@/assets/image/LogoImg.svg'
+import LogoTextImg from '@/assets/image/LogoTextImg.svg'
 
-export { LogoIcon, LogoTextIcon }
+export { LogoImg, LogoTextImg }
