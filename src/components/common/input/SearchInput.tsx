@@ -9,7 +9,7 @@ type SearchInputProps = BaseInputProps & {
  * 검색 인풋
  * @param onSearch - 클릭 했을 때의 이벤트 처리
  */
-export function SearchInput({ onSearch, ...props }: SearchInputProps) {
+export default function SearchInput({ onSearch, ...props }: SearchInputProps) {
   return (
     <BaseInput
       size="search"
