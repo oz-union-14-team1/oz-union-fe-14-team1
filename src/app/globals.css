@@ -2,7 +2,7 @@
 @import './token.css';
 
 body {
-  background-color: var(--clolr-background);
+  background-color: var(--color-background);
   color: var(--color-text-light);
   font-family: 'Pretendard', sans-serif;
 }
