@@ -1,15 +1,12 @@
-import { cn } from '../../../utils/cn'
+import { cn } from '@/utils'
 
 import { inputVariant, type InputVariant } from './inputStyle'
+import { ComponentProps, ReactNode, useId } from 'react'
 
-export type BaseInputProps = Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  'size'
-> &
+export type BaseInputProps = Omit<ComponentProps<'input'>, 'size'> &
   InputVariant & {
     label?: string
-    searchIcon?: React.ReactNode
-    onChange?: React.ChangeEventHandler<HTMLInputElement>
+    searchIcon?: ReactNode
     onSearchIconClick?: () => void
   }
 
@@ -17,32 +14,33 @@ export type BaseInputProps = Omit<
  * 베이스 인풋 컴포넌트
  */
 export default function BaseInput({
-  size = 'signUp',
+  inputSize = 'signUp',
   color = 'lightGray',
   label,
-  value,
-  onChange,
   searchIcon,
   onSearchIconClick,
   className,
   ...props
 }: BaseInputProps) {
+  const inputId = useId()
+
   return (
     <div className="relative w-fit">
       {label && (
         <p>
-          <label className="text-sm font-medium text-(--color-text-dark)">
+          <label
+            htmlFor={inputId}
+            className="text-sm font-medium text-text-dark"
+          >
             {label}
           </label>
         </p>
       )}
-
       <input
-        value={value}
-        onChange={onChange}
+        id={inputId}
         className={cn(
           inputVariant({
-            size,
+            inputSize,
             color,
           }),
           className
