@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import NotPoundImage from '@/assets/images/not-found.png'
+import { NotPoundImage } from '@/assets'
 import { NOTFOUND_IMAGE_WIDTH, ROUTES_PATHS } from '@/constants'
 
 export default function NotFound() {
