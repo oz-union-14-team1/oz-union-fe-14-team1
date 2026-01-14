@@ -22,7 +22,8 @@ export default function NavMenuUi() {
             className={cn(
               'rounded-sm px-1 py-0.5 transition-colors duration-200',
               'hover:text-main-purple',
-              isActive && 'text-main-purple'
+              isActive && 'text-main-purple',
+              menu.id === 'home' && 'hidden sm:block'
             )}
           >
             {menu.label}

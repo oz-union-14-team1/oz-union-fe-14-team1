@@ -5,11 +5,12 @@ import { cn } from '@/utils'
 import Link from 'next/link'
 import { Heart } from 'lucide-react'
 import { useState } from 'react'
+import { StaticImageData } from 'next/image'
 
 type GameCardProps = {
   id: string
   name: string
-  imgUrl: string
+  imgUrl: string | StaticImageData
 }
 
 export function GameCard({ id, name, imgUrl }: GameCardProps) {
@@ -36,7 +37,7 @@ export function GameCard({ id, name, imgUrl }: GameCardProps) {
           aria-label="찜하기"
           onClick={handleWishlistClick}
           className={cn(
-            'absolute top-4 left-41.5 z-10 size-8 cursor-pointer rounded-full bg-black/40 transition-all',
+            'absolute top-4 right-4 z-10 size-8 cursor-pointer rounded-full bg-black/40 transition-all',
             'flex flex-col items-center justify-center',
             'hover:bg-black/60',
             isWishlisted ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
@@ -49,8 +50,14 @@ export function GameCard({ id, name, imgUrl }: GameCardProps) {
             )}
           />
         </button>
-        <div className="flex w-50 flex-col items-start justify-center gap-5 text-text-light">
-          <Image src={imgUrl} alt={name} width={200} height={270} />
+        <div className="flex w-full flex-col items-start justify-center gap-5 px-2 text-text-light">
+          <Image
+            src={imgUrl}
+            alt={name}
+            width={200}
+            height={270}
+            className="h-auto w-full"
+          />
           <h1 className="text-lg font-bold">{name}</h1>
         </div>
       </div>
