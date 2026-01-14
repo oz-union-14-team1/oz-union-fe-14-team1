@@ -31,7 +31,7 @@ export default function GenreCard({
 }: GenreCardProps) {
   return (
     <button
-      aria-pressed={isSelected}
+      // aria-pressed={isSelected}
       className={cn(
         baseGenreCardStyle,
         isSelected ? selectedGenreCardStyle : defaultGenreCardStyle,

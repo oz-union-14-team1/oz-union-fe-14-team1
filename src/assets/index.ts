@@ -1,5 +1,5 @@
-import LogoImg from '@/assets/image/LogoImg.svg'
-import LogoTextImg from '@/assets/image/LogoTextImg.svg'
-import NotPoundImage from './images/NotPoundImage.png'
+import logo from '@/assets/images/logo/logo.svg'
+import logoText from '@/assets/images/logo/logotext.svg'
+import NotPoundImage from '@/assets/images/NotPoundImage.png'
 
-export { LogoImg, LogoTextImg, NotPoundImage }
+export { logo, logoText, NotPoundImage }
