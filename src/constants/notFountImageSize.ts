@@ -1,0 +1,1 @@
+export const NOTFOUND_IMAGE_WIDTH = 640
