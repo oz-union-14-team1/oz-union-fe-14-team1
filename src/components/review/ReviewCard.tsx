@@ -5,7 +5,7 @@ function Card({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       className={cn(
-        'flex flex-col rounded-[var(--radius-lg)] border border-white/5 text-[var(--color-text-light)] shadow-sm',
+        'text-color-light flex flex-col rounded-lg border border-white/5 shadow-sm',
         className
       )}
       {...props}
@@ -24,10 +24,7 @@ function CardHeader({ className, ...props }: ComponentProps<'div'>) {
 
 function CardContent({ className, ...props }: ComponentProps<'div'>) {
   return (
-    <div
-      className={cn('p-6 pt-2 text-[var(--color-text-light)]', className)}
-      {...props}
-    />
+    <div className={cn('text-color-light p-6 pt-2', className)} {...props} />
   )
 }
 

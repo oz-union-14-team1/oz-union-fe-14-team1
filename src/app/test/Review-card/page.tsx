@@ -1,22 +1,11 @@
-import {
-  Card,
-  CardHeader,
-  CardContent,
-  CardFooter,
-} from '@/components/review/ReviewCard'
+import { Card } from '@/components/review/ReviewCard'
 
-export default function test() {
+export default function ReviewerCard() {
   return (
     <Card>
-      <CardHeader>
-        <p>아바타</p>
-      </CardHeader>
-      <CardContent>
-        <p>댓글</p>
-      </CardContent>
-      <CardFooter>
-        <button>답글달기</button>
-      </CardFooter>
+      <Card.Header>유저 정보</Card.Header>
+      <Card.Content>리뷰 내용</Card.Content>
+      <Card.Footer>답글 버튼</Card.Footer>
     </Card>
   )
 }
