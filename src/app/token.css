@@ -1,5 +1,8 @@
 @theme {
-  /* ===== BASE COLORS ===== */
+  /* =====================================================
+   * ===== BASE COLORS  =====
+   * ===================================================== */
+
   --color-background: #222222;
   --color-text-light: #fbfbfb;
   --color-text-dark: #2b2b2b;
@@ -75,8 +78,55 @@
   /* ===== LAYOUT ===== */
   --width-container: 1380px;
 
-  /* spacing으로 px-*, py-* 등으로 사용 가능 */
+  /* spacing */
   --spacing-mobile: 16px;
   --spacing-tablet: 32px;
   --spacing-desktop: 40px;
+
+  /* =====================================================
+   * ===== SEMANTIC TOKENS =====
+   * ===================================================== */
+
+  /* ===== Brand ===== */
+  --color-primary: var(--color-main-violet);
+  --color-primary-hover: var(--color-main-purple);
+  --color-primary-active: var(--color-main-fuchsia);
+
+  --color-secondary: var(--color-sub-cyan);
+  --color-secondary-hover: var(--color-sub-indigo);
+
+  /* ===== Surface ===== */
+  --color-surface-default: var(--color-background);
+  --color-surface-elevated: #1a1a1a;
+  --color-surface-muted: #2a2a2a;
+
+  /* ===== Text ===== */
+  --color-text-primary: var(--color-text-light);
+  --color-text-secondary: rgba(255, 255, 255, 0.7);
+  --color-text-inverse: var(--color-text-dark);
+
+  /* ===== Border ===== */
+  --color-border-default: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.16);
+
+  /* ===== Feedback ===== */
+  --color-feedback-success: var(--color-toast-success);
+  --color-feedback-warning: var(--color-toast-warning);
+  --color-feedback-error: var(--color-toast-error);
+
+  /* ===== Shadow (Semantic Alias) ===== */
+  --shadow-interactive-inactive: var(--shadow-tag-inactive);
+  --shadow-interactive-active: var(--shadow-tag-active);
+
+  /* ===== Radius (Semantic Alias) ===== */
+  --radius-card: var(--radius-lg);
+  --radius-control: var(--radius-default);
+
+  /* ===== Layout (Semantic Alias) ===== */
+  --layout-container-width: var(--width-container);
+
+  /* ===== Typography (Semantic Alias) ===== */
+  --font-body: var(--font-family-base);
+  --font-size-heading: var(--font-size-title);
+  --font-size-caption: var(--font-size-small);
 }
