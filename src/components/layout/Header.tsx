@@ -1,6 +1,11 @@
 'use client'
 
-import { LogoUi, NavMenuUi, SearchInputUi, SearchUserUi } from '@/components/ui'
+import {
+  LogoUi,
+  NavMenuUi,
+  SearchInputUi,
+  SearchUserUi,
+} from '@/components/layout/ui'
 import { useSearchInputUi } from '@/hooks'
 
 export default function Header() {
