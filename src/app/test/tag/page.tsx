@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+
 import Tag from '@/components/common/tag/Tag'
 
 const TAGS = [

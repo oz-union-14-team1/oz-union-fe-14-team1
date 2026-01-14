@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import { cn } from '@/utils/cn'
 import { usePathname } from 'next/navigation'
+
+import { cn } from '@/utils/cn'
 
 const NAV_MENU = [
   { id: 'home', label: '홈', href: '/' },

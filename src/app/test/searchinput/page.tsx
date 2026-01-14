@@ -1,7 +1,8 @@
 'use client'
 
-import SearchInput from '@/components/common/input/SearchInput'
 import { useState } from 'react'
+
+import SearchInput from '@/components/common/input/SearchInput'
 
 export default function BaseInputTestPage() {
   const [value, setValue] = useState('')

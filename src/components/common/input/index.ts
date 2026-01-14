@@ -1,6 +1,6 @@
 // common/input/index.ts
 import BaseInput from './BaseInput'
-import SearchInput from './SearchInput'
 import { inputVariant } from './inputStyle'
+import SearchInput from './SearchInput'
 
-export { BaseInput, SearchInput, inputVariant }
+export { BaseInput, inputVariant, SearchInput }

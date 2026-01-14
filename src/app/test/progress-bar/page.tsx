@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+
 import ProgressBar from '@/components/common/progress-bar/ProgressBar'
 
 export default function ProgressBarTestPage() {

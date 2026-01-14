@@ -1,7 +1,8 @@
-import { GameCard } from '@/components/common/game-card'
+import { StaticImageData } from 'next/image'
+
 import Game1Image from '@/assets/images/games/game1.png'
 import Game2Image from '@/assets/images/games/game2.png'
-import { StaticImageData } from 'next/image'
+import { GameCard } from '@/components/common/game-card'
 
 type GameCardData = {
   id: string

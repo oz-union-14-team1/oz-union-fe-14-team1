@@ -1,6 +1,7 @@
-import Link from 'next/link'
 import { promises as fs } from 'fs'
 import path from 'path'
+
+import Link from 'next/link'
 
 /**
  * cebab-case를 PasCalCase로 변환합니다.
@@ -51,7 +52,7 @@ export default async function TestLayout({
         <nav>
           <ul className="flex flex-col gap-2">
             {testPages.map((page) => (
-              //TODO: 버튼 공통 컴포넌트 생성 후 해당 디자인 적용
+              // TODO: 버튼 공통 컴포넌트 생성 후 해당 디자인 적용
               <li key={page.href}>
                 <Link
                   href={`/test/${page.href}`}

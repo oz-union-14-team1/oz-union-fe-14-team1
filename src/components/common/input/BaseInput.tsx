@@ -1,7 +1,8 @@
+import { ComponentProps, ReactNode, useId } from 'react'
+
 import { cn } from '@/utils'
 
 import { inputVariant, type InputVariant } from './inputStyle'
-import { ComponentProps, ReactNode, useId } from 'react'
 
 export type BaseInputProps = Omit<ComponentProps<'input'>, 'size'> &
   InputVariant & {

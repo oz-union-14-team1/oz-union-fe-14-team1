@@ -1,7 +1,10 @@
-import type { VariantProps } from 'class-variance-authority'
-import { cn } from '@/utils'
-import { badgeVariants } from './badgeStyle'
 import { ComponentPropsWithoutRef, ReactNode } from 'react'
+
+import { cn } from '@/utils'
+
+import { badgeVariants } from './badgeStyle'
+
+import type { VariantProps } from 'class-variance-authority'
 
 type BadgeProps = ComponentPropsWithoutRef<'span'> &
   VariantProps<typeof badgeVariants> & {

@@ -1,4 +1,5 @@
 import { Search } from 'lucide-react'
+
 import BaseInput, { BaseInputProps } from './BaseInput'
 
 type SearchInputProps = BaseInputProps & {

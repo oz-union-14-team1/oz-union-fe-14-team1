@@ -1,7 +1,8 @@
 'use client'
 
-import GenreCard from '@/components/common/genre-card-ui/GenreCard'
 import { useState } from 'react'
+
+import GenreCard from '@/components/common/genre-card-ui/GenreCard'
 
 const GENRES = [
   { id: 1, name: '어드벤처', imgUrl: '/images/genres/adventure.png' },

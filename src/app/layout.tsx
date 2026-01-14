@@ -1,6 +1,8 @@
-import type { Metadata } from 'next'
 import { Suspense } from 'react'
+
 import { Header } from '@/components/layout'
+
+import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {

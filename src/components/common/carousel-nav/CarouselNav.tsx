@@ -1,5 +1,6 @@
-import { cn } from '@/utils'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+
+import { cn } from '@/utils'
 
 type CarouselNavProps = {
   onPrev: () => void

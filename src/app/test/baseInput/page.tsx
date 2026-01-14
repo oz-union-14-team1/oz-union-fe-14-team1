@@ -1,7 +1,8 @@
 'use client'
 
-import BaseInput from '@/components/common/input/BaseInput'
 import { useState } from 'react'
+
+import BaseInput from '@/components/common/input/BaseInput'
 
 export default function BaseInputTestPage() {
   const [value, setValue] = useState('')
