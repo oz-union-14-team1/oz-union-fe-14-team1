@@ -1,6 +1,7 @@
+import { Funnel } from 'lucide-react'
+
 import { SearchInput } from '@/components/common/input'
 import { cn } from '@/utils/cn'
-import { Funnel } from 'lucide-react'
 
 export default function SearchInputUi({
   searchInputValue,

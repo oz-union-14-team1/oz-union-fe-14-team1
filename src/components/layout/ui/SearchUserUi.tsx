@@ -1,5 +1,5 @@
+import { CircleUser, Search } from 'lucide-react'
 import Link from 'next/link'
-import { Search, CircleUser } from 'lucide-react'
 
 export default function SearchUserUi() {
   return (

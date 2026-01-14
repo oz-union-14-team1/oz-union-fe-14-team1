@@ -1,5 +1,6 @@
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
+
 import { NotPoundImage } from '@/assets'
 import { NOTFOUND_IMAGE_WIDTH, ROUTES_PATHS } from '@/constants'
 

@@ -1,11 +1,12 @@
 'use client'
 
-import Image from 'next/image'
-import { cn } from '@/utils'
-import Link from 'next/link'
 import { Heart } from 'lucide-react'
-import { useState } from 'react'
+import Image from 'next/image'
 import { StaticImageData } from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
+
+import { cn } from '@/utils'
 
 type GameCardProps = {
   id: string
