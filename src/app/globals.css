@@ -5,4 +5,5 @@ body {
   background-color: var(--color-background);
   color: var(--color-text-light);
   font-family: 'Pretendard', sans-serif;
+  min-width: 375px;
 }

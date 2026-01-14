@@ -1,9 +1,10 @@
 type ToastVariant = 'error' | 'success' | 'warning'
 
-interface ToastProps {
+export interface ToastProps {
   type: ToastVariant
   message: string
 }
+
 const TOAST_VARIANTS: Record<
   ToastVariant,
   { container: string; iconBg: string; icon: string }

@@ -2,6 +2,7 @@
 import CustomButton from '@/components/common/button/Button'
 import { BaseInput } from '@/components/common/input'
 import Toast from '@/components/common/toast/Toast'
+import { ToastProps } from '@/components/common/toast/Toast'
 import LoginForm from '@/components/feature/auth/LoginForm'
 import { Header } from '@/components/layout'
 import {
@@ -21,4 +22,5 @@ export {
   SearchInputUi,
   SearchUserUi,
   Toast,
+  type ToastProps,
 }
