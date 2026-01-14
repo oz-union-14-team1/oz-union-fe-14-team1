@@ -1,6 +1,7 @@
 import { cn } from '@/utils'
+import { ComponentProps } from 'react'
 
-function Card({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+function Card({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       className={cn(
