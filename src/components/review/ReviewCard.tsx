@@ -13,10 +13,7 @@ function Card({ className, ...props }: ComponentProps<'div'>) {
   )
 }
 
-function CardHeader({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+function CardHeader({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       className={cn('flex items-center justify-between p-6 pb-0', className)}
@@ -25,10 +22,7 @@ function CardHeader({
   )
 }
 
-function CardContent({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+function CardContent({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       className={cn('p-6 pt-2 text-[var(--color-text-light)]', className)}
@@ -37,10 +31,7 @@ function CardContent({
   )
 }
 
-function CardFooter({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
+function CardFooter({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div className={cn('flex justify-end p-6 pt-0', className)} {...props} />
   )
