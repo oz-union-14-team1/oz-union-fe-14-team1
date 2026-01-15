@@ -1,4 +1,4 @@
-export const MOCK_FILTER_CATEGORIES = [
+const MOCK_FILTER_CATEGORIES = [
   {
     id: 1,
     name: '장르',
@@ -66,4 +66,4 @@ export const MOCK_FILTER_CATEGORIES = [
   },
 ] as const
 
-export type MockFilterCategory = (typeof MOCK_FILTER_CATEGORIES)[number]
+export default MOCK_FILTER_CATEGORIES

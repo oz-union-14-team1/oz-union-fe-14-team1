@@ -14,7 +14,7 @@ export type MockGame = {
   mood: string[]
 }
 
-export const MOCK_GAMES: MockGame[] = [
+const MOCK_GAMES: MockGame[] = [
   {
     id: '1',
     name: 'Cyberpunk 2077',
@@ -96,3 +96,5 @@ export const MOCK_GAMES: MockGame[] = [
     mood: ['밝은', '감동적인'],
   },
 ]
+
+export default MOCK_GAMES
