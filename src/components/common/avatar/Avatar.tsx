@@ -14,7 +14,7 @@ export default function Avatar({
 }: AvatarProps) {
   return (
     <div
-      className={`relative h-[50px] w-[50px] overflow-hidden rounded-full bg-gray-200 ${className}`}
+      className={`relative h-12 w-12 overflow-hidden rounded-full bg-gray-200 ${className}`}
       {...props}
     >
       {src ? (
