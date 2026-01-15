@@ -26,7 +26,7 @@ const ButtonVariant = cva(
         outline: cn(
           'bg-white border border-btn-outline-stroke',
           'hover:bg-btn-outline-hover-fill',
-          'active:bg-btn-main-default',
+          'active:bg-btn-outline-active-fill',
           'disabled:border-btn-outline-disabled-stroke disabled:bg-white'
         ),
         gray: cn(
