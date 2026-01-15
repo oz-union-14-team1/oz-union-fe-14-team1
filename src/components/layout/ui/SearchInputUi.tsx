@@ -1,7 +1,20 @@
-import { Funnel } from 'lucide-react'
+'use client'
 
 import { SearchInput } from '@/components/common/input'
-import { cn } from '@/utils/cn'
+import { FilterDrawerUi } from '@/components/layout/ui'
+
+import type { ChangeEvent, KeyboardEvent } from 'react'
+
+type SearchInputUiProps = {
+  searchInputValue: string
+  handleSearchChange: (e: ChangeEvent<HTMLInputElement>) => void
+  handleKeyDown: (e: KeyboardEvent<HTMLInputElement>) => void
+  handleSearchSubmit: () => void
+  isFilterOpen: boolean
+  setIsFilterOpen: (isFilterOpen: boolean) => void
+  selectedFilters: string[]
+  setSelectedFilters: (filters: string[]) => void
+}
 
 export default function SearchInputUi({
   searchInputValue,
@@ -11,43 +24,24 @@ export default function SearchInputUi({
   isFilterOpen,
   setIsFilterOpen,
   selectedFilters,
-}: {
-  searchInputValue: string
-  handleSearchChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void
-  handleSearchSubmit: () => void
-  isFilterOpen: boolean
-  setIsFilterOpen: (isFilterOpen: boolean) => void
-  selectedFilters: number[]
-}) {
+  setSelectedFilters,
+}: SearchInputUiProps) {
   return (
-    <div className="relative hidden items-center gap-2.5 md:flex">
+    <div className="relative flex items-center gap-2.5">
       <SearchInput
-        className="w-72"
+        className="w-full md:w-56 lg:w-72"
         value={searchInputValue}
         onChange={handleSearchChange}
         onKeyDown={handleKeyDown}
         onSearch={handleSearchSubmit}
         placeholder="검색어를 입력하세요"
       />
-
-      <button
-        type="button"
-        aria-label={isFilterOpen ? '필터 닫기' : '필터 열기'}
-        onClick={() => setIsFilterOpen(!isFilterOpen)}
-        className={cn(
-          'pointer-events-auto relative size-10 rounded-default transition-all duration-200',
-          'flex shrink-0 items-center justify-center',
-          selectedFilters.length > 0
-            ? 'bg-linear-to-r from-main-purple via-main-violet to-main-fuchsia'
-            : 'bg-btn-outline-stroke from-main-purple via-main-violet to-main-fuchsia hover:bg-linear-to-r'
-        )}
-      >
-        <Funnel
-          fill="currentColor"
-          className="size-5.5 stroke-0 text-text-light"
-        />
-      </button>
+      <FilterDrawerUi
+        isFilterOpen={isFilterOpen}
+        setIsFilterOpen={setIsFilterOpen}
+        selectedFilters={selectedFilters}
+        setSelectedFilters={setSelectedFilters}
+      />
     </div>
   )
 }
