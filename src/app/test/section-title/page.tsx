@@ -1,5 +1,5 @@
 import SectionTitle from '@/components/common/section-title/SectionTitle'
-import { SECTION_TITLES } from '@/constatns/sectionTitle'
+import { SECTION_TITLES } from '@/constants'
 
 export default function SectionTitleTestPage() {
   // 동적 타이틀 테스트용

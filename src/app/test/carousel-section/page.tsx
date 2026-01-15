@@ -1,6 +1,6 @@
 import { CarouselSection } from '@/components/common/carousel-section/CarouselSection'
-import { DUMMY_GAMES } from '@/components/mocks/dummyGames'
-import { SECTION_TITLES } from '@/constatns/sectionTitle'
+import { SECTION_TITLES } from '@/constants'
+import { DUMMY_GAMES } from '@/mocks/dummyGames'
 
 export default function CarouselTestPage() {
   const { NEW_RELEASE, RECOMMENDATION, MYFAVORITES } = SECTION_TITLES
