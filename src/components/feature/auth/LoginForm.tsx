@@ -98,10 +98,11 @@ export default function LoginForm() {
           className="h-[clamp(36px,4vw,48px)] text-[clamp(14px,2vw,16px)]"
         />
         <CustomButton
-          label="로그인"
           type="submit"
           className="rounded-radius-default h-[clamp(36px,4vw,48px)] w-full cursor-pointer bg-cyan-300 text-[clamp(14px,2vw,16px)] font-semibold text-text-dark hover:bg-cyan-400"
-        />
+        >
+          로그인
+        </CustomButton>
       </form>
     </div>
   )
