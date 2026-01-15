@@ -37,8 +37,10 @@
   /* ===== SHADOWS ===== */
   --shadow-tag-inactive:
     0 4px 4px 0 rgba(0, 0, 0, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.04);
-
   --shadow-tag-active: 0 8px 24px 0 rgba(124, 92, 255, 0.35);
+
+  /* Text Shadow 추가 */
+  --shadow-text-crisp: 0 0 0.5px currentColor, 0 0 0.5px currentColor;
 
   /* ===== BUTTON COLORS ===== */
 
@@ -99,6 +101,7 @@
   --color-surface-default: var(--color-background);
   --color-surface-elevated: #1a1a1a;
   --color-surface-muted: #2a2a2a;
+  --color-surface-hover: #3b3b3b;
 
   /* ===== Text ===== */
   --color-text-primary: var(--color-text-light);
@@ -129,4 +132,46 @@
   --font-body: var(--font-family-base);
   --font-size-heading: var(--font-size-title);
   --font-size-caption: var(--font-size-small);
+}
+
+@utility text-shadow-crisp {
+  text-shadow: var(--shadow-text-crisp);
+}
+
+@utility text-shadow-glow {
+  text-shadow: var(--shadow-text-glow);
+}
+
+@utility text-shadow-hard {
+  text-shadow: var(--shadow-text-hard);
+}
+
+@utility bg-gradient-main {
+  background-image: var(--gradient-main);
+}
+
+@utility bg-gradient-sub {
+  background-image: var(--gradient-sub);
+}
+
+@utility text-gradient-main {
+  background-image: var(--gradient-main);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility text-gradient-sub {
+  background-image: var(--gradient-sub);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility shadow-inactive {
+  box-shadow: var(--shadow-interactive-inactive);
+}
+
+@utility shadow-active {
+  box-shadow: var(--shadow-interactive-active);
 }

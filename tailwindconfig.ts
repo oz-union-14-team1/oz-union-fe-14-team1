@@ -80,22 +80,6 @@ const config: Config = {
         heading: 'var(--font-size-heading)',
         caption: 'var(--font-size-caption)',
       },
-
-      /* ============================
-       * GRADIENTS
-       * ============================ */
-      backgroundImage: {
-        'gradient-main': 'var(--gradient-main)',
-        'gradient-sub': 'var(--gradient-sub)',
-      },
-
-      /* ============================
-       * SHADOW
-       * ============================ */
-      boxShadow: {
-        inactive: 'var(--shadow-interactive-inactive)',
-        active: 'var(--shadow-interactive-active)',
-      },
     },
   },
 
