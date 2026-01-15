@@ -51,7 +51,7 @@ const ButtonVariant = cva(
 
 type ButtonProps = ComponentProps<'button'> & VariantProps<typeof ButtonVariant>
 
-const CustomButton = ({
+const Button = ({
   variant,
   size,
   children,
@@ -71,4 +71,4 @@ const CustomButton = ({
   )
 }
 
-export default CustomButton
+export default Button

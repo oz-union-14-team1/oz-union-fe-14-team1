@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { compoundLogoColumn } from '@/assets'
 import {
   BaseInput,
-  CustomButton,
+  Button,
   LoginFormValues,
   loginSchema,
   Toast,
@@ -97,12 +97,12 @@ export default function LoginForm() {
           onChange={(e) => handleChange('password', e.target.value)}
           className="h-[clamp(36px,4vw,48px)] text-[clamp(14px,2vw,16px)]"
         />
-        <CustomButton
+        <Button
           type="submit"
           className="rounded-radius-default h-[clamp(36px,4vw,48px)] w-full cursor-pointer bg-cyan-300 text-[clamp(14px,2vw,16px)] font-semibold text-text-dark hover:bg-cyan-400"
         >
           로그인
-        </CustomButton>
+        </Button>
       </form>
     </div>
   )
