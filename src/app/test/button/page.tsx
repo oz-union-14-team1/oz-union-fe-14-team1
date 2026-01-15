@@ -1,4 +1,4 @@
-import Button from '@/components/common/button/Button'
+import { Button } from '@/components'
 
 const variants = ['main', 'sub', 'outline', 'gray'] as const
 const sizes = ['sm', 'md', 'big'] as const
