@@ -7,7 +7,7 @@ export const inputVariant = cva(
       inputSize: {
         signUp: 'w-89 h-10',
         login: 'w-92.5 h-10',
-        search: 'w-72 h-10',
+        search: 'w-full h-10',
       },
       color: {
         lightGray: 'bg-neutral-300 text-main-purple',
