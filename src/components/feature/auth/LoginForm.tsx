@@ -1,10 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { useState } from 'react'
 
-import { compoundLogoColumn, discordIcon, googleIcon } from '@/assets'
+import { compoundLogoColumn } from '@/assets'
 import {
   BaseInput,
   CustomButton,
@@ -14,6 +13,9 @@ import {
   ToastProps,
 } from '@/components'
 
+/**
+ * 로그인 폼 컴포넌트
+ */
 export default function LoginForm() {
   const [toast, setToast] = useState<ToastProps | null>(null)
   const [form, setForm] = useState<LoginFormValues>({
@@ -58,7 +60,7 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="w-full px-[clamp(16px,5vw,80px)] py-[clamp(64px,5vw,100px)]">
+    <div className="w-full px-[clamp(16px,5vw,80px)]">
       {toast && (
         <div className="absolute top-6">
           <Toast type={toast.type} message={toast.message} />
@@ -68,6 +70,7 @@ export default function LoginForm() {
         <Image
           src={compoundLogoColumn}
           alt="PlayTypeLogo"
+          priority
           className="mx-auto w-[clamp(120px,15vw,146px)]"
         />
       </div>
@@ -79,6 +82,7 @@ export default function LoginForm() {
         }}
       >
         <BaseInput
+          id="login-email"
           type="email"
           placeholder="이메일을 입력해 주세요."
           value={form.email}
@@ -86,6 +90,7 @@ export default function LoginForm() {
           className="h-[clamp(36px,4vw,48px)] text-[clamp(14px,2vw,16px)]"
         />
         <BaseInput
+          id="login-password"
           type="password"
           placeholder="비밀번호를 입력해 주세요."
           value={form.password}
@@ -98,54 +103,6 @@ export default function LoginForm() {
           className="rounded-radius-default h-[clamp(36px,4vw,48px)] w-full cursor-pointer bg-cyan-300 text-[clamp(14px,2vw,16px)] font-semibold text-text-dark hover:bg-cyan-400"
         />
       </form>
-      <div className="mt-6 flex flex-col items-center justify-center gap-[clamp(16px,3vw,24px)]">
-        <div className="flex justify-center gap-8 text-sm text-cyan-300">
-          <button
-            type="button"
-            className="cursor-pointer font-semibold hover:text-cyan-500"
-            /**
-             * TODO: 이메일 찾기 페이지로 연결
-             */
-          >
-            이메일 찾기
-          </button>
-          <Link
-            href="/find-password"
-            className="cursor-pointer font-semibold hover:text-cyan-500"
-          >
-            비밀번호 찾기
-          </Link>
-        </div>
-        <p className="flex justify-center text-sm">
-          <span className="pr-2">아직 회원이 아니신가요?</span>
-          <span>
-            <button
-              type="button"
-              className="cursor-pointer font-semibold text-cyan-300 hover:text-cyan-500"
-              /**
-               * TODO: 회원가입 페이지로 연결
-               */
-            >
-              회원가입 하기
-            </button>
-          </span>
-        </p>
-        <button
-          type="button"
-          className="flex h-10 w-55 cursor-pointer items-center justify-center gap-2.5 rounded-2xl bg-neutral-100 px-3 text-text-dark"
-        >
-          <Image src={googleIcon} alt="googleIcon" className="w-10" />
-          <span className="font-normal">Sign in with Google</span>
-        </button>
-
-        <button
-          type="button"
-          className="flex h-10 w-55 cursor-pointer items-center justify-center gap-2.5 rounded-2xl bg-indigo-600 px-3 text-text-light"
-        >
-          <Image src={discordIcon} alt="discordIcon" className="mx-2 w-5" />
-          <span className="font-normal">Sign in with Discord</span>
-        </button>
-      </div>
     </div>
   )
 }

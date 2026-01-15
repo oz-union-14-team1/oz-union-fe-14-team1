@@ -6,6 +6,7 @@ import { inputVariant, type InputVariant } from './inputStyle'
 
 export type BaseInputProps = Omit<ComponentProps<'input'>, 'size'> &
   InputVariant & {
+    id?: string
     label?: string
     searchIcon?: ReactNode
     onSearchIconClick?: () => void
@@ -15,6 +16,7 @@ export type BaseInputProps = Omit<ComponentProps<'input'>, 'size'> &
  * 베이스 인풋 컴포넌트
  */
 export default function BaseInput({
+  id,
   inputSize = 'signUp',
   color = 'lightGray',
   label,
@@ -23,7 +25,8 @@ export default function BaseInput({
   className,
   ...props
 }: BaseInputProps) {
-  const inputId = useId()
+  const reactId = useId()
+  const inputId = id ?? reactId
 
   return (
     <div className="relative w-fit">
