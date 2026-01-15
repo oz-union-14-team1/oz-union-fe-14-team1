@@ -53,6 +53,7 @@
 
   /* Outline */
   --color-btn-outline-stroke: #7b7b7b;
+  --color-btn-outline-default-fill: #ffffff;
   --color-btn-outline-hover-fill: var(--color-neutral-100);
   --color-btn-outline-active-fill: var(--color-neutral-300);
   --color-btn-outline-disabled-stroke: var(--color-neutral-100);

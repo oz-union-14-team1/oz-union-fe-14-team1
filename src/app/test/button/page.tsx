@@ -1,9 +1,9 @@
 import Button from '@/components/common/button/Button'
 
-export default function Home() {
+export default function buttontest() {
   return (
     <div>
-      <Button label="버튼" />
+      <Button variant="outline" label="버튼" />
     </div>
   )
 }
