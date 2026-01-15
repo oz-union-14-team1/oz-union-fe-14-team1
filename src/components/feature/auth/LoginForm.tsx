@@ -1,13 +1,25 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 
 import { compoundLogoColumn, discordIcon, googleIcon } from '@/assets'
-import { BaseInput, CustomButton, Toast, ToastProps } from '@/components'
+import {
+  BaseInput,
+  CustomButton,
+  LoginFormValues,
+  loginSchema,
+  Toast,
+  ToastProps,
+} from '@/components'
 
 export default function LoginForm() {
   const [toast, setToast] = useState<ToastProps | null>(null)
+  const [form, setForm] = useState<LoginFormValues>({
+    email: '',
+    password: '',
+  })
   /**
    * TODO: 이메일/비밀번호 상태 관리 (useState)
    * TODO: 입력값 유효성 검사
@@ -16,26 +28,33 @@ export default function LoginForm() {
    * TODO: 로그인 성공 시 토큰 저장
    * TODO: 로그인 후 페이지 이동 처리
    */
-
   /**
    * 로그인 성공 시 토스트
-   * TODO: api 연결 시 수정 예정
    */
   const handleSubmit = () => {
-    const isSmallHeight = window.innerWidth <= 400
-    console.log(window.innerWidth)
-    /**
-     * TODO: 입력값 가져오기
-     * TODO: API 요청 보내기
-     */
+    const { email, password } = form
+    const result = loginSchema.safeParse({ email, password })
+
+    if (!result.success) {
+      setToast({
+        type: 'error',
+        message: result.error.issues[0].message,
+      })
+
+      setTimeout(() => setToast(null), 1500)
+      return
+    }
+
     setToast({
-      type: isSmallHeight ? 'warning' : 'success',
-      message: '토스트 테스트 성공!',
+      type: 'success',
+      message: '로그인 성공!',
     })
 
-    setTimeout(() => {
-      setToast(null)
-    }, 1000)
+    setTimeout(() => setToast(null), 1000)
+  }
+
+  const handleChange = (field: keyof LoginFormValues, value: string) => {
+    setForm((prev) => ({ ...prev, [field]: value }))
   }
 
   return (
@@ -62,11 +81,15 @@ export default function LoginForm() {
         <BaseInput
           type="email"
           placeholder="이메일을 입력해 주세요."
+          value={form.email}
+          onChange={(e) => handleChange('email', e.target.value)}
           className="h-[clamp(36px,4vw,48px)] text-[clamp(14px,2vw,16px)]"
         />
         <BaseInput
           type="password"
           placeholder="비밀번호를 입력해 주세요."
+          value={form.password}
+          onChange={(e) => handleChange('password', e.target.value)}
           className="h-[clamp(36px,4vw,48px)] text-[clamp(14px,2vw,16px)]"
         />
         <CustomButton
@@ -80,21 +103,31 @@ export default function LoginForm() {
           <button
             type="button"
             className="cursor-pointer font-semibold hover:text-cyan-500"
+            /**
+             * TODO: 이메일 찾기 페이지로 연결
+             */
           >
             이메일 찾기
           </button>
-          <button
-            type="button"
+          <Link
+            href="/find-password"
             className="cursor-pointer font-semibold hover:text-cyan-500"
           >
             비밀번호 찾기
-          </button>
+          </Link>
         </div>
-
         <p className="flex justify-center text-sm">
           <span className="pr-2">아직 회원이 아니신가요?</span>
-          <span className="cursor-pointer font-semibold text-cyan-300 hover:text-cyan-500">
-            회원가입 하기
+          <span>
+            <button
+              type="button"
+              className="cursor-pointer font-semibold text-cyan-300 hover:text-cyan-500"
+              /**
+               * TODO: 회원가입 페이지로 연결
+               */
+            >
+              회원가입 하기
+            </button>
           </span>
         </p>
         <button

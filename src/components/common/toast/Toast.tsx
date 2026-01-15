@@ -17,15 +17,15 @@ const TOAST_VARIANTS: Record<
   },
   success: {
     container:
-      'bg-[var(--color-toast-success)]/10 border-[var(--color-toast-success)] text-[var(--color-toast-success)]',
-    iconBg: 'bg-[var(--color-toast-success)]',
-    icon: '✓',
-  },
-  warning: {
-    container:
       'bg-[var(--color-toast-warning)]/10 border-[var(--color-toast-warning)] text-[var(--color-toast-warning)]',
     iconBg: 'bg-[var(--color-toast-warning)]',
     icon: '!',
+  },
+  warning: {
+    container:
+      'bg-[var(--color-toast-success)]/10 border-[var(--color-toast-success)] text-[var(--color-toast-success)]',
+    iconBg: 'bg-[var(--color-toast-success)]',
+    icon: '✓',
   },
 }
 
