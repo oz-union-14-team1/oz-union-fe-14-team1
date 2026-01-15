@@ -1,23 +1,60 @@
 import { ComponentProps } from 'react'
 
 import { cn } from '@/utils/cn'
+import { cva, VariantProps } from 'class-variance-authority'
 
-type ButtonProps = ComponentProps<'button'> & {
-  label: string
-  variant?: 'main' | 'sub'
-}
+const ButtonVariant = cva(
+  cn(
+    'font-bold rounded-default px-5 py-2.5 text-text-dark transition-colors',
+    'disabled:text-gray-200'
+  ),
+  {
+    variants: {
+      variant: {
+        main: cn(
+          'text-text-light bg-btn-main-default',
+          'hover:bg-btn-main-hover',
+          'active:bg-btn-main-active',
+          'disabled:bg-btn-main-disabled'
+        ),
+        sub: cn(
+          'bg-btn-sub-default',
+          'hover:bg-btn-sub-hover',
+          'active:bg-btn-sub-active',
+          'disabled:bg-btn-sub-disabled'
+        ),
+        outline: cn(
+          'bg-white border border-btn-outline-stroke',
+          'hover:bg-btn-outline-hover-fill',
+          'active:bg-btn-main-default',
+          'disabled:border-btn-outline-disabled-stroke disabled:bg-white'
+        ),
+        gray: cn(
+          'bg-btn-gray-default',
+          'hover:bg-btn-gray-hover',
+          'active:bg-btn-gray-active',
+          'disabled:bg-btn-gray-disabled'
+        ),
+      },
+      size: {
+        sm: 'px-2.5 py-2 text-sm',
+        md: 'text-base',
+        big: 'text-xl',
+      },
+    },
+    defaultVariants: {
+      variant: 'main',
+      size: 'md',
+    },
+  }
+)
 
-const BUTTON_VARIANTS = {
-  main: 'bg-[var(--color-btn-main-default)] hover:bg-[var(--color-btn-main-hover)] active:bg-[var(--color-btn-main-active)] disabled:bg-[var(--color-btn-main-disabled)] text-white',
-  sub: 'bg-[var(--color-btn-sub-default)] hover:bg-[var(--color-btn-sub-hover)] active:bg-[var(--color-btn-sub-active)] disabled:bg-[var(--color-btn-sub-disabled)] text-black',
-  outline:
-    'border border-[var(--color-btn-outline-stroke)] bg-transparent hover:bg-[var(--color-btn-outline-hover-fill)] active:bg-[var(--color-btn-outline-active-fill)] disabled:border-[var(--color-btn-outline-disabled-stroke)]',
-  gray: 'bg-[var(--color-btn-gray-default)] hover:bg-[var(--color-btn-gray-hover)] active:bg-[var(--color-btn-gray-active)] disabled:bg-[var(--color-btn-gray-disabled)] text-black',
-}
+type ButtonProps = ComponentProps<'button'> & VariantProps<typeof ButtonVariant>
 
 const CustomButton = ({
-  variant = 'main',
-  label = '버튼',
+  variant,
+  size,
+  children,
   className,
   ...props
 }: ButtonProps) => {
@@ -25,12 +62,11 @@ const CustomButton = ({
     <button
       {...props}
       className={cn(
-        'flex h-10 w-17.5 items-center justify-center rounded-md font-medium transition-all',
-        BUTTON_VARIANTS[variant], // 선택된 variant 스타일 적용
+        ButtonVariant({ variant, size }),
         className // 외부에서 주는 추가 클래스
       )}
     >
-      {label}
+      {children}
     </button>
   )
 }
