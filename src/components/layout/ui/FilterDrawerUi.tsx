@@ -10,7 +10,7 @@ import {
 
 import { Drawer, DrawerContent, DrawerTitle } from '@/components/ui'
 import { useDrawerOutsideClick } from '@/hooks'
-import { MOCK_FILTER_CATEGORIES, type MockFilterCategory } from '@/mocks'
+import { MOCK_FILTER_CATEGORIES } from '@/mocks'
 
 import FilterButtonUi from './FilterButtonUi'
 import FilterCategoryUi from './FilterCategoryUi'
@@ -99,7 +99,7 @@ const FilterDrawerUi = forwardRef<
 
           {/* 필터 카테고리 목록 */}
           <div className="grid grid-cols-1 gap-5 sm:gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {MOCK_FILTER_CATEGORIES.map((category: MockFilterCategory) => {
+            {MOCK_FILTER_CATEGORIES.map((category) => {
               const isOpen = openCategories.includes(category.id)
               return (
                 // 모바일용 필터 카테고리 코드 분리 -> FilterCategoryUi (FilterItemUi 포함 ) 컴포넌트 사용
