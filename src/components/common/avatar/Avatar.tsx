@@ -12,6 +12,18 @@ export default function Avatar({
   className,
   ...props
 }: AvatarProps) {
-  const imageNode = src ? <Image src={src} alt={alt} /> : null
-  return <>{imageNode}</>
+  return (
+    <div
+      className={`relative h-[50px] w-[50px] overflow-hidden rounded-full bg-gray-200 ${className}`}
+      {...props}
+    >
+      {src ? (
+        <Image src={src} alt={alt} fill className="object-cover" />
+      ) : (
+        <div className="flex h-full w-full items-center justify-center text-sm">
+          {fallback || alt}
+        </div>
+      )}
+    </div>
+  )
 }
