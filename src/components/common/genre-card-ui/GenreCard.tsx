@@ -1,7 +1,7 @@
 import { Check } from 'lucide-react'
 import Image from 'next/image'
 
-import { cn } from '@/utils/cn'
+import { cn } from '@/utils'
 
 type GenreCardProps = {
   name: string
