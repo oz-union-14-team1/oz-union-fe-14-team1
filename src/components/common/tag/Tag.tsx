@@ -15,18 +15,18 @@ const tagBaseStyle = [
 ]
 
 const tagInactiveStyle = [
-  'bg-[#2b2b2b] hover:bg-[#3b3b3b]',
-  'text-[var(--color-text-light)]',
+  'bg-surface-muted hover:bg-surface-hover',
+  'text-text-light',
   'border border-transparent',
-  'shadow-[var(--shadow-tag-inactive)]',
+  'shadow-tag-inactive',
 ]
 
 const tagActiveStyle = [
-  'bg-[var(--gradient-main)]',
+  'bg-gradient-main',
   'text-white font-normal',
   'border border-purple-500/60',
-  'shadow-[var(--shadow-tag-active)]',
-  '[text-shadow:0_0_0.5px_currentColor,0_0_0.5px_currentColor]',
+  'shadow-active',
+  'text-shadow-crisp',
 ]
 
 export default function Tag({
