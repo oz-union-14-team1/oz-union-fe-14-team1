@@ -29,8 +29,8 @@ export default function GameCard({ id, name, imgUrl }: GameCardProps) {
         <div className="rounded-0 pointer-events-none absolute -inset-1 -z-10 bg-gradient-to-r from-main-purple via-main-violet to-main-fuchsia opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-30" />
         {/* 위시리스트 버튼 코드 분리 -> HeartButtonUi 컴포넌트 사용*/}
         <HeartButtonUi />
-
-        <div className="relative flex w-full flex-col items-start justify-center gap-3 text-text-light">
+        <div className="flex flex-col items-start justify-center gap-3">
+          {/* <div className="relative flex w-full flex-col items-center justify-center gap-3 text-text-light"> */}
           <div className="rounded-0 relative h-67.5 w-50 overflow-hidden">
             <Image
               src={imgUrl}
@@ -41,9 +41,12 @@ export default function GameCard({ id, name, imgUrl }: GameCardProps) {
             {/* 이미지 오버레이 */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           </div>
-          <h1 className="relative z-10 text-lg font-bold transition-all duration-300 group-hover:text-main-purple group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]">
-            {name}
-          </h1>
+          {/* </div> */}
+          <div>
+            <h1 className="relative z-10 text-lg font-bold text-text-light transition-all duration-300 group-hover:text-main-purple group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]">
+              {name}
+            </h1>
+          </div>
         </div>
 
         {/* 반짝이는 테두리 효과 */}
