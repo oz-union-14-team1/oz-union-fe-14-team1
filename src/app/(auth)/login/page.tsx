@@ -1,7 +1,9 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { discordIcon, googleIcon } from '@/assets'
 import LoginForm from '@/components/feature/auth/LoginForm'
+import { ROUTES_PATHS } from '@/constants'
 
 export default function LoginPage() {
   return (
@@ -31,15 +33,12 @@ export default function LoginPage() {
         <p className="flex justify-center text-sm">
           <span className="pr-2">아직 회원이 아니신가요?</span>
           <span>
-            <button
-              type="button"
+            <Link
+              href={ROUTES_PATHS.SIGNUP_PAGE}
               className="cursor-pointer font-semibold text-cyan-300 hover:text-cyan-500"
-              /**
-               * TODO: 회원가입 페이지로 연결 LINK 연결예정
-               */
             >
               회원가입 하기
-            </button>
+            </Link>
           </span>
         </p>
         <button

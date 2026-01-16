@@ -18,3 +18,7 @@ export {
 export { NavButton } from './feature/recomendation/NavButton'
 export { TagSelector } from './feature/recomendation/TagSelector'
 export { OnboardingHeader } from './feature/recomendation/OnboardingHeader'
+export {
+  type SignupFormValues,
+  signupSchema,
+} from '@/components/feature/auth/schema/signupSchema'
