@@ -2,6 +2,9 @@ import { StaticImageData } from 'next/image'
 
 import game1 from '@/assets/images/games/game1.png'
 import game2 from '@/assets/images/games/game2.png'
+import game3 from '@/assets/images/games/game3.jpg'
+import game4 from '@/assets/images/games/game4.jpg'
+import game5 from '@/assets/images/games/game5.jpg'
 
 export type MockGame = {
   id: string
@@ -38,7 +41,7 @@ const MOCK_GAMES: MockGame[] = [
   {
     id: '3',
     name: 'Elden Ring',
-    imgUrl: game1,
+    imgUrl: game3,
     genres: ['RPG', '액션'],
     platforms: ['PC', 'PlayStation', 'Xbox'],
     players: ['싱글플레이', '멀티플레이', '온라인 PvP'],
@@ -48,7 +51,7 @@ const MOCK_GAMES: MockGame[] = [
   {
     id: '4',
     name: "Baldur's Gate 3",
-    imgUrl: game1,
+    imgUrl: game4,
     genres: ['RPG', '전략'],
     platforms: ['PC', 'PlayStation'],
     players: ['싱글플레이', '멀티플레이', '협동'],
@@ -58,7 +61,7 @@ const MOCK_GAMES: MockGame[] = [
   {
     id: '5',
     name: 'Red Dead Redemption 2',
-    imgUrl: game1,
+    imgUrl: game5,
     genres: ['액션', '어드벤처'],
     platforms: ['PC', 'PlayStation', 'Xbox'],
     players: ['싱글플레이', '멀티플레이'],
@@ -78,7 +81,7 @@ const MOCK_GAMES: MockGame[] = [
   {
     id: '7',
     name: 'Valorant',
-    imgUrl: game1,
+    imgUrl: game3,
     genres: ['슈팅', '전략'],
     platforms: ['PC'],
     players: ['멀티플레이', '온라인 PvP'],
