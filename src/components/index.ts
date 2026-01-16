@@ -1,6 +1,6 @@
 // components
-export { BaseInput } from '@/components/common/input'
-export { default as Toast } from '@/components/common/toast/Toast'
+export { default as BaseInput } from './common/input/BaseInput'
+export { default as Toast } from './common/toast/Toast'
 export { default as Button } from '@/components/common/button/Button'
 export { type ToastProps } from '@/components/common/toast/Toast'
 export { default as LoginForm } from '@/components/feature/auth/LoginForm'
