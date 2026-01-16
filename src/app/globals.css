@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 @import './token.css';
 
+@custom-variant dark (&:is(.dark *));
+
 body {
   background-color: var(--color-background);
   color: var(--color-text-light);
@@ -15,4 +17,10 @@ body {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* Prevent vaul top-drawer pseudo element from blocking header clicks */
+[data-vaul-drawer][data-vaul-drawer-direction='top']::after {
+  display: none;
+  content: none;
 }

@@ -24,10 +24,20 @@ export default function CarouselNav({
   )
   return (
     <nav className="flex items-center gap-2">
-      <button onClick={onPrev} disabled={!hasPrev} className={buttonStyle}>
+      <button
+        onClick={onPrev}
+        disabled={!hasPrev}
+        className={buttonStyle}
+        title="Previous"
+      >
         <ChevronLeft size={16} />
       </button>
-      <button onClick={onNext} disabled={!hasNext} className={buttonStyle}>
+      <button
+        onClick={onNext}
+        disabled={!hasNext}
+        className={buttonStyle}
+        title="Next"
+      >
         <ChevronRight size={16} />
       </button>
     </nav>

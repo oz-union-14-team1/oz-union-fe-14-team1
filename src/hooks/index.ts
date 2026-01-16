@@ -1,3 +1,3 @@
-import useSearchInputUi from '@/hooks/useSearchInputUi'
-
-export { useSearchInputUi }
+// src/hooks/index.ts
+export { default as useSearchInputUi } from './useSearchInputUi'
+export { useDrawerOutsideClick } from './useDrawerOutsideClick'

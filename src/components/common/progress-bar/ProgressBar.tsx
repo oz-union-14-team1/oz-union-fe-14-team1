@@ -1,4 +1,4 @@
-import { cn } from '@/utils/cn'
+import { cn } from '@/utils'
 
 type ProgressBarProps = {
   currentStep: number
@@ -22,7 +22,7 @@ export default function ProgressBar({
     >
       <div
         className={cn(
-          'h-full rounded-full bg-linear-to-r from-sub-cyan to-sub-indigo transition-all duration-300'
+          'h-full rounded-full bg-gradient-to-r from-sub-cyan to-sub-indigo transition-all duration-300'
         )}
         style={{ width: `${progressPercent}%` }}
       />

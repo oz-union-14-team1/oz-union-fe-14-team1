@@ -1,64 +1,55 @@
 'use client'
 
-import { Heart } from 'lucide-react'
-import Image from 'next/image'
+import Image, { type StaticImageData } from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
 
-import { Game } from '@/types/game'
 import { cn } from '@/utils'
 
-type GameCardProps = Game & {}
+import { HeartButtonUi } from './ui'
 
-export function GameCard({ id, name, imgUrl }: GameCardProps) {
-  const [isWishlisted, setIsWishlisted] = useState(false)
+export type GameCardProps = {
+  id: string
+  name: string
+  imgUrl: string | StaticImageData
+}
 
-  const handleWishlistClick = (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    setIsWishlisted((prev) => !prev)
-  }
-
+export default function GameCard({ id, name, imgUrl }: GameCardProps) {
   return (
-    <Link href={`/game/${id}`} className="justify-start">
+    <Link href={`/game/${id}`} className="relative justify-start">
       <div
         className={cn(
-          'relative w-full bg-background/40 pt-2 transition-all duration-300',
+          'group rounded-0 relative h-90 w-54 overflow-hidden border border-white/0 bg-white/0 p-3 backdrop-blur-md transition-all duration-500',
           'flex flex-col items-center justify-start',
-          'hover:scale-105 hover:shadow-2xl',
-          'group'
+          'hover:scale-105 hover:border-white/20 hover:bg-white/10 hover:shadow-[0_8px_32px_rgba(168,85,247,0.3)]'
         )}
       >
-        <button
-          type="button"
-          aria-label="찜하기"
-          onClick={handleWishlistClick}
-          className={cn(
-            'absolute top-4 right-4 z-10 size-8 cursor-pointer rounded-full bg-black/40 transition-all',
-            'flex flex-col items-center justify-center',
-            'hover:bg-white/20',
-            isWishlisted ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-          )}
-        >
-          <Heart
-            className={cn(
-              'size-5 transition-colors',
-              isWishlisted
-                ? 'fill-main-purple text-btn-main-active'
-                : 'text-white'
-            )}
-          />
-        </button>
-        <div className="relative mb-3 aspect-3/4 w-full overflow-hidden">
-          <Image
-            src={imgUrl}
-            alt={name}
-            fill
-            sizes="(max-width: 768px) 50vw, (max-width:1024px) 25vw, 16vw"
-            className="object-cover"
-          />
+        {/* 배경 그라데이션 효과 */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-main-purple/10 via-transparent to-main-fuchsia/10 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+
+        {/* Glow 효과 */}
+        <div className="rounded-0 pointer-events-none absolute -inset-1 -z-10 bg-gradient-to-r from-main-purple via-main-violet to-main-fuchsia opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-30" />
+        {/* 위시리스트 버튼 코드 분리 -> HeartButtonUi 컴포넌트 사용*/}
+        <HeartButtonUi />
+
+        <div className="relative flex w-full flex-col items-start justify-center gap-4 text-text-light">
+          <div className="rounded-0 relative w-full overflow-hidden">
+            <Image
+              src={imgUrl}
+              alt={name}
+              width={200}
+              height={270}
+              className="h-auto w-full transition-transform duration-500 group-hover:scale-110"
+            />
+            {/* 이미지 오버레이 */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          </div>
+          <h1 className="relative z-10 text-lg font-bold transition-all duration-300 group-hover:text-main-purple group-hover:drop-shadow-[0_0_8px_rgba(168,85,247,0.6)]">
+            {name}
+          </h1>
         </div>
-        <p className="text-lg font-bold text-text-light">{name}</p>
+
+        {/* 반짝이는 테두리 효과 */}
+        <div className="rounded-0 pointer-events-none absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
       </div>
     </Link>
   )

@@ -29,7 +29,7 @@ export default function BaseInput({
   const inputId = id ?? reactId
 
   return (
-    <div className="relative w-fit">
+    <div className="relative w-full">
       {label && (
         <p>
           <label
