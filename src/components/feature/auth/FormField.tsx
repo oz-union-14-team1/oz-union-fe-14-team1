@@ -15,7 +15,7 @@ export function FormField({
     <div className="flex flex-col gap-1">
       {password ? (
         <div className="flex items-end gap-4">
-          <span className="text-sm">
+          <span className="text-xs md:text-sm">
             {label}
             {required && <span className="pl-2 text-red-500">*</span>}
           </span>
@@ -24,7 +24,7 @@ export function FormField({
           </span>
         </div>
       ) : (
-        <p className="text-sm">
+        <p className="text-xs md:text-sm">
           {label}
           {required && <span className="pl-2 text-red-500">*</span>}
         </p>
