@@ -175,3 +175,20 @@
 @utility shadow-active {
   box-shadow: var(--shadow-interactive-active);
 }
+
+/* ===== 천천히 회전하는 애니메이션 ===== */
+@utility animate-spin-slow {
+  animation: spin 8s linear infinite;
+}
+
+@utility animate-spin-slower {
+  animation: spin 12s linear infinite;
+}
+
+@utility animate-spin-slowest {
+  animation: spin 20s linear infinite;
+}
+
+@utility animate-spin-reverse-slow {
+  animation: spin 10s linear infinite reverse;
+}
