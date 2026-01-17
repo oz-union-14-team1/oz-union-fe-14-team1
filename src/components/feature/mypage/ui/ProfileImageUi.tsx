@@ -1,10 +1,15 @@
+'use client'
+
 import Image from 'next/image'
 
 import joystickIcon from '@/assets/icons/joystickIcon.svg'
-// import profile from '@/assets/images/profile/profile.jpg'
 import { cn } from '@/utils'
 
-export default function ProfileImageUi() {
+interface ProfileImageUiProps {
+  imageUrl?: string
+}
+
+export default function ProfileImageUi({ imageUrl }: ProfileImageUiProps) {
   return (
     <>
       {/* 회전하는 그라데이션 링 - 천천히 (8초) ⭐ */}
@@ -14,19 +19,22 @@ export default function ProfileImageUi() {
         </div>
       </div>
 
-      {/* 프로필 / 이미지 / 회원 - 천천히 회전 (12초) ⭐ */}
-      {/* <Image
-        src={profile}
-        alt="profile"
-        className={cn(
-          'absolute top-2.5 left-2.5 z-5 h-35.75 w-35.75 rounded-full',
-          'border-2 border-main-purple/20',
-          // 'animate-spin-slower',
-          'transition-all duration-500',
-          'group-hover:border-main-purple/60 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]',
-          'group-hover:scale-105'
-        )}
-      /> */}
+      {/* 프로필 / 이미지 / 회원 - 회전 없음 ⭐ */}
+      {imageUrl && (
+        <Image
+          src={imageUrl}
+          alt="profile"
+          width={143}
+          height={143}
+          className={cn(
+            'absolute top-2.5 left-2.5 z-5 h-35.75 w-35.75 rounded-full object-cover',
+            'border-2 border-main-purple/20',
+            'transition-all duration-500',
+            'group-hover:border-main-purple/60 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]',
+            'group-hover:scale-105'
+          )}
+        />
+      )}
 
       {/* 프로필 / 이미지 / 기본 - 화려한 디자인 ⭐ */}
       <div

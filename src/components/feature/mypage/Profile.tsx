@@ -8,14 +8,18 @@ import {
   ProfileNameMobileUi,
 } from './ui'
 
-export default function Profile() {
+interface ProfileProps {
+  imageUrl?: string
+}
+
+export default function Profile({ imageUrl }: ProfileProps) {
   return (
     <>
       <div className="relative">
         <GlowUi />
         <div className="group relative flex h-40.75 w-40.75 cursor-pointer flex-col items-center justify-center md:h-auto md:w-auto">
           <EditProfileImageUi />
-          <ProfileImageUi />
+          <ProfileImageUi imageUrl={imageUrl} />
           <ProfileNameMobileUi />
           <GenresTagUi
             genre="GENRES (MOBILE)"
