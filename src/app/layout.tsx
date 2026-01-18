@@ -1,8 +1,10 @@
 import { Suspense } from 'react'
 
 import { Header } from '@/components/layout'
+import Providers from '@/components/providers/Providers'
 
 import type { Metadata } from 'next'
+
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -17,12 +19,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <Suspense>
-          <Header />
-        </Suspense>
-        {children}
-      </body>
+      <Providers>
+        <body>
+          <Suspense>
+            <Header />
+          </Suspense>
+          {children}
+        </body>
+      </Providers>
     </html>
   )
 }
