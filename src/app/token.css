@@ -132,6 +132,26 @@
   --font-body: var(--font-family-base);
   --font-size-heading: var(--font-size-title);
   --font-size-caption: var(--font-size-small);
+
+  /* ===== Toast Animation ===== */
+  --animate-fade-in-out-toast: fade-in-out-toast 3s ease-out;
+
+  @keyframes fade-in-out-toast {
+    0% {
+      opacity: 0;
+      transform: translateX(10%);
+    }
+    15% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    85% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
 }
 
 @utility text-shadow-crisp {

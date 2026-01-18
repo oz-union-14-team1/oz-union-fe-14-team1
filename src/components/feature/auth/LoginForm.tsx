@@ -4,24 +4,18 @@ import Image from 'next/image'
 import { useState } from 'react'
 
 import { compoundLogoColumn } from '@/assets'
-import {
-  BaseInput,
-  Button,
-  LoginFormValues,
-  loginSchema,
-  Toast,
-  ToastProps,
-} from '@/components'
+import { BaseInput, Button, LoginFormValues, loginSchema } from '@/components'
+import useToast from '@/hooks/useToast'
 
 /**
  * 로그인 폼 컴포넌트
  */
 export default function LoginForm() {
-  const [toast, setToast] = useState<ToastProps | null>(null)
   const [form, setForm] = useState<LoginFormValues>({
     email: '',
     password: '',
   })
+  const { triggerToast } = useToast()
   /**
    * TODO: 이메일/비밀번호 상태 관리 (useState)
    * TODO: 입력값 유효성 검사
@@ -38,21 +32,11 @@ export default function LoginForm() {
     const result = loginSchema.safeParse({ email, password })
 
     if (!result.success) {
-      setToast({
-        type: 'error',
-        message: result.error.issues[0].message,
-      })
-
-      setTimeout(() => setToast(null), 1500)
+      triggerToast('error', result.error.issues[0].message)
       return
     }
 
-    setToast({
-      type: 'success',
-      message: '로그인 성공!',
-    })
-
-    setTimeout(() => setToast(null), 1000)
+    triggerToast('success', '로그인 성공')
   }
 
   const handleChange = (field: keyof LoginFormValues, value: string) => {
@@ -61,11 +45,6 @@ export default function LoginForm() {
 
   return (
     <div className="w-full px-[clamp(16px,5vw,80px)]">
-      {toast && (
-        <div className="absolute top-6">
-          <Toast type={toast.type} message={toast.message} />
-        </div>
-      )}
       <div className="mb-9 flex justify-center">
         <Image
           src={compoundLogoColumn}
