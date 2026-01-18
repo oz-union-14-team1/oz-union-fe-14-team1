@@ -17,7 +17,7 @@ const TOAST_ICON_BG_COLOR: Record<ToastType, string> = {
 
 const ToastVariant = cva(
   cn(
-    'flex w-fit min-w-85 items-center gap-3 rounded-xl border px-5 py-3 shadow-md'
+    'flex w-fit min-w-85 items-center gap-3 rounded-xl border px-5 py-3 shadow-md animate-fade-in-out-toast'
   ),
   {
     variants: {
