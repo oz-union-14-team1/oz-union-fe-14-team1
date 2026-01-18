@@ -1,8 +1,7 @@
 import { cva, VariantProps } from 'class-variance-authority'
 
+import { ToastType } from '@/types/toast'
 import { cn } from '@/utils'
-
-type ToastType = 'success' | 'warning' | 'error'
 
 const TOAST_ICON: Record<ToastType, string> = {
   success: '✓',
