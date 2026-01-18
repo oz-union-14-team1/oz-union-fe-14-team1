@@ -15,3 +15,6 @@ export {
   SearchInputUi,
   SearchUserUi,
 } from '@/components/layout/ui'
+export { NavButton } from './feature/recomendation/NavButton'
+export { TagSelector } from './feature/recomendation/TagSelector'
+export { OnboardingHeader } from './feature/recomendation/OnboardingHeader'
