@@ -16,13 +16,13 @@ export default function ProgressBar({
   return (
     <div
       className={cn(
-        'h-1.5 w-full max-w-238.5 overflow-hidden rounded-full bg-neutral-300',
+        'h-1.5 w-full overflow-hidden rounded-full bg-neutral-300',
         className
       )}
     >
       <div
         className={cn(
-          'h-full rounded-full bg-gradient-to-r from-sub-cyan to-sub-indigo transition-all duration-300'
+          'h-full rounded-full bg-gradient-sub transition-all duration-300'
         )}
         style={{ width: `${progressPercent}%` }}
       />

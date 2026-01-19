@@ -8,8 +8,10 @@ type TagProps = {
 } & React.ComponentProps<'button'>
 
 const tagBaseStyle = [
-  'px-5 py-2.5 md:px-6 md:py-3',
-  'text-xsmall md:text-sm',
+  'px-4 py-2',
+  'md:px-5 md:py-2.5',
+  'lg:px-6 lg:py-3',
+  'text-xs md:text-base',
   'rounded-full font-normal',
   'whitespace-nowrap transition-all',
 ]
