@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 type UsePhoneVerificationTimerProps = {
   onExpire?: () => void
@@ -21,7 +21,7 @@ export default function usePhoneVerificationTimer({
   const [isCodeVerified, setIsCodeVerified] = useState(false)
   const [remainingTime, setRemainingTime] = useState(0)
 
-  const handleSendCode = () => {
+  const handleSendCode = useCallback(() => {
     /**
      * TODO: 휴대폰 번호 인증번호 전송 API 연동
      * TODO: 유효시간 시간 변경 10초 -> 180초
@@ -30,9 +30,9 @@ export default function usePhoneVerificationTimer({
     setIsCodeSent(true)
     setIsCodeVerified(false)
     setRemainingTime(duration)
-  }
+  }, [duration])
 
-  const handleVerifyCode = () => {
+  const handleVerifyCode = useCallback(() => {
     /**
      * TODO: 휴대폰 번호 인증번호 확인 API 연동
      * TODO: API 통해서 인증번호 확인 됐을 때와 아닐 때 분기
@@ -44,7 +44,13 @@ export default function usePhoneVerificationTimer({
     setIsCodeVerified(true)
     setIsCodeSent(false)
     setRemainingTime(0)
-  }
+  }, [isCodeSent])
+
+  const handleExpire = useCallback(() => {
+    setIsCodeSent(false)
+    setIsCodeVerified(false)
+    onExpire?.()
+  }, [onExpire])
 
   useEffect(() => {
     if (!isCodeSent) {
@@ -52,20 +58,21 @@ export default function usePhoneVerificationTimer({
     }
 
     const timer = setInterval(() => {
-      setRemainingTime((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer)
-          setIsCodeSent(false)
-          setIsCodeVerified(false)
-          onExpire?.()
-          return 0
-        }
-        return prev - 1
-      })
+      setRemainingTime((prev) => prev - 1)
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [isCodeSent, onExpire])
+  }, [isCodeSent])
+
+  useEffect(() => {
+    if (remainingTime === 0 && isCodeSent) {
+      const id = setTimeout(() => {
+        handleExpire()
+      }, 0)
+
+      return () => clearTimeout(id)
+    }
+  }, [remainingTime, isCodeSent, handleExpire])
 
   const formatTime = (sec: number) => {
     const m = String(Math.floor(sec / 60)).padStart(2, '0')

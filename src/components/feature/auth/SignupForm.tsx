@@ -5,16 +5,9 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { compoundLogoRow } from '@/assets'
-import {
-  BaseInput,
-  Button,
-  SignupFormValues,
-  signupSchema,
-  Toast,
-  ToastProps,
-} from '@/components'
+import { BaseInput, Button, SignupFormValues, signupSchema } from '@/components'
 import { SIGNUP_FIELDS } from '@/constants'
-import { usePhoneVerificationTimer } from '@/hooks'
+import { usePhoneVerificationTimer, useToast } from '@/hooks'
 import { cn } from '@/utils'
 
 import { DuplicateCheckField } from './DuplicateCheckField'
@@ -31,7 +24,6 @@ export default function SignupForm() {
   const router = useRouter()
   const [isIdChecked, setIsIdChecked] = useState(false)
   const [isNickNameChecked, setIsNickNameChecked] = useState(false)
-  const [toast, setToast] = useState<ToastProps | null>(null)
   const [form, setForm] = useState<SignupFormValues>({
     name: '',
     id: '',
@@ -43,11 +35,11 @@ export default function SignupForm() {
     password: '',
     passwordConfirm: '',
   })
+  const { triggerToast } = useToast()
 
   const phoneTimer = usePhoneVerificationTimer({
     duration: 10 /** TODO: 180초 */,
-    onExpire: () =>
-      setToast({ type: 'error', message: '인증 시간이 만료되었습니다.' }),
+    onExpire: () => triggerToast('error', '인증 시간이 만료되었습니다.'),
   })
 
   const handleChange = (field: keyof SignupFormValues, value: string) => {
@@ -69,37 +61,28 @@ export default function SignupForm() {
     const result = signupSchema.safeParse(form)
 
     if (!result.success) {
-      if (!isNickNameChecked) {
-        setToast({ type: 'error', message: '닉네임 중복 확인을 해주세요.' })
+      if (!isIdChecked) {
+        triggerToast('error', '아이디 중복 확인을 해주세요.')
         return
       }
 
-      if (!isIdChecked) {
-        setToast({ type: 'error', message: '아이디 중복 확인을 해주세요.' })
+      if (!isNickNameChecked) {
+        triggerToast('error', '닉네임 중복 확인을 해주세요.')
         return
       }
 
       if (!phoneTimer.isCodeVerified) {
-        setToast({ type: 'error', message: '휴대폰 인증을 완료해 주세요.' })
+        triggerToast('error', '휴대폰 인증을 완료해 주세요.')
+
         return
       }
 
-      setToast({
-        type: 'error',
-        message: result.error.issues[0].message,
-      })
-
-      setTimeout(() => setToast(null), 2000)
+      triggerToast('error', result.error.issues[0].message)
 
       return
     }
 
-    setToast({
-      type: 'success',
-      message: '회원가입 성공!',
-    })
-
-    setTimeout(() => setToast(null), 2000)
+    triggerToast('success', '회원가입 성공!')
 
     router.push('/login')
   }
@@ -126,11 +109,6 @@ export default function SignupForm() {
 
   return (
     <div className="flex w-full flex-col gap-5">
-      {toast && (
-        <div className="absolute top-1 right-1">
-          <Toast type={toast.type} message={toast.message} />
-        </div>
-      )}
       <div className="mb-2 flex justify-center">
         <Image src={compoundLogoRow} alt="PlayTypeLogo" priority />
       </div>

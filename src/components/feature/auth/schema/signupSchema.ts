@@ -43,6 +43,14 @@ const isValidBirthday = (value: string) => {
 export const signupSchema = z
   .object({
     id: z.string().min(1, '아이디를 입력해 주세요.'),
+    nickName: z
+      .string()
+      .regex(nicknameRegex, '닉네임은 2~16자의 한글/영문/숫자만 가능합니다.')
+      .refine(
+        (value) =>
+          !bannedNicknames.some((word) => value.toLowerCase().includes(word)),
+        { message: '사용할 수 없는 닉네임입니다.' }
+      ),
     password: z
       .string()
       .regex(
@@ -54,14 +62,6 @@ export const signupSchema = z
         message: '공백은 사용할 수 없습니다.',
       }),
     passwordConfirm: z.string(),
-    nickName: z
-      .string()
-      .regex(nicknameRegex, '닉네임은 2~16자의 한글/영문/숫자만 가능합니다.')
-      .refine(
-        (value) =>
-          !bannedNicknames.some((word) => value.toLowerCase().includes(word)),
-        { message: '사용할 수 없는 닉네임입니다.' }
-      ),
     name: z.string().min(1, '이름을 입력해 주세요.'),
     birthday: z
       .string()

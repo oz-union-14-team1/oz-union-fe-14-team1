@@ -11,20 +11,6 @@ type FieldConfig = {
 
 export const SIGNUP_FIELDS: FieldConfig[] = [
   {
-    key: 'name',
-    label: '이름',
-    type: 'text',
-    placeholder: '이름을 입력해 주세요.',
-    required: true,
-  },
-  {
-    key: 'birthday',
-    label: '생년월일',
-    type: 'text',
-    placeholder: '8자리 입력해주세요 (ex.20260101)',
-    required: true,
-  },
-  {
     key: 'password',
     label: '비밀번호',
     type: 'password',
@@ -37,6 +23,20 @@ export const SIGNUP_FIELDS: FieldConfig[] = [
     label: '비밀번호 확인',
     type: 'password',
     placeholder: '비밀번호를 다시 입력해 주세요.',
+    required: true,
+  },
+  {
+    key: 'name',
+    label: '이름',
+    type: 'text',
+    placeholder: '이름을 입력해 주세요.',
+    required: true,
+  },
+  {
+    key: 'birthday',
+    label: '생년월일',
+    type: 'text',
+    placeholder: '8자리 입력해주세요 (ex.20260101)',
     required: true,
   },
 ]
