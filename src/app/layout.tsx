@@ -19,14 +19,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <Providers>
-        <body>
+      <body>
+        <Providers>
           <Suspense>
             <Header />
           </Suspense>
           {children}
-        </body>
-      </Providers>
+        </Providers>
+      </body>
     </html>
   )
 }
