@@ -1,11 +1,11 @@
 import { Check } from 'lucide-react'
-import Image from 'next/image'
+import Image, { StaticImageData } from 'next/image'
 
 import { cn } from '@/utils'
 
 type GenreCardProps = {
   name: string
-  imgUrl: string
+  imgUrl: string | StaticImageData
   isSelected?: boolean
 } & React.ComponentPropsWithoutRef<'button'>
 
