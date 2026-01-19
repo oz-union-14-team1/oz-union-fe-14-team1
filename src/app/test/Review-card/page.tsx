@@ -1,4 +1,4 @@
-import { Card } from '@/components/review/ReviewCard'
+import { Card } from '@/components/feature/review/ReviewCard'
 
 export default function ReviewerCard() {
   return (
