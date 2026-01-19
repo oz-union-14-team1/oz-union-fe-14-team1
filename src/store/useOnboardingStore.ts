@@ -2,10 +2,10 @@ import { create } from 'zustand'
 
 type OnboardingState = {
   selectedTags: string[]
-  selectedGenres: string[]
+  selectedGenres: number[]
 
   toggleTag: (tagId: string) => void
-  toggleGenre: (genreId: string) => void
+  toggleGenre: (genreId: number) => void
   reset: () => void
 }
 

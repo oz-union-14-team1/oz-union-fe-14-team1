@@ -23,3 +23,4 @@ export {
   signupSchema,
 } from '@/components/feature/auth/schema/signupSchema'
 export { default as SignupForm } from './feature/auth/SignupForm'
+export { default as GenreSelector } from './feature/recomendation/GenreSelector'
