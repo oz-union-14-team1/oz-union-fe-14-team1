@@ -48,16 +48,15 @@ export function StarRating({
             type="button"
             disabled={readonly}
             className={`relative rounded-sm transition-all duration-200 focus-visible:outline-none ${!readonly ? 'cursor-pointer hover:scale-110 active:scale-95' : 'cursor-default'} `}
-            onMouseEnter={() => !readonly && setHoverValue(starValue)}
-            onMouseLeave={() => !readonly && setHoverValue(null)}
-            onClick={() => !readonly && handleClick(starValue)}
+            onMouseEnter={() => readonly || setHoverValue(starValue)}
+            onMouseLeave={() => readonly || setHoverValue(null)}
+            onClick={() => readonly || handleClick(starValue)}
           >
             <Star
               size={size}
               className="text-muted-foreground/30 fill-transparent stroke-[1.5]"
             />
 
-            {/* //소수점 */}
             <div
               className="absolute top-0 left-0 overflow-hidden transition-all duration-300"
               style={{ width: `${fillPercentage}%` }}
