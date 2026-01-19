@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 
 import Tag from '@/components/common/tag/Tag'
 import { useOnboardingStore } from '@/store/useOnboardingStore'
+import { cn } from '@/utils'
 import { shuffle } from '@/utils/shuffle'
 
 type TagData = {
@@ -17,8 +18,7 @@ type TagSelectorProps = {
 
 export function TagSelector({ tags }: TagSelectorProps) {
   const [shuffledTags, setShuffledTags] = useState(tags)
-  const selectedTags = useOnboardingStore((state) => state.selectedTags)
-  const toggleTag = useOnboardingStore((state) => state.toggleTag)
+  const { selectedTags, toggleTag } = useOnboardingStore((state) => state)
 
   useEffect(() => {
     setShuffledTags(shuffle(tags))
@@ -26,7 +26,12 @@ export function TagSelector({ tags }: TagSelectorProps) {
 
   return (
     <>
-      <div className="flex flex-wrap justify-center gap-x-4 gap-y-[clamp(32px,5vh,88px)] md:gap-x-6 md:gap-y-8 lg:gap-x-10 lg:gap-y-14">
+      <div
+        className={cn(
+          'flex flex-wrap justify-center gap-x-4 gap-y-[clamp(32px,5vh,88px)]',
+          'md:gap-x-6 md:gap-y-8 lg:gap-x-10 lg:gap-y-14'
+        )}
+      >
         {shuffledTags.map((tag) => (
           <Tag
             key={tag.id}
