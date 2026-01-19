@@ -36,29 +36,37 @@ export function StarRating({
     <div className={cn('flex items-center gap-1', className)}>
       {Array.from({ length: max }).map((_, i) => {
         const starValue = i + 1
-        const isFilled = starValue <= displayValue
+
+        const fillPercentage = Math.max(
+          0,
+          Math.min(100, (displayValue - i) * 100)
+        )
 
         return (
           <button
             key={i}
             type="button"
             disabled={readonly}
-            className={cn(
-              'focus-visible:ring-ring rounded-sm transition-transform focus-visible:ring-2 focus-visible:outline-none',
-              !readonly && 'cursor-pointer hover:scale-110 active:scale-95',
-              readonly && 'cursor-default'
-            )}
+            className={`relative rounded-sm transition-all duration-200 focus-visible:outline-none ${!readonly ? 'cursor-pointer hover:scale-110 active:scale-95' : 'cursor-default'} `}
             onMouseEnter={() => !readonly && setHoverValue(starValue)}
             onMouseLeave={() => !readonly && setHoverValue(null)}
-            onClick={() => handleClick(starValue)}
+            onClick={() => !readonly && handleClick(starValue)}
           >
             <Star
               size={size}
-              className={cn(
-                'stroke-muted-foreground fill-transparent transition-colors',
-                isFilled && 'fill-yellow-400 stroke-yellow-400'
-              )}
+              className="text-muted-foreground/30 fill-transparent stroke-[1.5]"
             />
+
+            {/* //소수점 */}
+            <div
+              className="absolute top-0 left-0 overflow-hidden transition-all duration-300"
+              style={{ width: `${fillPercentage}%` }}
+            >
+              <Star
+                size={size}
+                className="fill-yellow-400 stroke-yellow-400 stroke-[1.5] text-yellow-400"
+              />
+            </div>
           </button>
         )
       })}
