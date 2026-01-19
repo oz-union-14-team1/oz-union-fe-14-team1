@@ -9,6 +9,7 @@ type Props = {
   onChange: (v: string) => void
   onCheck: () => void
   isChecked: boolean
+  id: string
 }
 
 /**
@@ -28,6 +29,7 @@ export function DuplicateCheckField({
   onChange,
   onCheck,
   isChecked,
+  id,
 }: Props) {
   return (
     <div className="flex flex-col gap-1">
@@ -38,6 +40,7 @@ export function DuplicateCheckField({
       <div className="flex md:items-end">
         <div className="relative md:flex md:gap-2">
           <BaseInput
+            id={id}
             value={value}
             placeholder={placeholder}
             onChange={(e) => onChange(e.target.value)}

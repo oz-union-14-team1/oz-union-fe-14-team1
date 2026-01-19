@@ -109,9 +109,6 @@ export default function SignupForm() {
 
   return (
     <div className="flex w-full flex-col gap-5">
-      <div className="mb-2 flex justify-center">
-        <Image src={compoundLogoRow} alt="PlayTypeLogo" priority />
-      </div>
       <form
         className="flex flex-col gap-2.5 md:gap-5"
         onSubmit={(e) => {
@@ -120,6 +117,7 @@ export default function SignupForm() {
         }}
       >
         <DuplicateCheckField
+          id="signup-id"
           label="아이디"
           value={form.id}
           placeholder="아이디를 입력해 주세요."
@@ -128,6 +126,7 @@ export default function SignupForm() {
           isChecked={isIdChecked}
         />
         <DuplicateCheckField
+          id="signup-nickName"
           label="닉네임"
           value={form.nickName}
           placeholder="닉네임을 입력헤 주세요."

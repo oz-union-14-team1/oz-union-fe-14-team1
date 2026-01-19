@@ -22,3 +22,4 @@ export {
   type SignupFormValues,
   signupSchema,
 } from '@/components/feature/auth/schema/signupSchema'
+export { default as SignupForm } from './feature/auth/SignupForm'
