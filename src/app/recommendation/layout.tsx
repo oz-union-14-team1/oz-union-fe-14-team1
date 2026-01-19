@@ -18,13 +18,7 @@ export default function RecommendationLayout({
   const stepIndex = steps.indexOf(currentStep) + 1
 
   return (
-    <div
-      className={cn(
-        'flex min-h-[calc(100dvh-5.25rem)]',
-        'flex-col',
-        'lg:items-center lg:justify-center'
-      )}
-    >
+    <div className="flex min-h-[calc(100dvh-5.25rem)] flex-col lg:items-center lg:justify-center">
       <div
         className={cn(
           'mx-auto w-full',
