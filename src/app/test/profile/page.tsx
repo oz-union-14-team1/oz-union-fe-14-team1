@@ -11,7 +11,7 @@ export default function ProfilePage() {
 
       {/* 회원 프로필 이미지 없는 버전 (기본 조이스틱) */}
       <div className="flex flex-col gap-4">
-        <Profile />
+        <Profile imageUrl="" />
       </div>
     </div>
   )
