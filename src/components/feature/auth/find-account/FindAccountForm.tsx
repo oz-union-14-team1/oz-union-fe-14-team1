@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { PhoneVerificationField } from '@/components'
 import { Button } from '@/components/common'
 import { usePhoneVerificationTimer, useToast } from '@/hooks'
+import { FindAccountMode } from '@/types/findAccountMode'
 
 import {
   FindAccountFormValues,
@@ -15,10 +16,10 @@ import {
 /**
  * 아이디/비밀번호 찾기 모드
  */
-type FindAccountMode = 'id' | 'password'
 
 type FindAccountFormProps = {
   mode: FindAccountMode
+  onError: (msg: string | null) => void
 }
 
 /**
@@ -26,7 +27,10 @@ type FindAccountFormProps = {
  * @param mode - 'id'
  * @returns 아이디/비밀번호 찾기 폼 UI
  */
-export default function FindAccountForm({ mode }: FindAccountFormProps) {
+export default function FindAccountForm({
+  mode,
+  onError,
+}: FindAccountFormProps) {
   /**
    * TODO: 이메일/비밀번호 상태 관리 (useState)
    * TODO: 입력값 유효성 검사
@@ -36,7 +40,6 @@ export default function FindAccountForm({ mode }: FindAccountFormProps) {
    * TODO: 로그인 후 페이지 이동 처리
    */
   const isFindMode = mode === 'id'
-  const [error, setError] = useState<string | null>(null)
   const [form, setForm] = useState<FindAccountFormValues>({
     phone: '',
     phoneCode: '',
@@ -63,7 +66,7 @@ export default function FindAccountForm({ mode }: FindAccountFormProps) {
 
     if (!result.success) {
       const message = result.error.issues[0].message
-      setError(message)
+      onError(message)
       triggerToast('error', '아이디 찾기에 실패하였습니다.')
       return
     }
@@ -72,8 +75,7 @@ export default function FindAccountForm({ mode }: FindAccountFormProps) {
      * TODO: 아이디 찾기 API 연동
      * TODO: credentials: 'include',
      */
-
-    setError(null)
+    onError(null)
     triggerToast('success', '아이디 찾기 성공!')
   }
 
@@ -87,60 +89,48 @@ export default function FindAccountForm({ mode }: FindAccountFormProps) {
     })
 
     if (!result.success) {
-      setError(result.error.issues[0].message)
+      onError(result.error.issues[0].message)
       triggerToast('error', '인증번호 전송에 실패하였습니다.')
       return
     }
 
     setForm((prev) => ({ ...prev, phoneCode: '' }))
 
-    setError(null)
+    onError(null)
     phoneTimer.handleSendCode()
   }
 
   return (
-    <div className="w-full px-12">
-      <div className="mb-2 flex flex-col justify-center">
-        <div className="mb-12 flex flex-col text-center text-3xl font-bold text-text-dark">
-          {isFindMode ? '아이디 찾기' : '비밀번호 찾기'}
-          {error && (
-            <p className="max-w-md text-center text-sm leading-relaxed font-semibold wrap-break-word text-red-600 md:text-[16px]">
-              {error}
-            </p>
-          )}
+    <div className="flex flex-col items-center justify-center gap-10">
+      <form
+        className="mx-auto flex flex-col gap-5"
+        onSubmit={(e) => {
+          e.preventDefault()
+          handleSubmit()
+        }}
+      >
+        <PhoneVerificationField
+          phone={form.phone}
+          code={form.phoneCode}
+          onPhoneChange={(value) => handleChange('phone', value)}
+          onCodeChange={(value) => handleChange('phoneCode', value)}
+          isCodeSent={phoneTimer.isCodeSent}
+          isCodeVerified={phoneTimer.isCodeVerified}
+          remainingTime={phoneTimer.remainingTime}
+          formatTime={phoneTimer.formatTime}
+          handleSendCode={handleSendCodeWithValidation}
+          handleVerifyCode={phoneTimer.handleVerifyCode}
+        />
+        <div className="mt-10 flex w-full flex-col">
+          <Button
+            type="submit"
+            variant="sub"
+            className="cursor-pointer bg-sub-cyan text-xs md:text-xl"
+          >
+            {isFindMode ? '아이디 찾기' : '비밀번호 찾기'}
+          </Button>
         </div>
-      </div>
-      <div className="flex flex-col items-center justify-center gap-10">
-        <form
-          className="mx-auto flex flex-col gap-5"
-          onSubmit={(e) => {
-            e.preventDefault()
-            handleSubmit()
-          }}
-        >
-          <PhoneVerificationField
-            phone={form.phone}
-            code={form.phoneCode}
-            onPhoneChange={(value) => handleChange('phone', value)}
-            onCodeChange={(value) => handleChange('phoneCode', value)}
-            isCodeSent={phoneTimer.isCodeSent}
-            isCodeVerified={phoneTimer.isCodeVerified}
-            remainingTime={phoneTimer.remainingTime}
-            formatTime={phoneTimer.formatTime}
-            handleSendCode={handleSendCodeWithValidation}
-            handleVerifyCode={phoneTimer.handleVerifyCode}
-          />
-          <div className="mt-10 flex w-full flex-col">
-            <Button
-              type="submit"
-              variant="sub"
-              className="cursor-pointer bg-sub-cyan text-xs md:text-xl"
-            >
-              {isFindMode ? '아이디 찾기' : '비밀번호 찾기'}
-            </Button>
-          </div>
-        </form>
-      </div>
+      </form>
     </div>
   )
 }

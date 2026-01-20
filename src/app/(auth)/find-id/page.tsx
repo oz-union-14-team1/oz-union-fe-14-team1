@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import { compoundLogoColumn } from '@/assets'
-import FindAccountForm from '@/components/feature/auth/find-account/FindAccountForm'
+import { FindAccountContainer } from '@/components'
 
 export default function FindIdPage() {
   return (
@@ -9,7 +9,7 @@ export default function FindIdPage() {
       <div className="mb-1 flex flex-col">
         <Image src={compoundLogoColumn} alt="PlayTypeLogo" priority />
       </div>
-      <FindAccountForm mode="id" />
+      <FindAccountContainer mode="id" />
     </div>
   )
 }
