@@ -6,7 +6,7 @@ export default function MyPage() {
   return (
     <section className="mx-auto max-w-(--width-container)">
       <div className="px-26.5 py-25.5">
-        <Profile />
+        <Profile imageUrl="" />
       </div>
     </section>
   )

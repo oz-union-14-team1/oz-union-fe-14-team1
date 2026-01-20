@@ -3,10 +3,11 @@
 import Image from 'next/image'
 
 import joystickIcon from '@/assets/icons/joystickIcon.svg'
+import { PROFILE_IMAGE_SIZE, PROFILE_TEXT } from '@/constants'
 import { cn } from '@/utils'
 
-interface ProfileImageUiProps {
-  imageUrl?: string
+type ProfileImageUiProps = {
+  imageUrl: string
 }
 
 export default function ProfileImageUi({ imageUrl }: ProfileImageUiProps) {
@@ -23,9 +24,9 @@ export default function ProfileImageUi({ imageUrl }: ProfileImageUiProps) {
       {imageUrl && (
         <Image
           src={imageUrl}
-          alt="profile"
-          width={143}
-          height={143}
+          alt={PROFILE_TEXT.IMAGE_ALT}
+          width={PROFILE_IMAGE_SIZE.WIDTH}
+          height={PROFILE_IMAGE_SIZE.HEIGHT}
           className={cn(
             'absolute top-2.5 left-2.5 z-5 h-35.75 w-35.75 rounded-full object-cover',
             'border-2 border-main-purple/20',
@@ -60,7 +61,7 @@ export default function ProfileImageUi({ imageUrl }: ProfileImageUiProps) {
           {/* 조이스틱 아이콘 - 아주 천천히 회전 (20초) ⭐ */}
           <Image
             src={joystickIcon}
-            alt="joystick"
+            alt={PROFILE_TEXT.JOYSTICK_ALT}
             className={cn(
               'relative z-10 h-auto w-20 pl-1 opacity-80 transition-all duration-500 group-hover:scale-110 group-hover:brightness-110 group-hover:drop-shadow-[0_0_12px_rgba(168,85,247,0.8)]',
               'animate-spin-slowest'
