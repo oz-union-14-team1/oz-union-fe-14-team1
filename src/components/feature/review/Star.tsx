@@ -24,7 +24,7 @@ export function StarRating({
 }: StarRatingProps) {
   const [hoverValue, setHoverValue] = React.useState<number | null>(null)
 
-  const displayValue = hoverValue !== null ? hoverValue : value
+  const displayValue = hoverValue || value
 
   const handleClick = (rating: number) => {
     if (!readonly && onChange) {
@@ -47,7 +47,9 @@ export function StarRating({
             key={i}
             type="button"
             disabled={readonly}
-            className={`relative rounded-sm transition-all duration-200 focus-visible:outline-none ${!readonly ? 'cursor-pointer hover:scale-110 active:scale-95' : 'cursor-default'} `}
+            className={cn(
+              `relative rounded-sm transition-all duration-200 focus-visible:outline-none ${!readonly ? 'cursor-pointer hover:scale-110 active:scale-95' : 'cursor-default'} `
+            )}
             onMouseEnter={() => readonly || setHoverValue(starValue)}
             onMouseLeave={() => readonly || setHoverValue(null)}
             onClick={() => readonly || handleClick(starValue)}
