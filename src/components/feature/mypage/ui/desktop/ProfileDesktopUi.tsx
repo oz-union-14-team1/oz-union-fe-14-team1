@@ -66,7 +66,7 @@ function Glow() {
 function ProfileName() {
   return (
     <div className="flex items-center gap-3">
-      <p className="hidden pt-4 pl-43 text-2xl font-semibold text-text-light md:block">
+      <p className="hidden pt-4 pl-43 text-2xl font-semibold whitespace-nowrap text-text-light md:block">
         {/* API / ✅ ---------------------------------------------------------------------- */}
         NAME (DESKTOP)
       </p>

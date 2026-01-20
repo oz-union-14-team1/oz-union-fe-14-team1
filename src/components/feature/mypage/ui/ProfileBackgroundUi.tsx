@@ -10,13 +10,13 @@ export default function ProfileBackgroundUi() {
       <Image
         src={profileBackgroundMobile}
         alt="profile background mobile"
-        className="absolute top-0 left-0 z-1 rounded-full md:h-auto md:w-auto"
+        className="absolute top-0 left-0 z-1 rounded-full lg:h-auto lg:w-auto"
       />
       {/* 프로필 / 배경 / 데스크탑 */}
       <Image
         src={profileBackgroundDesktop}
         alt="profile background desktop"
-        className="absolute top-0 left-0 z-1 hidden md:block"
+        className="absolute top-0 left-0 z-1 hidden lg:block"
       />
     </>
   )
