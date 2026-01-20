@@ -2,9 +2,16 @@
 
 import { useCallback, useEffect, useState } from 'react'
 
+/**
+ * 휴대폰 인증 타이머 훅 속성
+ * @property onExpire - 인증 만료 시 실행되는 콜백
+ * @property duration - 타이머 지속 시간(초)
+ * @property onVerified - 인증 성공 시 실행되는 콜백
+ */
 type UsePhoneVerificationTimerProps = {
   onExpire?: () => void
   duration?: number
+  onVerified?: () => void
 }
 
 /**
@@ -16,6 +23,7 @@ type UsePhoneVerificationTimerProps = {
 export default function usePhoneVerificationTimer({
   onExpire,
   duration = 10 /** TODO:180초 */,
+  onVerified,
 }: UsePhoneVerificationTimerProps) {
   const [isCodeSent, setIsCodeSent] = useState(false)
   const [isCodeVerified, setIsCodeVerified] = useState(false)
@@ -41,10 +49,18 @@ export default function usePhoneVerificationTimer({
       return
     }
 
+    setIsCodeVerified(false)
+    setIsCodeSent(true)
+
+    /**
+     * TODO: 인증 성공 시
+     */
     setIsCodeVerified(true)
     setIsCodeSent(false)
     setRemainingTime(0)
-  }, [isCodeSent])
+
+    onVerified?.()
+  }, [isCodeSent, onVerified])
 
   const handleExpire = useCallback(() => {
     setIsCodeSent(false)
@@ -52,6 +68,9 @@ export default function usePhoneVerificationTimer({
     onExpire?.()
   }, [onExpire])
 
+  /**
+   * 타이머 카운트다운 효과
+   */
   useEffect(() => {
     if (!isCodeSent) {
       return
@@ -64,6 +83,9 @@ export default function usePhoneVerificationTimer({
     return () => clearInterval(timer)
   }, [isCodeSent])
 
+  /**
+   * 타이머 만료 처리 효과
+   */
   useEffect(() => {
     if (remainingTime === 0 && isCodeSent) {
       const id = setTimeout(() => {

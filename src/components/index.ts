@@ -24,3 +24,5 @@ export {
 } from '@/components/feature/auth/schema/signupSchema'
 export { default as SignupForm } from './feature/auth/SignupForm'
 export { default as GenreSelector } from './feature/recomendation/GenreSelector'
+export { default as PhoneVerificationField } from './feature/auth/PhoneVerificationField'
+export { default as FindIdResultClient } from './feature/auth/find-account/FindIdResultClient'
