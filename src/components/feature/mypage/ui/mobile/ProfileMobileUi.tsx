@@ -1,5 +1,6 @@
 import { Pencil } from 'lucide-react'
 
+import { MOCK_GENRES } from '@/constants'
 import { cn } from '@/utils'
 
 import {
@@ -9,8 +10,8 @@ import {
   ProfileImageUi,
 } from '..'
 
-interface ProfileMobileProps {
-  imageUrl?: string
+type ProfileMobileProps = {
+  imageUrl: string
 }
 
 export default function ProfileMobileUi({ imageUrl }: ProfileMobileProps) {
@@ -31,7 +32,7 @@ export default function ProfileMobileUi({ imageUrl }: ProfileMobileProps) {
         className="z-7 mt-5 block px-4 py-2 text-sm"
       />
       <div className="z-7 mt-5 flex w-[70vw] flex-wrap items-center justify-center gap-2">
-        {['ACTION', 'RPG', 'ADVENTURE', 'SHOOTER'].map((genre) => (
+        {MOCK_GENRES.map((genre) => (
           <GenresTagMobileUi
             key={genre}
             genre={genre}

@@ -1,6 +1,6 @@
 import { cn } from '@/utils'
 
-interface GenresTagDesktopUiProps {
+type GenresTagDesktopUiProps = {
   genre: string
   variant?: 'main' | 'sub'
   className?: string

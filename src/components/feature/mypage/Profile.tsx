@@ -1,8 +1,8 @@
 import ProfileDesktop from './ui/desktop/ProfileDesktopUi'
 import ProfileMobile from './ui/mobile/ProfileMobileUi'
 
-interface ProfileProps {
-  imageUrl?: string
+type ProfileProps = {
+  imageUrl: string
 }
 
 export default function Profile({ imageUrl }: ProfileProps) {

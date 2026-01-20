@@ -1,6 +1,6 @@
 import { cn } from '@/utils'
 
-interface GenresTagMobileUiProps {
+type GenresTagMobileUiProps = {
   genre: string
   variant?: 'main' | 'sub'
   className?: string

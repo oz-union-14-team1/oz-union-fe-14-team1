@@ -1,5 +1,6 @@
 import { Pencil } from 'lucide-react'
 
+import { MOCK_GENRES } from '@/constants'
 import { cn } from '@/utils'
 
 import {
@@ -9,8 +10,8 @@ import {
   ProfileImageUi,
 } from '..'
 
-interface ProfileDesktopProps {
-  imageUrl?: string
+type ProfileDesktopProps = {
+  imageUrl: string
 }
 
 export default function ProfileDesktopUi({ imageUrl }: ProfileDesktopProps) {
@@ -29,7 +30,7 @@ export default function ProfileDesktopUi({ imageUrl }: ProfileDesktopProps) {
       />
       <ProfileBackgroundUi />
       <div className="absolute top-30 left-41 z-2 flex flex-wrap items-center gap-2">
-        {['ACTION', 'RPG', 'ADVENTURE', 'SHOOTER'].map((genre) => (
+        {MOCK_GENRES.map((genre) => (
           <GenresTagDesktopUi
             key={genre}
             genre={genre}
