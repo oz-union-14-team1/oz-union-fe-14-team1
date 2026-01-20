@@ -1,5 +1,6 @@
 // src/components/feature/mypage/index.ts
 export { default as Profile } from './Profile'
+export { default as DashBoard } from './DashBoard'
 // ui
 export { default as ProfileMobile } from './ui/mobile/ProfileMobileUi'
 export { default as ProfileDesktop } from './ui/desktop/ProfileDesktopUi'
