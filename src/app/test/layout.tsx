@@ -41,7 +41,7 @@ export default async function TestLayout({
   const testPages = await getTestPages()
 
   return (
-    <div className="flex min-h-screen text-black">
+    <div className="flex min-h-screen text-text-dark">
       <aside className="w-64 border-r border-gray-200 p-4">
         <Link
           href={'/test'}

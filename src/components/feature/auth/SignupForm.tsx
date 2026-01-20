@@ -1,18 +1,21 @@
 'use client'
 
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { compoundLogoRow } from '@/assets'
-import { BaseInput, Button, SignupFormValues, signupSchema } from '@/components'
+import {
+  BaseInput,
+  Button,
+  PhoneVerificationField,
+  SignupFormValues,
+  signupSchema,
+} from '@/components'
 import { SIGNUP_FIELDS } from '@/constants'
 import { usePhoneVerificationTimer, useToast } from '@/hooks'
 import { cn } from '@/utils'
 
 import { DuplicateCheckField } from './DuplicateCheckField'
 import { FormField } from './FormField'
-import { PhoneVerificationField } from './PhoneVerificationField'
 
 const INPUT_CLASS =
   'h-9 w-85 text-xs placeholder:text-xs md:h-10 md:w-90 md:text-sm md:placeholder:text-sm'
@@ -164,8 +167,8 @@ export default function SignupForm() {
                   `font-semibold, rounded-full px-6 py-2 text-xs shadow-tag-inactive md:px-8 md:py-2 md:text-sm`,
                   `${
                     form.gender === gender
-                      ? 'bg-gradient-sub text-black'
-                      : 'bg-btn-gray-active text-black'
+                      ? 'bg-gradient-sub text-text-dark'
+                      : 'bg-btn-gray-active text-text-dark'
                   }`
                 )}
               >

@@ -1,0 +1,31 @@
+'use client'
+
+import { useRouter } from 'next/navigation'
+
+import { Button } from '@/components/common'
+
+/**
+ * 아이디 찾기 결과 컴포넌트
+ */
+export default function FindIdResultClient() {
+  const router = useRouter()
+
+  return (
+    <div className="flex w-full gap-4">
+      <Button
+        variant="gray"
+        onClick={() => router.push('/login')}
+        className="w-full cursor-pointer hover:bg-btn-gray-hover"
+      >
+        로그인 하기
+      </Button>
+      <Button
+        variant="sub"
+        onClick={() => router.push('/find-password')}
+        className="w-full cursor-pointer hover:bg-btn-sub-hover"
+      >
+        비밀번호 찾기
+      </Button>
+    </div>
+  )
+}

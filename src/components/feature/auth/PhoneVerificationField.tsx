@@ -1,6 +1,9 @@
 import { BaseInput, Button } from '@/components'
 import { cn } from '@/utils'
 
+/**
+ * 핸드폰 번호 및 인증번호 필드 컴포넌트 속성
+ */
 type Props = {
   phone: string
   code: string
@@ -24,11 +27,11 @@ type Props = {
  * @param isCodeVerified - 인증번호 인증 완료 여부
  * @param remainingTime - 남은 인증 시간(초)
  * @param formatTime - 남은 시간을 표시 문자열로 변환하는 함수
- * @param onSend - 인증번호 전송 핸들러
- * @param onVerify - 인증번호 확인 핸들러
+ * @param handleSendCode - 인증번호 전송 핸들러
+ * @param handleVerifyCode - 인증번호 확인 핸들러
  * @returns 휴대폰 인증 UI
  */
-export function PhoneVerificationField({
+export default function PhoneVerificationField({
   phone,
   code,
   onPhoneChange,
@@ -51,11 +54,11 @@ export function PhoneVerificationField({
             id="signup-phone"
             type="tel"
             value={phone}
-            placeholder="휴대폰 번호 입력"
+            placeholder="휴대폰 번호(숫자)를 입력해주세요."
             onChange={(e) => onPhoneChange(e.target.value)}
             disabled={isCodeSent || isCodeVerified}
             className={cn(
-              'h-9 w-85 text-xs placeholder:text-xs md:h-10 md:w-90 md:text-sm md:placeholder:text-sm',
+              'h-9 w-85 pr-26 text-xs placeholder:text-xs md:h-10 md:w-90 md:pr-3 md:text-sm md:placeholder:text-sm',
               isCodeSent && 'cursor-not-allowed'
             )}
           />
@@ -89,7 +92,7 @@ export function PhoneVerificationField({
             onChange={(e) => onCodeChange(e.target.value)}
             disabled={!isCodeSent || isCodeVerified}
             className={cn(
-              'h-9 w-85 text-xs placeholder:text-xs md:h-10 md:w-90 md:text-sm md:placeholder:text-sm',
+              'h-9 w-85 pr-26 text-xs placeholder:text-xs md:h-10 md:w-90 md:pr-3 md:text-sm md:placeholder:text-sm',
               !isCodeSent && 'cursor-not-allowed'
             )}
           />
@@ -106,7 +109,7 @@ export function PhoneVerificationField({
                 : 'cursor-not-allowed bg-btn-gray-disabled opacity-60'
             )}
           >
-            {isCodeVerified ? '인증 완료' : '인증번호 확인'}
+            {isCodeVerified ? '인증번호 완료' : '인증번호 확인'}
           </Button>
         </div>
         {isCodeSent && (
