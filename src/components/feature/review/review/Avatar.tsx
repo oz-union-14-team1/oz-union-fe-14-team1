@@ -10,18 +10,20 @@ type AvatarProps = React.ComponentPropsWithoutRef<
   alt?: string
   name?: string
   date?: string
+  ref?: React.Ref<HTMLDivElement>
 }
 
 export default function Avatar({
   className,
   src,
   alt,
+  ref,
   date,
   name,
   ...props
 }: AvatarProps) {
   return (
-    <div className="flex items-center gap-3">
+    <div ref={ref} className="flex items-center gap-3">
       <AvatarPrimitive.Root
         className={cn(
           'inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-gray-100',
