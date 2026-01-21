@@ -5,11 +5,27 @@ const passwordRegex =
 
 const noTripleRepeat = /^(?!.*(.)\1\1).*$/
 
+export const passwordRule = z
+  .string()
+  .regex(
+    passwordRegex,
+    '비밀번호는 8~20자, 대/소문자, 숫자, 특수문자를 포함해야 합니다.'
+  )
+  .regex(noTripleRepeat, '같은 문자를 3번 이상 사용할 수 없습니다.')
+  .refine((pw) => !pw.includes(' '), {
+    message: '공백은 사용할 수 없습니다.',
+  })
+
 const nicknameRegex = /^[가-힣a-zA-Z0-9]{2,16}$/
 
 const bannedNicknames = ['관리자', '운영자', 'admin']
 
 const phoneRegex = /^(01[016789])\d{7,8}$/
+
+export const phoneRule = z
+  .string()
+  .regex(/^\d{10,11}$/, '휴대폰 번호를 정확히 입력해 주세요.')
+  .regex(phoneRegex, '올바른 휴대폰 번호를 입력해 주세요.')
 
 const isValidBirthday = (value: string) => {
   if (!/^\d{8}$/.test(value)) {
@@ -51,16 +67,7 @@ export const signupSchema = z
           !bannedNicknames.some((word) => value.toLowerCase().includes(word)),
         { message: '사용할 수 없는 닉네임입니다.' }
       ),
-    password: z
-      .string()
-      .regex(
-        passwordRegex,
-        '비밀번호는 8~20자, 대/소문자, 숫자, 특수문자를 포함해야 합니다.'
-      )
-      .regex(noTripleRepeat, '같은 문자를 3번 이상 사용할 수 없습니다.')
-      .refine((pw) => !pw.includes(' '), {
-        message: '공백은 사용할 수 없습니다.',
-      }),
+    password: passwordRule,
     passwordConfirm: z.string(),
     name: z.string().min(1, '이름을 입력해 주세요.'),
     birthday: z

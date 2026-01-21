@@ -3,16 +3,15 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { PhoneVerificationField } from '@/components'
-import { Button } from '@/components/common'
-import { usePhoneVerificationTimer, useToast } from '@/hooks'
-import { FindAccountMode } from '@/types/findAccountMode'
-
 import {
+  Button,
   FindAccountFormValues,
   findAccountSchema,
   phoneOnlySchema,
-} from '../schema/findAccountSchema'
+  PhoneVerificationField,
+} from '@/components'
+import { usePhoneVerificationTimer, useToast } from '@/hooks'
+import { FindAccountMode } from '@/types/findAccountMode'
 
 /**
  * 아이디/비밀번호 찾기 모드
@@ -133,7 +132,7 @@ export default function FindAccountForm({
           <Button
             type="submit"
             variant="sub"
-            className="cursor-pointer bg-sub-cyan text-sm md:text-[16px]"
+            className="cursor-pointer bg-sub-cyan text-sm md:text-base"
           >
             {isFindMode ? '아이디 찾기' : '비밀번호 찾기'}
           </Button>

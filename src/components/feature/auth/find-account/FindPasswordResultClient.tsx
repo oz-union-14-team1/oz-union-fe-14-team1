@@ -88,7 +88,7 @@ export default function FindPasswordResultClient() {
           <Button
             type="submit"
             variant="sub"
-            className="w-full cursor-pointer text-sm hover:bg-btn-sub-hover md:text-[16px]"
+            className="w-full cursor-pointer text-sm hover:bg-btn-sub-hover md:text-base"
           >
             비밀번호 변경하기
           </Button>

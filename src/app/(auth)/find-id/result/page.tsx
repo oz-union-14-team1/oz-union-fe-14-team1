@@ -21,7 +21,7 @@ export default function FindIdResultPage() {
         아이디 찾기
       </h1>
       <div className="mb-10 flex h-15 w-70 items-center justify-center rounded-default bg-btn-gray-default text-lg font-semibold shadow-tag-active md:h-25 md:w-90">
-        <span className="text-[16px] text-text-dark md:text-xl">
+        <span className="text-base text-text-dark md:text-xl">
           {/** TODO: {userId} */}
         </span>
       </div>

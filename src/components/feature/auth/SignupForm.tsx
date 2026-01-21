@@ -193,7 +193,7 @@ export default function SignupForm() {
           <Button
             type="submit"
             variant="sub"
-            className="cursor-pointer bg-sub-cyan text-sm md:text-[16px]"
+            className="cursor-pointer bg-sub-cyan text-sm md:text-base"
           >
             회원 가입
           </Button>
