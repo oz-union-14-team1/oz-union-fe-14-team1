@@ -28,15 +28,13 @@ export function NavButton() {
 
   const handleNext = () => {
     if (currentStep === 'tag' && selectedTags.length === 0) {
-      triggerToast('error', '최소 1개의 태그를 선택해주세요.')
+      triggerToast('error', '최소 한 개 이상의 태그를 선택해주세요.')
       return
     }
-
     if (currentStep === 'genre' && selectedGenres.length === 0) {
-      triggerToast('error', '최소 1개의 장르를 선택해주세요')
+      triggerToast('error', '최소 한 개 이상의 장르를 선택해주세요.')
       return
     }
-
     if (recommendationStepConfig.next) {
       router.push(recommendationStepConfig.next.path)
     }
@@ -46,44 +44,58 @@ export function NavButton() {
     (currentStep === 'tag' && selectedTags.length === 0) ||
     (currentStep === 'genre' && selectedGenres.length === 0)
 
-  const prevButton = recommendationStepConfig.prev && (
-    <button
-      onClick={handlePrev}
-      className="text-sm font-bold text-text-light hover:opacity-80 lg:text-base"
-    >
-      <span className="mr-1">←</span> {recommendationStepConfig.prev.label}
-    </button>
-  )
-
   return (
     <>
-      <div className="mt-6 hidden justify-between md:flex lg:mt-8">
-        {prevButton ?? <div />}
+      <div className="hidden justify-between md:flex">
+        {recommendationStepConfig.prev ? (
+          <button
+            onClick={handlePrev}
+            className="text-sm font-bold text-text-light hover:opacity-80 lg:text-base"
+          >
+            ← {recommendationStepConfig.prev.label}
+          </button>
+        ) : (
+          <div />
+        )}
 
         {recommendationStepConfig.next && (
           <button
             onClick={handleNext}
-            className="text-sm font-bold transition-opacity hover:opacity-80 lg:text-base"
+            className="text-sm font-bold hover:opacity-80 lg:text-base"
           >
-            {recommendationStepConfig.next.label}{' '}
-            <span className="ml-1">→</span>
+            {recommendationStepConfig.next.label} →
           </button>
         )}
       </div>
 
-      {recommendationStepConfig.next && (
-        <div className="fixed bottom-4 left-1/2 z-50 w-full max-w-md -translate-x-1/2 px-4 pb-[env(safe-area-inset-bottom)] md:hidden">
-          <Button
-            size="big"
-            variant="sub"
-            className="w-full"
-            disabled={isNextDisabled}
-            onClick={handleNext}
-          >
-            {recommendationStepConfig.next.label.replace('로 이동', '')}
-          </Button>
+      <div className="fixed bottom-4 left-1/2 z-50 w-full max-w-md -translate-x-1/2 px-4 pb-[env(safe-area-inset-bottom)] md:hidden">
+        <div className="flex gap-3">
+          {recommendationStepConfig.prev && (
+            <Button
+              size="big"
+              variant="outline"
+              className="flex-1 text-[1rem]"
+              onClick={handlePrev}
+            >
+              {recommendationStepConfig.prev.mobileLabel ||
+                recommendationStepConfig.prev.label}
+            </Button>
+          )}
+
+          {recommendationStepConfig.next && (
+            <Button
+              size="big"
+              variant="sub"
+              className="flex-1 text-[1rem]"
+              disabled={isNextDisabled}
+              onClick={handleNext}
+            >
+              {recommendationStepConfig.next.mobileLabel ||
+                recommendationStepConfig.next.label}
+            </Button>
+          )}
         </div>
-      )}
+      </div>
     </>
   )
 }

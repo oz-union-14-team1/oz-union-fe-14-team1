@@ -10,7 +10,10 @@ type GenreCardProps = {
 } & React.ComponentPropsWithoutRef<'button'>
 
 const baseGenreCardStyle = [
-  'rounded-radius-default relative h-40 w-33.75 overflow-hidden',
+  'rounded-radius-default relative overflow-hidden',
+  'h-28 w-24',
+  'md:h-36 md:w-30',
+  'lg:h-40 lg:w-33.75',
   'transition-all duration-200 ease-out',
   'border border-transparent',
 ]

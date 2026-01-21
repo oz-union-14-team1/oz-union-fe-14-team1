@@ -36,3 +36,5 @@ export {
   findAccountSchema,
   phoneOnlySchema,
 } from './feature/auth/schema/findAccountSchema'
+export { default as ResultsContent } from './feature/recomendation/ResultsContent'
+export { ResponsiveText } from './feature/recomendation/ResponsiveText'
