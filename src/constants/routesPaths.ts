@@ -4,6 +4,8 @@ export const ROUTES_PATHS = {
   LOGIN_PAGE: '/login',
   FIDN_ID_PAGE: '/find-id',
   FIND_PASSWORD_PAGE: '/find-password',
+  FIDN_ID_RESULT_PAGE: '/find-id/result',
+  FIND_PASSWORD_RESULT_PAGE: '/find-password/result',
 }
 
 export const RECOMMEND_PATHS = {
