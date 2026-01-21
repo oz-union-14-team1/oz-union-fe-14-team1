@@ -28,7 +28,7 @@ export default function GameCard({ id, name, imgUrl }: GameCardProps) {
         {/* Glow 효과 */}
         <div className="rounded-0 pointer-events-none absolute -inset-1 -z-10 bg-gradient-to-r from-main-purple via-main-violet to-main-fuchsia opacity-0 blur-xl transition-opacity duration-500 group-hover:opacity-30" />
         {/* 위시리스트 버튼 코드 분리 -> HeartButtonUi 컴포넌트 사용*/}
-        <HeartButtonUi />
+        <HeartButtonUi gameId={id} />
         <div className="flex flex-col items-start justify-center gap-3">
           {/* <div className="relative flex w-full flex-col items-center justify-center gap-3 text-text-light"> */}
           <div className="rounded-0 relative h-67.5 w-50 overflow-hidden">
