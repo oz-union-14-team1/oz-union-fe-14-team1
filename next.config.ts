@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
         hostname: 'media.rawg.io',
         pathname: '/media/**',
       },
+      {
+        protocol: 'https',
+        hostname: '**.amazonaws.com',
+      },
     ],
   },
 }
