@@ -10,7 +10,7 @@ import {
   SignupFormValues,
   signupSchema,
 } from '@/components'
-import { SIGNUP_FIELDS } from '@/constants'
+import { ROUTES_PATHS, SIGNUP_FIELDS } from '@/constants'
 import { usePhoneVerificationTimer, useToast } from '@/hooks'
 import { cn } from '@/utils'
 
@@ -87,7 +87,7 @@ export default function SignupForm() {
 
     triggerToast('success', '회원가입 성공!')
 
-    router.push('/login')
+    router.push(ROUTES_PATHS.LOGIN_PAGE)
   }
 
   const handleIdCheckClick = () => {

@@ -79,7 +79,7 @@ export default function LoginForm() {
         <Button
           type="submit"
           variant={'sub'}
-          className="h-[clamp(36px,4vw,48px)] w-full cursor-pointer"
+          className="h-[clamp(44px,4vw,50px)] w-full cursor-pointer"
         >
           로그인
         </Button>

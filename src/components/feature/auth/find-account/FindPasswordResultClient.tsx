@@ -9,7 +9,7 @@ import {
   newPasswordSchema,
   NewPasswordSchemaValues,
 } from '@/components'
-import { PASSWORD_CONFIRM_FIELDS } from '@/constants'
+import { PASSWORD_CONFIRM_FIELDS, ROUTES_PATHS } from '@/constants'
 import { useToast } from '@/hooks'
 
 import FormField from '../FormField'
@@ -50,7 +50,7 @@ export default function FindPasswordResultClient() {
      * TODO: 비밀번호 변경 API 연동
      * TODO: credentials: 'include'
      */
-    router.push('/login')
+    router.push(ROUTES_PATHS.LOGIN_PAGE)
   }
 
   return (

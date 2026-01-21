@@ -10,6 +10,7 @@ import {
   phoneOnlySchema,
   PhoneVerificationField,
 } from '@/components'
+import { ROUTES_PATHS } from '@/constants'
 import { usePhoneVerificationTimer, useToast } from '@/hooks'
 import { FindAccountMode } from '@/types/findAccountMode'
 
@@ -80,9 +81,9 @@ export default function FindAccountForm({
     triggerToast('success', '아이디 찾기 성공!')
 
     if (isFindMode) {
-      router.push('/find-id/result')
+      router.push(ROUTES_PATHS.FIDN_ID_RESULT_PAGE)
     } else {
-      router.push('/find-password/result')
+      router.push(ROUTES_PATHS.FIND_PASSWORD_RESULT_PAGE)
     }
   }
 

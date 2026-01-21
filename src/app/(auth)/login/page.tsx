@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import { discordIcon, googleIcon } from '@/assets'
-import LoginForm from '@/components/feature/auth/LoginForm'
+import { LoginForm } from '@/components'
 import { ROUTES_PATHS } from '@/constants'
 
 export default function LoginPage() {
@@ -11,24 +11,18 @@ export default function LoginPage() {
       <LoginForm />
       <div className="mt-6 flex flex-col items-center justify-center gap-[clamp(16px,3vw,24px)]">
         <div className="flex justify-center gap-8 text-sm text-cyan-300">
-          <button
-            type="button"
+          <Link
+            href={ROUTES_PATHS.FIDN_ID_PAGE}
             className="cursor-pointer font-semibold hover:text-cyan-500"
-            /**
-             * TODO: 이메일 찾기 페이지로 연결 LINK 연결예정
-             */
           >
-            이메일 찾기
-          </button>
-          <button
-            type="button"
+            아이디 찾기
+          </Link>
+          <Link
+            href={ROUTES_PATHS.FIND_PASSWORD_PAGE}
             className="cursor-pointer font-semibold hover:text-cyan-500"
-            /**
-             * TODO: 비밀번호 찾기 페이지로 연결 LINK 연결예정
-             */
           >
             비밀번호 찾기
-          </button>
+          </Link>
         </div>
         <p className="flex justify-center text-sm">
           <span className="pr-2">아직 회원이 아니신가요?</span>
@@ -50,7 +44,7 @@ export default function LoginPage() {
         </button>
         <button
           type="button"
-          className="flex h-10 w-55 cursor-pointer items-center justify-center gap-2.5 rounded-2xl bg-indigo-600 px-3 text-text-light"
+          className="flex h-11 w-55 cursor-pointer items-center justify-center gap-2.5 rounded-2xl bg-indigo-600 px-3 text-text-light"
         >
           <Image src={discordIcon} alt="discordIcon" className="mx-2 w-5" />
           <span className="font-normal">Sign in with Discord</span>
