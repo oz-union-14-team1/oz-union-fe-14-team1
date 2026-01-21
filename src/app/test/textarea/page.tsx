@@ -1,4 +1,4 @@
-import { Textarea } from '@/components/feature/review/Textarea'
+import { Textarea } from '@/components/feature/review/review/Textarea'
 
 export default function TextareaTestPage() {
   return (
