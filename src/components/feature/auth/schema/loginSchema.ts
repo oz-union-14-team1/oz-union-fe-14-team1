@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { passwordRule } from './signupSchema'
 
 export const loginSchema = z.object({
-  email: z.string().email('올바른 이메일 형식이 아닙니다.'),
+  id: z.string().min(1, '아이디를 입력해 주세요.'),
 
   password: passwordRule,
 })
