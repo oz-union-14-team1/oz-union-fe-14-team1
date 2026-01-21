@@ -3,7 +3,7 @@
 import { Heart, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 
-import { cn } from '@/utils'
+import { ROUTES_PATHS } from '@/constants'
 
 export default function WishListEmptyUi() {
   return (
@@ -25,13 +25,8 @@ export default function WishListEmptyUi() {
       </div>
 
       <Link
-        href="/"
-        className={cn(
-          'group relative overflow-hidden rounded-full',
-          'bg-gradient-to-r from-pink-500 to-purple-600 px-5 py-2.5 md:px-6 md:py-3',
-          'text-sm font-medium text-white transition-all duration-300 md:text-base',
-          'hover:shadow-[0_0_30px_rgba(236,72,153,0.5)]'
-        )}
+        href={ROUTES_PATHS.MAIN_PAGE}
+        className="group relative overflow-hidden rounded-full bg-gradient-to-r from-pink-500 to-purple-600 px-5 py-2.5 text-sm font-medium text-white transition-all duration-300 hover:shadow-[0_0_30px_rgba(236,72,153,0.5)] md:px-6 md:py-3 md:text-base"
       >
         <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-500 group-hover:translate-x-full" />
         <span className="relative flex items-center gap-2">

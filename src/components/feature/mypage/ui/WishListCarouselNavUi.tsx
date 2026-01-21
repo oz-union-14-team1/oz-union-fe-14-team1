@@ -2,8 +2,6 @@
 
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
-import { cn } from '@/utils'
-
 type WishListCarouselNavUiProps = {
   canScrollPrev: boolean
   canScrollNext: boolean
@@ -22,11 +20,7 @@ export default function WishListCarouselNavUi({
       <button
         onClick={scrollPrev}
         disabled={!canScrollPrev}
-        className={cn(
-          'rounded-full bg-white/10 p-1.5 backdrop-blur-md transition-all duration-300 md:p-2',
-          'hover:bg-white/20 hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]',
-          'disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:shadow-none'
-        )}
+        className="rounded-full bg-white/10 p-1.5 backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:shadow-[0_0_20px_rgba(168,85,247,0.5)] disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:shadow-none md:p-2"
         aria-label="이전 게임"
       >
         <ChevronLeft className="h-5 w-5 text-text-light md:h-6 md:w-6" />
@@ -35,11 +29,7 @@ export default function WishListCarouselNavUi({
       <button
         onClick={scrollNext}
         disabled={!canScrollNext}
-        className={cn(
-          'rounded-full bg-white/10 p-1.5 backdrop-blur-md transition-all duration-300 md:p-2',
-          'hover:bg-white/20 hover:shadow-[0_0_20px_rgba(168,85,247,0.5)]',
-          'disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:shadow-none'
-        )}
+        className="rounded-full bg-white/10 p-1.5 backdrop-blur-md transition-all duration-300 hover:bg-white/20 hover:shadow-[0_0_20px_rgba(168,85,247,0.5)] disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:shadow-none md:p-2"
         aria-label="다음 게임"
       >
         <ChevronRight className="h-5 w-5 text-text-light md:h-6 md:w-6" />
