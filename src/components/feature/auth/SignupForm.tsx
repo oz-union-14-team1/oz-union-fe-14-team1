@@ -15,9 +15,9 @@ import { usePhoneVerificationTimer, useToast } from '@/hooks'
 import { cn } from '@/utils'
 
 import { DuplicateCheckField } from './DuplicateCheckField'
-import { FormField } from './FormField'
+import FormField from './FormField'
 
-const INPUT_CLASS =
+export const INPUT_CLASS =
   'h-9 w-85 text-xs placeholder:text-xs md:h-10 md:w-90 md:text-sm md:placeholder:text-sm'
 
 /**
@@ -193,7 +193,7 @@ export default function SignupForm() {
           <Button
             type="submit"
             variant="sub"
-            className="cursor-pointer bg-sub-cyan text-xs md:text-[16px]"
+            className="cursor-pointer bg-sub-cyan text-sm md:text-base"
           >
             회원 가입
           </Button>

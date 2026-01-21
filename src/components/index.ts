@@ -7,7 +7,7 @@ export { default as LoginForm } from '@/components/feature/auth/LoginForm'
 export {
   type LoginFormValues,
   loginSchema,
-} from '@/components/feature/auth/schema/loginSchema'
+} from './feature/auth/schema/loginSchema'
 export { Header } from '@/components/layout'
 export {
   LogoUi,
@@ -21,9 +21,18 @@ export { OnboardingHeader } from './feature/recomendation/OnboardingHeader'
 export {
   type SignupFormValues,
   signupSchema,
-} from '@/components/feature/auth/schema/signupSchema'
+} from './feature/auth/schema/signupSchema'
 export { default as SignupForm } from './feature/auth/SignupForm'
 export { default as GenreSelector } from './feature/recomendation/GenreSelector'
 export { default as PhoneVerificationField } from './feature/auth/PhoneVerificationField'
 export { default as FindIdResultClient } from './feature/auth/find-account/FindIdResultClient'
 export { default as FindAccountContainer } from './feature/auth/find-account/FindAccountContainer'
+export {
+  newPasswordSchema,
+  type NewPasswordSchemaValues,
+} from './feature/auth/schema/newPasswordSchema'
+export {
+  type FindAccountFormValues,
+  findAccountSchema,
+  phoneOnlySchema,
+} from './feature/auth/schema/findAccountSchema'
