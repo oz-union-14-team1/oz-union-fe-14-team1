@@ -1,3 +1,3 @@
 // src/components/review/index.ts
-export { Avatar } from './Avatar'
+export { default as Avatar } from './Avatar'
 export { Card as ReviewCard } from './ReviewCard'
