@@ -1,5 +1,6 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { PhoneVerificationField } from '@/components'
@@ -45,6 +46,7 @@ export default function FindAccountForm({
     phoneCode: '',
   })
   const { triggerToast } = useToast()
+  const router = useRouter()
 
   /**
    * 핸드폰 인증 타이머 훅
@@ -77,6 +79,12 @@ export default function FindAccountForm({
      */
     onError(null)
     triggerToast('success', '아이디 찾기 성공!')
+
+    if (isFindMode) {
+      router.push('/find-id/result')
+    } else {
+      router.push('/find-password/result')
+    }
   }
 
   const handleChange = (field: keyof FindAccountFormValues, value: string) => {
@@ -125,7 +133,7 @@ export default function FindAccountForm({
           <Button
             type="submit"
             variant="sub"
-            className="cursor-pointer bg-sub-cyan text-xs md:text-xl"
+            className="cursor-pointer bg-sub-cyan text-sm md:text-[16px]"
           >
             {isFindMode ? '아이디 찾기' : '비밀번호 찾기'}
           </Button>
