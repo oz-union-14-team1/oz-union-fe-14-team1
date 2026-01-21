@@ -14,15 +14,15 @@ export function NavButton() {
   const { selectedTags, selectedGenres } = useOnboardingStore((state) => state)
 
   const currentStep = pathname.split('/').pop() as keyof typeof STEP_CONFIG
-  const config = STEP_CONFIG[currentStep]
+  const recommendationStepConfig = STEP_CONFIG[currentStep]
 
-  if (!config) {
+  if (!recommendationStepConfig) {
     return null
   }
 
   const handlePrev = () => {
-    if (config.prev) {
-      router.push(config.prev.path)
+    if (recommendationStepConfig.prev) {
+      router.push(recommendationStepConfig.prev.path)
     }
   }
 
@@ -35,8 +35,8 @@ export function NavButton() {
       triggerToast('error', '최소 한 개 이상의 장르를 선택해주세요.')
       return
     }
-    if (config.next) {
-      router.push(config.next.path)
+    if (recommendationStepConfig.next) {
+      router.push(recommendationStepConfig.next.path)
     }
   }
 
@@ -47,41 +47,42 @@ export function NavButton() {
   return (
     <>
       <div className="hidden justify-between md:flex">
-        {config.prev ? (
+        {recommendationStepConfig.prev ? (
           <button
             onClick={handlePrev}
             className="text-sm font-bold text-text-light hover:opacity-80 lg:text-base"
           >
-            ← {config.prev.label}
+            ← {recommendationStepConfig.prev.label}
           </button>
         ) : (
           <div />
         )}
 
-        {config.next && (
+        {recommendationStepConfig.next && (
           <button
             onClick={handleNext}
             className="text-sm font-bold hover:opacity-80 lg:text-base"
           >
-            {config.next.label} →
+            {recommendationStepConfig.next.label} →
           </button>
         )}
       </div>
 
       <div className="fixed bottom-4 left-1/2 z-50 w-full max-w-md -translate-x-1/2 px-4 pb-[env(safe-area-inset-bottom)] md:hidden">
         <div className="flex gap-3">
-          {config.prev && (
+          {recommendationStepConfig.prev && (
             <Button
               size="big"
               variant="outline"
               className="flex-1 text-[1rem]"
               onClick={handlePrev}
             >
-              {config.prev.mobileLabel || config.prev.label}
+              {recommendationStepConfig.prev.mobileLabel ||
+                recommendationStepConfig.prev.label}
             </Button>
           )}
 
-          {config.next && (
+          {recommendationStepConfig.next && (
             <Button
               size="big"
               variant="sub"
@@ -89,7 +90,8 @@ export function NavButton() {
               disabled={isNextDisabled}
               onClick={handleNext}
             >
-              {config.next.mobileLabel || config.next.label}
+              {recommendationStepConfig.next.mobileLabel ||
+                recommendationStepConfig.next.label}
             </Button>
           )}
         </div>
