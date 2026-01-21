@@ -12,7 +12,7 @@ import useToast from '@/hooks/useToast'
  */
 export default function LoginForm() {
   const [form, setForm] = useState<LoginFormValues>({
-    email: '',
+    id: '',
     password: '',
   })
   const { triggerToast } = useToast()
@@ -28,8 +28,8 @@ export default function LoginForm() {
    * 로그인 성공 시 토스트
    */
   const handleSubmit = () => {
-    const { email, password } = form
-    const result = loginSchema.safeParse({ email, password })
+    const { id, password } = form
+    const result = loginSchema.safeParse({ id, password })
 
     if (!result.success) {
       triggerToast('error', result.error.issues[0].message)
@@ -61,11 +61,11 @@ export default function LoginForm() {
         }}
       >
         <BaseInput
-          id="login-email"
-          type="email"
-          placeholder="이메일을 입력해 주세요."
-          value={form.email}
-          onChange={(e) => handleChange('email', e.target.value)}
+          id="login-id"
+          type="text"
+          placeholder="아이디를 입력해 주세요."
+          value={form.id}
+          onChange={(e) => handleChange('id', e.target.value)}
           className="h-[clamp(36px,4vw,48px)] text-[clamp(14px,2vw,16px)]"
         />
         <BaseInput
@@ -78,7 +78,7 @@ export default function LoginForm() {
         />
         <Button
           type="submit"
-          variant={'sub'}
+          variant="sub"
           className="h-[clamp(44px,4vw,50px)] w-full cursor-pointer"
         >
           로그인
