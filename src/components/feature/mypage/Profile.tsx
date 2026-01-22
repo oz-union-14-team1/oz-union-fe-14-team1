@@ -1,5 +1,4 @@
-import ProfileDesktop from './ui/desktop/ProfileDesktopUi'
-import ProfileMobile from './ui/mobile/ProfileMobileUi'
+import { ProfileDesktopUi, ProfileMobileUi } from './index'
 
 type ProfileProps = {
   imageUrl: string
@@ -9,10 +8,10 @@ export default function Profile({ imageUrl }: ProfileProps) {
   return (
     <>
       <div className="block lg:hidden">
-        <ProfileMobile imageUrl={imageUrl} />
+        <ProfileMobileUi imageUrl={imageUrl} />
       </div>
       <div className="hidden lg:block">
-        <ProfileDesktop imageUrl={imageUrl} />
+        <ProfileDesktopUi imageUrl={imageUrl} />
       </div>
     </>
   )

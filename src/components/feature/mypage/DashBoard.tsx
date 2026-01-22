@@ -5,7 +5,7 @@ import Link from 'next/link'
 
 import { cn } from '@/utils'
 
-import { DashBoardCardUi } from './ui'
+import { DashBoardCardUi } from './index'
 
 type DashBoardProps = {
   wishlistCount: number
