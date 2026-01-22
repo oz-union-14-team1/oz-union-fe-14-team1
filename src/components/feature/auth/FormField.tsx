@@ -25,9 +25,9 @@ export default function FormField({
         <div className="flex items-end gap-4">
           <span className="text-xs md:text-sm">
             {label}
-            {required && <span className="pl-2 text-red-500">*</span>}
+            {required && <span className="pl-2 text-red-400/90">*</span>}
           </span>
-          <span className="text-xs text-red-500 md:text-sm">
+          <span className="text-xs text-red-400/90 md:text-sm">
             8~20자의 영문 대소문자, 숫자, 특수문자 포함
           </span>
         </div>
@@ -41,7 +41,7 @@ export default function FormField({
       <div className="flex">
         <span className="text-xs md:text-sm">
           {label}
-          {required && <span className="pl-2 text-red-500">*</span>}
+          {required && <span className="pl-2 text-red-400/90">*</span>}
         </span>
       </div>
       {children}

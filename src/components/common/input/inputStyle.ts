@@ -10,7 +10,7 @@ export const inputVariant = cva(
         search: 'w-full h-10',
       },
       color: {
-        lightGray: 'bg-neutral-100/10 shadow-tag-inactive text-main-purple ',
+        lightGray: 'bg-neutral-100/10 shadow-tag-inactive text-main-purple',
         darkGray: 'bg-neutral-500 text-text-light',
       },
     },

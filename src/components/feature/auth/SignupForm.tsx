@@ -18,7 +18,7 @@ import { DuplicateCheckField } from './DuplicateCheckField'
 import FormField from './FormField'
 
 export const INPUT_CLASS =
-  'h-9 w-85 text-xs placeholder:text-xs md:h-10 md:w-90 md:text-sm md:placeholder:text-sm'
+  'h-9 text-xs placeholder:text-xs md:h-10 md:text-sm md:placeholder:text-sm placeholder:text-btn-main-disabled/40'
 
 /**
  * 회원가입 폼
@@ -149,13 +149,13 @@ export default function SignupForm() {
               type={field.type}
               placeholder={field.placeholder}
               value={form[field.key]}
-              className={INPUT_CLASS}
+              className={cn(INPUT_CLASS, 'w-full')}
               onChange={(e) => handleChange(field.key, e.target.value)}
             />
           </FormField>
         ))}
         <FormField label="성별" required>
-          <div className="flex gap-3">
+          <div className="flex gap-5">
             {['남성', '여성'].map((gender) => (
               <button
                 key={gender}
@@ -164,11 +164,11 @@ export default function SignupForm() {
                   handleChange('gender', gender as '남성' | '여성')
                 }
                 className={cn(
-                  `font-semibold, rounded-full px-6 py-2 text-xs shadow-tag-inactive md:px-8 md:py-2 md:text-sm`,
+                  `font-semibold, w-full cursor-pointer rounded-default px-6 py-2 text-xs shadow-tag-inactive md:px-8 md:py-2 md:text-sm`,
                   `${
                     form.gender === gender
-                      ? 'bg-gradient-sub text-text-dark'
-                      : 'bg-btn-gray-active text-text-dark'
+                      ? 'bg-main-purple text-text-light shadow-tag-inactive'
+                      : 'bg-neutral-100/10 text-text-light shadow-tag-inactive'
                   }`
                 )}
               >
@@ -192,8 +192,7 @@ export default function SignupForm() {
         <div className="mt-10 flex flex-col">
           <Button
             type="submit"
-            variant="sub"
-            className="cursor-pointer bg-sub-cyan text-sm md:text-base"
+            className="cursor-pointer bg-main-purple text-sm shadow-tag-inactive hover:bg-main-purple/70 md:text-base"
           >
             회원 가입
           </Button>

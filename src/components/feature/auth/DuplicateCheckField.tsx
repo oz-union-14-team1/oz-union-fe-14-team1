@@ -1,6 +1,10 @@
 import { Check } from 'lucide-react'
 
 import { BaseInput, Button } from '@/components'
+import { cn } from '@/utils'
+
+import { VERIFY_BUTTON_CLASS } from './PhoneVerificationField'
+import { INPUT_CLASS } from './SignupForm'
 
 type Props = {
   label: string
@@ -35,7 +39,7 @@ export function DuplicateCheckField({
     <div className="flex flex-col gap-1">
       <p className="text-sm">
         {label}
-        <span className="pl-2 text-red-500">*</span>
+        <span className="pl-2 text-red-400/90">*</span>
       </p>
       <div className="flex md:items-end">
         <div className="relative md:flex md:gap-2">
@@ -44,13 +48,13 @@ export function DuplicateCheckField({
             value={value}
             placeholder={placeholder}
             onChange={(e) => onChange(e.target.value)}
-            className="'h-9 w-85 text-xs placeholder:text-xs md:h-10 md:w-90 md:text-sm md:placeholder:text-sm"
+            className={cn('w-85 md:w-90', INPUT_CLASS)}
           />
           <Button
             type="button"
-            variant="gray"
+            variant="purple"
             size="md"
-            className="absolute top-1/2 right-2 h-7 w-22 -translate-y-1/2 rounded-full bg-(--color-btn-gray-active) text-xs shadow-tag-inactive hover:bg-gradient-sub md:static md:h-10 md:w-full md:translate-y-0 md:rounded-default md:text-sm"
+            className={cn('cursor-pointer', VERIFY_BUTTON_CLASS)}
             onClick={onCheck}
           >
             중복 확인

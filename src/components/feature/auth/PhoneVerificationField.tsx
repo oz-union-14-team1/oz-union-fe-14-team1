@@ -1,6 +1,8 @@
 import { BaseInput, Button } from '@/components'
 import { cn } from '@/utils'
 
+import { INPUT_CLASS } from './SignupForm'
+
 /**
  * 핸드폰 번호 및 인증번호 필드 컴포넌트 속성
  */
@@ -16,6 +18,9 @@ type Props = {
   handleSendCode: () => void
   handleVerifyCode: () => void
 }
+
+export const VERIFY_BUTTON_CLASS =
+  'absolute top-1/2 right-2 -translate-y-1/2 rounded-full text-center text-xs shadow-tag-inactive md:static md:h-10 md:w-full md:translate-y-0 md:rounded-default md:text-sm'
 
 /**
  * 핸드폰 번호 및 인증번호 필드
@@ -58,21 +63,21 @@ export default function PhoneVerificationField({
             onChange={(e) => onPhoneChange(e.target.value)}
             disabled={isCodeSent || isCodeVerified}
             className={cn(
-              'h-9 w-85 pr-26 text-xs placeholder:text-xs md:h-10 md:w-90 md:pr-3 md:text-sm md:placeholder:text-sm',
+              'w-85 pr-26 md:w-90 md:pr-3',
+              INPUT_CLASS,
               isCodeSent && 'cursor-not-allowed'
             )}
           />
           <Button
             type="button"
-            variant="gray"
             size="sm"
             onClick={handleSendCode}
             disabled={isCodeSent || isCodeVerified}
             className={cn(
-              'absolute top-1/2 right-2 h-7 w-22 -translate-y-1/2 rounded-full text-xs shadow-tag-inactive md:static md:h-10 md:w-full md:translate-y-0 md:rounded-default md:text-sm',
+              VERIFY_BUTTON_CLASS,
               isCodeSent || isCodeVerified
                 ? 'cursor-not-allowed bg-btn-gray-disabled opacity-60'
-                : 'cursor-pointer bg-btn-gray-active hover:bg-gradient-sub'
+                : 'cursor-pointer bg-neutral-100/10 hover:bg-main-purple'
             )}
           >
             {isCodeVerified ? '인증번호 완료' : '인증번호 전송'}
@@ -92,20 +97,20 @@ export default function PhoneVerificationField({
             onChange={(e) => onCodeChange(e.target.value)}
             disabled={!isCodeSent || isCodeVerified}
             className={cn(
-              'h-9 w-85 pr-26 text-xs placeholder:text-xs md:h-10 md:w-90 md:pr-3 md:text-sm md:placeholder:text-sm',
+              'w-85 pr-26 md:w-90 md:pr-3',
+              INPUT_CLASS,
               !isCodeSent && 'cursor-not-allowed'
             )}
           />
           <Button
             type="button"
-            variant="gray"
             size="sm"
             onClick={handleVerifyCode}
             disabled={!isCodeSent || isCodeVerified}
             className={cn(
-              'absolute top-1/2 right-2 h-7 w-22 -translate-y-1/2 rounded-full text-xs shadow-tag-inactive md:static md:h-10 md:w-full md:translate-y-0 md:rounded-default md:text-sm',
+              VERIFY_BUTTON_CLASS,
               isCodeSent
-                ? 'cursor-pointer bg-btn-gray-active hover:bg-gradient-sub'
+                ? 'cursor-pointer bg-neutral-100/10 hover:bg-main-purple'
                 : 'cursor-not-allowed bg-btn-gray-disabled opacity-60'
             )}
           >
