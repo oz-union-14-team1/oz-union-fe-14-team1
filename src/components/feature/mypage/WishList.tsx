@@ -1,7 +1,7 @@
 'use client'
 
 import { useWishlistCarousel } from '@/hooks'
-import MOCK_GAMES from '@/mocks/mockGames'
+import { MOCK_GAMES } from '@/mocks'
 import { useWishlistStore } from '@/store/useWishlistStore'
 
 import {
