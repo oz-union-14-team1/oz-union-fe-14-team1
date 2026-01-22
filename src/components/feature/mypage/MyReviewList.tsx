@@ -1,0 +1,46 @@
+import { MessageSquare } from 'lucide-react'
+
+import { MOCK_REVIEWS } from '@/mocks'
+
+import { MyReviewListSectionUi, MyReviewListWelcomeUi } from './ui'
+
+function MyReviewList() {
+  const reviewCount = MOCK_REVIEWS.length
+  const hasReviews = reviewCount > 0
+
+  return (
+    <div className="mt-10 flex flex-col justify-center">
+      <div className="mt-10 mb-35 flex min-w-0 flex-1 items-center gap-2 md:gap-4">
+        <div className="flex items-center gap-2 md:gap-3">
+          <div className="shrink-0 rounded-full bg-gradient-to-br from-main-purple/20 to-main-fuchsia/20 p-1.5 md:p-2">
+            <MessageSquare className="h-4 w-4 fill-main-purple text-main-purple md:h-6 md:w-6" />
+          </div>
+          <h2 className="truncate text-lg font-bold text-text-light md:text-2xl">
+            내가쓴리뷰
+          </h2>
+        </div>
+        {reviewCount > 0 && (
+          <span className="shrink-0 rounded-full bg-white/10 px-2 py-0.5 text-xs font-medium text-text-light/80 backdrop-blur-sm md:px-3 md:py-1 md:text-sm">
+            <span className="md:hidden">{reviewCount}</span>
+            <span className="hidden md:inline">{reviewCount}개의 리뷰</span>
+          </span>
+        )}
+      </div>
+
+      {hasReviews ? (
+        <>
+          <div>
+            {MOCK_REVIEWS.map((review) => (
+              <MyReviewListSectionUi key={review.id} review={review} />
+            ))}
+          </div>
+          <MyReviewListWelcomeUi />
+        </>
+      ) : (
+        <MyReviewListWelcomeUi />
+      )}
+    </div>
+  )
+}
+
+export default MyReviewList

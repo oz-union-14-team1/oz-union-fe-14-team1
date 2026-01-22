@@ -1,6 +1,7 @@
 export { default as Profile } from './Profile'
 export { default as DashBoard } from './DashBoard'
 export { default as WishList } from './WishList'
+export { default as MyReviewList } from './MyReviewList'
 // ui
 export { default as ProfileMobile } from './ui/mobile/ProfileMobileUi'
 export { default as ProfileDesktop } from './ui/desktop/ProfileDesktopUi'
@@ -10,6 +11,10 @@ export { default as EditProfileImageUi } from './ui/EditProfileImageUi'
 export { default as ProfileImageUi } from './ui/ProfileImageUi'
 export { default as ProfileBackgroundUi } from './ui/ProfileBackgroundUi'
 export { default as DashBoardCardUi } from './ui/DashBoardCardUi'
+export { default as MyReviewListSectionUi } from './ui/MyReviewListSectionUi'
+export { default as MyReviewListWelcomeUi } from './ui/MyReviewListWelcomeUi'
+export { default as MyReviewListCardUi } from './ui/MyReviewListCardUi'
+// user-info
 export { default as InfoBox } from './user-info/user-delete/InfoBox'
 export { default as UserDeleteClient } from './user-info/user-delete/UserDeleteClient'
 export { default as WishListCarouselNavUi } from './ui/WishListCarouselNavUi'
