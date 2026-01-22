@@ -1,9 +1,8 @@
-// components
 export { default as BaseInput } from './common/input/BaseInput'
 export { default as Toast } from './common/toast/Toast'
 export { default as Button } from '@/components/common/button/Button'
 export { type ToastProps } from '@/components/common/toast/Toast'
-export { default as LoginForm } from '@/components/feature/auth/LoginForm'
+export { default as LoginForm } from '@/components/feature/auth/login/LoginForm'
 export {
   type LoginFormValues,
   loginSchema,
@@ -42,3 +41,4 @@ export { default as HeroBannerDesktop } from './feature/main/herobanner/HeroBann
 export { default as HeroBannerMobile } from './feature/main/herobanner/HeroBannerMobile'
 export { default as HeroBanner } from './feature/main/herobanner/HeroBanner'
 export { default as DotIndicator } from './feature/main/herobanner/DotIndicator'
+export { default as SnsLoginForm } from '@/components/feature/auth/login/SnsLoginForm'
