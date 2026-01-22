@@ -10,9 +10,11 @@ export default function MyReviewListCardUi({
 }: {
   review: MockReviewType
 }) {
+  const REVIEW_DETAIL_URL = `/review/${review.id}`
+
   return (
     <Link
-      href={`/review/${review.id}`}
+      href={REVIEW_DETAIL_URL}
       className="-mt-28 flex min-h-[200px] max-w-full flex-1 flex-col items-start justify-start gap-2 overflow-hidden bg-background px-3 py-4 opacity-60 shadow-[0_10px_40px_rgba(0,0,0,0.3)] transition-all duration-300 group-hover:scale-[1.02] group-hover:opacity-100 group-hover:shadow-[0_15px_60px_rgba(0,0,0,0.4)] md:-mt-30 md:min-h-[240px] md:gap-4 md:px-4 md:py-6 lg:gap-10 lg:px-8"
     >
       <div className="flex items-center gap-2 md:hidden">
