@@ -17,15 +17,15 @@ export default function FindAccountHeader({
 }) {
   const isFindMode = mode === 'id'
   return (
-    <div className="mb-2 flex flex-col justify-center">
-      <div className="mb-12 flex flex-col text-center text-3xl font-bold text-text-dark">
+    <div className="mb-10 flex flex-col items-center justify-center">
+      <div className="text-2xl font-bold md:text-3xl">
         {isFindMode ? '아이디 찾기' : '비밀번호 찾기'}
-        {error && (
-          <p className="max-w-md text-center text-sm leading-relaxed font-semibold wrap-break-word text-red-600 md:text-base">
-            {error}
-          </p>
-        )}
       </div>
+      {error && (
+        <p className="max-w-md text-center text-sm leading-relaxed font-semibold wrap-break-word text-red-500 md:text-base">
+          {error}
+        </p>
+      )}
     </div>
   )
 }
