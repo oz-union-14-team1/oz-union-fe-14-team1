@@ -1,11 +1,15 @@
 import { ThumbsDown, ThumbsUp } from 'lucide-react'
 import Link from 'next/link'
 
-import { ReviewType } from '@/types'
+import { MockReviewType } from '@/types'
 
 import { formatDate } from './MyReviewListWelcomeUi'
 
-export default function MyReviewListCardUi({ review }: { review: ReviewType }) {
+export default function MyReviewListCardUi({
+  review,
+}: {
+  review: MockReviewType
+}) {
   return (
     <Link
       href={`/review/${review.id}`}

@@ -1,4 +1,4 @@
-import { ReviewType } from '@/types'
+import { MockReviewType } from '@/types'
 
 import { MyReviewListCardUi } from '..'
 import { formatDate } from './MyReviewListWelcomeUi'
@@ -6,7 +6,7 @@ import { formatDate } from './MyReviewListWelcomeUi'
 export default function MyReviewListSectionUi({
   review,
 }: {
-  review: ReviewType
+  review: MockReviewType
 }) {
   return (
     <div className="group flex items-start justify-start gap-4 md:gap-6 lg:gap-10">

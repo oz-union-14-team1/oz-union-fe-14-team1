@@ -1,6 +1,6 @@
 import { StaticImageData } from 'next/image'
 
-export type ReviewType = {
+export type MockReviewType = {
   id: string
   category: string
   gameId: string
