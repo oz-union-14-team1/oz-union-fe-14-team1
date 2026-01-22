@@ -1,9 +1,13 @@
-import { Review } from '@/types'
+import { ReviewType } from '@/types'
 
 import { MyReviewListCardUi } from '..'
 import { formatDate } from './MyReviewListWelcomeUi'
 
-export default function MyReviewListSectionUi({ review }: { review: Review }) {
+export default function MyReviewListSectionUi({
+  review,
+}: {
+  review: ReviewType
+}) {
   return (
     <div className="group flex items-start justify-start gap-4 md:gap-6 lg:gap-10">
       <div className="-mt-1.5 hidden w-16 shrink-0 md:block md:w-20">
