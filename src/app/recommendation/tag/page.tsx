@@ -1,5 +1,5 @@
 import { OnboardingHeader, TagSelector } from '@/components'
-import { MOCK_TAGS } from '@/mocks/mockTags'
+import { MOCK_TAGS } from '@/mocks'
 
 async function getTags() {
   // TODO: API 연동

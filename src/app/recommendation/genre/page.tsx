@@ -1,5 +1,5 @@
 import { GenreSelector, OnboardingHeader } from '@/components'
-import { MOCK_GENRES } from '@/mocks/mockGenres'
+import { MOCK_GENRES } from '@/mocks'
 
 async function getGenres() {
   return MOCK_GENRES
