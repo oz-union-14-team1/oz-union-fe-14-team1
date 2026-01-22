@@ -1,16 +1,17 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 
 export default function MswClientTestPage() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [data, setData] = useState<any>()
+  const { data } = useQuery<{ message: string }>({
+    queryKey: ['test'],
+    queryFn: async () => {
+      const res = await fetch('https://api/test')
+      const data = await res.json()
 
-  useEffect(() => {
-    fetch('https://api/test')
-      .then((res) => res.json())
-      .then((json) => setData(json))
-  }, [])
+      return data
+    },
+  })
 
   return (
     <div className="flex flex-col gap-2">
