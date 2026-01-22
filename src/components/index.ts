@@ -38,3 +38,6 @@ export {
 } from './feature/auth/schema/findAccountSchema'
 export { default as ResultsContent } from './feature/recomendation/ResultsContent'
 export { ResponsiveText } from './feature/recomendation/ResponsiveText'
+export { default as HeroBannerDesktop } from './feature/main/herobanner/HeroBannerDesktop'
+export { default as HeroBannerMobile } from './feature/main/herobanner/HeroBannerMobile'
+export { default as HeroBanner } from './feature/main/herobanner/HeroBanner'
