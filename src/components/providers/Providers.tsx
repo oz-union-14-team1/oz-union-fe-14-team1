@@ -2,6 +2,7 @@
 
 import { ReactNode, useEffect, useState } from 'react'
 
+import TanstackQueryProvider from '@/components/providers/TanstackQueryProvider'
 import { ToastProvider } from '@/components/providers/ToastProvider'
 
 interface ProvidersProps {
@@ -25,5 +26,9 @@ export default function Providers({ children }: ProvidersProps) {
     return null
   }
 
-  return <ToastProvider>{children}</ToastProvider>
+  return (
+    <TanstackQueryProvider>
+      <ToastProvider>{children}</ToastProvider>
+    </TanstackQueryProvider>
+  )
 }
