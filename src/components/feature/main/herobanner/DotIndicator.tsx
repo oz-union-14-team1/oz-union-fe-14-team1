@@ -1,9 +1,7 @@
-import { Banner } from '@/types/carousel'
-
 type DotIndicatorProps = {
-  banners: Banner[]
+  total: number
   currentIndex: number
-  onDotClick: (id: number | string) => void
+  onDotClick: (index: number) => void
 }
 
 const dotBase = 'h-2 rounded-full transition-all'
@@ -11,7 +9,7 @@ const dotActive = 'w-6 bg-gradient-sub opacity-80'
 const dotInactive = 'w-2 bg-white/30 hover:bg-white/70'
 
 export default function DotIndicator({
-  banners,
+  total,
   currentIndex,
   onDotClick,
 }: DotIndicatorProps) {
@@ -19,11 +17,11 @@ export default function DotIndicator({
     index === currentIndex ? dotActive : dotInactive
 
   return (
-    <div className="absolute bottom-3 left-1/2 z-30 flex -translate-x-1/2 gap-2">
-      {banners.map((banner, index) => (
+    <div className="flex justify-center gap-2">
+      {Array.from({ length: total }).map((_, index) => (
         <button
-          key={banner.id}
-          onClick={() => onDotClick(banner.id)}
+          key={index}
+          onClick={() => onDotClick(index)}
           className={`${dotBase} ${getDotStyle(index)}`}
         />
       ))}

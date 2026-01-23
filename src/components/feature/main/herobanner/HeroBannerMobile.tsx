@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 
+import { SWIPE_THRESHOLD } from '@/constants'
 import { useRotation } from '@/hooks'
 import { Banner } from '@/types/carousel'
 
@@ -35,7 +36,7 @@ export default function HeroBannerMobile({
 
   const currentItem = orderedBanner[0]
 
-  const getBannerVisibility = (bannerId: number | string) =>
+  const getBannerVisibility = (bannerId: Banner['id']) =>
     bannerId === currentItem.id ? visibleBanner : hiddenBanner
 
   return (
@@ -47,13 +48,15 @@ export default function HeroBannerMobile({
         onDragStart={pause}
         onDragEnd={(_, info) => {
           resume()
-          if (info.offset.x < -100) {
+          if (info.offset.x < -SWIPE_THRESHOLD) {
             next()
           }
-          if (info.offset.x > 100) {
+          if (info.offset.x > SWIPE_THRESHOLD) {
             prev()
           }
         }}
+        data-role="gesture-layer"
+        aria-hidden
         className="absolute inset-0 z-20 cursor-grab active:cursor-grabbing"
       />
 
@@ -67,7 +70,7 @@ export default function HeroBannerMobile({
       ))}
 
       <DotIndicator
-        banners={banners}
+        total={banners.length}
         currentIndex={currentIndex}
         onDotClick={jumpToBanner}
       />
