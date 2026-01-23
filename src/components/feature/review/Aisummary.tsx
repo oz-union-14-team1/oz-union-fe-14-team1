@@ -9,12 +9,12 @@ export default function AiSummary({ content, className }: AisummaryProps) {
   return (
     <div
       className={cn(
-        'h-30px flex w-200 flex-col gap-4 rounded-xl border border-white/10 bg-[#1a1a1a] p-6 shadow-sm',
+        'h-30px flex w-160 flex-col gap-4 rounded-xl border border-white/10 bg-surface-elevated p-6 shadow-sm',
         className
       )}
     >
       <div className="flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-purple-500 to-pink-500 text-white">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg from-purple-500 to-pink-500 text-white">
           <span className="text-lg">✨</span>
         </div>
         <h2 className="text-[18px] font-bold text-white">AI 요약</h2>
