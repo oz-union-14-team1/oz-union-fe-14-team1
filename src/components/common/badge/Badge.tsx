@@ -18,12 +18,16 @@ type BadgeProps = ComponentPropsWithoutRef<'span'> &
  */
 export default function Badge({
   className,
+  size,
   variant,
   children,
   ...props
 }: BadgeProps) {
   return (
-    <span className={cn(badgeVariants({ variant }), className)} {...props}>
+    <span
+      className={cn(badgeVariants({ variant, size }), className)}
+      {...props}
+    >
       {children}
     </span>
   )
