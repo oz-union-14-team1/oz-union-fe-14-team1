@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 
+import { MAIN_BANNER_OFFSET, MAX_SIDE_BANNERS } from '@/constants'
 import { useRotation } from '@/hooks'
 import { Banner } from '@/types/carousel'
 
@@ -28,10 +29,14 @@ export default function HeroBannerDesktop({
     autoPlay,
   })
 
-  const [mainBanner, ...sideBanner] = orderedBanner
+  const [mainBanner, ...sideBanners] = orderedBanner
 
-  const getBannerVisibility = (bannerId: number | string) =>
+  const getBannerVisibility = (bannerId: Banner['id']) =>
     bannerId === mainBanner.id ? visibleBanner : hiddenBanner
+
+  const handleSideBannerClick = (index: number) => {
+    jumpToSide(index + MAIN_BANNER_OFFSET)
+  }
 
   return (
     <section
@@ -51,10 +56,10 @@ export default function HeroBannerDesktop({
       </div>
 
       <div className="flex flex-1 flex-col gap-2">
-        {sideBanner.slice(0, 4).map((banner, index) => (
+        {sideBanners.slice(0, MAX_SIDE_BANNERS).map((banner, index) => (
           <div
             key={banner.id}
-            onClick={() => jumpToSide(index + 1)}
+            onClick={() => handleSideBannerClick(index)}
             className="relative flex-1 cursor-pointer overflow-hidden transition-all"
           >
             <Image

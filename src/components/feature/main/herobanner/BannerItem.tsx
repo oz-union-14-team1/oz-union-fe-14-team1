@@ -29,7 +29,7 @@ export default function BannerItem({
       <div
         className={cn(
           isDesktop ? 'bottom-8 left-8' : 'absolute right-4 bottom-10 left-4',
-          'text-text-light'
+          'absolute z-10 text-text-light'
         )}
       >
         <div className="flex gap-1">
