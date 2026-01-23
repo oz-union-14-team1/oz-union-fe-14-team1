@@ -5,9 +5,3 @@ export type Game = {
   name: string
   imgUrl: string | StaticImageData
 }
-
-export type Genre = {
-  id: number
-  name: string
-  imgUrl: string | StaticImageData
-}
