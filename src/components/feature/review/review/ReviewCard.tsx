@@ -6,7 +6,7 @@ function Card({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       className={cn(
-        'text-color-light flex flex-col rounded-lg border border-white/5 shadow-sm',
+        'text-color-light flex flex-col rounded-lg border-white/5 bg-surface-elevated shadow-sm',
         className
       )}
       {...props}
