@@ -1,8 +1,9 @@
 'use client'
 
+import { GENRE_ASSETS } from '@/assets'
 import { GenreCard } from '@/components/common'
 import { useOnboardingStore } from '@/store/useOnboardingStore'
-import { Genre } from '@/types/game'
+import { Genre } from '@/types'
 
 type GenreSelectorProps = {
   genres: Genre[]
@@ -18,7 +19,7 @@ export default function GenreSelector({ genres }: GenreSelectorProps) {
           <GenreCard
             key={genre.id}
             name={genre.name}
-            imgUrl={genre.imgUrl}
+            imgUrl={GENRE_ASSETS[genre.slug].vertical}
             isSelected={selectedGenres.includes(genre.id)}
             onClick={() => toggleGenre(genre.id)}
           />
