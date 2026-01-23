@@ -1,2 +1,3 @@
 export * from './playTypeResult'
 export * from './traitScores'
+export * from './review'
