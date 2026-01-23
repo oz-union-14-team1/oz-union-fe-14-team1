@@ -13,7 +13,7 @@ function EditProfileImageUi() {
         'group-hover:shadow-[0_4px_12px_rgba(168,85,247,0.2)]'
       )}
     >
-      <Pencil className="size-8 text-text-light transition-colors duration-300 group-hover:text-main-purple" />
+      <Pencil className="size-7 text-text-light transition-colors duration-300 group-hover:text-text-light" />
     </div>
   )
 }
@@ -34,7 +34,7 @@ function DeleteProfileImageUi() {
         // TODO: 이미지 삭제 로직 추가
       }}
     >
-      <X className="size-8 text-text-light transition-colors duration-300 group-hover:text-red-500" />
+      <X className="size-8 text-text-light transition-colors duration-300 group-hover:text-text-light" />
     </button>
   )
 }
