@@ -98,6 +98,26 @@ const MOCK_GAMES: MockGame[] = [
     price: '1만원 이하',
     mood: ['밝은', '감동적인'],
   },
+  {
+    id: '9',
+    name: 'God of War',
+    imgUrl: game1,
+    genres: ['액션', '어드벤처'],
+    platforms: ['PC', 'PlayStation'],
+    players: ['싱글플레이'],
+    price: '유료',
+    mood: ['어두운', '판타지'],
+  },
+  {
+    id: '10',
+    name: 'League of Legends',
+    imgUrl: game4,
+    genres: ['MOBA', '전략'],
+    platforms: ['PC'],
+    players: ['멀티플레이', '온라인 PvP'],
+    price: '무료',
+    mood: ['판타지'],
+  },
 ]
 
 export default MOCK_GAMES
