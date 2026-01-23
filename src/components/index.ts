@@ -41,3 +41,4 @@ export { default as HeroBannerMobile } from './feature/main/herobanner/HeroBanne
 export { default as HeroBanner } from './feature/main/herobanner/HeroBanner'
 export { default as DotIndicator } from './feature/main/herobanner/DotIndicator'
 export { default as SnsLoginForm } from '@/components/feature/auth/login/SnsLoginForm'
+export { default as FindPasswordResultClient } from './feature/auth/find-account/FindPasswordResultClient'

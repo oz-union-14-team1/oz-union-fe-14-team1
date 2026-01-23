@@ -22,7 +22,7 @@ export default function FindAccountHeader({
         {isFindMode ? '아이디 찾기' : '비밀번호 찾기'}
       </div>
       {error && (
-        <p className="max-w-md text-center text-sm leading-relaxed font-semibold wrap-break-word text-red-500 md:text-base">
+        <p className="mt-2 max-w-md text-center text-sm leading-relaxed font-semibold wrap-break-word text-red-400/80 md:text-base">
           {error}
         </p>
       )}

@@ -65,7 +65,7 @@
   /* Gray */
   --color-btn-gray-default: var(--color-neutral-200);
   --color-btn-gray-hover: var(--color-neutral-100);
-  --color-btn-gray-active: var(--color-neutral-300);
+  --color-btn-gray-active: var(--color-neutral-500);
   --color-btn-gray-disabled: var(--color-neutral-100);
 
   /* Disabled Text (공통) */
