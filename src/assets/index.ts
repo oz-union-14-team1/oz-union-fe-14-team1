@@ -1,5 +1,6 @@
 import discordIcon from '@/assets/icons/discordIcon.svg'
 import googleIcon from '@/assets/icons/googleIcon.svg'
+import googleLogo from '@/assets/icons/googleLogo.png'
 import compoundLogoColumn from '@/assets/images/logo/compoundLogoColumn.svg'
 import compoundLogoRow from '@/assets/images/logo/compoundLogoRow.svg'
 import logo from '@/assets/images/logo/logo.svg'
@@ -11,6 +12,7 @@ export {
   compoundLogoRow,
   discordIcon,
   googleIcon,
+  googleLogo,
   logo,
   logoText,
   notFoundImage,

@@ -35,6 +35,7 @@ const ButtonVariant = cva(
           'active:bg-btn-gray-active',
           'disabled:bg-btn-gray-disabled'
         ),
+        purple: cn('bg-neutral-100/10 text-text-light', 'hover:bg-main-purple'),
       },
       size: {
         sm: 'px-2.5 py-2 text-sm',

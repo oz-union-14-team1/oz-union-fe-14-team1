@@ -132,8 +132,7 @@ export default function FindAccountForm({
         <div className="mt-10 flex w-full flex-col">
           <Button
             type="submit"
-            variant="sub"
-            className="cursor-pointer bg-sub-cyan text-sm md:text-base"
+            className="cursor-pointer bg-neutral-100/10 text-sm shadow-interactive-inactive hover:bg-main-purple md:text-lg"
           >
             {isFindMode ? '아이디 찾기' : '비밀번호 찾기'}
           </Button>

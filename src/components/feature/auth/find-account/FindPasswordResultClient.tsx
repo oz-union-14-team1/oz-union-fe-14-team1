@@ -11,6 +11,7 @@ import {
 } from '@/components'
 import { PASSWORD_CONFIRM_FIELDS, ROUTES_PATHS } from '@/constants'
 import { useToast } from '@/hooks'
+import { cn } from '@/utils'
 
 import FormField from '../FormField'
 import { INPUT_CLASS } from '../SignupForm'
@@ -54,10 +55,12 @@ export default function FindPasswordResultClient() {
   }
 
   return (
-    <>
+    <div className="w-full">
       <div className="mb-10 text-center font-bold text-text-dark">
         {error && (
-          <p className="w-full text-sm font-semibold text-red-500">{error}</p>
+          <p className="mt-2 w-full text-sm font-semibold text-red-400/80">
+            {error}
+          </p>
         )}
       </div>
       <form
@@ -79,21 +82,20 @@ export default function FindPasswordResultClient() {
               type={field.type}
               placeholder={field.placeholder}
               value={form[field.key]}
-              className={INPUT_CLASS}
+              className={cn(INPUT_CLASS, 'w-85 md:w-full')}
               onChange={(e) => handleChange(field.key, e.target.value)}
             />
           </FormField>
         ))}
-        <div className="mt-15 flex w-full">
+        <div className="mt-10 flex w-full flex-col">
           <Button
             type="submit"
-            variant="sub"
-            className="w-full cursor-pointer text-sm hover:bg-btn-sub-hover md:text-base"
+            className="cursor-pointer bg-neutral-100/10 text-sm text-text-light shadow-interactive-inactive hover:bg-main-purple md:text-lg"
           >
             비밀번호 변경하기
           </Button>
         </div>
       </form>
-    </>
+    </div>
   )
 }

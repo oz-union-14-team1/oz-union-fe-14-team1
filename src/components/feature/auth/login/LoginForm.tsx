@@ -44,8 +44,8 @@ export default function LoginForm() {
   }
 
   return (
-    <div className="w-full px-[clamp(16px,5vw,80px)]">
-      <div className="mb-9 flex justify-center">
+    <div className="px-[clamp(16px,5vw,80px)]">
+      <div className="mb-9 flex">
         <Image
           src={compoundLogoColumn}
           alt="PlayTypeLogo"
@@ -54,7 +54,7 @@ export default function LoginForm() {
         />
       </div>
       <form
-        className="mx-auto flex flex-col gap-[clamp(12px,3vw,28px)]"
+        className="flex flex-col gap-[clamp(12px,3vw,28px)]"
         onSubmit={(e) => {
           e.preventDefault()
           handleSubmit()
@@ -63,23 +63,24 @@ export default function LoginForm() {
         <BaseInput
           id="login-id"
           type="text"
+          inputSize="login"
           placeholder="아이디를 입력해 주세요."
           value={form.id}
           onChange={(e) => handleChange('id', e.target.value)}
-          className="h-[clamp(36px,4vw,48px)] text-[clamp(14px,2vw,16px)]"
+          className="h-[clamp(36px,4vw,48px)] w-80 text-[clamp(14px,2vw,16px)] placeholder:text-btn-main-disabled/40 md:w-92.5"
         />
         <BaseInput
+          inputSize="login"
           id="login-password"
           type="password"
           placeholder="비밀번호를 입력해 주세요."
           value={form.password}
           onChange={(e) => handleChange('password', e.target.value)}
-          className="h-[clamp(36px,4vw,48px)] text-[clamp(14px,2vw,16px)]"
+          className="h-[clamp(36px,4vw,48px)] w-80 text-[clamp(14px,2vw,16px)] placeholder:text-btn-main-disabled/40 md:w-92.5"
         />
         <Button
           type="submit"
-          variant="sub"
-          className="h-[clamp(44px,4vw,50px)] w-full cursor-pointer"
+          className="h-[clamp(44px,4vw,50px)] w-80 cursor-pointer bg-main-purple shadow-tag-inactive hover:bg-main-purple/70 md:w-92.5"
         >
           로그인
         </Button>
