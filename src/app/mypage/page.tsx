@@ -13,20 +13,20 @@ export default function MyPage() {
 
   return (
     <section className="container mx-auto mb-50 max-w-345">
-      <div className="flex flex-col items-center justify-between gap-10 px-5 pt-20 lg:flex-row lg:items-start lg:gap-5">
-        <div className="w-full lg:w-1/2">
+      <div className="flex flex-col items-center justify-between gap-5 px-5 pt-10 lg:flex-row lg:items-start lg:gap-5">
+        <div className="w-full pt-5 lg:w-1/2 lg:pl-5">
           <Profile imageUrl={profile.src} />
           {/* <Profile imageUrl="" /> */}
         </div>
 
-        <div className="w-full max-w-full sm:max-w-4/5 md:max-w-5/7 lg:max-w-1/2">
+        <div className="w-full max-w-[600px] lg:max-w-3/7">
           <DashBoard
             wishlistCount={WISHLIST_COUNT}
             reviewCount={REVIEW_COUNT}
           />
         </div>
       </div>
-      <div className="mt-10 px-0 lg:mt-20">
+      <div className="mt-5 px-0 lg:mt-20">
         <WishList />
       </div>
       <div className="my-10 px-5">

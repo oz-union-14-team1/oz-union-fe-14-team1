@@ -9,8 +9,8 @@ function MyReviewList() {
   const hasReviews = reviewCount > 0
 
   return (
-    <div className="mt-10 flex flex-col justify-center">
-      <div className="mt-10 mb-35 flex min-w-0 flex-1 items-center gap-2 md:gap-4">
+    <div className="flex flex-col justify-center">
+      <div className="mb-35 flex min-w-0 flex-1 items-center gap-2 md:gap-4">
         <div className="flex items-center gap-2 md:gap-3">
           <div className="shrink-0 rounded-full bg-gradient-to-br from-main-purple/20 to-main-fuchsia/20 p-1.5 md:p-2">
             <MessageSquare className="h-4 w-4 fill-main-purple text-main-purple md:h-6 md:w-6" />
