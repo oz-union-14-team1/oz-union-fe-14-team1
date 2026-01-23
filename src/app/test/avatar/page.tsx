@@ -1,9 +1,9 @@
-import Avatar from '@/components/common/avatar/Avatar'
+import Avatar from '@/components/feature/review/review/Avatar'
 
 export default function AvatarTestPage() {
   return (
     <div>
-      <Avatar alt="재민" />
+      <Avatar />
     </div>
   )
 }
