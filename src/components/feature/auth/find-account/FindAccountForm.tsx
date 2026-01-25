@@ -128,6 +128,7 @@ export default function FindAccountForm({
           formatTime={phoneTimer.formatTime}
           handleSendCode={handleSendCodeWithValidation}
           handleVerifyCode={phoneTimer.handleVerifyCode}
+          idValue={isFindMode ? 'findId' : 'findPassword'}
         />
         <div className="mt-10 flex w-full flex-col">
           <Button
