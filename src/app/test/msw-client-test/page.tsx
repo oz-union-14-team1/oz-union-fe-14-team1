@@ -1,15 +1,15 @@
 'use client'
-
 import { useQuery } from '@tanstack/react-query'
+
+import { api } from '@/utils'
 
 export default function MswClientTestPage() {
   const { data } = useQuery<{ message: string }>({
     queryKey: ['test'],
     queryFn: async () => {
-      const res = await fetch('https://api/test')
-      const data = await res.json()
+      const res = await api.get('https://api/test')
 
-      return data
+      return res.data
     },
   })
 

@@ -1,10 +1,12 @@
+import { api } from '@/utils'
+
 export default async function MswServerTestPage() {
   let data
 
   try {
-    const res = await fetch('https://api/test')
+    const res = await api.get('https://api/test')
 
-    data = await res.json()
+    data = res.data
   } catch (e) {
     console.error(e)
   }
