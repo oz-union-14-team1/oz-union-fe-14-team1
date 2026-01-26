@@ -17,11 +17,16 @@ export default function useSearchInputUi() {
   const currentFiltersParam = searchParams.get('filters')
 
   const selectedFilters = useMemo(() => {
+    // 검색 페이지가 아니면 필터를 0으로 초기화
+    if (pathname !== '/search') {
+      return []
+    }
+
     if (currentFiltersParam) {
       return currentFiltersParam.split(',').filter(Boolean)
     }
     return searchStorage.getFilters()
-  }, [currentFiltersParam])
+  }, [currentFiltersParam, pathname])
 
   const [isFilterOpen, setIsFilterOpen] = useState(false)
 
@@ -33,11 +38,12 @@ export default function useSearchInputUi() {
     return searchStorage.getQuery()
   })
 
-  // 홈 페이지로 이동하면 검색창 비우기 + 필터 닫기
+  // 검색 페이지가 아닌 곳으로 이동하면 검색창 비우기 + 필터 초기화
   useEffect(() => {
-    if (pathname === '/') {
+    if (pathname !== '/search') {
       setTimeout(() => {
         setSearchInputValue('')
+        searchStorage.removeFilters()
       }, 0)
     }
   }, [pathname])
@@ -59,7 +65,7 @@ export default function useSearchInputUi() {
     }
   }, [currentQuery, selectedFilters])
 
-  // 디바운스된 자동 검색
+  // 디바운스된 자동 검색 (검색 페이지가 아닐 때는 실행하지 않음)
   useEffect(() => {
     const trimmedValue = searchInputValue.trim()
 
@@ -68,6 +74,11 @@ export default function useSearchInputUi() {
       searchStorage.removeQuery()
       return
     }
+
+    // 검색 페이지가 아닐 때는 자동 검색 실행하지 않음
+    // if (pathname !== '/search') {
+    //   return
+    // }
 
     // 500ms 후에 자동으로 검색 실행
     const timeoutId = setTimeout(() => {
@@ -90,7 +101,7 @@ export default function useSearchInputUi() {
     return () => {
       clearTimeout(timeoutId)
     }
-  }, [searchInputValue, selectedFilters, router])
+  }, [searchInputValue, selectedFilters, router, pathname])
 
   const handleSearchChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
