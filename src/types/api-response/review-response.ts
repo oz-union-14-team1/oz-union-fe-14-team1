@@ -29,8 +29,9 @@ export type ReviewCommentAuthor = {
 
 export type ReveiwComment = {
   id: number
+  author: ReviewCommentAuthor
   content: string
-  create_at: Date
+  created_at: Date
 }
 
 /** GET /api/vi/community/reviews/{review_id}/comments 응답 */
