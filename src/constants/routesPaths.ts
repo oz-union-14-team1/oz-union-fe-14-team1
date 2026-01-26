@@ -8,6 +8,9 @@ export const ROUTES_PATHS = {
   FIND_PASSWORD_RESULT_PAGE: '/find-password/result',
   USER_DELETE_PAGE: '/mypage/user-info/user-delete',
   USER_DELETE_RESULT_PAGE: '/mypage/user-info/user-delete/result',
+
+  GENRE_BASE: '/genre',
+  GENRE_DETAIL: (slug: string) => `/genre/${slug}`,
 }
 
 export const RECOMMEND_PATHS = {
