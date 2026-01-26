@@ -7,6 +7,9 @@ import {
   phoneRule,
 } from './signupSchema'
 
+/**
+ * 회원정보 수정 조드 스키마
+ */
 export const userInfoUpdateSchema = z
   .object({
     nickName: nickNameRule,
