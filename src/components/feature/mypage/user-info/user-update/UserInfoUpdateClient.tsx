@@ -8,6 +8,7 @@ import {
   Button,
   DuplicateCheckField,
   FormField,
+  INPUT_CLASS,
   PhoneVerificationField,
   UserInfoUpdateSchemaValues,
 } from '@/components'
@@ -16,12 +17,10 @@ import {
   ROUTES_PATHS,
   SIGNUP_FIELDS,
 } from '@/constants'
+import { RECOMMEND_PATHS } from '@/constants/routesPaths'
 import { usePhoneVerificationTimer, useToast, useUserInfoUpdate } from '@/hooks'
 import { MOCK_USERINFO } from '@/mocks/data/mockUserInfo'
 import { cn } from '@/utils'
-
-export const INPUT_CLASS =
-  'h-9 text-xs placeholder:text-xs md:h-10 md:text-sm md:placeholder:text-sm placeholder:text-btn-main-disabled/40'
 
 /**
  * 회원가입 폼
@@ -166,7 +165,15 @@ export default function UserInfoUpdateClient() {
           handleVerifyCode={phoneTimer.handleVerifyCode}
           idValue="userInfoUpdate"
         />
-        <div className="mt-10 flex w-full gap-4">
+        <Button
+          type="button"
+          onClick={() => router.push(RECOMMEND_PATHS.TAG)}
+          variant="purple"
+          className="mt-5 w-full cursor-pointer bg-gradient-main text-sm shadow-tag-inactive hover:bg-main-purple/70 md:text-lg"
+        >
+          취향 선택하기
+        </Button>
+        <div className="mt-5 flex w-full gap-4">
           <Button
             type="submit"
             variant="purple"
