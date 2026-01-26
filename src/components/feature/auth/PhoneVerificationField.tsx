@@ -17,6 +17,7 @@ type Props = {
   formatTime: (n: number) => string
   handleSendCode: () => void
   handleVerifyCode: () => void
+  idValue: 'signup' | 'findId' | 'findPassword' | 'userInfoUpdate'
 }
 
 export const VERIFY_BUTTON_CLASS =
@@ -47,6 +48,7 @@ export default function PhoneVerificationField({
   formatTime,
   handleSendCode,
   handleVerifyCode,
+  idValue,
 }: Props) {
   return (
     <>
@@ -56,7 +58,7 @@ export default function PhoneVerificationField({
         </p>
         <div className="relative md:flex md:gap-2">
           <BaseInput
-            id="signup-phone"
+            id={cn(idValue, '-phone')}
             type="tel"
             value={phone}
             placeholder="휴대폰 번호(숫자)를 입력해주세요."
@@ -90,7 +92,7 @@ export default function PhoneVerificationField({
         </p>
         <div className="relative md:flex md:gap-2">
           <BaseInput
-            id="signup-phone-code"
+            id={cn(idValue, '-phone-code')}
             type="text"
             value={code}
             placeholder="인증번호를 입력해 주세요."

@@ -18,6 +18,15 @@ export const passwordRule = z
 
 const nicknameRegex = /^[가-힣a-zA-Z0-9]{2,16}$/
 
+export const nickNameRule = z
+  .string()
+  .regex(nicknameRegex, '닉네임은 2~16자의 한글/영문/숫자만 가능합니다.')
+  .refine(
+    (value) =>
+      !bannedNicknames.some((word) => value.toLowerCase().includes(word)),
+    { message: '사용할 수 없는 닉네임입니다.' }
+  )
+
 const bannedNicknames = ['관리자', '운영자', 'admin']
 
 const phoneRegex = /^(01[016789])\d{7,8}$/
@@ -53,34 +62,26 @@ const isValidBirthday = (value: string) => {
   return true
 }
 
+export const birthdayRule = z
+  .string()
+  .regex(/^\d{8}$/, '생년월일은 8자리 숫자여야 합니다.')
+  .refine(isValidBirthday, { message: '올바른 생년월일 형식이 아닙니다.' })
+
 /**
  * 회원가입 조드 스키마
  */
 export const signupSchema = z
   .object({
     id: z.string().min(1, '아이디를 입력해 주세요.'),
-    nickName: z
-      .string()
-      .regex(nicknameRegex, '닉네임은 2~16자의 한글/영문/숫자만 가능합니다.')
-      .refine(
-        (value) =>
-          !bannedNicknames.some((word) => value.toLowerCase().includes(word)),
-        { message: '사용할 수 없는 닉네임입니다.' }
-      ),
+    nickName: nickNameRule,
     password: passwordRule,
     passwordConfirm: z.string(),
     name: z.string().min(1, '이름을 입력해 주세요.'),
-    birthday: z
-      .string()
-      .regex(/^\d{8}$/, '생년월일은 8자리 숫자여야 합니다.')
-      .refine(isValidBirthday, { message: '올바른 생년월일 형식이 아닙니다.' }),
+    birthday: birthdayRule,
     gender: z.enum(['남성', '여성'], {
       message: '성별을 선택해 주세요.',
     }),
-    phone: z
-      .string()
-      .regex(/^\d{10,11}$/, '휴대폰 번호를 정확히 입력해 주세요.')
-      .regex(phoneRegex, '올바른 휴대폰 번호를 입력해 주세요.'),
+    phone: phoneRule,
     phoneCode: z.string().regex(/^\d{6}$/, '인증번호는 6자리 숫자입니다.'),
   })
   .refine((data) => data.password === data.passwordConfirm, {

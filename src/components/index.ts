@@ -43,3 +43,12 @@ export { default as DotIndicator } from './feature/main/herobanner/DotIndicator'
 export { default as SnsLoginForm } from '@/components/feature/auth/login/SnsLoginForm'
 export { default as FindPasswordResultClient } from './feature/auth/find-account/FindPasswordResultClient'
 export { default as GenreCarouselSection } from './feature/main/genre-section/GenreSection'
+export { default as DuplicateCheckField } from './feature/auth/DuplicateCheckField'
+export { default as FormField } from './feature/auth/FormField'
+export {
+  userInfoUpdateSchema,
+  type UserInfoUpdateSchemaValues,
+} from '@/components/feature/auth/schema/userInfoUpdateSchema'
+export { pwCheckSchema } from '@/components/feature/auth/schema/pwCheckSchema'
+export { default as UserInfoUpdateClient } from '@/components/feature/mypage/user-info/user-update/UserInfoUpdateClient'
+export { INPUT_CLASS } from '@/components/feature/auth/SignupForm'

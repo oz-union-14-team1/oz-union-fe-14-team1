@@ -12,8 +12,9 @@ type Props = {
   placeholder: string
   onChange: (v: string) => void
   onCheck: () => void
-  isChecked: boolean
+  isChecked?: boolean
   id: string
+  isUserUpdateMode?: boolean
 }
 
 /**
@@ -26,7 +27,7 @@ type Props = {
  * @param isChecked - 중복 확인 완료 여부
  * @returns 중복 체크 UI
  */
-export function DuplicateCheckField({
+export default function DuplicateCheckField({
   label,
   value,
   placeholder,
@@ -34,6 +35,7 @@ export function DuplicateCheckField({
   onCheck,
   isChecked,
   id,
+  isUserUpdateMode = false,
 }: Props) {
   return (
     <div className="flex flex-col gap-1">
@@ -42,23 +44,29 @@ export function DuplicateCheckField({
         <span className="pl-2 text-red-400/90">*</span>
       </p>
       <div className="flex md:items-end">
-        <div className="relative md:flex md:gap-2">
+        <div className="relative w-full md:flex md:gap-2">
           <BaseInput
             id={id}
             value={value}
             placeholder={placeholder}
             onChange={(e) => onChange(e.target.value)}
-            className={cn('w-85 md:w-90', INPUT_CLASS)}
+            className={cn(INPUT_CLASS, {
+              'w-full': isUserUpdateMode,
+              'w-85 md:w-90': !isUserUpdateMode,
+            })}
+            disabled={isUserUpdateMode}
           />
-          <Button
-            type="button"
-            variant="purple"
-            size="md"
-            className={cn('cursor-pointer', VERIFY_BUTTON_CLASS)}
-            onClick={onCheck}
-          >
-            중복 확인
-          </Button>
+          {!isUserUpdateMode && (
+            <Button
+              type="button"
+              variant="purple"
+              size="md"
+              className={cn('cursor-pointer', VERIFY_BUTTON_CLASS)}
+              onClick={onCheck}
+            >
+              중복 확인
+            </Button>
+          )}
         </div>
       </div>
       {isChecked && (

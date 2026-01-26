@@ -6,6 +6,8 @@ import { useState } from 'react'
 import {
   BaseInput,
   Button,
+  DuplicateCheckField,
+  FormField,
   PhoneVerificationField,
   SignupFormValues,
   signupSchema,
@@ -13,9 +15,6 @@ import {
 import { ROUTES_PATHS, SIGNUP_FIELDS } from '@/constants'
 import { usePhoneVerificationTimer, useToast } from '@/hooks'
 import { cn } from '@/utils'
-
-import { DuplicateCheckField } from './DuplicateCheckField'
-import FormField from './FormField'
 
 export const INPUT_CLASS =
   'h-9 text-xs placeholder:text-xs md:h-10 md:text-sm md:placeholder:text-sm placeholder:text-btn-main-disabled/40'
@@ -188,6 +187,7 @@ export default function SignupForm() {
           formatTime={phoneTimer.formatTime}
           handleSendCode={phoneTimer.handleSendCode}
           handleVerifyCode={phoneTimer.handleVerifyCode}
+          idValue="signup"
         />
         <div className="mt-10 flex flex-col">
           <Button
