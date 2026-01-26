@@ -27,15 +27,12 @@ export default function NavMenuUi() {
               isActive
                 ? 'bg-gradient-to-r from-main-purple via-main-violet to-main-fuchsia bg-clip-text text-transparent'
                 : 'text-sm text-text-light/80 hover:text-text-light sm:text-base'
-              // menu.id === 'home' && 'hidden sm:block'
             )}
           >
             {menu.label}
-            {/* 활성 상태 언더라인 */}
             {isActive && (
               <div className="absolute right-0 bottom-0 left-0 h-0.5 animate-pulse bg-gradient-to-r from-main-purple via-main-violet to-main-fuchsia" />
             )}
-            {/* 호버 언더라인 */}
             {!isActive && (
               <div className="absolute right-0 bottom-0 left-0 h-0.5 origin-left scale-x-0 bg-gradient-to-r from-main-purple via-main-violet to-main-fuchsia transition-transform duration-300 group-hover:scale-x-100" />
             )}
