@@ -9,8 +9,8 @@ export const MOCK_GENRES: Genre[] = [
   { id: 83, name: '퍼즐', slug: 'puzzle' },
   { id: 14, name: '로그라이크', slug: 'roguelike' },
   { id: 1, name: '서바이벌', slug: 'survival' },
-  { id: 15, name: '아케이드', slug: 'arcade' },
-  { id: 57, name: '레이싱', slug: 'racing' },
   { id: 25, name: '호러', slug: 'horror' },
+  { id: 57, name: '레이싱', slug: 'racing' },
+  { id: 15, name: '아케이드', slug: 'arcade' },
   { id: 34, name: '스포츠', slug: 'sports' },
 ]
