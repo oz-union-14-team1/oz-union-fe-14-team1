@@ -11,11 +11,12 @@ import {
   NavMenuUi,
   SearchUserUi,
 } from '@/components/layout/ui'
+import { ROUTES_PATHS } from '@/constants'
 import { useSearchInputUi } from '@/hooks'
 
 export default function Header() {
   const pathname = usePathname()
-  const isSearchPage = pathname === '/search'
+  const isSearchPage = pathname === ROUTES_PATHS.SEARCH_PAGE
   const filterTriggerRef = useRef<HTMLButtonElement>(null)
 
   const {
