@@ -1,9 +1,12 @@
+'use client'
+
 import { useSearchParams } from 'next/navigation'
 
 import Badge from '@/components/common/badge/Badge'
 import { GameCard } from '@/components/common/game-card'
 import { SearchEmptyUi } from '@/components/feature/search-page'
 import { MOCK_GAMES, type MockGame } from '@/mocks'
+import { getTagVariant } from '@/utils/getTagVariant'
 
 function SearchResults() {
   const searchParams = useSearchParams()
@@ -51,17 +54,7 @@ function SearchResults() {
               {filterList.map((filter, index) => (
                 <Badge
                   key={`${filter}-${index}`}
-                  variant={
-                    index % 5 === 0
-                      ? 'lightcyan'
-                      : index % 5 === 1
-                        ? 'purple'
-                        : index % 5 === 2
-                          ? 'cyan'
-                          : index % 5 === 3
-                            ? 'lightpurple'
-                            : 'darksky'
-                  }
+                  variant={getTagVariant(index + 1)}
                   size="md"
                 >
                   {filter}
