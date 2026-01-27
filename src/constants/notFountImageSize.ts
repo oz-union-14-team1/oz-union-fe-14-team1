@@ -1,1 +1,1 @@
-export const NOTFOUND_IMAGE_WIDTH = 640
+export const NOTFOUND_IMAGE_WIDTH = 500
