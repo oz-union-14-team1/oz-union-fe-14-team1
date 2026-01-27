@@ -67,7 +67,7 @@ export default function LoginForm() {
           placeholder="아이디를 입력해 주세요."
           value={form.id}
           onChange={(e) => handleChange('id', e.target.value)}
-          className="h-[clamp(36px,4vw,48px)] w-80 text-[clamp(14px,2vw,16px)] placeholder:text-btn-main-disabled/40 md:w-92.5"
+          className="h-[clamp(36px,4vw,48px)] w-80 text-[clamp(14px,2vw,16px)] md:w-92.5"
         />
         <BaseInput
           inputSize="login"
@@ -76,11 +76,11 @@ export default function LoginForm() {
           placeholder="비밀번호를 입력해 주세요."
           value={form.password}
           onChange={(e) => handleChange('password', e.target.value)}
-          className="h-[clamp(36px,4vw,48px)] w-80 text-[clamp(14px,2vw,16px)] placeholder:text-btn-main-disabled/40 md:w-92.5"
+          className="h-[clamp(36px,4vw,48px)] w-80 text-[clamp(14px,2vw,16px)] md:w-92.5"
         />
         <Button
           type="submit"
-          className="h-[clamp(44px,4vw,50px)] w-80 cursor-pointer bg-main-purple shadow-tag-inactive hover:bg-main-purple/70 md:w-92.5"
+          className="h-[clamp(44px,4vw,50px)] w-80 cursor-pointer bg-gradient-main shadow-tag-inactive hover:opacity-70 md:w-92.5"
         >
           로그인
         </Button>

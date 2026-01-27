@@ -17,7 +17,7 @@ import { usePhoneVerificationTimer, useToast } from '@/hooks'
 import { cn } from '@/utils'
 
 export const INPUT_CLASS =
-  'h-9 text-xs placeholder:text-xs md:h-10 md:text-sm md:placeholder:text-sm placeholder:text-btn-main-disabled/40'
+  'h-9 text-xs placeholder:text-xs md:h-10 md:text-sm md:placeholder:text-sm'
 
 /**
  * 회원가입 폼
@@ -192,7 +192,7 @@ export default function SignupForm() {
         <div className="mt-10 flex flex-col">
           <Button
             type="submit"
-            className="cursor-pointer bg-main-purple text-sm shadow-tag-inactive hover:bg-main-purple/70 md:text-base"
+            className="cursor-pointer bg-gradient-main text-sm shadow-tag-inactive hover:opacity-70 md:text-base"
           >
             회원 가입
           </Button>
