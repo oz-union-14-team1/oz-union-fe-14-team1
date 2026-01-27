@@ -10,7 +10,7 @@ export default function LogoUi() {
       className="group flex shrink-0 items-center transition-all duration-300 hover:scale-105"
     >
       <div className="relative overflow-hidden rounded-2xl">
-        <Image src={logo} alt="Logo Image" className="w-25" />
+        <Image src={logo} alt="Logo Image" className="w-20 sm:w-25" />
         {/* 반짝이는 효과 */}
         <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       </div>

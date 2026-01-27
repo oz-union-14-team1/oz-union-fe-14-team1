@@ -11,11 +11,12 @@ import {
   NavMenuUi,
   SearchUserUi,
 } from '@/components/layout/ui'
+import { ROUTES_PATHS } from '@/constants'
 import { useSearchInputUi } from '@/hooks'
 
 export default function Header() {
   const pathname = usePathname()
-  const isSearchPage = pathname === '/search'
+  const isSearchPage = pathname === ROUTES_PATHS.SEARCH_PAGE
   const filterTriggerRef = useRef<HTMLButtonElement>(null)
 
   const {
@@ -37,9 +38,9 @@ export default function Header() {
             <LogoUi />
             <NavMenuUi />
           </div>
-          <div className="flex min-w-0 flex-1 items-center justify-end gap-4">
+          <div className="flex min-w-0 flex-1 items-center justify-end gap-2">
             {/* 데스크톱용 검색바 */}
-            <div className="relative hidden items-center gap-2.5 md:flex">
+            <div className="relative hidden items-center gap-4 md:flex">
               <SearchInput
                 className="w-56 lg:w-72"
                 value={searchInputValue}
@@ -63,8 +64,8 @@ export default function Header() {
 
       {/* 모바일용 검색바 - 검색 페이지에서만 표시 */}
       {isSearchPage && (
-        <div className="sticky top-21 z-40 w-full border-b border-white/10 bg-background/95 px-2 py-3 backdrop-blur-xl md:hidden">
-          <div className="relative flex items-center gap-2">
+        <div className="sticky top-21 z-40 w-full border-b border-white/10 bg-background/95 px-4 py-3 backdrop-blur-xl md:hidden">
+          <div className="relative flex items-center gap-4">
             <SearchInput
               className="flex-1"
               value={searchInputValue}
