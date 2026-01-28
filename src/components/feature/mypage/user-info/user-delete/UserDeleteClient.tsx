@@ -5,14 +5,13 @@ import { useState } from 'react'
 
 import { Button } from '@/components'
 import { ROUTES_PATHS } from '@/constants'
-import { useToast } from '@/hooks'
 
 /**
  * 회원탈퇴 클라이언트 컴포넌트
  */
 export default function UserDeleteClient() {
   const router = useRouter()
-  const { triggerToast } = useToast()
+
   const [checked, setChecked] = useState(false)
 
   const handleUserDelete = async () => {
@@ -21,10 +20,10 @@ export default function UserDeleteClient() {
     }
 
     /**
-     * TODO: 탈퇴 API 연동
+     * pw_check 페이지로 넘어가는데, 서치파라미터로 delete를 부여함.
+     * 추후 다른 곳에서도 pw-check 사용 시 type 값으로 변경하여 재사용성을 높임.
      */
-    triggerToast('success', '회원탈퇴가 완료되었습니다.')
-    router.push(ROUTES_PATHS.USER_DELETE_RESULT_PAGE)
+    router.push(`${ROUTES_PATHS.USER_PW_CHECK_PAGE}?type=delete`)
   }
   return (
     <>

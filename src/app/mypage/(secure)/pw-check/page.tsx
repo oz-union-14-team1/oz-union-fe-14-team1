@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import { compoundLogoColumn } from '@/assets'
-import PwCheck from '@/components/feature/mypage/user-info/user-update/PwCheck'
+import { PwCheck } from '@/components'
 
 /**
  * 회원 정보 수정 전 비밀번호 확인 페이지
