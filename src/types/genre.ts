@@ -4,6 +4,11 @@ export type Genre = {
   slug: GenreSlug
 }
 
+export type GenreWithMeta = Genre & {
+  description: string
+  backgroundImage: string
+}
+
 export type GenreSlug =
   | 'adventure'
   | 'action'
