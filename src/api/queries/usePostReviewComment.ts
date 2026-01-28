@@ -28,7 +28,7 @@ export default function usePostReviewComment(
     },
     onError: () => {
       triggerToast(
-        'success',
+        'error',
         '답글 작성에 실패했습니다. 잠시후 다시 시도해주세요.'
       )
     },
