@@ -52,3 +52,4 @@ export {
 export { pwCheckSchema } from '@/components/feature/auth/schema/pwCheckSchema'
 export { default as UserInfoUpdateClient } from '@/components/feature/mypage/user-info/user-update/UserInfoUpdateClient'
 export { INPUT_CLASS } from '@/components/feature/auth/SignupForm'
+export { default as PwCheck } from '@/components/feature/mypage/PwCheck'

@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
 import { BaseInput, Button, FormField, pwCheckSchema } from '@/components'
@@ -8,10 +8,13 @@ import { ROUTES_PATHS, SIGNUP_FIELDS } from '@/constants'
 import { useToast } from '@/hooks'
 import { cn } from '@/utils'
 
+type PwCheckType = 'delete'
 /**
  * 비밀번호 확인 컴포넌트
  */
 export default function PwCheck() {
+  const searchParams = useSearchParams()
+  const pwCheckType = searchParams.get('type') as PwCheckType | null
   const { triggerToast } = useToast()
   const router = useRouter()
   const passwordField = SIGNUP_FIELDS.find((f) => f.key === 'password')
@@ -24,6 +27,12 @@ export default function PwCheck() {
   }
 
   const handleSubmit = async () => {
+    if (!pwCheckType) {
+      router.replace(ROUTES_PATHS.USER_INFO_UPDATE_PAGE)
+      console.log('pwCheckType 없다')
+      return null
+    }
+
     const result = pwCheckSchema.safeParse({ password })
 
     if (!result.success) {
@@ -42,6 +51,17 @@ export default function PwCheck() {
        * - 성공 시 아래 로직 유지
        */
       triggerToast('success', '비밀번호가 확인되었습니다.')
+
+      if (pwCheckType === 'delete') {
+        /**
+         * TODO: 탈퇴 API 연동
+         * await deleteUserAPI()
+         */
+        console.log('pwCheckType delete')
+
+        router.replace(ROUTES_PATHS.USER_DELETE_RESULT_PAGE)
+        return
+      }
 
       router.push(ROUTES_PATHS.USER_INFO_UPDATE_PAGE)
     } catch {
