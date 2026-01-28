@@ -1,4 +1,4 @@
-import { ImageCard } from '@/components/feature/review/ImageCard'
+import { ImageCard } from '@/components/layout/review/ImageCard'
 
 const response = {
   imgUrl: 'https://my-bucket.s3.amazonaws.com/...',

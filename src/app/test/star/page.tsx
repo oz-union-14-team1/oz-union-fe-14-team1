@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 
-import { StarRating } from '@/components/feature/review/review/Star'
+import { StarRating } from '@/components/layout/review/review/Star'
 
 export default function StarTestPage() {
   const [rating, setRating] = useState(3.8)
