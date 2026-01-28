@@ -1,4 +1,4 @@
-import Avatar from '@/components/feature/review/review/Avatar'
+import { Avatar } from '@/components/feature/review'
 
 export default function AvatarTestPage() {
   return (

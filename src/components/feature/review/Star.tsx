@@ -1,12 +1,12 @@
 'use client'
 
-import { Star } from 'lucide-react'
+import { Star as StarIcon } from 'lucide-react'
 import * as React from 'react'
 
 import { cn } from '@/utils'
 
-type StarRatingProps = {
-  value: number
+type StarProps = {
+  value?: number
   max?: number
   onChange?: (value: number) => void
   readonly?: boolean
@@ -14,14 +14,14 @@ type StarRatingProps = {
   className?: string
 }
 
-export function StarRating({
-  value,
+export function Star({
+  value = 0,
   max = 5,
   onChange,
   readonly = false,
   size = 48,
   className,
-}: StarRatingProps) {
+}: StarProps) {
   const [hoverValue, setHoverValue] = React.useState<number | null>(null)
 
   const displayValue = hoverValue || value
@@ -48,13 +48,17 @@ export function StarRating({
             type="button"
             disabled={readonly}
             className={cn(
-              `relative rounded-sm transition-all duration-200 focus-visible:outline-none ${!readonly ? 'cursor-pointer hover:scale-110 active:scale-95' : 'cursor-default'} `
+              `relative rounded-sm transition-all duration-200 focus-visible:outline-none ${
+                !readonly
+                  ? 'cursor-pointer hover:scale-110 active:scale-95'
+                  : 'cursor-default'
+              } `
             )}
             onMouseEnter={() => readonly || setHoverValue(starValue)}
             onMouseLeave={() => readonly || setHoverValue(null)}
             onClick={() => readonly || handleClick(starValue)}
           >
-            <Star
+            <StarIcon
               size={size}
               className="text-muted-foreground/30 fill-transparent stroke-[1.5]"
             />
@@ -63,7 +67,7 @@ export function StarRating({
               className="absolute top-0 left-0 overflow-hidden transition-all duration-300"
               style={{ width: `${fillPercentage}%` }}
             >
-              <Star
+              <StarIcon
                 size={size}
                 className="fill-yellow-400 stroke-yellow-400 stroke-[1.5] text-yellow-400"
               />
