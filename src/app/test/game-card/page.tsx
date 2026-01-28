@@ -6,9 +6,9 @@ export default function GameCardTestPage() {
     <div className="mx-auto flex max-w-(--width-container) flex-wrap justify-start gap-2">
       {MOCK_GAMES.map((game) => (
         <GameCard
-          key={`grid-${game.id}`}
-          id={game.id}
-          name={game.name}
+          key={`grid-${game.gameId}`}
+          id={game.gameId}
+          name={game.gameName}
           imgUrl={game.imgUrl}
         />
       ))}

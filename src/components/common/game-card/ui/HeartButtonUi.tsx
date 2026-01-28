@@ -3,10 +3,11 @@
 import { Heart } from 'lucide-react'
 
 import { useWishlistStore } from '@/store/useWishlistStore'
+import { GameId } from '@/types'
 import { cn } from '@/utils'
 
 type HeartButtonUiProps = {
-  gameId: string
+  gameId: GameId
 }
 
 export function HeartButtonUi({ gameId }: HeartButtonUiProps) {
