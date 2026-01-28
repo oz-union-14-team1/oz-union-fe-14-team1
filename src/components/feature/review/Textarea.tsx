@@ -33,7 +33,7 @@ export const Textarea = ({ className, ...props }: TextareaProps) => {
         </div>
       </div>
 
-      <div className="rounded-[14px] border border-gray-700 bg-[#1e1e1e] bg-text-dark p-4 focus-within:border-gray-500">
+      <div>
         <textarea
           {...props}
           value={text}
