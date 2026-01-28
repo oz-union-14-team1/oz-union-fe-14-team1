@@ -9,3 +9,16 @@ export const getReviewDetail = async (reviewId: string) => {
 
   return res.data
 }
+
+export const postReviewComment = async ({
+  reviewId,
+  content,
+}: {
+  reviewId: number | string
+  content: string
+}) => {
+  await api.post(
+    `${MSW_BASE_URL}${API_PATH.REVIEW_DETAIL_API_PATH(String(reviewId))}`,
+    { content }
+  )
+}
