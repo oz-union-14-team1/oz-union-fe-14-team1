@@ -1,4 +1,4 @@
-export default function FineIdLayout({
+export default function PwcheckLayout({
   children,
 }: {
   children: React.ReactNode
