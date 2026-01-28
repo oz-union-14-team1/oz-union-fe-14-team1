@@ -19,4 +19,17 @@ const getReviewDetail = http.get(
   }
 )
 
-export const reviewHandlers = [getReviewDetail]
+const postReviewComment = http.post(
+  `${MSW_BASE_URL}${API_PATH.REVIEW_DETAIL_API_PATH(':review_id')}`,
+  async ({ request }) => {
+    const { content } = (await request.clone().json()) as { content: string }
+
+    if (!content) {
+      return HttpResponse.json({}, { status: 400 })
+    }
+
+    return HttpResponse.json({}, { status: 201 })
+  }
+)
+
+export const reviewHandlers = [getReviewDetail, postReviewComment]
