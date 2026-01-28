@@ -7,6 +7,7 @@ export const gameHandlers = [
   http.get(`${MSW_BASE_URL}${API_PATH.GAMES}`, ({ request }) => {
     const url = new URL(request.url)
     const genreId = url.searchParams.get('genre_id')
+    const tagId = url.searchParams.get('tag_id')
     const year = url.searchParams.get('year')
     const minScore = url.searchParams.get('min_score')
     const page = Number(url.searchParams.get('page') ?? 1)
@@ -21,7 +22,14 @@ export const gameHandlers = [
     if (genreId) {
       const genreIds = genreId.split(',').map(Number)
       filteredGames = filteredGames.filter((game) =>
-        game.genre_id?.some((id) => genreIds.includes(id))
+        game.genreId?.some((id) => genreIds.includes(id))
+      )
+    }
+
+    if (tagId) {
+      const tagIds = tagId.split(',').map(Number)
+      filteredGames = filteredGames.filter((game) =>
+        game.tagId?.some((id) => tagIds.includes(id))
       )
     }
 
