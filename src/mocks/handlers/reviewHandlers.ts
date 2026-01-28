@@ -20,7 +20,7 @@ const getReviewDetail = http.get(
 )
 
 const putReview = http.patch(
-  `${MSW_BASE_URL}${API_PATH.REVIEW_PATCH_DELETE_API_PATH(`:comment_id`)}`,
+  `${MSW_BASE_URL}${API_PATH.REVIEW_PATCH_DELETE_API_PATH(`:review_id`)}`,
   async ({ request }) => {
     const { content } = (await request.clone().json()) as { content: string }
 
@@ -33,7 +33,7 @@ const putReview = http.patch(
 )
 
 const deleteReview = http.delete(
-  `${MSW_BASE_URL}${API_PATH.REVIEW_PATCH_DELETE_API_PATH(`:comment_id`)}`,
+  `${MSW_BASE_URL}${API_PATH.REVIEW_PATCH_DELETE_API_PATH(`:review_id`)}`,
   () => HttpResponse.json({}, { status: 204 })
 )
 
