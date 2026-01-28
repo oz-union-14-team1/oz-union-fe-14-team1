@@ -1,8 +1,10 @@
 'use client'
 
 import Image from 'next/image'
+import { useState } from 'react'
 
 import DefaultProfile from '@/assets/images/profile/profile.jpg'
+import { Button } from '@/components/common'
 import { ReviewCard } from '@/components/feature/review/review'
 import { getDayDiffFromNow } from '@/utils'
 
@@ -13,6 +15,8 @@ interface ReviewDetailProps {
 }
 
 export default function ReviewDetail({ reviewDetail }: ReviewDetailProps) {
+  const [isCommentAreaOpen, setIsCommentAreaOpen] = useState(false)
+
   const {
     created_at: createdAt,
     author: { nickname, profile_image_url: profileImageUrl },
@@ -39,7 +43,48 @@ export default function ReviewDetail({ reviewDetail }: ReviewDetailProps) {
       </div>
 
       <p>{content}</p>
-      {/* TODO: 답글달기 기능*/}
+
+      {/* 답글달기 기능*/}
+      {isCommentAreaOpen ? (
+        <>
+          <hr className="w-full bg-white" />
+          <textarea className="w-full rounded bg-neutral-700 p-2 focus:outline-none" />
+          <div className="flex w-full items-center justify-end gap-2">
+            <Button
+              variant={'main'}
+              onClick={() => {
+                setIsCommentAreaOpen(false)
+              }}
+              size={'sm'}
+              className="px-4"
+            >
+              완료
+            </Button>
+            <Button
+              variant={'outline'}
+              onClick={() => {
+                setIsCommentAreaOpen(false)
+              }}
+              size={'sm'}
+              className="px-4"
+            >
+              취소
+            </Button>
+          </div>
+        </>
+      ) : (
+        <div className="flex w-full items-center justify-end">
+          <Button
+            variant={'gray'}
+            onClick={() => {
+              setIsCommentAreaOpen(true)
+            }}
+            size={'sm'}
+          >
+            답글달기
+          </Button>
+        </div>
+      )}
     </ReviewCard>
   )
 }
