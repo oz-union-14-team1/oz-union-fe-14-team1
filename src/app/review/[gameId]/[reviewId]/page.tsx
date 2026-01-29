@@ -1,7 +1,6 @@
 import Image from 'next/image'
 
 import { getReviewDetail } from '@/api/fetchers/reveiwFetchers'
-import GameImage from '@/assets/images/games/game2.png'
 import DefaultProfile from '@/assets/images/profile/profile.jpg'
 import { ReviewCard } from '@/components/feature/review/review'
 import ReviewDetail from '@/components/feature/review/ReviewDetail'
@@ -75,9 +74,10 @@ export default async function ReviewDetailPage({
       {/* TODO: 반응형 */}
       <div className="flex flex-col items-center gap-3">
         <Image
-          src={GameImage}
+          src="/images/games/game2.png"
           alt="게임 이미지"
           width={200}
+          height={300}
           className="rounded-2xl"
         />
         <span className="text-3xl font-bold">문명</span>

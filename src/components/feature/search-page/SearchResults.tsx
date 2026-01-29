@@ -5,7 +5,8 @@ import { useSearchParams } from 'next/navigation'
 import Badge from '@/components/common/badge/Badge'
 import { GameCard } from '@/components/common/game-card'
 import { SearchEmptyUi } from '@/components/feature/search-page'
-import { MOCK_GAMES, type MockGame } from '@/mocks'
+import { MOCK_GAMES } from '@/mocks'
+import { Game } from '@/types/api-response/game-response'
 import { getTagVariant } from '@/utils/getTagVariant'
 
 function SearchResults() {
@@ -15,20 +16,19 @@ function SearchResults() {
 
   const filterList = filters ? filters.split(',').filter(Boolean) : []
 
-  const games = MOCK_GAMES.filter((game: MockGame) => {
+  const games = MOCK_GAMES.filter((game: Game) => {
     const matchesQuery =
-      !query || game.name.toLowerCase().includes(query.toLowerCase())
+      !query || game.gameName.toLowerCase().includes(query.toLowerCase())
 
     const matchesFilters =
       filterList.length === 0 ||
-      filterList.some(
-        (filter) =>
-          game.genres.includes(filter) ||
-          game.platforms.includes(filter) ||
-          game.players.includes(filter) ||
-          game.price === filter ||
-          game.mood.includes(filter)
-      )
+      filterList.some((filter) => {
+        const filterId = Number(filter)
+
+        return (
+          game.genreId?.includes(filterId) || game.tagId?.includes(filterId)
+        )
+      })
 
     return matchesQuery && matchesFilters
   })
@@ -68,9 +68,13 @@ function SearchResults() {
       {games.length > 0 ? (
         <div className="flex flex-wrap justify-start gap-x-2 gap-y-8">
           {games.map((game) => (
-            <div key={game.id} className="w-[calc(50%-4px)] sm:w-auto">
-              <div className="-mb-[90px] origin-top-left scale-[0.78] transition-transform duration-300 sm:mb-0 sm:scale-100">
-                <GameCard id={game.id} name={game.name} imgUrl={game.imgUrl} />
+            <div key={game.gameId} className="w-[calc(50%-4px)] sm:w-auto">
+              <div className="-mb-22.5 origin-top-left scale-[0.78] transition-transform duration-300 sm:mb-0 sm:scale-100">
+                <GameCard
+                  id={game.gameId}
+                  name={game.gameName}
+                  imgUrl={game.imgUrl}
+                />
               </div>
             </div>
           ))}

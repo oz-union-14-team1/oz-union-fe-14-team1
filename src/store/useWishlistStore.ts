@@ -3,10 +3,12 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
+import { GameId } from '@/types'
+
 type WishlistState = {
-  wishlistedGameIds: string[]
-  toggleWishlist: (gameId: string) => void
-  isWishlisted: (gameId: string) => boolean
+  wishlistedGameIds: GameId[]
+  toggleWishlist: (gameId: GameId) => void
+  isWishlisted: (gameId: GameId) => boolean
   clearWishlist: () => void
 }
 
@@ -15,7 +17,7 @@ export const useWishlistStore = create<WishlistState>()(
     (set, get) => ({
       wishlistedGameIds: [],
 
-      toggleWishlist: (gameId) => {
+      toggleWishlist: (gameId: GameId) => {
         set((state) => ({
           wishlistedGameIds: state.wishlistedGameIds.includes(gameId)
             ? state.wishlistedGameIds.filter((id) => id !== gameId)
@@ -23,7 +25,7 @@ export const useWishlistStore = create<WishlistState>()(
         }))
       },
 
-      isWishlisted: (gameId) => {
+      isWishlisted: (gameId: GameId) => {
         return get().wishlistedGameIds.includes(gameId)
       },
 

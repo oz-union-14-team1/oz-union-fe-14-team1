@@ -1,14 +1,9 @@
-import game6 from '@/assets/images/games/game6.png'
-import game7 from '@/assets/images/games/game7.png'
-import game8 from '@/assets/images/games/game8.png'
-import game9 from '@/assets/images/games/game9.png'
-import game10 from '@/assets/images/games/game10.png'
 import { Banner } from '@/types/carousel'
 
 export const MOCK_BANNERS: Banner[] = [
   {
     id: 1,
-    imgUrl: game6.src,
+    imgUrl: '/images/games/game6.png',
     title: '007 First Light',
     genre: ['액션'],
     tag: ['#싱글플레이', '#스파이', '#스토리'],
@@ -16,7 +11,7 @@ export const MOCK_BANNERS: Banner[] = [
   },
   {
     id: 2,
-    imgUrl: game7.src,
+    imgUrl: '/images/games/game7.png',
     title: '슬라임 랜처 2',
     genre: ['액션', '어드벤처', '캐주얼', '인디'],
     tag: ['#싱글플레이', '#멀티플레이', '#오픈월드', '#판타지'],
@@ -24,7 +19,7 @@ export const MOCK_BANNERS: Banner[] = [
   },
   {
     id: 3,
-    imgUrl: game8.src,
+    imgUrl: '/images/games/game8.png',
     title: 'Clair Obscur: Expedition 33',
     genre: ['RPG', '액션'],
     tag: ['#싱글플레이', '#스토리', '#판타지', '#탐험'],
@@ -33,7 +28,7 @@ export const MOCK_BANNERS: Banner[] = [
   },
   {
     id: 4,
-    imgUrl: game9.src,
+    imgUrl: '/images/games/game9.png',
     title: 'The Legend of Zelda: Tears of the Kingdom',
     genre: ['액션', '대규모 멀티플레이어'],
     tag: ['#싱글플레이', '#오픈월드', '#독점'],
@@ -42,7 +37,7 @@ export const MOCK_BANNERS: Banner[] = [
   },
   {
     id: 5,
-    imgUrl: game10.src,
+    imgUrl: '/images/games/game10.png',
     title: 'DiRT Rally',
     genre: ['시뮬레이션', '스포츠', '레이싱'],
     tag: [

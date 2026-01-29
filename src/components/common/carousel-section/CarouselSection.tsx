@@ -44,7 +44,7 @@ export function CarouselSection({
       >
         {games.map((game) => (
           <div
-            key={game.id}
+            key={game.gameId}
             className={cn(
               'shrink-0 snap-start',
               'basis-[calc(33.333%-11px)]',
@@ -53,9 +53,9 @@ export function CarouselSection({
             )}
           >
             <GameCard
-              key={game.id}
-              id={game.id}
-              name={game.name}
+              key={game.gameId}
+              id={game.gameId}
+              name={game.gameName}
               imgUrl={game.imgUrl}
             />
           </div>

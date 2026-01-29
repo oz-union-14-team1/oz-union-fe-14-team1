@@ -1,7 +1,11 @@
-import { StaticImageData } from 'next/image'
+export type GameId = number | string
 
 export type Game = {
-  id: string
-  name: string
-  imgUrl: string | StaticImageData
+  gameId: GameId
+  gameName: string
+  imgUrl: string
+  genreId?: number[]
+  tagId?: number[]
+  release?: string
+  score?: number
 }
