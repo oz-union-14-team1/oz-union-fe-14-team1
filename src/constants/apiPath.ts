@@ -8,4 +8,8 @@ export const API_PATH = {
   GAMES: '/games',
   GAME_DETAIL: (gameId: number) => `/games/${gameId}`,
   LOGIN_API_PATH: '/user/login/',
+  /**
+   * TODO: 리프레쉬 refresh api 추가 예정
+   */
+  LOGIN_REFRESH_API_PATH: '/',
 } as const
