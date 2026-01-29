@@ -4,8 +4,7 @@ import {
   GameFilterParams,
   GameList,
 } from '@/types/api-response/game-response'
-
-import { camelApi } from '../client/camelApi'
+import { camelApi } from '@/utils/axios'
 
 export const getGames = async (params?: GameFilterParams) => {
   const res = await camelApi.get<GameList>(`${MSW_BASE_URL}${API_PATH.GAMES}`, {
