@@ -6,9 +6,6 @@ import { useAuthStore } from '@/store/useAuthStore'
 
 import { convertToCamelCase } from './convertToCamelCase'
 
-/**
- * TODO: baseURL: API_BASE_URL,
- */
 const api = axios.create({
   withCredentials: true,
 })
