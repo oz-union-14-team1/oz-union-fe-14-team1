@@ -32,6 +32,7 @@ export default function ReviewDetail({
     author: { nickname, profile_image_url: profileImageUrl },
     content,
     id: reviewId,
+    rating,
   } = reviewDetail
 
   const handleReviewDeleteButtonClick: MouseEventHandler<HTMLButtonElement> = (
@@ -82,7 +83,8 @@ export default function ReviewDetail({
         // 리뷰 수정 기능
         <ReviewDetailReviewEditForm
           reviewId={reviewId}
-          defaultValue={content}
+          defaultContent={content}
+          defaultRating={rating}
           setIsEditing={setIsEditing}
         />
       ) : (
