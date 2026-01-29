@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { getReviewDetail } from '@/api/fetchers/reveiwFetchers'
 import DefaultProfile from '@/assets/images/profile/profile.jpg'
 import { ReviewCard } from '@/components/feature/review'
-import ReviewDetail from '@/components/feature/review/ReviewDetail'
+import ReviewDetail from '@/components/feature/review/review-detail/ReviewDetail'
 import { ReviewDetail as ReviewDetailType } from '@/types/api-response/review-response'
 import { getDayDiffFromNow } from '@/utils'
 
