@@ -22,3 +22,31 @@ export const postReviewComment = async ({
     { content }
   )
 }
+
+export const deleteReview = async ({
+  reviewId,
+}: {
+  reviewId: string | number
+}) => {
+  await api.delete(
+    `${MSW_BASE_URL}${API_PATH.REVIEW_PATCH_DELETE_API_PATH(String(reviewId))}`
+  )
+}
+
+export const patchReview = async ({
+  reviewId,
+  content,
+  rating,
+}: {
+  reviewId: string | number
+  content: string
+  rating: number
+}) => {
+  await api.patch(
+    `${MSW_BASE_URL}${API_PATH.REVIEW_PATCH_DELETE_API_PATH(String(reviewId))}`,
+    {
+      content,
+      rating,
+    }
+  )
+}

@@ -19,6 +19,24 @@ const getReviewDetail = http.get(
   }
 )
 
+const putReview = http.patch(
+  `${MSW_BASE_URL}${API_PATH.REVIEW_PATCH_DELETE_API_PATH(`:review_id`)}`,
+  async ({ request }) => {
+    const { content } = (await request.clone().json()) as { content: string }
+
+    if (!content) {
+      return HttpResponse.json({}, { status: 400 })
+    }
+
+    return HttpResponse.json({}, { status: 200 })
+  }
+)
+
+const deleteReview = http.delete(
+  `${MSW_BASE_URL}${API_PATH.REVIEW_PATCH_DELETE_API_PATH(`:review_id`)}`,
+  () => HttpResponse.json({}, { status: 204 })
+)
+
 const postReviewComment = http.post(
   `${MSW_BASE_URL}${API_PATH.REVIEW_DETAIL_API_PATH(':review_id')}`,
   async ({ request }) => {
@@ -32,4 +50,9 @@ const postReviewComment = http.post(
   }
 )
 
-export const reviewHandlers = [getReviewDetail, postReviewComment]
+export const reviewHandlers = [
+  getReviewDetail,
+  postReviewComment,
+  putReview,
+  deleteReview,
+]
