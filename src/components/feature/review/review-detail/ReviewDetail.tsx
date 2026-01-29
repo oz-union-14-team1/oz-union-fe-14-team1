@@ -1,13 +1,13 @@
 'use client'
 
 import Image from 'next/image'
-import { MouseEventHandler, useState } from 'react'
+import { useState } from 'react'
 
-import useDeleteReveiw from '@/api/queries/useDeleteReview'
 import DefaultProfile from '@/assets/images/profile/profile.jpg'
 import { Button } from '@/components/common'
 import { ReviewCard } from '@/components/feature/review'
 import ReveiwDetailCommentArea from '@/components/feature/review/review-detail/ReveiwDetailCommentArea'
+import ReviewDeleteButton from '@/components/feature/review/review-detail/ReviewDeleteButton'
 import ReviewDetailReviewEditForm from '@/components/feature/review/review-detail/ReviewDetailReviewEditForm'
 import { getDayDiffFromNow } from '@/utils'
 
@@ -24,9 +24,6 @@ export default function ReviewDetail({
 }: ReviewDetailProps) {
   const [isEditing, setIsEditing] = useState(false)
 
-  const { mutate: deleteReview, isPending: isDeleteReviewPending } =
-    useDeleteReveiw(gameId)
-
   const {
     created_at: createdAt,
     author: { nickname, profile_image_url: profileImageUrl },
@@ -34,13 +31,6 @@ export default function ReviewDetail({
     id: reviewId,
     rating,
   } = reviewDetail
-
-  const handleReviewDeleteButtonClick: MouseEventHandler<HTMLButtonElement> = (
-    e
-  ) => {
-    e.preventDefault()
-    deleteReview({ reviewId })
-  }
 
   return (
     <ReviewCard className="flex w-full flex-col items-start gap-4 p-4">
@@ -68,14 +58,7 @@ export default function ReviewDetail({
           >
             수정
           </Button>
-          <Button
-            variant={'gray'}
-            size="sm"
-            onClick={handleReviewDeleteButtonClick}
-            disabled={isDeleteReviewPending}
-          >
-            삭제
-          </Button>
+          <ReviewDeleteButton reviewId={reviewId} gameId={gameId} />
         </div>
       </div>
 
