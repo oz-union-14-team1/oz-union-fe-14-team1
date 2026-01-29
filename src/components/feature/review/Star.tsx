@@ -1,7 +1,7 @@
 'use client'
 
-import { Star as StarIcon } from 'lucide-react'
-import * as React from 'react'
+import { StarIcon } from 'lucide-react'
+import { useState } from 'react'
 
 import { cn } from '@/utils'
 
@@ -22,7 +22,7 @@ export function Star({
   size = 48,
   className,
 }: StarProps) {
-  const [hoverValue, setHoverValue] = React.useState<number | null>(null)
+  const [hoverValue, setHoverValue] = useState<number | null>(null)
 
   const displayValue = hoverValue || value
 
@@ -36,10 +36,16 @@ export function Star({
     <div className={cn('flex items-center gap-1', className)}>
       {Array.from({ length: max }).map((_, i) => {
         const starValue = i + 1
-
         const fillPercentage = Math.max(
           0,
           Math.min(100, (displayValue - i) * 100)
+        )
+
+        const starButtonStyle = cn(
+          'relative rounded-sm transition-all duration-200 focus-visible:outline-none',
+          !readonly
+            ? 'cursor-pointer hover:scale-110 active:scale-95'
+            : 'cursor-default'
         )
 
         return (
@@ -47,13 +53,7 @@ export function Star({
             key={i}
             type="button"
             disabled={readonly}
-            className={cn(
-              `relative rounded-sm transition-all duration-200 focus-visible:outline-none ${
-                !readonly
-                  ? 'cursor-pointer hover:scale-110 active:scale-95'
-                  : 'cursor-default'
-              } `
-            )}
+            className={starButtonStyle}
             onMouseEnter={() => readonly || setHoverValue(starValue)}
             onMouseLeave={() => readonly || setHoverValue(null)}
             onClick={() => readonly || handleClick(starValue)}
