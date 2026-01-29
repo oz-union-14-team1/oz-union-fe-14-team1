@@ -14,7 +14,7 @@ type ReviewDetailPageProps = {
 export default async function ReviewDetailPage({
   params,
 }: ReviewDetailPageProps) {
-  const { reviewId } = await params
+  const { reviewId, gameId } = await params
 
   let reviewDetail: ReviewDetailType
 
@@ -36,7 +36,7 @@ export default async function ReviewDetailPage({
     <div className="flex justify-center gap-4 p-10">
       <div className="flex max-w-xl flex-1 flex-col items-center gap-2">
         {/* 리뷰 상세*/}
-        <ReviewDetail reviewDetail={reviewDetail} />
+        <ReviewDetail reviewDetail={reviewDetail} gameId={gameId} />
 
         {/* 리뷰 댓글*/}
         {comments.map((comment) => {

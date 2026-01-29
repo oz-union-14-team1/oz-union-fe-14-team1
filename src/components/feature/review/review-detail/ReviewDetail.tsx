@@ -1,8 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { MouseEventHandler, useState } from 'react'
 
+import useDeleteReveiw from '@/api/queries/useDeleteReview'
 import DefaultProfile from '@/assets/images/profile/profile.jpg'
 import { Button } from '@/components/common'
 import { ReviewCard } from '@/components/feature/review'
@@ -14,17 +15,31 @@ import type { ReviewDetail } from '@/types/api-response/review-response'
 
 type ReviewDetailProps = {
   reviewDetail: ReviewDetail
+  gameId: string | number
 }
 
-export default function ReviewDetail({ reviewDetail }: ReviewDetailProps) {
+export default function ReviewDetail({
+  reviewDetail,
+  gameId,
+}: ReviewDetailProps) {
   const [isEditing, setIsEditing] = useState(false)
+
+  const { mutate: deleteReview, isPending: isDeleteReviewPending } =
+    useDeleteReveiw(gameId)
 
   const {
     created_at: createdAt,
     author: { nickname, profile_image_url: profileImageUrl },
     content,
-    id,
+    id: reviewId,
   } = reviewDetail
+
+  const handleReviewDeleteButtonClick: MouseEventHandler<HTMLButtonElement> = (
+    e
+  ) => {
+    e.preventDefault()
+    deleteReview({ reviewId })
+  }
 
   return (
     <ReviewCard className="flex w-full flex-col items-start gap-4 p-4">
@@ -52,7 +67,12 @@ export default function ReviewDetail({ reviewDetail }: ReviewDetailProps) {
           >
             수정
           </Button>
-          <Button variant={'gray'} size="sm">
+          <Button
+            variant={'gray'}
+            size="sm"
+            onClick={handleReviewDeleteButtonClick}
+            disabled={isDeleteReviewPending}
+          >
             삭제
           </Button>
         </div>
@@ -61,7 +81,7 @@ export default function ReviewDetail({ reviewDetail }: ReviewDetailProps) {
       {isEditing ? (
         // 리뷰 수정 기능
         <ReviewDetailReviewEditForm
-          reviewId={id}
+          reviewId={reviewId}
           defaultValue={content}
           setIsEditing={setIsEditing}
         />
@@ -70,7 +90,7 @@ export default function ReviewDetail({ reviewDetail }: ReviewDetailProps) {
       )}
 
       {/* 답글달기 기능*/}
-      <ReveiwDetailCommentArea reviewId={id} />
+      <ReveiwDetailCommentArea reviewId={reviewId} />
     </ReviewCard>
   )
 }
