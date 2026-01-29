@@ -1,8 +1,9 @@
+import { API_BASE_URL } from '@/constants/apiPath'
 import { API_PATH } from '@/constants/apiPath'
 import api from '@/utils/axios'
 
 type LoginRequest = {
-  id: string
+  email: string
   password: string
 }
 
@@ -11,7 +12,10 @@ type LoginResponse = {
 }
 
 export const loginApi = async (data: LoginRequest) => {
-  const res = await api.post<LoginResponse>(API_PATH.LOGIN_API_PATH, data)
+  const res = await api.post<LoginResponse>(
+    `${API_BASE_URL}${API_PATH.LOGIN_API_PATH}`,
+    data
+  )
 
   return res.data
 }

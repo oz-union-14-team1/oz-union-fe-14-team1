@@ -43,11 +43,7 @@ export default function LoginForm() {
     }
 
     try {
-      const data = await loginApi({ id, password })
-      /**
-       * console.log 데이터확인 후 삭제 예정
-       */
-      console.log('login response:', data)
+      const data = await loginApi({ email: id, password })
       setToken(data.accessToken)
       triggerToast('success', '로그인 성공')
       router.replace(ROUTES_PATHS.MAIN_PAGE)

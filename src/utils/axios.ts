@@ -1,12 +1,13 @@
 import axios, { InternalAxiosRequestConfig } from 'axios'
 
-import { API_BASE_URL } from '@/constants/apiPath'
 import { useAuthStore } from '@/store/useAuthStore'
 
 import { convertToCamelCase } from './convertToCamelCase'
 
+/**
+ * TODO: baseURL: API_BASE_URL,
+ */
 const api = axios.create({
-  baseURL: API_BASE_URL,
   withCredentials: true,
 })
 
