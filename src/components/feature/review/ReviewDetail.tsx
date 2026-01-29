@@ -3,13 +3,13 @@
 import Image from 'next/image'
 
 import DefaultProfile from '@/assets/images/profile/profile.jpg'
+import { ReviewCard } from '@/components/feature/review'
 import ReveiwDetailCommentArea from '@/components/feature/review/ReveiwDetailCommentArea'
-import { ReviewCard } from '@/components/feature/review/review'
 import { getDayDiffFromNow } from '@/utils'
 
 import type { ReviewDetail } from '@/types/api-response/review-response'
 
-interface ReviewDetailProps {
+type ReviewDetailProps = {
   reviewDetail: ReviewDetail
 }
 
