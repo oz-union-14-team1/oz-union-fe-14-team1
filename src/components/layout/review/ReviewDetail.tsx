@@ -4,8 +4,9 @@ import Image from 'next/image'
 
 import DefaultProfile from '@/assets/images/profile/profile.jpg'
 import { ReviewCard } from '@/components/feature/review'
-import ReveiwDetailCommentArea from '@/components/feature/review/ReveiwDetailCommentArea'
 import { getDayDiffFromNow } from '@/utils'
+
+import ReveiwDetailCommentArea from './ReveiwDetailCommentArea'
 
 import type { ReviewDetail } from '@/types/api-response/review-response'
 
