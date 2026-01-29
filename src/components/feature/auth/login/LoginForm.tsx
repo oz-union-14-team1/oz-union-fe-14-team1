@@ -1,11 +1,15 @@
 'use client'
 
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
+import { loginApi } from '@/api/fetchers/authFetchers'
 import { compoundLogoColumn } from '@/assets'
 import { BaseInput, Button, LoginFormValues, loginSchema } from '@/components'
+import { ROUTES_PATHS } from '@/constants'
 import useToast from '@/hooks/useToast'
+import { useAuthStore } from '@/store/useAuthStore'
 
 /**
  * 로그인 폼 컴포넌트
@@ -15,7 +19,9 @@ export default function LoginForm() {
     id: '',
     password: '',
   })
+  const router = useRouter()
   const { triggerToast } = useToast()
+  const { setToken } = useAuthStore()
   /**
    * TODO: 이메일/비밀번호 상태 관리 (useState)
    * TODO: 입력값 유효성 검사
@@ -27,7 +33,7 @@ export default function LoginForm() {
   /**
    * 로그인 성공 시 토스트
    */
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const { id, password } = form
     const result = loginSchema.safeParse({ id, password })
 
@@ -36,7 +42,18 @@ export default function LoginForm() {
       return
     }
 
-    triggerToast('success', '로그인 성공')
+    try {
+      const data = await loginApi({ id, password })
+      /**
+       * console.log 데이터확인 후 삭제 예정
+       */
+      console.log('login response:', data)
+      setToken(data.accessToken)
+      triggerToast('success', '로그인 성공')
+      router.replace(ROUTES_PATHS.MAIN_PAGE)
+    } catch {
+      triggerToast('error', '아이디 또는 비밀번호가 올바르지 않습니다.')
+    }
   }
 
   const handleChange = (field: keyof LoginFormValues, value: string) => {
