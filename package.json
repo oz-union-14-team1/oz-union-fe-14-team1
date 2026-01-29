@@ -22,6 +22,7 @@
     "clsx": "^2.1.1",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^12.28.1",
+    "lottie-react": "^2.4.1",
     "lucide-react": "^0.562.0",
     "msw": "^2.12.7",
     "next": "16.1.1",
