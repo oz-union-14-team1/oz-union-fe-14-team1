@@ -14,13 +14,13 @@ export default function AiSummary({ content, className }: AisummaryProps) {
       )}
     >
       <div className="flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg from-main-purple to-pink-500 text-white">
+        <div className="flex h-8 w-8 items-center justify-center rounded-lg from-purple-500 to-pink-500 text-white">
           <span className="text-lg">✨</span>
         </div>
-        <h2 className="text-lg font-bold text-white">AI 요약</h2>
+        <h2 className="text-[18px] font-bold text-white">AI 요약</h2>
       </div>
 
-      <div className="overflow-y-auto pr-2 text-[15px] leading-relaxed text-input-placeholer-color">
+      <div className="overflow-y-auto pr-2 text-[15px] leading-relaxed text-[#9DA2A7]">
         {content || '요약된 내용을 불러오는 중입니다...'}
       </div>
     </div>

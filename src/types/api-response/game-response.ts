@@ -23,6 +23,7 @@ export type GameDetail = Game & {
   release: string
   developer: string
   publisher: string
+  playTime: string
 }
 
 /*

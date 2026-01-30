@@ -46,10 +46,8 @@ export default function Avatar({
         )}
       </AvatarPrimitive.Root>
       <div className="flex flex-col">
-        <span className="text-sm font-bold text-input-placeholer-color">
-          {name}
-        </span>
-        <span className="text-sm text-white">{date}</span>
+        <span className="text-[14px] font-bold text-[#9DA2A7]">{name}</span>
+        <span className="text-[14px] text-white">{date}</span>
       </div>
     </div>
   )
