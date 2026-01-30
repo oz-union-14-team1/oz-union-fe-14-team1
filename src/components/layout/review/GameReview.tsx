@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { GameDetail } from '@/types/api-response/game-response'
+import type { GameDetail } from '@/types/api-response/game-response'
 
 type GameReviewProps = {
   gameDetail: GameDetail
