@@ -19,3 +19,15 @@ export const loginApi = async (data: LoginRequest) => {
 
   return res.data
 }
+
+/**
+ * TODO: 리프래쉬 api 추가 될 예정
+ * LOGIN_REFRESH_API_PATH 값 변경 예정
+ */
+export const refreshApi = async () => {
+  const res = await api.post(
+    `${API_BASE_URL}${API_PATH.LOGIN_REFRESH_API_PATH}`
+  )
+
+  return res.data
+}
