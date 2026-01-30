@@ -1,31 +1,25 @@
 import React from 'react'
 
+import { GameDetail } from '@/types/api-response/game-response'
+
 type GameReviewProps = {
-  platform?: string // 플랫폼
-  developer?: string // 개발사
-  publisher?: string // 출판사
-  genre?: string // 장르
-  playTime?: string // 플레이타임
-  releaseDate?: string // 출시일
-  description?: string // 게임 설명
+  gameDetail: GameDetail
 }
 
-export const GameReview = (props: GameReviewProps) => {
+export const GameReview = ({ gameDetail }: GameReviewProps) => {
   const labelStyle = 'text-sm text-gray-500'
   const valueStyle = 'text-lg text-white font-semibold'
 
-  // 1. 표시할 항목들을 데이터 배열로 정리
   const infoItems = [
-    { label: '플랫폼', value: props.platform },
-    { label: '개발사', value: props.developer },
-    { label: '퍼블리셔', value: props.publisher },
-    { label: '장르', value: props.genre },
-    { label: '플레이타임', value: props.playTime },
-    { label: '출시일', value: props.releaseDate },
+    { label: '플랫폼', value: gameDetail.platformName },
+    { label: '개발사', value: gameDetail.developer },
+    { label: '퍼블리셔', value: gameDetail.publisher },
+    { label: '플레이타임', value: gameDetail.playTime },
+    { label: '출시일', value: gameDetail.release },
   ]
 
   return (
-    <div className="w-100 rounded-2xl border border-gray-800 bg-[#121212] p-8 shadow-2xl">
+    <div className="w-100 rounded-2xl border border-gray-800 bg-surface-elevated p-8">
       <h2 className="mb-8 text-2xl font-bold text-white">게임 정보</h2>
 
       <div className="flex flex-col gap-6">
@@ -36,9 +30,9 @@ export const GameReview = (props: GameReviewProps) => {
           </div>
         ))}
 
-        <hr className="my-2 border-gray-800" />
+        <hr className="my-2 border-text-light" />
         <p className="text-base leading-relaxed text-gray-300">
-          {props.description || '게임에 대한 상세 설명이 없습니다.'}
+          {gameDetail.intro || '게임에 대한 상세 설명이 없습니다.'}
         </p>
       </div>
     </div>
