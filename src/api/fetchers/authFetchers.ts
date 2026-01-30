@@ -46,3 +46,25 @@ export const signupApi = async (data: SignupRequest) => {
 
   return res.data
 }
+
+export type FindIdRequest = {
+  phone_number: string
+}
+
+export type FindIdResponse = {
+  exists: boolean
+  identifier?: string
+  message: string
+}
+
+/**
+ * 계정 아이디 찾기 api
+ */
+export const findIdApi = async (data: FindIdRequest) => {
+  const res = await api.post<FindIdResponse>(
+    `${API_BASE_URL}${API_PATH.FIND_ID_API_PATH}`,
+    data
+  )
+
+  return res.data
+}

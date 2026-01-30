@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
+import { findIdApi } from '@/api/fetchers/authFetchers'
 import {
   Button,
   FindAccountFormValues,
@@ -12,6 +13,7 @@ import {
 } from '@/components'
 import { ROUTES_PATHS } from '@/constants'
 import { usePhoneVerificationTimer, useToast } from '@/hooks'
+import { useFindIdStore } from '@/store/useFindIdStore'
 import { FindAccountMode } from '@/types/findAccountMode'
 
 /**
@@ -41,6 +43,7 @@ export default function FindAccountForm({
    * TODO: 로그인 후 페이지 이동 처리
    */
   const isFindMode = mode === 'id'
+  const findIdStore = useFindIdStore()
   const [form, setForm] = useState<FindAccountFormValues>({
     phone: '',
     phoneCode: '',
@@ -62,7 +65,7 @@ export default function FindAccountForm({
     },
   })
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const { phone, phoneCode } = form
     const result = findAccountSchema.safeParse({ phone, phoneCode })
 
@@ -73,15 +76,29 @@ export default function FindAccountForm({
       return
     }
 
-    /**
-     * TODO: 아이디 찾기 API 연동
-     * TODO: credentials: 'include',
-     */
-    onError(null)
-    triggerToast('success', '아이디 찾기 성공!')
-
     if (isFindMode) {
-      router.push(ROUTES_PATHS.FIDN_ID_RESULT_PAGE)
+      try {
+        const data = await findIdApi({
+          phone_number: phone,
+        })
+
+        if (!data.exists) {
+          triggerToast('error', '계정을 찾을 수 없습니다.')
+          return
+        }
+
+        if (!data.identifier) {
+          triggerToast('error', '아이디 정보가 없습니다.')
+          return
+        }
+
+        findIdStore.setIdentifier(data.identifier)
+        onError(null)
+        triggerToast('success', data.message)
+        router.push(ROUTES_PATHS.FIDN_ID_RESULT_PAGE)
+      } catch {
+        triggerToast('error', '계정 찾기에 실패했습니다.')
+      }
     } else {
       router.push(ROUTES_PATHS.FIND_PASSWORD_RESULT_PAGE)
     }
