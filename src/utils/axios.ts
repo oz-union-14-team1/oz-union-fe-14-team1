@@ -69,7 +69,8 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
 
         return api(original)
       } catch (e) {
-        useAuthStore.getState().clear()
+        const store = useAuthStore.getState()
+        store.clear()
         location.href = ROUTES_PATHS.LOGIN_PAGE
         return Promise.reject(e)
       }

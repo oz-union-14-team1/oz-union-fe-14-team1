@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 import { loginApi } from '@/api/fetchers/authFetchers'
+import { getUserInfoApi } from '@/api/fetchers/userInfoFetchers'
 import { compoundLogoColumn } from '@/assets'
 import { BaseInput, Button, LoginFormValues, loginSchema } from '@/components'
 import { ROUTES_PATHS } from '@/constants'
@@ -15,24 +16,14 @@ import { useAuthStore } from '@/store/useAuthStore'
  * 로그인 폼 컴포넌트
  */
 export default function LoginForm() {
+  const router = useRouter()
+  const { triggerToast } = useToast()
+  const { setToken, setUser } = useAuthStore()
   const [form, setForm] = useState<LoginFormValues>({
     id: '',
     password: '',
   })
-  const router = useRouter()
-  const { triggerToast } = useToast()
-  const { setToken } = useAuthStore()
-  /**
-   * TODO: 이메일/비밀번호 상태 관리 (useState)
-   * TODO: 입력값 유효성 검사
-   * TODO: 로그인 API 연결
-   * TODO: 에러 메시지 처리
-   * TODO: 로그인 성공 시 토큰 저장
-   * TODO: 로그인 후 페이지 이동 처리
-   */
-  /**
-   * 로그인 성공 시 토스트
-   */
+
   const handleSubmit = async () => {
     const { id, password } = form
     const result = loginSchema.safeParse({ id, password })
@@ -45,6 +36,10 @@ export default function LoginForm() {
     try {
       const data = await loginApi({ email: id, password })
       setToken(data.accessToken)
+
+      const userInfo = await getUserInfoApi()
+      setUser(userInfo)
+
       triggerToast('success', '로그인 성공')
       router.replace(ROUTES_PATHS.MAIN_PAGE)
     } catch {
