@@ -3,17 +3,19 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
+import { signupApi, type SignupRequest } from '@/api/fetchers/authFetchers'
 import {
   BaseInput,
   Button,
   DuplicateCheckField,
   FormField,
   PhoneVerificationField,
-  SignupFormValues,
+  type SignupFormValues,
   signupSchema,
 } from '@/components'
 import { ROUTES_PATHS, SIGNUP_FIELDS } from '@/constants'
 import { usePhoneVerificationTimer, useToast } from '@/hooks'
+import useGuestGuard from '@/hooks/useGuestGuard'
 import { cn } from '@/utils'
 
 export const INPUT_CLASS =
@@ -23,6 +25,7 @@ export const INPUT_CLASS =
  * 회원가입 폼
  */
 export default function SignupForm() {
+  useGuestGuard()
   const router = useRouter()
   const [isIdChecked, setIsIdChecked] = useState(false)
   const [isNickNameChecked, setIsNickNameChecked] = useState(false)
@@ -39,12 +42,20 @@ export default function SignupForm() {
   })
   const { triggerToast } = useToast()
 
+  const genderMap = {
+    남성: 'M',
+    여성: 'F',
+  } as const
+
   const phoneTimer = usePhoneVerificationTimer({
     duration: 10 /** TODO: 180초 */,
     onExpire: () => triggerToast('error', '인증 시간이 만료되었습니다.'),
   })
 
-  const handleChange = (field: keyof SignupFormValues, value: string) => {
+  const handleChange = <T extends keyof SignupFormValues>(
+    field: T,
+    value: SignupFormValues[T]
+  ) => {
     setForm((prev) => ({ ...prev, [field]: value }))
 
     if (field === 'id') {
@@ -56,10 +67,7 @@ export default function SignupForm() {
     }
   }
 
-  const handleSubmit = () => {
-    /**
-     * TODO : 회원가입 API 연동
-     */
+  const handleSubmit = async () => {
     const result = signupSchema.safeParse(form)
 
     if (!result.success) {
@@ -84,9 +92,22 @@ export default function SignupForm() {
       return
     }
 
-    triggerToast('success', '회원가입 성공!')
+    const payload: SignupRequest = {
+      email: form.id,
+      password: form.password,
+      nickname: form.nickName,
+      name: form.name,
+      gender: genderMap[form.gender],
+      phone_number: form.phone,
+    }
 
-    router.push(ROUTES_PATHS.LOGIN_PAGE)
+    try {
+      await signupApi(payload)
+      triggerToast('success', '회원가입 성공!')
+      router.push(ROUTES_PATHS.LOGIN_PAGE)
+    } catch {
+      triggerToast('error', '회원가입에 실패했습니다.')
+    }
   }
 
   const handleIdCheckClick = () => {
@@ -95,8 +116,6 @@ export default function SignupForm() {
      * toast 진행 예정
      */
     setIsIdChecked(true)
-
-    alert('아이디 중복체크')
   }
 
   const handleNickNameCheckClick = () => {
@@ -105,8 +124,6 @@ export default function SignupForm() {
      * toast 진행 예정
      */
     setIsNickNameChecked(true)
-
-    alert('닉네임 중복체크')
   }
 
   return (
