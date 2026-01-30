@@ -1,6 +1,6 @@
 # 📁 Project Structure
 
-> Feature 기반 프로젝트 폴더 구조입니다.
+> PLAYTYPE는 도메인 + Feature 기반 구조를 바탕으로 페이지, 비즈니스 로직, UI 책임을 명확히 분리한 프로젝트입니다.
 
 ---
 
@@ -9,75 +9,60 @@
 ```
 📦 프로젝트 루트
 │
-├── 📂 docs/                      # 📚 프로젝트 문서
+├── 📂 public/                         # 🌐 정적 리소스
+│   ├── images/                        # 게임 / 장르 이미지
+│   └── mockServiceWorker.js           # MSW 실행 스크립트
+│
+├── 📂 docs/                           # 📚 프로젝트 문서
 │   ├── README.md
-│   ├── CONVENTION.md
 │   ├── BRANCH.md
 │   ├── COMMIT.md
-│   ├── STRUCTURE.md
-│   ├── API.md
-│   └── TROUBLESHOOTING.md
+│   ├── CONVENTION.md
+│   └── STRUCTURE.md
 │
 ├── 📂 src/
-│   ├── 📂 api/                   # 🔌 API 중앙 관리
-│   │   ├── instance.ts           # Axios 인스턴스 설정
-│   │   ├── auth.ts               # Auth 관련 API
-│   │   ├── admin.ts              # Admin 관련 API
-│   │   └── exams.ts              # Exam 관련 API
+│   ├── 📂 app/                        # 📄 Next.js App Router
+│   │   ├── (auth)/                    # 로그인 / 회원가입 / 계정 찾기
+│   │   ├── community/                 # 커뮤니티 메인
+│   │   ├── genre/[slug]/              # 장르별 게임 목록
+│   │   ├── mypage/                    # 마이페이지
+│   │   ├── recommendation/            # 온보딩 & 플레이타입 추천
+│   │   ├── review/[gameId]/[reviewId] # 리뷰 상세
+│   │   ├── search/                    # 검색 페이지
+│   │   ├── test/                      # 개발용 테스트 페이지
+│   │   ├── layout.tsx                 # 전역 레이아웃
+│   │   ├── page.tsx                   # 메인 페이지
+│   │   └── not-found.tsx              # 404 페이지
 │   │
-│   ├── 📂 assets/                # 🖼️ 전역 정적 파일
+│   ├── 📂 api/                        # 🔌 API 레이어
+│   │   ├── fetchers/                  # Axios 기반 요청 함수
+│   │   └── queries/                   # TanStack Query 커스텀 훅
+│   │
+│   ├── 📂 assets/                     # 🖼️ 전역 에셋
 │   │   ├── images/
 │   │   ├── icons/
-│   │   └── fonts/
+│   │   └── lottie/
 │   │
-│   ├── 📂 components/            # 🧩 전역 공통 UI 컴포넌트
-│   │   ├── common/               # 버튼, 인풋, 모달 등 기초 UI
-│   │   └── layout/               # 헤더, 푸터, 사이드바 등 레이아웃
+│   ├── 📂 components/                 # 🧩 UI 컴포넌트
+│   │   ├── common/                    # 공통 UI (Button, Tag 등)
+│   │   ├── feature/                   # 도메인별 컴포넌트
+│   │   └── layout/                    # Header, Filter UI 등
 │   │
-│   ├── 📂 constants/             # 📌 전역 상수
-│   │   └── dev.ts
+│   ├── 📂 hooks/                      # 🪝 전역 커스텀 훅
 │   │
-│   ├── 📂 features/              # ✨ 기능(Feature) 단위 비즈니스 로직
-│   │   ├── auth/
-│   │   │   ├── components/       # LoginForm, SignupForm 등
-│   │   │   ├── hooks/            # useLogin, useAuthCheck 등
-│   │   │   ├── types/            # User, AuthResponse 등
-│   │   │   └── utils/            # tokenValidator 등
-│   │   │
-│   │   ├── exam/
-│   │   │   ├── components/       # ExamForm, ExamCreate 등
-│   │   │   ├── hooks/            # useExamAttempt, useSearchParam 등
-│   │   │   └── types/
-│   │   │
-│   │   └── admin/
-│   │       ├── components/       # AccountList, AccountDetail 등
-│   │       ├── hooks/
-│   │       └── types/
+│   ├── 📂 store/                      # 🗃️ Zustand 전역 상태
 │   │
-│   ├── 📂 hooks/                 # 🪝 전역 유틸리티 훅
-│   │   └── useTheme.ts           # 다크모드, 윈도우 리사이즈 등
+│   ├── 📂 mocks/                      # 🧪 MSW Mock
 │   │
-│   ├── 📂 pages/                 # 📄 라우팅 페이지 (Features 조립)
-│   │   ├── HomePage.tsx
-│   │   ├── ExamPage.tsx
-│   │   └── AdminPage.tsx
+│   ├── 📂 constants/                  # 📌 전역 상수
+│   ├── 📂 types/                      # 📝 타입 정의
+│   ├── 📂 utils/                      # 🔧 유틸 함수
 │   │
-│   ├── 📂 stores/                # 🗃️ 전역 클라이언트 상태 (Zustand)
-│   │   └── useAppStore.ts
-│   │
-│   ├── 📂 types/                 # 📝 전역 공유 타입
-│   │
-│   ├── 📂 utils/                 # 🔧 전역 유틸리티 함수
-│   │   └── dateFormat.ts
-│   │
-│   ├── App.tsx
-│   └── main.tsx
+│   ├── globals.css
+│   └── token.css                      # 디자인 토큰
 │
-├── .gitignore
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
-└── README.md
+├── tailwindconfig.ts
+└── tsconfig.json
 ```
 
 ---
@@ -99,39 +84,109 @@
 
 ---
 
-## Features 폴더 구조
+## app (Routing) 구조
 
-> **Feature 기반 아키텍처**를 사용합니다.  
-> 각 Feature는 서로 **독립적**이어야 하며, **상호 참조하지 않습니다.**
+> **라우팅은 URL 기준**, **로직은 Feature 기준**으로 분리합니다.
 
-```
-📂 features/auth/
-├── components/       # Feature 전용 컴포넌트
-├── hooks/            # Feature 전용 커스텀 훅
-├── types/            # Feature 전용 타입 정의
-└── utils/            # Feature 전용 유틸리티
-```
-
----
-
-## 컴포넌트 폴더 구조
-
-```
-📂 button/
-├── Button.tsx          # 컴포넌트 로직
-├── Button.stories.tsx  # Storybook 스토리
-├── Button.test.tsx     # 테스트 (선택)
-└── index.ts            # barrel export
+```bash
+📂 app/
+├── (auth)/            # 인증 관련 페이지
+├── recommendation/    # 온보딩 / 추천
+├── mypage/            # 개인화 영역
+├── community/         # 커뮤니티
+├── review/            # 리뷰 상세
+├── search/            # 검색
+└── test/              # 개발용 테스트 페이지
 ```
 
 ---
 
-## 참고사항
+## components 구조
 
-> - **Feature는 서로 독립적**: auth, exam, admin은 서로 참조하지 않습니다
-> - **Pages는 조립만**: 페이지에서는 Features의 컴포넌트를 조립만 합니다
-> - **전역 vs Feature**: 2개 이상의 Feature에서 사용하면 전역으로 이동
-> - **barrel export** 패턴을 사용하여 import를 간결하게 유지합니다
+### common/
+
+> 서비스 전반에서 재사용되는 **기초 UI 컴포넌트**
+
+```
+📂 common/
+├── button/
+├── tag/
+├── carousel/
+└── toast/
+```
+
+---
+
+### feature/
+
+> **도메인(기능) 단위 컴포넌트 구조**
+
+```
+📂 feature/
+├── auth/
+├── main/
+├── mypage/
+├── recommendation/
+├── review/
+└── search-page/
+```
+
+- Feature 간 직접 참조 ❌
+- 공통으로 쓰이면 `common` 으로 이동
+
+---
+
+### api 구조/
+
+```
+📂 api/
+├── fetchers/   # 순수 API 요청 함수
+└── queries/    # useQuery / useMutation 훅
+```
+
+- 컴포넌트에서 직접 axios 호출 ❌
+- 쿼리 훅만 사용
+
+---
+
+### store (Zustand)n/
+
+```
+📂 store/
+├── useAuthStore.ts
+├── useOnboardingStore.ts
+└── useWishlistStore.ts
+```
+
+- 도메인별 store 분리
+- 전역 상태 최소화 원칙
+
+---
+
+### mocks (MSW)
+
+```
+📂 mocks/
+├── handlers/
+├── data/
+├── browser.ts
+└── server.ts
+```
+
+- 개발 환경에서 실제 API없이 UI/로직 검증
+- Test Page와 함께 사용
+
+---
+
+## 구조 설계 원칙
+
+> PLAYTYPE은 아래 원칙을 기준으로 구조를 설계했습니다.
+
+> - **Routing ≠ Business Logic**
+> - **Feature 단위 응집**
+> - **전역 최소화, 도메인 중심**
+> - **UI / 상태 / API 역할 분리**
+> - **테스트 및 확장 고려**
 
 ---
 

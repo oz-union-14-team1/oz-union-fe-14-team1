@@ -85,9 +85,6 @@ import { useAuth } from '@hooks'
 
 // 4. 타입
 import type { UserType } from '@custom-types'
-
-// 5. 스타일 / 에셋
-import styles from './Component.module.css'
 ```
 
 ---
@@ -112,6 +109,79 @@ import styles from './Component.module.css'
 | lint-staged   | staged 파일만 린트     |
 | perfectionist | import 자동 정렬       |
 | TypeScript    | 정적 타입 검사         |
+
+---
+
+# 🔎 Data Fetching Convention (TanStack Query)
+
+> TanStack Query는 **커스텀 훅 패턴**으로 관리합니다.
+
+---
+
+## 기본 규칙
+
+- `useQuery`는 **상위 컴포넌트에서 직접 사용하지 않습니다.**
+- 서버 데이터 패칭은 **API 전용 훅**으로 분리합니다.
+- 훅은 `hooks/api` 디렉토리에서 관리합니다.
+- 훅은 `useQuery`의 **반환 객체를 그대로 반환**합니다.
+- Query 옵션은 **상위 컴포넌트에서 제어**합니다.
+
+---
+
+## 훅 구조
+
+```txt
+hooks/
+└── api/
+    ├── useComment.ts
+    ├── useGames.ts
+    └── useBookmarks.ts
+```
+
+### TanStack Query 사용
+
+```tsx
+// ✅ Good
+export default function Page() {
+  const { data, isPending } = useComment(postId)
+}
+```
+
+### 훅 작성 규칙
+
+- Query 옵션은 options 파라미터로 전달받습니다.
+- queryKey, queryFn은 훅 내부에서 고정합니다.
+
+```tsx
+// ✅ Good
+
+type CommentQueryOptions = Omit<
+  UseQueryOptions<CommentList>,
+  'queryKey' | 'queryFn'
+>
+
+export default function useComment(
+  postId: string,
+  options?: CommentQueryOptions
+) {
+  return useQuery<CommentList>({
+    queryKey: ['comments', postId],
+    queryFn: async () => {
+      const res = await api.get('/comments', {
+        params: { post_id: postId },
+      })
+
+      return res.data
+    },
+    ...options,
+  })
+}
+```
+
+### Query Key 규칙
+
+- Query Key는 엔드포인트 구조 기준으로 작성합니다.
+- 형식: [resource, subResource, action, searchParams]
 
 ---
 
