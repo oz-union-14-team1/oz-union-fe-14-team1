@@ -17,11 +17,11 @@ export const ROUTES_PATHS = {
   USER_DELETE_RESULT_PAGE: '/mypage/user-delete/result',
   USER_PW_CHECK_PAGE: '/mypage/pw-check',
   USER_INFO_UPDATE_PAGE: '/mypage/userinfo-update',
-}
 
-export const RECOMMEND_PATHS = {
-  BASE: '/recommendation',
-  TAG: '/recommendation/tag',
-  GENRE: '/recommendation/genre',
-  RESULT: '/recommendation/result',
-}
+  RECOMMEND: {
+    BASE: '/recommendation',
+    TAG: '/recommendation/tag',
+    GENRE: '/recommendation/genre',
+    RESULT: '/recommendation/result',
+  },
+} as const

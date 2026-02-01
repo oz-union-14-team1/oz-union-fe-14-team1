@@ -1,13 +1,4 @@
-import { GenreSlug } from '@/types'
-
-export const GENRE_ASSETS: Record<
-  GenreSlug,
-  {
-    vertical: string
-    horizontal: string
-    position: string
-  }
-> = {
+export const GENRE_ASSETS = {
   adventure: {
     vertical: '/images/genres/vertical/adventure.png',
     horizontal: '/images/genres/horizontal/adventure.png',
@@ -69,4 +60,45 @@ export const GENRE_ASSETS: Record<
     horizontal: '/images/genres/horizontal/sports.png',
     position: 'center',
   },
+} as const
+
+export type GenreSlug = keyof typeof GENRE_ASSETS
+
+export const DEFAULT_GENRE_IMAGE = {
+  vertical: '/images/fallback-v.png',
+  horizontal: '/images/fallback-h.png',
+  position: 'center',
+}
+
+export function getGenreImage(
+  slug: string,
+  type: 'vertical' | 'horizontal' = 'vertical'
+): string {
+  const asset = GENRE_ASSETS[slug as GenreSlug]
+
+  if (!asset) {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`⚠️ Missing genre asset for: "${slug}"`)
+    }
+    return DEFAULT_GENRE_IMAGE[type]
+  }
+
+  return asset[type]
+}
+
+export function getGenreAsset(slug: string) {
+  const asset = GENRE_ASSETS[slug as GenreSlug]
+
+  if (!asset) {
+    if (process.env.NODE_ENV === 'development') {
+      console.warn(`⚠️ Missing genre asset for: "${slug}"`)
+    }
+    return {
+      vertical: DEFAULT_GENRE_IMAGE.vertical,
+      horizontal: DEFAULT_GENRE_IMAGE.horizontal,
+      position: 'center' as const,
+    }
+  }
+
+  return asset
 }

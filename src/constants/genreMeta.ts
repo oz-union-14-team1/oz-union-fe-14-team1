@@ -1,4 +1,4 @@
-import { GenreSlug } from '@/types'
+import { GenreSlug } from '@/assets/genreAssets'
 
 /**
  * 장르별 메타 정보
