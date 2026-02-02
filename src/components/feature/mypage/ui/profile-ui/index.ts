@@ -10,3 +10,4 @@ export {
   ProfileGenresMobileUi,
 } from './ProfileGenresUi'
 export { ProfileDesktopUi, ProfileMobileUi } from './ProfileUi'
+export { default as ProfileImageCropDialogUi } from './ProfileImageCropDialogUi'
