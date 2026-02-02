@@ -17,4 +17,5 @@ export const API_PATH = {
   LOGIN_REFRESH_API_PATH: '/',
   USER_INFO_GET_API_PATH: '/user/me',
   MAIN_PAGE: '/',
+  FIND_ID_API_PATH: '/user/find-account',
 } as const
