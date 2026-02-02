@@ -31,3 +31,18 @@ export const refreshApi = async () => {
 
   return res.data
 }
+
+export type SignupRequest = {
+  email: string
+  password: string
+  name: string
+  nickname: string
+  gender: string
+  phone_number: string
+}
+
+export const signupApi = async (data: SignupRequest) => {
+  const res = await api.post(`${API_BASE_URL}${API_PATH.SIGNUP_API_PATH}`, data)
+
+  return res.data
+}

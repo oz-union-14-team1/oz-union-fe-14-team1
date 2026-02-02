@@ -10,9 +10,11 @@ export const API_PATH = {
   GAMES: '/games',
   GAME_DETAIL: (gameId: number) => `/games/${gameId}`,
   LOGIN_API_PATH: '/user/login',
+  SIGNUP_API_PATH: '/user/signup',
   /**
    * TODO: 리프레쉬 refresh api 추가 예정
    */
   LOGIN_REFRESH_API_PATH: '/',
   USER_INFO_GET_API_PATH: '/user/me',
+  MAIN_PAGE: '/',
 } as const
