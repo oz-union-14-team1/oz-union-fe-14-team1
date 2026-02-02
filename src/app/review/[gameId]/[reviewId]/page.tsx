@@ -33,7 +33,7 @@ export default async function ReviewDetailPage({
   const { comments } = reviewDetail
 
   return (
-    <div className="flex justify-center gap-4 p-10">
+    <div className="flex flex-col-reverse justify-center gap-4 p-10 sm:flex-row">
       <div className="flex max-w-xl flex-1 flex-col items-center gap-2">
         {/* 리뷰 상세*/}
         <ReviewDetail reviewDetail={reviewDetail} gameId={gameId} />
@@ -71,14 +71,13 @@ export default async function ReviewDetailPage({
       </div>
 
       {/* TODO: api 연결 */}
-      {/* TODO: 반응형 */}
-      <div className="flex flex-col items-center gap-3">
+      <div className="flex w-full flex-col items-center gap-3 sm:w-60">
         <Image
           src="/images/games/game2.png"
           alt="게임 이미지"
           width={200}
           height={300}
-          className="rounded-2xl"
+          className="w-full max-w-2xs rounded-2xl"
         />
         <span className="text-3xl font-bold">문명</span>
       </div>
