@@ -1,27 +1,19 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
-
-import { ROUTES_PATHS } from '@/constants'
 import { useFindIdStore } from '@/store/useFindIdStore'
 
 /**
  * 계정 아이디 찾기 결과 페이지 클라이언트
  */
 export default function FindIdResultClient() {
-  const router = useRouter()
-
-  const { identifier, clear } = useFindIdStore()
-  useEffect(() => {
-    if (!identifier) {
-      router.replace(ROUTES_PATHS.FIDN_ID_PAGE)
-      return
-    }
-  }, [identifier, router, clear])
+  const { identifier } = useFindIdStore()
 
   if (!identifier) {
-    return null
+    return (
+      <span className="text-sm text-gray-400">
+        아이디 찾기 후 이용해주세요.
+      </span>
+    )
   }
 
   return (
