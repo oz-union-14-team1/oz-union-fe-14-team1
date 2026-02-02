@@ -1,7 +1,6 @@
 export const ROUTES_PATHS = {
   MAIN_PAGE: '/',
   SEARCH_PAGE: '/search',
-  MYPAGE_PAGE: '/mypage',
   SIGNUP_PAGE: '/signup',
   LOGIN_PAGE: '/login',
   FIDN_ID_PAGE: '/find-id',

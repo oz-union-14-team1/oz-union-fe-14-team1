@@ -1,4 +1,4 @@
-import profile from '@/assets/images/profile/profile.jpg'
+// import profile from '@/assets/images/profile/profile.jpg'
 import {
   DashBoard,
   MyReviewList,
@@ -15,8 +15,8 @@ export default function MyPage() {
     <section className="container mx-auto mb-50 max-w-345">
       <div className="flex flex-col items-center justify-between gap-5 px-5 pt-10 lg:flex-row lg:items-start lg:gap-5">
         <div className="w-full pt-5 lg:w-1/2 lg:pl-5">
-          <Profile imageUrl={profile.src} />
-          {/* <Profile imageUrl="" /> */}
+          {/* <Profile imageUrl={profile.src} /> */}
+          <Profile imageUrl="" />
         </div>
 
         <div className="w-full max-w-[600px] lg:max-w-3/7">
