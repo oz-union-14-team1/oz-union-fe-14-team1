@@ -5,6 +5,9 @@ import { API_PATH } from '@/constants/apiPath'
 import { useAuthStore } from '@/store/useAuthStore'
 import { convertToCamelCase } from '@/utils/convertToCamelCase'
 
+type CustomAxiosRequestConfig = InternalAxiosRequestConfig & {
+  _retry?: boolean
+}
 /**
  * 공통 response interceptor
  */
@@ -38,9 +41,13 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
      * - 401 에러시
      */
     async (error) => {
-      const original = error.config
+      const original = error.config as CustomAxiosRequestConfig
 
-      if (error.response?.status !== 401 || original._retry) {
+      if (error.response?.status !== 401) {
+        return Promise.reject(error)
+      }
+
+      if (original._retry) {
         return Promise.reject(error)
       }
 
@@ -49,9 +56,6 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
       try {
         if (!refreshing) {
           refreshing = api
-            /**
-             * refresh_api 추후 생성되면 변경예정
-             */
             .post(API_PATH.LOGIN_REFRESH_API_PATH)
             .then((res) => {
               const token = res.data.accessToken
@@ -68,11 +72,13 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
         original.headers.Authorization = `Bearer ${newToken}`
 
         return api(original)
-      } catch (e) {
+      } catch (error) {
         const store = useAuthStore.getState()
+
         store.clear()
         location.href = ROUTES_PATHS.LOGIN_PAGE
-        return Promise.reject(e)
+
+        return Promise.reject(error)
       }
     }
   )

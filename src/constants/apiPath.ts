@@ -11,11 +11,9 @@ export const API_PATH = {
   GAME_DETAIL: (gameId: number) => `/game/${gameId}`,
   LOGIN_API_PATH: '/user/login',
   SIGNUP_API_PATH: '/user/signup',
-  /**
-   * TODO: 리프레쉬 refresh api 추가 예정
-   */
-  LOGIN_REFRESH_API_PATH: '/',
+  LOGIN_REFRESH_API_PATH: '/user/token/refresh',
   USER_INFO_GET_API_PATH: '/user/me',
   MAIN_PAGE: '/',
   FIND_ID_API_PATH: '/user/find-account',
+  USER_DELETE_API_PATH: '/user/me/delete',
 } as const
