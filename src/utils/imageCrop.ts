@@ -1,5 +1,7 @@
 import { IMAGE_CROP_CONFIG } from '@/constants'
 
+import { IMAGE_CROP_MESSAGES } from './imageCropMessages'
+
 /**
  * 이미지 로딩을 위한 Promise 래퍼
  */
@@ -30,7 +32,7 @@ export async function getCroppedImg(
   const ctx = canvas.getContext('2d')
 
   if (!ctx) {
-    throw new Error('Canvas context를 생성할 수 없습니다.')
+    throw new Error(IMAGE_CROP_MESSAGES.CANVAS_CONTEXT_CREATION_FAILED)
   }
 
   const maxSize = Math.max(image.width, image.height)
@@ -68,7 +70,7 @@ export async function getCroppedImg(
   return new Promise((resolve, reject) => {
     canvas.toBlob((blob) => {
       if (!blob) {
-        reject(new Error('Canvas를 Blob으로 변환할 수 없습니다.'))
+        reject(new Error(IMAGE_CROP_MESSAGES.CANVAS_TO_BLOB_CONVERSION_FAILED))
         return
       }
       resolve(blob)
@@ -113,7 +115,7 @@ export async function resizeImage(
   const ctx = canvas.getContext('2d')
 
   if (!ctx) {
-    throw new Error('Canvas context를 생성할 수 없습니다.')
+    throw new Error(IMAGE_CROP_MESSAGES.CANVAS_CONTEXT_CREATION_FAILED)
   }
 
   let { width, height } = image
@@ -139,7 +141,7 @@ export async function resizeImage(
   return new Promise((resolve, reject) => {
     canvas.toBlob((blob) => {
       if (!blob) {
-        reject(new Error('Canvas를 Blob으로 변환할 수 없습니다.'))
+        reject(new Error(IMAGE_CROP_MESSAGES.CANVAS_TO_BLOB_CONVERSION_FAILED))
         return
       }
       resolve(blob)
