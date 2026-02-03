@@ -36,7 +36,7 @@ export default function SearchUserUi() {
       </Link>
 
       <Link
-        href={isLoggedIn ? ROUTES_PATHS.MYPAGE_PAGE : ROUTES_PATHS.LOGIN_PAGE}
+        href={isLoggedIn ? ROUTES_PATHS.MY_PAGE : ROUTES_PATHS.LOGIN_PAGE}
         className="group relative flex size-10 items-center justify-center overflow-hidden rounded-full border border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300 hover:scale-105 hover:border-white/20 hover:bg-white/10 hover:shadow-[0_4px_12px_rgba(168,85,247,0.2)]"
       >
         <CircleUser className="relative z-10 size-5.5 text-current transition-all duration-300 group-hover:text-sub-cyan" />

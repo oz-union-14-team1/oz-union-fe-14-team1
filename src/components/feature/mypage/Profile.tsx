@@ -1,17 +1,21 @@
+import {
+  GetUserMe,
+  GetUserProfileImage,
+} from '@/types/api-response/user-response'
+
 import { ProfileDesktopUi, ProfileMobileUi } from './index'
 
-type ProfileProps = {
-  imageUrl: string
-}
-
-export default function Profile({ imageUrl }: ProfileProps) {
+export default function Profile({
+  nickname,
+  image_url,
+}: Pick<GetUserMe, 'nickname'> & Pick<GetUserProfileImage, 'image_url'>) {
   return (
     <>
       <div className="block lg:hidden">
-        <ProfileMobileUi imageUrl={imageUrl} />
+        <ProfileMobileUi nickname={nickname} image_url={image_url} />
       </div>
       <div className="hidden lg:block">
-        <ProfileDesktopUi imageUrl={imageUrl} />
+        <ProfileDesktopUi nickname={nickname} image_url={image_url} />
       </div>
     </>
   )
