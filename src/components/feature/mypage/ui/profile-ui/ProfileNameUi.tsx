@@ -2,12 +2,13 @@ import { Pencil } from 'lucide-react'
 import Link from 'next/link'
 
 import { ROUTES_PATHS } from '@/constants'
+import { GetUserMe } from '@/types/api-response/user-response'
 
-function ProfileDesktopNameUi() {
+function ProfileDesktopNameUi({ nickname }: Pick<GetUserMe, 'nickname'>) {
   return (
     <div className="flex items-center gap-3">
       <p className="hidden pt-4 pl-43 text-2xl font-semibold whitespace-nowrap text-text-light md:block">
-        Kim Sowon
+        {nickname}
       </p>
       <Link
         href={ROUTES_PATHS.USER_INFO_UPDATE_PAGE}
@@ -20,11 +21,11 @@ function ProfileDesktopNameUi() {
   )
 }
 
-function ProfileMobileNameUi() {
+function ProfileMobileNameUi({ nickname }: Pick<GetUserMe, 'nickname'>) {
   return (
     <div className="z-7 mt-5 ml-11 flex items-center justify-center gap-3">
       <p className="text-center text-[22px] font-semibold whitespace-nowrap text-text-light lg:hidden">
-        Kim Sowon
+        {nickname}
       </p>
       <Link
         href={ROUTES_PATHS.USER_INFO_UPDATE_PAGE}

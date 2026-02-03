@@ -6,6 +6,7 @@ import { useCallback, useState } from 'react'
 import Cropper from 'react-easy-crop'
 
 import { IMAGE_CROP_CONFIG, PROFILE_TEXT } from '@/constants'
+import { useToast } from '@/hooks'
 import { cn, getCroppedImg } from '@/utils'
 
 type Point = { x: number; y: number }
@@ -28,6 +29,7 @@ export default function ProfileImageCropDialogUi({
   const [zoom, setZoom] = useState<number>(IMAGE_CROP_CONFIG.ZOOM_MIN)
   const [croppedAreaPixels, setCroppedAreaPixels] = useState<Area | null>(null)
   const [isProcessing, setIsProcessing] = useState(false)
+  const { triggerToast } = useToast()
 
   const onCropComplete = useCallback(
     (_croppedArea: Area, croppedAreaPixels: Area) => {
@@ -48,7 +50,7 @@ export default function ProfileImageCropDialogUi({
       onClose()
     } catch (error) {
       console.error('이미지 크롭 실패:', error)
-      alert('이미지 처리 중 오류가 발생했습니다.')
+      triggerToast('error', '이미지 처리 중 오류가 발생했습니다.')
     } finally {
       setIsProcessing(false)
     }
@@ -118,7 +120,7 @@ export default function ProfileImageCropDialogUi({
             <div
               className={cn(
                 'relative mb-6 h-[50vh] w-full overflow-hidden sm:mb-8 sm:h-[55vh] md:h-[60vh]',
-                'max-h-[400px] sm:max-h-[450px] md:max-h-[500px]',
+                'max-h-100 sm:max-h-112.5 md:max-h-125',
                 'border-border-base/30 rounded-lg border bg-black shadow-lg sm:rounded-xl',
                 'ring-1 ring-main-purple/5'
               )}

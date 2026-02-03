@@ -16,7 +16,7 @@ export default function MyPage() {
       <div className="flex flex-col items-center justify-between gap-5 px-5 pt-10 lg:flex-row lg:items-start lg:gap-5">
         <div className="w-full pt-5 lg:w-1/2 lg:pl-5">
           {/* <Profile imageUrl={profile.src} /> */}
-          <Profile imageUrl="" />
+          <Profile nickname="" image_url="" />
         </div>
 
         <div className="w-full max-w-[600px] lg:max-w-3/7">
