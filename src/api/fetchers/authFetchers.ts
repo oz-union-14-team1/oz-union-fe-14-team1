@@ -28,10 +28,9 @@ type RefreshResponse = {
  * refresh 토큰 api
  */
 export const refreshTokenApi = async () => {
-  const res = await api.post<RefreshResponse>(
+  const res = await api.get<RefreshResponse>(
     `${API_BASE_URL}${API_PATH.LOGIN_REFRESH_API_PATH}`
   )
-
   return res.data.accessToken
 }
 
@@ -76,6 +75,11 @@ type DeleteUserRequest = {
   password: string
 }
 
-export const deleteUserApi = (data: DeleteUserRequest) => {
-  return api.post<void>(`${API_BASE_URL}${API_PATH.USER_DELETE_API_PATH}`, data)
+/**
+ * 회원탈퇴 api
+ */
+export const deleteUserApi = async (data: DeleteUserRequest) => {
+  const res = await api.post<void>(API_PATH.USER_DELETE_API_PATH, data)
+
+  return res
 }

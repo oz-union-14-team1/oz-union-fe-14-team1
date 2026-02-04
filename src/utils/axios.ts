@@ -51,12 +51,21 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
         return Promise.reject(error)
       }
 
+      if (
+        error.response?.status === 401 &&
+        original.url === API_PATH.LOGIN_REFRESH_API_PATH
+      ) {
+        useAuthStore.getState().clear()
+        location.href = ROUTES_PATHS.LOGIN_PAGE
+        return Promise.reject(error)
+      }
+
       original._retry = true
 
       try {
         if (!refreshing) {
           refreshing = api
-            .post(API_PATH.LOGIN_REFRESH_API_PATH)
+            .get(API_PATH.LOGIN_REFRESH_API_PATH)
             .then((res) => {
               const token = res.data.accessToken
               useAuthStore.getState().setToken(token)
@@ -69,7 +78,7 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
 
         const newToken = await refreshing
 
-        original.headers.Authorization = `Bearer ${newToken}`
+        original.headers?.set('Authorization', `Bearer ${newToken}`)
 
         return api(original)
       } catch (error) {
