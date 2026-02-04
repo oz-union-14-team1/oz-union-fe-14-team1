@@ -30,8 +30,10 @@ export {
   type NewPasswordSchemaValues,
 } from './feature/auth/schema/newPasswordSchema'
 export {
-  type FindAccountFormValues,
-  findAccountSchema,
+  type FindIdFormValues,
+  findIdSchema,
+  type FindPasswordFormValues,
+  findPasswordSchema,
   phoneOnlySchema,
 } from './feature/auth/schema/findAccountSchema'
 export { default as ResultsContent } from './feature/recomendation/ResultsContent'

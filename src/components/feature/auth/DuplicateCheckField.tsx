@@ -15,6 +15,7 @@ type Props = {
   isChecked?: boolean
   id: string
   isUserUpdateMode?: boolean
+  isFindPasswordMode?: boolean
 }
 
 /**
@@ -36,6 +37,7 @@ export default function DuplicateCheckField({
   isChecked,
   id,
   isUserUpdateMode = false,
+  isFindPasswordMode = false,
 }: Props) {
   return (
     <div className="flex flex-col gap-1">
@@ -51,12 +53,12 @@ export default function DuplicateCheckField({
             placeholder={placeholder}
             onChange={(e) => onChange(e.target.value)}
             className={cn(INPUT_CLASS, {
-              'w-full': isUserUpdateMode,
-              'w-85 md:w-90': !isUserUpdateMode,
+              'w-full': isUserUpdateMode || isFindPasswordMode,
+              'w-85 md:w-90': !isUserUpdateMode && !isFindPasswordMode,
             })}
-            disabled={isUserUpdateMode}
+            disabled={isUserUpdateMode && !isFindPasswordMode}
           />
-          {!isUserUpdateMode && (
+          {!isUserUpdateMode && !isFindPasswordMode && (
             <Button
               type="button"
               variant="purple"
