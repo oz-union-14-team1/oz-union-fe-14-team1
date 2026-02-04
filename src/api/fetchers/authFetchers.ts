@@ -83,3 +83,10 @@ export const deleteUserApi = async (data: DeleteUserRequest) => {
 
   return res
 }
+
+/**
+ * 로그아웃 api
+ */
+export const logoutApi = async (): Promise<void> => {
+  await api.post(`${API_BASE_URL}${API_PATH.USER_LOGOUT_API_PATH}`)
+}
