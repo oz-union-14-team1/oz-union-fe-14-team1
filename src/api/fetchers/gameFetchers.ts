@@ -1,4 +1,4 @@
-import { API_PATH, MSW_BASE_URL } from '@/constants/apiPath'
+import { API_BASE_URL, API_PATH, MSW_BASE_URL } from '@/constants/apiPath'
 import {
   GameDetail,
   GameFilterParams,
@@ -15,7 +15,7 @@ export const getGames = async (params?: GameFilterParams) => {
 
 export const getGameDetail = async (gameId: number) => {
   const res = await camelApi.get<GameDetail>(
-    `${MSW_BASE_URL}${API_PATH.GAME_DETAIL(gameId)}`
+    `${API_BASE_URL}${API_PATH.GAME_DETAIL(gameId)}`
   )
   return res.data
 }

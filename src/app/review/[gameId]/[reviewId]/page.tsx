@@ -1,9 +1,11 @@
 import Image from 'next/image'
 
+import { getGameDetail } from '@/api/fetchers/gameFetchers'
 import { getReviewDetail } from '@/api/fetchers/reveiwFetchers'
 import DefaultProfile from '@/assets/images/profile/profile.jpg'
 import { ReviewCard } from '@/components/feature/review'
 import ReviewDetail from '@/components/feature/review/review-detail/ReviewDetail'
+import { GameDetail } from '@/types/api-response/game-response'
 import { ReviewDetail as ReviewDetailType } from '@/types/api-response/review-response'
 import { getDayDiffFromNow } from '@/utils'
 
@@ -17,9 +19,11 @@ export default async function ReviewDetailPage({
   const { reviewId, gameId } = await params
 
   let reviewDetail: ReviewDetailType
+  let gameDetail: GameDetail
 
   try {
     reviewDetail = await getReviewDetail(reviewId)
+    gameDetail = await getGameDetail(Number(gameId))
   } catch (e) {
     console.error(e)
 
@@ -31,12 +35,13 @@ export default async function ReviewDetailPage({
   }
 
   const { comments } = reviewDetail
+  const { id: gameIdFromAPI } = gameDetail
 
   return (
     <div className="flex flex-col-reverse justify-center gap-4 p-10 sm:flex-row">
       <div className="flex max-w-xl flex-1 flex-col items-center gap-2">
         {/* 리뷰 상세*/}
-        <ReviewDetail reviewDetail={reviewDetail} gameId={gameId} />
+        <ReviewDetail reviewDetail={reviewDetail} gameId={gameIdFromAPI} />
 
         {/* 리뷰 댓글*/}
         {comments.map((comment) => {
@@ -73,13 +78,15 @@ export default async function ReviewDetailPage({
       {/* TODO: api 연결 */}
       <div className="flex w-full flex-col items-center gap-3 sm:w-60">
         <Image
-          src="/images/games/game2.png"
+          src={gameDetail.images[0]}
           alt="게임 이미지"
           width={200}
           height={300}
           className="w-full max-w-2xs rounded-2xl"
         />
-        <span className="text-3xl font-bold">문명</span>
+        <span className="text-center text-3xl font-bold">
+          {gameDetail.name}
+        </span>
       </div>
     </div>
   )
