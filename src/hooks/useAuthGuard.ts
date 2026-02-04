@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useEffect } from 'react'
 
-import { API_PATH } from '@/constants/apiPath'
+import { ROUTES_PATHS } from '@/constants'
 import { useAuthStore } from '@/store/useAuthStore'
 
 /**
@@ -21,7 +21,7 @@ export default function useAuthGuard() {
     }
 
     if (!accessToken) {
-      router.replace(API_PATH.LOGIN_API_PATH)
+      router.replace(ROUTES_PATHS.LOGIN_PAGE)
     }
   }, [accessToken, isInitialized, router])
 }
