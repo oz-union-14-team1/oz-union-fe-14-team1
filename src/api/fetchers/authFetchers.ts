@@ -20,16 +20,18 @@ export const loginApi = async (data: LoginRequest) => {
   return res.data
 }
 
+type RefreshResponse = {
+  accessToken: string
+}
+
 /**
- * TODO: 리프래쉬 api 추가 될 예정
- * LOGIN_REFRESH_API_PATH 값 변경 예정
+ * refresh 토큰 api
  */
-export const refreshApi = async () => {
-  const res = await api.post(
+export const refreshTokenApi = async () => {
+  const res = await api.get<RefreshResponse>(
     `${API_BASE_URL}${API_PATH.LOGIN_REFRESH_API_PATH}`
   )
-
-  return res.data
+  return res.data.accessToken
 }
 
 export type SignupRequest = {
@@ -67,4 +69,17 @@ export const findIdApi = async (data: FindIdRequest) => {
   )
 
   return res.data
+}
+
+type DeleteUserRequest = {
+  password: string
+}
+
+/**
+ * 회원탈퇴 api
+ */
+export const deleteUserApi = async (data: DeleteUserRequest) => {
+  const res = await api.post<void>(API_PATH.USER_DELETE_API_PATH, data)
+
+  return res
 }
