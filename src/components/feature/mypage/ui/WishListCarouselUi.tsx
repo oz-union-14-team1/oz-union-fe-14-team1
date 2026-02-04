@@ -28,7 +28,7 @@ export default function WishListCarouselUi({
         <div className="flex -space-x-8 md:gap-6 md:space-x-0 md:pl-4">
           {wishlistGames.map((game, index) => (
             <div
-              key={game.gameId}
+              key={game.id}
               className="animate-in fade-in slide-in-from-bottom-4 flex-[0_0_auto] scale-[0.8] md:scale-100"
               style={{
                 animationDelay: `${index * 100}ms`,
@@ -36,9 +36,9 @@ export default function WishListCarouselUi({
               }}
             >
               <GameCard
-                id={game.gameId}
-                name={game.gameName}
-                imgUrl={game.imgUrl}
+                id={game.id}
+                name={game.name}
+                imgUrl={game.image || ''}
               />
             </div>
           ))}

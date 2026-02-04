@@ -18,16 +18,15 @@ function SearchResults() {
 
   const games = MOCK_GAMES.filter((game: Game) => {
     const matchesQuery =
-      !query || game.gameName.toLowerCase().includes(query.toLowerCase())
+      !query || String(game.id).toLowerCase().includes(query.toLowerCase())
 
     const matchesFilters =
       filterList.length === 0 ||
       filterList.some((filter) => {
         const filterId = Number(filter)
 
-        return (
-          game.genreId?.includes(filterId) || game.tagId?.includes(filterId)
-        )
+        return String(game.id).includes(String(filterId))
+        // || game.tagId?.includes(filterId)
       })
 
     return matchesQuery && matchesFilters
@@ -68,12 +67,12 @@ function SearchResults() {
       {games.length > 0 ? (
         <div className="flex flex-wrap justify-start gap-x-2 gap-y-8">
           {games.map((game) => (
-            <div key={game.gameId} className="w-[calc(50%-4px)] sm:w-auto">
+            <div key={game.id} className="w-[calc(50%-4px)] sm:w-auto">
               <div className="-mb-22.5 origin-top-left scale-[0.78] transition-transform duration-300 sm:mb-0 sm:scale-100">
                 <GameCard
-                  id={game.gameId}
-                  name={game.gameName}
-                  imgUrl={game.imgUrl}
+                  id={game.id}
+                  name={game.name}
+                  imgUrl={game.images[0] || ''}
                 />
               </div>
             </div>
