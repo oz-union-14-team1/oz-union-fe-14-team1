@@ -18,7 +18,7 @@ export default function WishList() {
 
   // 위시리스트에 등록된 게임만 필터링
   const wishlistGames = MOCK_GAMES.filter((game) =>
-    wishlistedGameIds.includes(game.gameId)
+    wishlistedGameIds.includes(game.id)
   )
 
   return (

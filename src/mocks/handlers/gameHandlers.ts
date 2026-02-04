@@ -9,7 +9,7 @@ export const gameHandlers = [
     const genreId = url.searchParams.get('genre_id')
     const tagId = url.searchParams.get('tag_id')
     const year = url.searchParams.get('year')
-    const minScore = url.searchParams.get('min_score')
+    // const minScore = url.searchParams.get('min_score')
     const page = Number(url.searchParams.get('page') ?? 1)
 
     /**
@@ -20,32 +20,32 @@ export const gameHandlers = [
     let filteredGames = [...MOCK_GAMES]
 
     if (genreId) {
-      const genreIds = genreId.split(',').map(Number)
+      const genreIds = genreId.split(',').map(String)
       filteredGames = filteredGames.filter((game) =>
-        game.genreId?.some((id) => genreIds.includes(id))
+        game.genres?.some((id) => genreIds.includes(id))
       )
     }
 
     if (tagId) {
-      const tagIds = tagId.split(',').map(Number)
+      const tagIds = tagId.split(',').map(String)
       filteredGames = filteredGames.filter((game) =>
-        game.tagId?.some((id) => tagIds.includes(id))
+        game.genres?.some((id) => tagIds.includes(id))
       )
     }
 
     if (year) {
       const years = year.split(',').map(Number)
       filteredGames = filteredGames.filter((game) => {
-        const gameYear = new Date(game.release!).getFullYear()
+        const gameYear = new Date(game.releasedAt!).getFullYear()
         return years.includes(gameYear)
       })
     }
 
-    if (minScore) {
-      filteredGames = filteredGames.filter(
-        (game) => (game.score ?? 0) >= Number(minScore)
-      )
-    }
+    // if (minScore) {
+    //   filteredGames = filteredGames.filter(
+    //     (game) => (game. ?? 0) >= Number(minScore)
+    //   )
+    // }
 
     return HttpResponse.json({
       page,

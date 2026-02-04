@@ -11,11 +11,10 @@ export const GameReview = ({ gameDetail }: GameReviewProps) => {
   const valueStyle = 'text-lg text-white font-semibold'
 
   const infoItems = [
-    { label: '플랫폼', value: gameDetail.platformName },
+    { label: '플랫폼', value: gameDetail.platforms[0] },
     { label: '개발사', value: gameDetail.developer },
     { label: '퍼블리셔', value: gameDetail.publisher },
-    { label: '플레이타임', value: gameDetail.playTime },
-    { label: '출시일', value: gameDetail.release },
+    { label: '출시일', value: gameDetail.releasedAt.toDateString() },
   ]
 
   return (
