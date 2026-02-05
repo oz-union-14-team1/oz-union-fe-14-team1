@@ -9,6 +9,7 @@ import { ImageCard } from '@/components/feature/review/ImageCard'
 import { Star } from '@/components/feature/review/Star'
 import { Textarea } from '@/components/feature/review/Textarea'
 import { GameReview } from '@/components/layout/review/GameReview'
+import { ReviewDetail } from '@/types/api-response/review-response'
 
 const MOCK_DETAIL_DATA = {
   id: 1,
@@ -24,13 +25,17 @@ const MOCK_DETAIL_DATA = {
   images: ['https://...'],
 }
 
-const MOCK_REVIEW_DATA = {
+const MOCK_REVIEW_DATA: ReviewDetail = {
   id: 1,
-  game_name: 'Grand Theft Auto V',
   content: '리뷰 테스트',
   rating: 5,
-  like_count: 0,
-  created_at: '2026-02-02T17:01:05.010484+09:00',
+  likeCount: 0,
+  author: {
+    id: 2000,
+    nickname: 'anonyumouise',
+    profileImgUrl: '',
+  },
+  createdAt: new Date('2026-02-02T17:01:05.010484+09:00'),
   comments: [
     {
       id: 101,
@@ -38,9 +43,9 @@ const MOCK_REVIEW_DATA = {
       author: {
         id: 4,
         nickname: '댓글러1',
-        profile_image_url: '',
+        profileImgUrl: '',
       },
-      created_at: '2026-02-02T17:01:05.010484+09:00',
+      createdAt: new Date('2026-02-02T17:01:05.010484+09:00'),
     },
   ],
 }
@@ -98,7 +103,7 @@ export default function ReviewPage() {
                     {comment.author.nickname}
                   </span>
                   <span className="text-sm text-gray-500">
-                    {new Date(comment.created_at).toLocaleDateString()}
+                    {new Date(comment.createdAt).toLocaleDateString()}
                   </span>
                 </div>
                 <div className="flex">

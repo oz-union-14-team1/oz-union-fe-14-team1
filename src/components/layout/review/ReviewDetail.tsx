@@ -16,8 +16,8 @@ type ReviewDetailProps = {
 
 export default function ReviewDetail({ reviewDetail }: ReviewDetailProps) {
   const {
-    created_at: createdAt,
-    author: { nickname, profile_image_url: profileImageUrl },
+    createdAt,
+    author: { nickname, profileImgUrl },
     content,
     id,
   } = reviewDetail
@@ -26,7 +26,7 @@ export default function ReviewDetail({ reviewDetail }: ReviewDetailProps) {
     <ReviewCard className="flex w-full flex-col items-start gap-4 p-4">
       <div className="flex flex-row items-center justify-start gap-4">
         <Image
-          src={profileImageUrl || DefaultProfile}
+          src={profileImgUrl || DefaultProfile}
           alt={`${nickname}의 프로필 이미지`}
           width={50}
           height={50}

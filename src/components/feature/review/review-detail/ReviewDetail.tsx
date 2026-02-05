@@ -23,24 +23,30 @@ export default function ReviewDetail({
   gameId,
 }: ReviewDetailProps) {
   const [isEditing, setIsEditing] = useState(false)
+  const [isImageError, setIsImageError] = useState(false)
 
   const {
-    created_at: createdAt,
-    author: { nickname, profile_image_url: profileImageUrl },
+    createdAt,
+    author: { nickname, profileImgUrl },
     content,
     id: reviewId,
     rating,
   } = reviewDetail
 
+  console.log(reviewDetail)
+
   return (
     <ReviewCard className="flex w-full flex-col items-start gap-4 p-4">
       <div className="flex w-full flex-row items-center justify-start gap-4">
         <Image
-          src={profileImageUrl || DefaultProfile}
+          src={!profileImgUrl || isImageError ? DefaultProfile : profileImgUrl}
           alt={`${nickname}의 프로필 이미지`}
           width={50}
           height={50}
           className="rounded-full"
+          onError={() => {
+            setIsImageError(true)
+          }}
         />
 
         <div className="flex flex-1 flex-col items-start justify-center gap-2 text-neutral-500">

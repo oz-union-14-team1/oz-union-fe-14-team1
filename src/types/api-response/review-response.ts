@@ -1,7 +1,7 @@
 export type ReviewAuthor = {
   id: number
   nickname: string
-  profile_image_url: string | null
+  profileImgUrl: string | null
 }
 
 export type Review = {
@@ -9,8 +9,8 @@ export type Review = {
   author: ReviewAuthor
   content: string
   rating: number
-  like_count: number
-  created_at: Date
+  likeCount: number
+  createdAt: Date
 }
 
 /** GET /api/v1/community/{game_id}/reviews 응답 */
@@ -24,14 +24,14 @@ export type ReviewList = {
 export type ReviewCommentAuthor = {
   id: number
   nickname: string
-  profile_image_url: string | null
+  profileImgUrl: string | null
 }
 
 export type ReveiwComment = {
   id: number
   author: ReviewCommentAuthor
   content: string
-  created_at: Date
+  createdAt: Date
 }
 
 /** GET /api/vi/community/reviews/{review_id}/comments 응답 */

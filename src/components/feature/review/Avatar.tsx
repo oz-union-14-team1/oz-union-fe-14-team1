@@ -17,10 +17,10 @@ export default function Avatar({ avatar, className }: AvatarProps) {
           'inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-gray-100'
         )}
       >
-        {avatar?.profile_image_url ? (
+        {avatar?.profileImgUrl ? (
           <AvatarPrimitive.Image
             className="h-full w-full object-cover"
-            src={avatar.profile_image_url}
+            src={avatar.profileImgUrl}
             alt={avatar.nickname}
           />
         ) : (
