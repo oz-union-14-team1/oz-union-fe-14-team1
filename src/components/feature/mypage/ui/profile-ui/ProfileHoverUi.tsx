@@ -18,7 +18,7 @@ function EditProfileImageUi() {
   const { triggerToast } = useToast()
   const queryClient = useQueryClient()
 
-  const { mutate: uploadImage, isPending } = useMutation({
+  const { mutate: uploadImage } = useMutation({
     mutationFn: postProfileApi,
     onSuccess: () => {
       triggerToast('success', IMAGE_ERROR_MESSAGES.UPLOAD_SUCCESS)

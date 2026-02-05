@@ -4,7 +4,6 @@ import axios, {
   InternalAxiosRequestConfig,
 } from 'axios'
 
-import { ROUTES_PATHS } from '@/constants'
 import { API_PATH } from '@/constants/apiPath'
 import { useAuthStore } from '@/store/useAuthStore'
 import { convertToCamelCase } from '@/utils/convertToCamelCase'
