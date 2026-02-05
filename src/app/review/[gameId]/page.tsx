@@ -96,7 +96,10 @@ export default function ReviewPage() {
             className="h-50 w-200 rounded-xl border p-8"
           >
             <div className="flex items-center gap-1">
-              <Avatar avatar={comment.author} className="h-12 w-12" />
+              <Avatar
+                avatar={comment.author}
+                className="mt-1 h-12 w-12 self-start"
+              />
               <div className="flex flex-col gap-1">
                 <div className="flex items-center gap-2">
                   <span className="text-lg font-bold text-white">
@@ -116,6 +119,9 @@ export default function ReviewPage() {
         ))}
       </div>
       <aside className="w-80 shrink-0">
+        <div className="mt-7 flex h-43.75 w-90 flex-col items-center justify-center rounded-card bg-gradient-main">
+          <Star size={24} />
+        </div>
         <GameReview gameDetail={game} />
       </aside>
     </div>

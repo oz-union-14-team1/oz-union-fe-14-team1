@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { Star } from './Star'
-
 import type { GameDetail } from '@/types/api-response/game-response'
 
 type GameReviewProps = {
@@ -13,10 +11,7 @@ export const GameReview = ({ gameDetail: data }: GameReviewProps) => {
   const valueStyle = 'text-lg text-white font-semibold'
 
   return (
-    <div className="h-150 w-full rounded-xl border border-gray-700 bg-surface-elevated p-6 shadow-lg">
-      <div className="flex h-43.75 w-90 flex-col items-center justify-center rounded-card bg-gradient-main py-10 text-white shadow-active">
-        <Star size={24} />
-      </div>
+    <div className="my-5 h-150 w-90 rounded-xl border border-gray-700 bg-surface-elevated p-6 shadow-lg">
       <h2 className="mb-4 text-xl font-bold text-white">게임 정보</h2>
 
       <div className="grid-cols grid gap-y-4 border-t border-gray-800 pt-4">
