@@ -22,7 +22,7 @@ export const Textarea = ({ className, ...props }: TextareaProps) => {
   }
 
   return (
-    <div className="h-100 w-200 overflow-hidden rounded-2xl border border-gray-800 bg-surface-elevated px-8 py-10 shadow-2xl">
+    <div className="h-100 w-200 overflow-hidden rounded-2xl bg-surface-elevated px-8 py-10">
       <div className="flex items-end justify-between pb-5">
         <h2 className="pb-5 text-2xl font-bold text-white">리뷰 작성하기</h2>
         <div className="flex flex-col items-end gap-1">
@@ -37,10 +37,7 @@ export const Textarea = ({ className, ...props }: TextareaProps) => {
           value={text}
           placeholder="이 게임에 대한 당신의 생각을 공유해주세요"
           onChange={(e) => setText(e.target.value)}
-          className={cn(
-            'h-24 w-full resize-none bg-transparent text-base text-white outline-none',
-            className
-          )}
+          className={cn('h-24 w-full', className)}
         />
       </div>
 

@@ -1,30 +1,22 @@
 import Image from 'next/image'
-import { ComponentProps } from 'react'
 
-type ImageCardHeaderProps = Omit<
-  ComponentProps<typeof Image>,
-  'src' | 'alt'
-> & {
-  imgUrl: string
-  name: string
+import { GameDetail } from '@/types/api-response/game-response'
+
+type ReviewPageProps = {
+  game: Pick<GameDetail, 'id' | 'name' | 'images'>
 }
 
-export default function ImageCardHeader({
-  name,
-  id,
-  imgUrl,
-  ...props
-}: ImageCardHeaderProps) {
+export default function ImageCardHeader({ game, ...props }: ReviewPageProps) {
   return (
     <div className="flex flex-col gap-2">
-      <h3 className="text-lg font-bold text-white">{name}</h3>
-      <div className="relative h-121 w-200 overflow-hidden rounded-[20px] border-[3px] shadow-2xl">
+      <h3 className="text-lg font-bold text-white">{game.name}</h3>
+      <div className="rounded-5 relative h-121 w-200 overflow-hidden border-[3px] shadow-2xl">
         <Image
-          src={imgUrl}
-          alt={name}
-          id={id}
+          src={game.images[0]}
+          alt={game.name}
           fill
           className="object-cover"
+          unoptimized
           {...props}
         />
       </div>
