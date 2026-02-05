@@ -17,4 +17,6 @@ export const API_PATH = {
   FIND_ID_API_PATH: '/user/find-account',
   USER_DELETE_API_PATH: '/user/me/delete',
   USER_LOGOUT_API_PATH: '/user/logout',
+  GET_PROFILE_IMAGE_API_PATH: '/user/me/image',
+  POST_PROFILE_IMAGE_API_PATH: '/user/me/image',
 } as const
