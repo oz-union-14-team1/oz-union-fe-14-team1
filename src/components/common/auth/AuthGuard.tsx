@@ -8,11 +8,15 @@ import { useAuthStore } from '@/store/useAuthStore'
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter()
-
-  const { accessToken, isInitialized } = useAuthStore()
+  const accessToken = useAuthStore((s) => s.accessToken)
+  const isInitialized = useAuthStore((s) => s.isInitialized)
 
   useEffect(() => {
-    if (isInitialized && !accessToken) {
+    if (!isInitialized) {
+      return
+    }
+
+    if (!accessToken) {
       router.replace(ROUTES_PATHS.LOGIN_PAGE)
     }
   }, [isInitialized, accessToken, router])
