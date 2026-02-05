@@ -22,17 +22,22 @@ export default function AuthProvider({
       try {
         const accessToken = await refreshTokenApi()
 
-        if (mounted) {
-          setToken(accessToken)
+        if (!mounted) {
+          return
         }
+        setToken(accessToken)
       } catch {
-        if (mounted) {
-          clear()
+        if (!mounted) {
+          return
         }
+
+        clear()
       } finally {
-        if (mounted) {
-          setInitialized(true)
+        if (!mounted) {
+          return
         }
+
+        setInitialized(true)
       }
     }
 

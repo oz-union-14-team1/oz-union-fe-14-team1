@@ -1,4 +1,8 @@
-import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios'
+import axios, {
+  AxiosError,
+  AxiosInstance,
+  InternalAxiosRequestConfig,
+} from 'axios'
 
 import { ROUTES_PATHS } from '@/constants'
 import { API_PATH } from '@/constants/apiPath'
@@ -8,6 +12,7 @@ import { convertToCamelCase } from '@/utils/convertToCamelCase'
 type CustomAxiosRequestConfig = InternalAxiosRequestConfig & {
   _retry?: boolean
 }
+
 /**
  * 공통 response interceptor
  */
@@ -40,7 +45,7 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
      * 응답 인터셉터
      * - 401 에러시
      */
-    async (error) => {
+    async (error: AxiosError) => {
       const original = error.config as CustomAxiosRequestConfig
 
       if (error.response?.status !== 401) {
@@ -51,12 +56,9 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
         return Promise.reject(error)
       }
 
-      if (
-        error.response?.status === 401 &&
-        original.url === API_PATH.LOGIN_REFRESH_API_PATH
-      ) {
+      if (original.url === API_PATH.LOGIN_REFRESH_API_PATH) {
         useAuthStore.getState().clear()
-        location.href = ROUTES_PATHS.LOGIN_PAGE
+        // location.href = ROUTES_PATHS.LOGIN_PAGE
         return Promise.reject(error)
       }
 
@@ -67,9 +69,9 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
           refreshing = api
             .get(API_PATH.LOGIN_REFRESH_API_PATH)
             .then((res) => {
-              const token = res.data.accessToken
-              useAuthStore.getState().setToken(token)
-              return token
+              const newToken = res.data.accessToken
+              useAuthStore.getState().setToken(newToken)
+              return newToken
             })
             .finally(() => {
               refreshing = null
@@ -85,7 +87,7 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
         const store = useAuthStore.getState()
 
         store.clear()
-        location.href = ROUTES_PATHS.LOGIN_PAGE
+        // location.href = ROUTES_PATHS.LOGIN_PAGE
 
         return Promise.reject(error)
       }

@@ -15,7 +15,6 @@ import {
 } from '@/components'
 import { ROUTES_PATHS, SIGNUP_FIELDS } from '@/constants'
 import { usePhoneVerificationTimer, useToast } from '@/hooks'
-import useGuestGuard from '@/hooks/useGuestGuard'
 import { cn } from '@/utils'
 
 export const INPUT_CLASS =
@@ -25,7 +24,6 @@ export const INPUT_CLASS =
  * 회원가입 폼
  */
 export default function SignupForm() {
-  useGuestGuard()
   const router = useRouter()
   const [isIdChecked, setIsIdChecked] = useState(false)
   const [isNickNameChecked, setIsNickNameChecked] = useState(false)
