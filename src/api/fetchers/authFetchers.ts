@@ -79,7 +79,17 @@ type DeleteUserRequest = {
  * 회원탈퇴 api
  */
 export const deleteUserApi = async (data: DeleteUserRequest) => {
-  const res = await api.post<void>(API_PATH.USER_DELETE_API_PATH, data)
+  const res = await api.post<void>(
+    `${API_BASE_URL}${API_PATH.USER_DELETE_API_PATH}`,
+    data
+  )
 
   return res
+}
+
+/**
+ * 로그아웃 api
+ */
+export const logoutApi = async (): Promise<void> => {
+  await api.post(`${API_BASE_URL}${API_PATH.USER_LOGOUT_API_PATH}`)
 }

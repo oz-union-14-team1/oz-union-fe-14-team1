@@ -3,26 +3,42 @@
 import { CircleUser, LogOut, Search } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
+import { logoutApi } from '@/api/fetchers/authFetchers'
 import { ROUTES_PATHS } from '@/constants'
+import { useToast } from '@/hooks'
+import { useAuthStore } from '@/store/useAuthStore'
 
 export default function SearchUserUi() {
   const router = useRouter()
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const { triggerToast } = useToast()
 
-  useEffect(() => {
-    const token = localStorage.getItem('accessToken')
+  const { accessToken, clear } = useAuthStore()
+  const isLoggedIn = !!accessToken
 
-    setTimeout(() => {
-      setIsLoggedIn(true) // TODO: 배포 전에 setIsLoggedIn(!!token)으로 변경
-    }, 0)
-  }, [])
+  const [isLoading, setIsLoading] = useState(false)
 
-  const handleLogout = () => {
-    localStorage.removeItem('accessToken')
-    setIsLoggedIn(false)
-    router.push(ROUTES_PATHS.MAIN_PAGE)
+  const handleLogout = async () => {
+    if (isLoading) {
+      return
+    }
+
+    try {
+      setIsLoading(true)
+
+      await logoutApi()
+    } catch {
+      console.warn('logout fail')
+    } finally {
+      clear()
+
+      triggerToast('success', '로그아웃 되었습니다.')
+
+      router.replace(ROUTES_PATHS.MAIN_PAGE)
+
+      setIsLoading(false)
+    }
   }
 
   return (
