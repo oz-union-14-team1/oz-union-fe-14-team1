@@ -1,6 +1,9 @@
 'use client'
 
-import useGuestGuard from '@/hooks/useGuestGuard'
+import { useRouter } from 'next/navigation'
+import { useEffect } from 'react'
+
+import { ROUTES_PATHS } from '@/constants'
 import { useAuthStore } from '@/store/useAuthStore'
 
 export default function GuestGuard({
@@ -8,15 +11,16 @@ export default function GuestGuard({
 }: {
   children: React.ReactNode
 }) {
+  const router = useRouter()
   const { accessToken, isInitialized } = useAuthStore()
 
-  useGuestGuard()
+  useEffect(() => {
+    if (isInitialized && accessToken) {
+      router.replace(ROUTES_PATHS.MAIN_PAGE)
+    }
+  }, [isInitialized, accessToken, router])
 
   if (!isInitialized) {
-    return null
-  }
-
-  if (accessToken) {
     return null
   }
 
