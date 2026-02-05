@@ -1,8 +1,10 @@
 'use client'
 
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Pencil, X } from 'lucide-react'
 import { ChangeEvent, useRef, useState } from 'react'
 
+import { postProfileApi } from '@/api/fetchers/profileFetchers'
 import { IMAGE_ERROR_MESSAGES, IMAGE_UPLOAD_CONFIG } from '@/constants'
 import useToast from '@/hooks/useToast'
 import { cn, validateFileSize, validateFileType } from '@/utils'
@@ -14,6 +16,21 @@ function EditProfileImageUi() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
   const { triggerToast } = useToast()
+  const queryClient = useQueryClient()
+
+  const { mutate: uploadImage, isPending } = useMutation({
+    mutationFn: postProfileApi,
+    onSuccess: () => {
+      triggerToast('success', IMAGE_ERROR_MESSAGES.UPLOAD_SUCCESS)
+      // 프로필 이미지 캐시 무효화하여 새 이미지 불러오기
+      queryClient.invalidateQueries({ queryKey: ['profileImage'] })
+    },
+    onError: (error) => {
+      console.error('이미지 업로드 실패:', error)
+      triggerToast('error', IMAGE_ERROR_MESSAGES.UPLOAD_FAILED)
+    },
+  })
+
   const handleClick = () => {
     fileInputRef.current?.click()
   }
@@ -53,23 +70,11 @@ function EditProfileImageUi() {
   }
 
   const handleSave = async (croppedImageBlob: Blob) => {
-    try {
-      // TODO: 서버에 이미지 업로드
+    // FormData 생성하여 이미지 업로드
+    const formData = new FormData()
+    formData.append('profile_image', croppedImageBlob, 'profile.jpg')
 
-      // 임시: 로컬 URL 생성 (개발용)
-      const croppedImageUrl = URL.createObjectURL(croppedImageBlob)
-      console.log('크롭된 이미지 URL:', croppedImageUrl)
-
-      // TODO: API 호출하여 프로필 이미지 업데이트
-      // const formData = new FormData()
-      // formData.append('profileImage', croppedImageBlob, 'profile.jpg')
-      // await api.post('/profile/image', formData)
-
-      triggerToast('success', IMAGE_ERROR_MESSAGES.UPLOAD_SUCCESS)
-    } catch (error) {
-      console.error('이미지 업로드 실패:', error)
-      triggerToast('error', IMAGE_ERROR_MESSAGES.UPLOAD_FAILED)
-    }
+    uploadImage(formData)
   }
 
   return (

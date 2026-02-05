@@ -1,12 +1,16 @@
-// import profile from '@/assets/images/profile/profile.jpg'
+'use client'
+
 import {
   DashBoard,
   MyReviewList,
   Profile,
   WishList,
 } from '@/components/feature/mypage'
+import { useProfileImage } from '@/hooks/useProfileImage'
 
 export default function MyPage() {
+  const profileImageUrl = useProfileImage()
+
   // TODO: 실제 API에서 데이터를 가져와서 사용
   const WISHLIST_COUNT = 15
   const REVIEW_COUNT = 8
@@ -15,8 +19,7 @@ export default function MyPage() {
     <section className="container mx-auto mb-50 max-w-345">
       <div className="flex flex-col items-center justify-between gap-5 px-5 pt-10 lg:flex-row lg:items-start lg:gap-5">
         <div className="w-full pt-5 lg:w-1/2 lg:pl-5">
-          {/* <Profile imageUrl={profile.src} /> */}
-          <Profile nickname="" image_url="" />
+          <Profile nickname="" image_url={profileImageUrl} />
         </div>
 
         <div className="w-full max-w-[600px] lg:max-w-3/7">
