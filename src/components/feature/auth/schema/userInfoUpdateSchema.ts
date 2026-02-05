@@ -17,6 +17,9 @@ export const userInfoUpdateSchema = z
     passwordConfirm: z.string().optional(),
     name: z.string().min(1, '이름을 입력해 주세요.'),
     birthday: birthdayRule,
+    gender: z.enum(['남성', '여성'], {
+      message: '성별을 선택해 주세요.',
+    }),
     phone: phoneRule,
     phoneCode: z
       .string()

@@ -12,7 +12,7 @@ export const API_PATH = {
   LOGIN_API_PATH: '/user/login',
   SIGNUP_API_PATH: '/user/signup',
   LOGIN_REFRESH_API_PATH: '/user/token/refresh',
-  USER_INFO_GET_API_PATH: '/user/me',
+  USER_ME_API_PATH: '/user/me',
   MAIN_PAGE: '/',
   FIND_ID_API_PATH: '/user/find-account',
   USER_DELETE_API_PATH: '/user/me/delete',

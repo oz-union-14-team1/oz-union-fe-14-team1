@@ -19,7 +19,9 @@ export default function UserInfoUpdatePage() {
           className="mb-4 w-30 md:w-40"
         />
       </div>
-      <h1 className="mb-2 text-[20px] font-bold md:text-[32px]">회원 수정</h1>
+      <h1 className="mb-2 text-[20px] font-bold md:text-[32px]">
+        내 정보 수정
+      </h1>
       <div className="mb-10">
         <UserInfoUpdateClient />
       </div>

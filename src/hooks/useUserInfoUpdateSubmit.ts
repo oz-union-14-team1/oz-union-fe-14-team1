@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation'
 
+import { useUpdateUserInfo } from '@/api/queries/useUpdateUserInfo'
 import { userInfoUpdateSchema, UserInfoUpdateSchemaValues } from '@/components'
 import { ROUTES_PATHS } from '@/constants'
 import { useToast } from '@/hooks'
@@ -14,9 +15,11 @@ type Params = {
 /**
  * 회원정보 업데이트 submit 훅
  */
-export default function useUserInfoUpdate() {
+export default function useUserInfoUpdateSubmit() {
   const router = useRouter()
   const { triggerToast } = useToast()
+
+  const { mutateAsync, isPending } = useUpdateUserInfo()
 
   const normalize = (value?: string) => (value === '' ? undefined : value)
 
@@ -65,20 +68,28 @@ export default function useUserInfoUpdate() {
       return
     }
 
-    try {
-      /**
-       * TODO: api 연결 예정
-       * updateUserInfoAPI(cleanedForm)
-       */
+    const payload = {
+      nickname: form.nickName,
+      name: form.name,
+      phoneNumber: form.phone,
+      birthday: form.birthday,
+      gender: form.gender === '여성' ? 'F' : 'M',
+      password: form.password || undefined,
+    }
 
-      triggerToast('success', '회원정보가 수정되었습니다.')
+    try {
+      await mutateAsync(payload)
+
       router.push(ROUTES_PATHS.MY_PAGE)
     } catch {
-      triggerToast('error', '회원정보 수정에 실패했습니다.')
+      /**
+       * mutation에서 처리
+       * */
     }
   }
 
   return {
     submit,
+    isPending,
   }
 }
