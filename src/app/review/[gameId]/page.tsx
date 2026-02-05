@@ -77,9 +77,9 @@ export default function ReviewPage() {
         <Button
           variant="main"
           onClick={handleButtonClick}
-          className="w-fit rounded-lg bg-blue-600 px-4 py-2 text-white"
+          className="w-fit rounded-xl bg-gray-700 px-4 py-2 text-white"
         >
-          {isEditing ? '닫기' : '댓글 작성하기'}
+          {isEditing ? '닫기' : '댓글 추가'}
         </Button>
         {isEditing && (
           <Textarea
