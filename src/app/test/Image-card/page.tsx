@@ -1,10 +1,12 @@
 import { ImageCard } from '@/components/feature/review/ImageCard'
+import { GameDetail } from '@/types/api-response/game-response'
 
-const response = {
-  imgUrl: 'https://my-bucket.s3.amazonaws.com/...',
-  key: 'uploads/images/...',
+const GameData: Pick<GameDetail, 'images' | 'id' | 'name'> = {
+  images: ['imageUrl'],
+  id: 1,
+  name: '젤다',
 }
 
 export default function Page() {
-  return <ImageCard imgUrl={response.imgUrl} name="젤다" id={response.key} />
+  return <ImageCard game={GameData} />
 }

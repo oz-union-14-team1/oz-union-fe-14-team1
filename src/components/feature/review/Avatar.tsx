@@ -1,58 +1,36 @@
 import * as AvatarPrimitive from '@radix-ui/react-avatar'
 import * as React from 'react'
 
+import { ReviewAuthor } from '@/types/api-response/review-response'
 import { cn } from '@/utils'
 
-type AvatarProps = React.ComponentPropsWithoutRef<
-  typeof AvatarPrimitive.Root
-> & {
-  src?: string
-  alt?: string
-  name?: string
-  date?: string
-  ref?: React.Ref<HTMLDivElement>
+type AvatarProps = {
+  avatar?: ReviewAuthor
+  className?: string
 }
 
-export default function Avatar({
-  className,
-  src,
-  alt,
-  ref,
-  date,
-  name,
-  ...props
-}: AvatarProps) {
+export default function Avatar({ avatar, className }: AvatarProps) {
   return (
-    <div ref={ref} className="flex items-center gap-3">
+    <div className={cn('flex items-center gap-3', className)}>
       <AvatarPrimitive.Root
         className={cn(
-          'inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-gray-100',
-          className
+          'inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-gray-100'
         )}
-        {...props}
       >
-        {src ? (
+        {avatar?.profile_image_url ? (
           <AvatarPrimitive.Image
             className="h-full w-full object-cover"
-            src={src}
-            alt={alt}
+            src={avatar.profile_image_url}
+            alt={avatar.nickname}
           />
         ) : (
           <AvatarPrimitive.Fallback className="flex h-full w-full items-center justify-center bg-gray-300 text-gray-600">
             <span className="text-xl font-medium">
-              {alt ? alt.charAt(0).toUpperCase() : '?'}
+              {avatar?.nickname.slice(0, 1)}
             </span>
           </AvatarPrimitive.Fallback>
         )}
       </AvatarPrimitive.Root>
-      <div className="flex flex-col">
-        <span className="text-sm font-bold text-input-placeholer-color">
-          {name}
-        </span>
-        <span className="text-sm text-white">{date}</span>
-      </div>
     </div>
   )
 }
-
-Avatar.displayName = 'Avatar'
