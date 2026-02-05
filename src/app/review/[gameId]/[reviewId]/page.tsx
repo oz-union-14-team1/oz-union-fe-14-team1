@@ -48,8 +48,8 @@ export default async function ReviewDetailPage({
           const {
             content,
             id,
-            author: { profile_image_url: profileImageUrl, nickname },
-            created_at: createdAt,
+            author: { profileImgUrl, nickname },
+            createdAt,
           } = comment
 
           return (
@@ -58,7 +58,7 @@ export default async function ReviewDetailPage({
               key={id}
             >
               <Image
-                src={profileImageUrl || DefaultProfile}
+                src={profileImgUrl || DefaultProfile}
                 alt={`${nickname}의 프로필 이미지`}
                 width={40}
                 height={40}
