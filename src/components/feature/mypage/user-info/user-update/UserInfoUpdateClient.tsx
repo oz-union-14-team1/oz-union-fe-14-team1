@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
 
+import { checkNickNameApi } from '@/api/fetchers/authFetchers'
 import { UserInfo } from '@/api/fetchers/userInfoFetchers'
 import { useGetUserMe } from '@/api/queries/useGetUserMe'
 import {
@@ -116,14 +117,27 @@ export default function UserInfoUpdateClient() {
     })
   }
 
-  const handleNickNameCheckClick = () => {
-    /**
-     * TODO: 닉네임 중복체크 이벤트 API 연동
-     * toast 진행 예정
-     */
-    setIsNickNameChecked(true)
+  const handleNickNameCheckClick = async () => {
+    if (!form.nickName) {
+      triggerToast('error', '닉네임을 입력해 주세요.')
+    }
 
-    alert('닉네임 중복체크')
+    try {
+      const res = await checkNickNameApi({
+        nickname: form.nickName,
+      })
+
+      if (res.available) {
+        triggerToast('success', res.message)
+        setIsNickNameChecked(true)
+      } else {
+        triggerToast('error', res.message)
+        setIsNickNameChecked(false)
+      }
+    } catch {
+      triggerToast('error', '닉네임 중복 확인에 실패했습니다.')
+      setIsNickNameChecked(false)
+    }
   }
 
   if (isLoading || !form || !baseUserInfo) {

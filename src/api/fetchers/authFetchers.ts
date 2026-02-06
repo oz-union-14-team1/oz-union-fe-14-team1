@@ -93,3 +93,48 @@ export const deleteUserApi = async (data: DeleteUserRequest) => {
 export const logoutApi = async (): Promise<void> => {
   await api.post(`${API_BASE_URL}${API_PATH.USER_LOGOUT_API_PATH}`)
 }
+
+type CheckEmailRequest = {
+  email: string
+}
+
+type CheckEmailResponse = {
+  available: boolean
+  message: string
+}
+
+/**
+ * 이메일 중복 확인 API
+ */
+export const checkEmailApi = async (
+  data: CheckEmailRequest
+): Promise<CheckEmailResponse> => {
+  const res = await api.post<CheckEmailResponse>(
+    `${API_BASE_URL}${API_PATH.CHECK_EMAIL_API_PATH}`,
+    data
+  )
+  return res.data
+}
+
+type CheckNickNameRequest = {
+  nickname: string
+}
+
+type CheckNickNameResponse = {
+  available: boolean
+  message: string
+}
+
+/**
+ * 닉네임 중복 확인 API
+ */
+export const checkNickNameApi = async (
+  data: CheckNickNameRequest
+): Promise<CheckNickNameResponse> => {
+  const res = await api.post<CheckNickNameResponse>(
+    `${API_BASE_URL}${API_PATH.CHECK_NICKNAME_API_PATH}`,
+    data
+  )
+  console.log('res : ' + res)
+  return res.data
+}

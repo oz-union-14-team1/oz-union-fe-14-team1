@@ -3,7 +3,12 @@
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { signupApi, type SignupRequest } from '@/api/fetchers/authFetchers'
+import {
+  checkEmailApi,
+  checkNickNameApi,
+  signupApi,
+  type SignupRequest,
+} from '@/api/fetchers/authFetchers'
 import {
   BaseInput,
   Button,
@@ -46,7 +51,7 @@ export default function SignupForm() {
   } as const
 
   const phoneTimer = usePhoneVerificationTimer({
-    duration: 10 /** TODO: 180초 */,
+    duration: 180,
     onExpire: () => triggerToast('error', '인증 시간이 만료되었습니다.'),
   })
 
@@ -108,20 +113,50 @@ export default function SignupForm() {
     }
   }
 
-  const handleIdCheckClick = () => {
-    /**
-     * TODO: 아이디 중복체크 이벤트 API 연동
-     * toast 진행 예정
-     */
-    setIsIdChecked(true)
+  const handleIdCheckClick = async () => {
+    if (!form.id) {
+      triggerToast('error', '아이디를 입력해 주세요.')
+    }
+
+    try {
+      const res = await checkEmailApi({
+        email: form.id,
+      })
+
+      if (res.available) {
+        triggerToast('success', res.message)
+        setIsIdChecked(true)
+      } else {
+        triggerToast('error', res.message)
+        setIsIdChecked(false)
+      }
+    } catch {
+      triggerToast('error', '이메일 중복 확인에 실패했습니다.')
+      setIsIdChecked(false)
+    }
   }
 
-  const handleNickNameCheckClick = () => {
-    /**
-     * TODO: 닉네임 중복체크 이벤트 API 연동
-     * toast 진행 예정
-     */
-    setIsNickNameChecked(true)
+  const handleNickNameCheckClick = async () => {
+    if (!form.nickName) {
+      triggerToast('error', '닉네임을 입력해 주세요.')
+    }
+
+    try {
+      const res = await checkNickNameApi({
+        nickname: form.nickName,
+      })
+
+      if (res.available) {
+        triggerToast('success', res.message)
+        setIsNickNameChecked(true)
+      } else {
+        triggerToast('error', res.message)
+        setIsNickNameChecked(false)
+      }
+    } catch {
+      triggerToast('error', '닉네임 중복 확인에 실패했습니다.')
+      setIsNickNameChecked(false)
+    }
   }
 
   return (
