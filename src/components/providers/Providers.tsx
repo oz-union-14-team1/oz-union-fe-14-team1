@@ -16,7 +16,7 @@ export default function Providers({ children }: ProvidersProps) {
   useEffect(() => {
     const initMSW = async () => {
       const { worker } = await import('@/mocks/browser')
-      await worker.start()
+      await worker.start({ onUnhandledRequest: 'bypass' })
       setIsMSWReady(true)
     }
 

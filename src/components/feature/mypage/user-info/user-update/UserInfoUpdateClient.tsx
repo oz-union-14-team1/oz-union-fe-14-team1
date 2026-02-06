@@ -1,8 +1,10 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
+import { UserInfo } from '@/api/fetchers/userInfoFetchers'
+import { useGetUserMe } from '@/api/queries/useGetUserMe'
 import {
   BaseInput,
   Button,
@@ -18,38 +20,58 @@ import {
   SIGNUP_FIELDS,
 } from '@/constants'
 import { RECOMMEND_PATHS } from '@/constants/routesPaths'
-import { usePhoneVerificationTimer, useToast, useUserInfoUpdate } from '@/hooks'
-import { MOCK_USERINFO } from '@/mocks/data/mockUserInfo'
+import {
+  usePhoneVerificationTimer,
+  useToast,
+  useUserInfoUpdateSubmit,
+} from '@/hooks'
 import { cn } from '@/utils'
 
+const EMPTY_FORM: UserInfoUpdateSchemaValues = {
+  nickName: '',
+  name: '',
+  phone: '',
+  birthday: '',
+  gender: '남성',
+  password: '',
+  passwordConfirm: '',
+  phoneCode: '',
+}
+
 /**
- * 회원가입 폼
+ * 내 정보 수정 폼
  */
 export default function UserInfoUpdateClient() {
   const router = useRouter()
   const { triggerToast } = useToast()
-  const { submit } = useUserInfoUpdate()
-  const baseUserInfo = MOCK_USERINFO
+  const { submit, isPending } = useUserInfoUpdateSubmit()
 
-  /**
-   * TODO: MOCK_USERINFO -> 나중에 서버에서 내려줄 값
-   * */
   const [isNickNameChecked, setIsNickNameChecked] = useState(false)
-  const [form, setForm] = useState<UserInfoUpdateSchemaValues>({
-    nickName: baseUserInfo.nickName,
-    name: baseUserInfo.name,
-    birthday: baseUserInfo.birthday,
-    phone: baseUserInfo.phone,
-    password: '',
-    passwordConfirm: '',
-    phoneCode: '',
-  })
+  const [form, setForm] = useState<UserInfoUpdateSchemaValues>(EMPTY_FORM)
+
   const USER_INFO_FIELD_KEYS = ['name', 'birthday'] as const
+
   const USER_INFO_FIELDS = SIGNUP_FIELDS.filter((field) =>
     USER_INFO_FIELD_KEYS.includes(
       field.key as (typeof USER_INFO_FIELD_KEYS)[number]
     )
   )
+
+  const handleGetSuccess = useCallback((data: UserInfo) => {
+    setForm({
+      ...EMPTY_FORM,
+      nickName: data.nickname,
+      name: data.name,
+      phone: data.phoneNumber,
+      birthday: data.birthday ?? '',
+      gender: data.gender === 'F' ? '여성' : '남성',
+    })
+  }, [])
+
+  const { data: userMe, isLoading } = useGetUserMe({
+    onSuccess: handleGetSuccess,
+  })
+  const baseUserInfo = userMe
 
   const phoneTimer = usePhoneVerificationTimer({
     duration: 10 /** TODO: 180초 */,
@@ -60,7 +82,12 @@ export default function UserInfoUpdateClient() {
     field: keyof UserInfoUpdateSchemaValues,
     value: string
   ) => {
-    setForm((prev) => ({ ...prev, [field]: value }))
+    setForm((prev) => {
+      if (!prev) {
+        return prev
+      }
+      return { ...prev, [field]: value }
+    })
 
     if (field === 'nickName') {
       setIsNickNameChecked(false)
@@ -68,12 +95,22 @@ export default function UserInfoUpdateClient() {
   }
 
   const handleSubmit = async () => {
-    /**
-     * TODO : 회원가입 API 연동
-     */
+    if (!baseUserInfo) {
+      triggerToast('error', '유저 정보를 불러오지 못했습니다.')
+      return
+    }
+
+    const mappedBaseUserInfo: UserInfoUpdateSchemaValues = {
+      nickName: baseUserInfo.nickname,
+      name: baseUserInfo.name,
+      birthday: baseUserInfo.birthday ?? '',
+      phone: baseUserInfo.phoneNumber,
+      gender: baseUserInfo.gender === 'M' ? '남성' : '여성',
+    }
+
     await submit({
       form,
-      baseUserInfo,
+      baseUserInfo: mappedBaseUserInfo,
       isNickNameChecked,
       isPhoneVerified: phoneTimer.isCodeVerified,
     })
@@ -89,6 +126,10 @@ export default function UserInfoUpdateClient() {
     alert('닉네임 중복체크')
   }
 
+  if (isLoading || !form || !baseUserInfo) {
+    return <div>로딩중...</div>
+  }
+
   return (
     <div className="flex w-full flex-col gap-5">
       <form
@@ -101,7 +142,7 @@ export default function UserInfoUpdateClient() {
         <DuplicateCheckField
           id="userInfoUpdate-id"
           label="아이디"
-          value={baseUserInfo.id}
+          value={baseUserInfo.email}
           placeholder="아이디를 입력해 주세요."
           onChange={() => {}}
           onCheck={() => {}}
@@ -152,6 +193,29 @@ export default function UserInfoUpdateClient() {
             />
           </FormField>
         ))}
+        <FormField label="성별" required>
+          <div className="flex gap-5">
+            {['남성', '여성'].map((gender) => (
+              <button
+                key={gender}
+                type="button"
+                onClick={() =>
+                  handleChange('gender', gender as '남성' | '여성')
+                }
+                className={cn(
+                  `font-semibold, w-full cursor-pointer rounded-default px-6 py-2 text-xs shadow-tag-inactive md:px-8 md:py-2 md:text-sm`,
+                  `${
+                    form.gender === gender
+                      ? 'bg-main-purple text-text-light shadow-tag-inactive'
+                      : 'bg-neutral-100/10 text-text-light shadow-tag-inactive'
+                  }`
+                )}
+              >
+                {gender}
+              </button>
+            ))}
+          </div>
+        </FormField>
         <PhoneVerificationField
           phone={form.phone}
           code={form.phoneCode ?? ''}
@@ -165,21 +229,14 @@ export default function UserInfoUpdateClient() {
           handleVerifyCode={phoneTimer.handleVerifyCode}
           idValue="userInfoUpdate"
         />
-        <Button
-          type="button"
-          onClick={() => router.push(RECOMMEND_PATHS.TAG)}
-          variant="purple"
-          className="mt-5 w-full cursor-pointer bg-gradient-main text-sm shadow-tag-inactive hover:bg-main-purple/70 md:text-lg"
-        >
-          취향 선택하기
-        </Button>
+
         <div className="mt-5 flex w-full gap-4">
           <Button
             type="submit"
             variant="purple"
             className="w-full cursor-pointer text-sm shadow-tag-inactive md:text-lg"
           >
-            변경 완료
+            {isPending ? '저장 중' : '변경 완료'}
           </Button>
           <Button
             type="button"
@@ -191,6 +248,14 @@ export default function UserInfoUpdateClient() {
           </Button>
         </div>
       </form>
+      <Button
+        type="button"
+        onClick={() => router.push(RECOMMEND_PATHS.TAG)}
+        variant="purple"
+        className="mt-5 w-full cursor-pointer bg-gradient-main text-sm shadow-tag-inactive hover:bg-main-purple/70 md:text-lg"
+      >
+        취향 선택하기
+      </Button>
     </div>
   )
 }
