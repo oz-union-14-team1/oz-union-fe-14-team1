@@ -11,8 +11,10 @@ export type GetUserMe = {
 }
 
 // [GET] /api/v1/user/me/profile-image 회원 프로필 URL
+// ⚠️ 주의: axios interceptor가 snake_case → camelCase 변환
+// 백엔드 응답: profile_img_url → profileImgUrl
 export type GetUserProfileImage = {
-  image_url: string
+  profileImgUrl: string
 }
 
 // [GET] /api/v1/user/me/profile-image 조회 응답 (Alias)

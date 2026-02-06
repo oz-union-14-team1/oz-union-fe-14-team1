@@ -9,7 +9,15 @@ import { getWishlistApi } from '@/api/fetchers/wishlistFetchers'
 export const useGetWishlist = () => {
   return useQuery({
     queryKey: ['wishlist'],
-    queryFn: getWishlistApi,
+    queryFn: async () => {
+      try {
+        return await getWishlistApi()
+      } catch (error) {
+        // 에러 발생 시 빈 배열 반환 (로그인하지 않은 경우 등)
+        console.warn('Failed to fetch wishlist:', error)
+        return []
+      }
+    },
     staleTime: 1000 * 60 * 5, // 5분
     retry: false, // 401/400 에러 시 재시도 방지
     enabled: typeof window !== 'undefined', // 클라이언트에서만 호출
