@@ -1,5 +1,9 @@
 import SectionTitle from '@/components/common/section-title/SectionTitle'
-import { SECTION_TITLES } from '@/constants'
+import {
+  COMMON_SECTION_TITLES,
+  GUEST_SECTION_TITLES,
+  USER_SECTION_TITLE,
+} from '@/constants'
 
 export default function SectionTitleTestPage() {
   // 동적 타이틀 테스트용
@@ -12,16 +16,16 @@ export default function SectionTitleTestPage() {
       <section>
         <p className="mb-2 text-sm text-gray-400">1. 상수들</p>
         <div className="flex flex-col gap-4">
-          <SectionTitle {...SECTION_TITLES.RECOMMENDATION} />
-          <SectionTitle {...SECTION_TITLES.MYFAVORITES} />
-          <SectionTitle {...SECTION_TITLES.GENREGAME} />
+          <SectionTitle {...COMMON_SECTION_TITLES.NEW_RELEASE} />
+          <SectionTitle {...GUEST_SECTION_TITLES.INTRODUCE} />
+          <SectionTitle {...USER_SECTION_TITLE.WHISHLIST} />
         </div>
       </section>
 
       <section>
         <p className="mb-2 text-sm text-gray-400">2. playType 적용한 타이틀</p>
         <SectionTitle
-          {...SECTION_TITLES.RECOMMENDATION}
+          {...GUEST_SECTION_TITLES.INTRODUCE}
           title={`${mockPlayType} 추천 리스트`}
         />
       </section>

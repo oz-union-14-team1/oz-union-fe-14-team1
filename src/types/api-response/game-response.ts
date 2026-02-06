@@ -14,13 +14,13 @@ export type GameList = {
 }
 
 /** GET /api/vi/games/{game_id} 응답 */
-export type GameDetail = Omit<Game, 'image'> & {
+export type GameDetail = Omit<Game, 'image' | 'platforms'> & {
   intro: string
   developer: string
   publisher: string
-  releasedAt: string
   genres: string[]
   tags: string[]
+  releasedAt: string
   platforms: string[]
   images: string[]
 }

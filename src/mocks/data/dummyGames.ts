@@ -1,52 +1,60 @@
-import { Game } from '@/types/game'
+import { Game } from '@/types/api-response/game-response'
 
 export const DUMMY_GAMES: Game[] = [
   {
-    gameId: 1,
-    gameName: 'Grand Theft Auto VI',
-    imgUrl:
+    id: 1,
+    name: 'Grand Theft Auto VI',
+    image:
       'https://media.rawg.io/media/resize/640/-/screenshots/4c4/4c47d5e898bda3ce131a8e73db6fe505.jpg',
+    releasedAt: '2024-08-23',
   },
   {
-    gameId: 2,
-    gameName: 'The Wolf Among Us 2',
-    imgUrl:
+    id: 2,
+    name: 'The Wolf Among Us 2',
+    image:
       'https://media.rawg.io/media/resize/640/-/games/845/84539f8f33fea2c753cca0ce3a6d168f.jpg',
+    releasedAt: '2025-07-12',
   },
   {
-    gameId: 3,
-    gameName: 'Cairn',
-    imgUrl:
+    id: 3,
+    name: 'Cairn',
+    image:
       'https://media.rawg.io/media/resize/640/-/screenshots/2d3/2d31b4bbfbcc94fd863b4e0990940443.jpg',
+    releasedAt: '2025-11-01',
   },
   {
-    gameId: 4,
-    gameName: 'Pathologic 3',
-    imgUrl:
+    id: 4,
+    name: 'Pathologic 3',
+    image:
       'https://media.rawg.io/media/resize/640/-/games/99b/99b4035609a6d464fb559f813c759d34.jpg',
+    releasedAt: '2026-01-26',
   },
   {
-    gameId: 5,
-    gameName: 'BioMenace Remastered',
-    imgUrl:
+    id: 5,
+    name: 'BioMenace Remastered',
+    image:
       'https://media.rawg.io/media/resize/640/-/screenshots/ead/eade181208e69d3d3e895ed965fde2f6.jpg',
+    releasedAt: '2019-05-11',
   },
   {
-    gameId: 6,
-    gameName: 'Rhythm Doctor',
-    imgUrl:
+    id: 6,
+    name: 'Rhythm Doctor',
+    image:
       'https://media.rawg.io/media/resize/640/-/games/1fd/1fdea6d922661f2a2b8d44d50fbdd9a4.jpg',
+    releasedAt: '2020-04-08',
   },
   {
-    gameId: 7,
-    gameName: 'FodFru',
-    imgUrl:
+    id: 7,
+    name: 'FodFru',
+    image:
       'https://media.rawg.io/media/resize/640/-/screenshots/551/551fe8e1a0b5ce120401c18d5efa01bb.jpg',
+    releasedAt: '2023-06-02',
   },
   {
-    gameId: 8,
-    gameName: 'Operation: Outbreak',
-    imgUrl:
+    id: 8,
+    name: 'Operation: Outbreak',
+    image:
       'https://media.rawg.io/media/resize/640/-/screenshots/c2f/c2f9ff05ab0e4826f46dd54a5af3d289.jpg',
+    releasedAt: '2025-03-19',
   },
 ]

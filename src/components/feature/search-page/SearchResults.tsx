@@ -3,7 +3,7 @@
 import { useSearchParams } from 'next/navigation'
 
 import Badge from '@/components/common/badge/Badge'
-import { GameCard } from '@/components/common/game-card'
+import GameCard from '@/components/common/game-card/GameCard'
 import { SearchEmptyUi } from '@/components/feature/search-page'
 import { MOCK_GAME } from '@/mocks/data/mockGameList'
 import { Game } from '@/types/api-response/game-response'
@@ -72,7 +72,7 @@ function SearchResults() {
                 <GameCard
                   id={game.id}
                   name={game.name}
-                  imagUrl={game.image || ''}
+                  image={game.image || ''}
                 />
               </div>
             </div>

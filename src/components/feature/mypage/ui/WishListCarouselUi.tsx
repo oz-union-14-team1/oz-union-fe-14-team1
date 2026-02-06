@@ -1,6 +1,6 @@
 'use client'
 
-import { GameCard } from '@/components/common/game-card'
+import GameCard from '@/components/common/game-card/GameCard'
 import { WishlistGame } from '@/types/api-response/wishlist-response'
 
 type WishListCarouselUiProps = {
@@ -38,7 +38,7 @@ export default function WishListCarouselUi({
               <GameCard
                 id={item.game}
                 name={item.game_name}
-                imgUrl={item.game_image || ''}
+                image={item.game_image}
               />
             </div>
           ))}
