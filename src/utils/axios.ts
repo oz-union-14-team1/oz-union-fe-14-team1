@@ -4,7 +4,7 @@ import axios, {
   InternalAxiosRequestConfig,
 } from 'axios'
 
-import { API_PATH } from '@/constants/apiPath'
+import { API_BASE_URL, API_PATH } from '@/constants/apiPath'
 import { useAuthStore } from '@/store/useAuthStore'
 import { convertToCamelCase } from '@/utils/convertToCamelCase'
 
@@ -23,7 +23,7 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
     const token = useAuthStore.getState().accessToken
 
     if (token) {
-      config.headers.Authorization = `Bearer ${token}`
+      config.headers?.set('Authorization', `Bearer ${token}`)
     }
 
     return config
@@ -47,6 +47,10 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
     async (error: AxiosError) => {
       const original = error.config as CustomAxiosRequestConfig
 
+      if (!original) {
+        return Promise.reject(error)
+      }
+
       if (error.response?.status !== 401) {
         return Promise.reject(error)
       }
@@ -54,21 +58,24 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
       if (original._retry) {
         return Promise.reject(error)
       }
+      original._retry = true
 
       if (original.url === API_PATH.LOGIN_REFRESH_API_PATH) {
         useAuthStore.getState().clear()
-        // location.href = ROUTES_PATHS.LOGIN_PAGE
         return Promise.reject(error)
       }
 
-      original._retry = true
-
       try {
         if (!refreshing) {
-          refreshing = api
+          refreshing = refreshApi
             .get(API_PATH.LOGIN_REFRESH_API_PATH)
             .then((res) => {
-              const newToken = res.data.accessToken
+              const newToken = res.data.accessToken ?? res.data.access_token
+
+              if (!newToken) {
+                throw new Error('accessToken이 없습니다.')
+              }
+
               useAuthStore.getState().setToken(newToken)
               return newToken
             })
@@ -81,12 +88,11 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
 
         original.headers?.set('Authorization', `Bearer ${newToken}`)
 
-        return api(original)
+        return instance(original)
       } catch (error) {
         const store = useAuthStore.getState()
 
         store.clear()
-        // location.href = ROUTES_PATHS.LOGIN_PAGE
 
         return Promise.reject(error)
       }
@@ -117,4 +123,12 @@ attachDefaultResponseInterceptor(camelApi)
 camelApi.interceptors.response.use((res) => {
   res.data = convertToCamelCase(res.data)
   return res
+})
+
+/**
+ * refresh API
+ */
+export const refreshApi = axios.create({
+  baseURL: API_BASE_URL,
+  withCredentials: true,
 })

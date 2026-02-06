@@ -12,10 +12,15 @@ export default function GuestGuard({
   children: React.ReactNode
 }) {
   const router = useRouter()
-  const { accessToken, isInitialized } = useAuthStore()
+  const accessToken = useAuthStore((s) => s.accessToken)
+  const isInitialized = useAuthStore((s) => s.isInitialized)
 
   useEffect(() => {
-    if (isInitialized && accessToken) {
+    if (!isInitialized) {
+      return
+    }
+
+    if (accessToken) {
       router.replace(ROUTES_PATHS.MAIN_PAGE)
     }
   }, [isInitialized, accessToken, router])
