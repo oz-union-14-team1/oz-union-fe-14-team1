@@ -1,4 +1,5 @@
 import {
+  DeleteProfileImage,
   GetProfileImage,
   PostProfileImage,
 } from '@/types/api-response/user-response'
@@ -63,3 +64,23 @@ export const postProfileApiMock = async (
     reader.readAsDataURL(file)
   })
 }
+
+/**
+ * Mock API - 프로필 이미지 삭제
+ * localStorage에서 이미지 삭제
+ */
+export const deleteProfileImageApiMock =
+  async (): Promise<DeleteProfileImage> => {
+    // 네트워크 지연 시뮬레이션
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    if (typeof window === 'undefined') {
+      throw new Error('서버 환경에서는 삭제할 수 없습니다.')
+    }
+
+    localStorage.removeItem(STORAGE_KEY)
+
+    return {
+      message: '프로필 이미지가 삭제되었습니다.',
+    }
+  }
