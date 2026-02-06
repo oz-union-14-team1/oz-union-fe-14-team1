@@ -28,4 +28,5 @@ export const API_PATH = {
   POST_PROFILE_IMAGE_API_PATH: '/user/me/image',
   CHECK_EMAIL_API_PATH: '/user/check-email',
   CHECK_NICKNAME_API_PATH: '/user/check-nickname',
+  DELETE_PROFILE_IMAGE_API_PATH: '/user/me/image',
 } as const
