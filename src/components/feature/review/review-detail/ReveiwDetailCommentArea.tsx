@@ -2,6 +2,7 @@
 
 import { FormEventHandler, useState } from 'react'
 
+import { useGetUserMe } from '@/api/queries/useGetUserMe'
 import usePostReviewComment from '@/api/queries/usePostReviewComment'
 import { Button } from '@/components/common'
 import { useToast } from '@/hooks'
@@ -18,6 +19,7 @@ export default function ReveiwDetailCommentArea({
   const [isCommentAreaOpen, setIsCommentAreaOpen] = useState(false)
   const [comment, setComment] = useState('')
 
+  const { data: userData } = useGetUserMe()
   const { triggerToast } = useToast()
 
   const { mutate: postComment, isPending } = usePostReviewComment()
@@ -84,7 +86,11 @@ export default function ReveiwDetailCommentArea({
       <Button
         variant={'gray'}
         onClick={() => {
-          setIsCommentAreaOpen(true)
+          if (userData) {
+            setIsCommentAreaOpen(true)
+          } else {
+            triggerToast('warning', '로그인 후 댓글을 작성할 수 있습니다.')
+          }
         }}
         size={'sm'}
       >
