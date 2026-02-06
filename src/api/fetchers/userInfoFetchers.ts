@@ -9,6 +9,7 @@ export type UserInfo = {
   isActive: boolean
   phoneNumber: string
   birthday: string
+  id?: number
 }
 
 export const getUserInfoApi = async (): Promise<UserInfo> => {

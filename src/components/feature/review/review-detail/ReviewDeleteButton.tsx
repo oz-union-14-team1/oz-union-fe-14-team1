@@ -1,3 +1,5 @@
+'use client'
+
 import { ComponentProps, MouseEventHandler } from 'react'
 
 import useDeleteReveiw from '@/api/queries/useDeleteReview'
@@ -6,12 +8,14 @@ import { Button } from '@/components/common'
 interface ReviewDeleteButtonProps extends ComponentProps<typeof Button> {
   gameId: string | number
   reviewId: string | number
+  isAuthor: boolean
 }
 
 export default function ReviewDeleteButton({
   gameId,
   reviewId,
   className,
+  isAuthor,
   ...props
 }: ReviewDeleteButtonProps) {
   const { mutate: deleteReview, isPending: isDeleteReviewPending } =
@@ -23,12 +27,13 @@ export default function ReviewDeleteButton({
     e.preventDefault()
     deleteReview({ reviewId })
   }
+
   return (
     <Button
       variant={'gray'}
       size="sm"
       onClick={handleReviewDeleteButtonClick}
-      disabled={isDeleteReviewPending}
+      disabled={!isAuthor || isDeleteReviewPending}
       className={className}
       {...props}
     >

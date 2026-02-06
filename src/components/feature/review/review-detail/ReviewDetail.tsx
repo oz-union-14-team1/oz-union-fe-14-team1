@@ -3,13 +3,14 @@
 import Image from 'next/image'
 import { useState } from 'react'
 
+import { useGetUserMe } from '@/api/queries/useGetUserMe'
 import DefaultProfile from '@/assets/images/profile/profile.jpg'
 import { Button } from '@/components/common'
 import { ReviewCard } from '@/components/feature/review'
 import ReveiwDetailCommentArea from '@/components/feature/review/review-detail/ReveiwDetailCommentArea'
 import ReviewDeleteButton from '@/components/feature/review/review-detail/ReviewDeleteButton'
 import ReviewDetailReviewEditForm from '@/components/feature/review/review-detail/ReviewDetailReviewEditForm'
-import { getDayDiffFromNow } from '@/utils'
+import { cn, getDayDiffFromNow } from '@/utils'
 
 import type { ReviewDetail } from '@/types/api-response/review-response'
 
@@ -27,13 +28,15 @@ export default function ReviewDetail({
 
   const {
     createdAt,
-    author: { nickname, profileImgUrl },
+    author: { nickname, profileImgUrl, id: authorId },
     content,
     id: reviewId,
     rating,
   } = reviewDetail
 
-  console.log(reviewDetail)
+  const { data: userData } = useGetUserMe()
+
+  const isAuthor = !!(userData && userData.id === authorId)
 
   return (
     <ReviewCard className="flex w-full flex-col items-start gap-4 p-4">
@@ -54,17 +57,28 @@ export default function ReviewDetail({
           <span className="text-sm">{`${getDayDiffFromNow(createdAt)}일 전`}</span>
         </div>
 
-        <div className="flex flex-row items-center justify-center gap-2">
+        <div
+          className={cn(
+            'flex flex-row items-center justify-center gap-2',
+            isAuthor ? 'visible' : 'hidden'
+          )}
+        >
           <Button
             variant={'gray'}
             size="sm"
             onClick={() => {
-              setIsEditing(true)
+              if (isAuthor) {
+                setIsEditing(true)
+              }
             }}
           >
             수정
           </Button>
-          <ReviewDeleteButton reviewId={reviewId} gameId={gameId} />
+          <ReviewDeleteButton
+            reviewId={reviewId}
+            gameId={gameId}
+            isAuthor={isAuthor}
+          />
         </div>
       </div>
 
