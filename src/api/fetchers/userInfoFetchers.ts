@@ -10,6 +10,7 @@ export type UserInfo = {
   phoneNumber: string
   birthday: string
   id?: number
+  created_at?: string
 }
 
 export const getUserInfoApi = async (): Promise<UserInfo> => {

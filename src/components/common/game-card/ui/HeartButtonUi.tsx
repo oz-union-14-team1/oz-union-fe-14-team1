@@ -22,8 +22,9 @@ export function HeartButtonUi({ gameId }: HeartButtonUiProps) {
 
   const gameIdNum = typeof gameId === 'string' ? parseInt(gameId, 10) : gameId
 
-  // 위시리스트 항목 찾기 (game 필드로 비교)
-  const wishlistItem = wishlistGames.find((item) => item.game === gameIdNum)
+  // 배열인지 확인 후 위시리스트 항목 찾기
+  const safeWishlistGames = Array.isArray(wishlistGames) ? wishlistGames : []
+  const wishlistItem = safeWishlistGames.find((item) => item.game === gameIdNum)
   const wishlisted = !!wishlistItem
 
   const handleWishlistClick = (e: React.MouseEvent) => {

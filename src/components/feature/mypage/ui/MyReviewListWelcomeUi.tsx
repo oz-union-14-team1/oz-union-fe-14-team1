@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
+import { useGetUserMe } from '@/api/queries/useGetUserMe'
 import { ROUTES_PATHS } from '@/constants'
 
 export const formatDate = (dateString: string) => {
@@ -11,16 +12,17 @@ export const formatDate = (dateString: string) => {
   return `${year}.${month}.${day}.`
 }
 
-// TODO: 실제 회원가입 날짜는 props나 API에서 가져와야 합니다
-const SIGNUP_DATE = '2023-11-28'
-
 export default function MyReviewListWelcomeUi() {
+  const { data: userInfo } = useGetUserMe()
+  // 회원가입 날짜가 없으면 현재 날짜 사용
+  const signupDate = userInfo?.created_at || new Date().toISOString()
+
   return (
     <div>
       <div className="flex items-start justify-start gap-4 md:gap-6 lg:gap-9.5">
         <div className="-mt-1.5 hidden w-16 shrink-0 md:block md:w-20">
           <p className="text-sm font-medium text-main-violet">
-            {formatDate(SIGNUP_DATE)}
+            {formatDate(signupDate)}
           </p>
         </div>
         <div className="ml-0.5 flex shrink-0 flex-col items-center justify-center lg:ml-1">

@@ -1,3 +1,5 @@
+'use client'
+
 import useGetProfileImage from '@/api/queries/useGetProfileImage'
 
 /**
