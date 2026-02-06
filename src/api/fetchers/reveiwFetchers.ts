@@ -29,7 +29,7 @@ export const deleteReview = async ({
   reviewId: string | number
 }) => {
   await api.delete(
-    `${MSW_BASE_URL}${API_PATH.REVIEW_PATCH_DELETE_API_PATH(String(reviewId))}`
+    `${API_BASE_URL}${API_PATH.REVIEW_PATCH_DELETE_API_PATH(String(reviewId))}`
   )
 }
 
