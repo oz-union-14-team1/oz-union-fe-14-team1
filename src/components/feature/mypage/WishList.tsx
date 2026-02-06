@@ -1,8 +1,7 @@
 'use client'
 
+import { useGetWishlist } from '@/api/queries/useGetWishlist'
 import { useWishlistCarousel } from '@/hooks'
-import { MOCK_GAMES } from '@/mocks'
-import { useWishlistStore } from '@/store/useWishlistStore'
 
 import {
   WishListCarouselNavUi,
@@ -12,14 +11,24 @@ import {
 } from './ui'
 
 export default function WishList() {
-  const { wishlistedGameIds } = useWishlistStore()
+  const { data: wishlistGames = [], isLoading } = useGetWishlist()
   const { emblaRef, canScrollPrev, canScrollNext, scrollPrev, scrollNext } =
     useWishlistCarousel()
 
-  // 위시리스트에 등록된 게임만 필터링
-  const wishlistGames = MOCK_GAMES.filter((game) =>
-    wishlistedGameIds.includes(game.id)
-  )
+  if (isLoading) {
+    return (
+      <div className="relative w-full">
+        <div className="relative p-0 backdrop-blur-sm md:p-0">
+          <div className="mb-2 flex items-center justify-between gap-2 px-4 md:mb-6 md:px-8">
+            <WishListTitleUi wishlistCount={0} />
+          </div>
+          <div className="flex h-64 items-center justify-center">
+            <p className="text-muted-foreground">위시리스트를 불러오는 중...</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="relative w-full">
