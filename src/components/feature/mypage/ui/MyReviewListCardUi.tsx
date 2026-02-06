@@ -1,15 +1,11 @@
 import { ThumbsDown, ThumbsUp } from 'lucide-react'
 import Link from 'next/link'
 
-import { MockReviewType } from '@/types'
+import { MyReview } from '@/types/api-response/myreview-response'
 
 import { formatDate } from './MyReviewListWelcomeUi'
 
-export default function MyReviewListCardUi({
-  review,
-}: {
-  review: MockReviewType
-}) {
+export default function MyReviewListCardUi({ review }: { review: MyReview }) {
   const REVIEW_DETAIL_URL = `/review/${review.id}`
 
   return (
@@ -19,7 +15,7 @@ export default function MyReviewListCardUi({
     >
       <div className="flex items-center gap-2 md:hidden">
         <p className="text-[10px] font-medium text-text-secondary transition-all duration-300">
-          {formatDate(review.createdAt)}
+          {formatDate(review.created_at)}
         </p>
         <div className="h-px flex-1 bg-text-secondary/30" />
       </div>
@@ -28,18 +24,10 @@ export default function MyReviewListCardUi({
         <div className="flex w-[150px] flex-col items-start justify-start gap-2 overflow-hidden md:w-[200px] md:gap-3 lg:w-[250px]">
           <div className="w-full">
             <p className="mb-0.5 text-xs font-thin text-sub-cyan md:mb-1 md:text-sm lg:text-base">
-              Category
+              Author
             </p>
             <p className="truncate text-sm font-medium text-text-primary md:text-base lg:text-lg">
-              {review.category}
-            </p>
-          </div>
-          <div className="w-full">
-            <p className="mb-0.5 text-xs font-thin text-sub-cyan md:mb-1 md:text-sm lg:text-base">
-              Game
-            </p>
-            <p className="truncate text-sm font-medium text-text-primary md:text-base lg:text-lg">
-              {review.gameName}
+              {review.author.nickname}
             </p>
           </div>
           <div className="flex w-full gap-3 md:gap-6">
@@ -69,6 +57,14 @@ export default function MyReviewListCardUi({
                 )}
               </div>
             </div>
+          </div>
+          <div className="w-full">
+            <p className="mb-0.5 text-xs font-thin text-sub-cyan md:mb-1 md:text-sm lg:text-base">
+              Likes
+            </p>
+            <p className="truncate text-sm font-medium text-text-primary md:text-base lg:text-lg">
+              {review.like_count}
+            </p>
           </div>
         </div>
 

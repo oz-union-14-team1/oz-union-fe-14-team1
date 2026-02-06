@@ -1,4 +1,4 @@
-import { MockReviewType } from '@/types'
+import { MyReview } from '@/types/api-response/myreview-response'
 
 import { MyReviewListCardUi } from '..'
 import { formatDate } from './MyReviewListWelcomeUi'
@@ -6,13 +6,13 @@ import { formatDate } from './MyReviewListWelcomeUi'
 export default function MyReviewListSectionUi({
   review,
 }: {
-  review: MockReviewType
+  review: MyReview
 }) {
   return (
     <div className="group flex items-start justify-start gap-4 md:gap-6 lg:gap-10">
       <div className="-mt-1.5 hidden w-16 shrink-0 md:block md:w-20">
         <p className="text-sm font-medium text-text-secondary transition-all duration-300 group-hover:text-sub-cyan">
-          {formatDate(review.createdAt)}
+          {formatDate(review.created_at)}
         </p>
       </div>
       <div className="flex shrink-0 flex-col items-center justify-center">
