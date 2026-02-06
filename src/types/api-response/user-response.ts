@@ -14,3 +14,9 @@ export type GetUserMe = {
 export type GetUserProfileImage = {
   image_url: string
 }
+
+// [GET] /api/v1/user/me/profile-image 조회 응답 (Alias)
+export type GetProfileImage = GetUserProfileImage
+
+// [POST] /api/v1/user/me/profile-image 업로드 응답
+export type PostProfileImage = GetUserProfileImage
