@@ -3,13 +3,14 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 
-import { getUserInfoApi, UserInfo } from '@/api/fetchers/userInfoFetchers'
+import { useGetUserMe } from '@/api/queries/useGetUserMe'
 import DefaultProfile from '@/assets/images/profile/profile.jpg'
 import { Button } from '@/components/common'
 import { ReviewCard } from '@/components/feature/review'
 import ReveiwDetailCommentArea from '@/components/feature/review/review-detail/ReveiwDetailCommentArea'
 import ReviewDeleteButton from '@/components/feature/review/review-detail/ReviewDeleteButton'
 import ReviewDetailReviewEditForm from '@/components/feature/review/review-detail/ReviewDetailReviewEditForm'
+import { useAuthStore } from '@/store/useAuthStore'
 import { getDayDiffFromNow } from '@/utils'
 
 import type { ReviewDetail } from '@/types/api-response/review-response'
@@ -25,7 +26,6 @@ export default function ReviewDetail({
 }: ReviewDetailProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [isImageError, setIsImageError] = useState(false)
-  const [userData, setUserData] = useState<UserInfo>()
 
   const {
     createdAt,
@@ -35,14 +35,16 @@ export default function ReviewDetail({
     rating,
   } = reviewDetail
 
-  useEffect(() => {
-    // useQuery를 사용한 훅을 사용하니 캐싱된 데이터와 충돌이 일어나 그냥 fetch 했습니다.
-    getUserInfoApi().then((data) => {
-      setUserData(data)
-    })
-  }, [])
+  const { data: userData, refetch, isError } = useGetUserMe()
+  const accessToken = useAuthStore((state) => state.accessToken)
 
-  const isAuthor = userData?.id === authorId
+  useEffect(() => {
+    if (isError && accessToken) {
+      refetch()
+    }
+  }, [isError, accessToken, refetch])
+
+  const isAuthor = String(userData?.id) === String(authorId)
 
   return (
     <ReviewCard className="flex w-full flex-col items-start gap-4 p-4">
