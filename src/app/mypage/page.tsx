@@ -1,5 +1,6 @@
 'use client'
 
+import { useGetMyReviews } from '@/api/queries/useGetMyReviews'
 import { useGetWishlist } from '@/api/queries/useGetWishlist'
 import {
   DashBoard,
@@ -7,15 +8,16 @@ import {
   Profile,
   WishList,
 } from '@/components/feature/mypage'
-import { MOCK_REVIEWS } from '@/mocks'
+import { useProfileImage } from '@/hooks/useProfileImage'
+// import { MOCK_REVIEWS } from '@/mocks'
 
 export default function MyPage() {
+  const profileImageUrl = useProfileImage()
   const { data: wishlistGames = [] } = useGetWishlist()
+  const { data: myReviews = [] } = useGetMyReviews()
 
-  const wishlistCount = wishlistGames.length
-  const reviewCount = MOCK_REVIEWS.length
-  // TODO: 프로필 이미지 API 연동 필요
-  const profileImageUrl = ''
+  const wishlistCount = Array.isArray(wishlistGames) ? wishlistGames.length : 0
+  const reviewCount = Array.isArray(myReviews) ? myReviews.length : 0
 
   return (
     <section className="container mx-auto mb-50 max-w-345">
