@@ -5,7 +5,7 @@
 /**
  * 이미지 URL 처리
  * - Base64: 그대로 반환 (Mock 모드)
- * - 절대 URL: 그대로 반환
+ * - 절대 URL: http → https 변환 (Mixed Content 방지)
  * - 상대 경로: Next.js API Route로 변환 (백엔드 프록시)
  */
 export const getFullImageUrl = (url: string): string => {
@@ -18,8 +18,20 @@ export const getFullImageUrl = (url: string): string => {
     return url
   }
 
-  // 이미 절대 URL이면 그대로 반환
-  if (url.startsWith('http://') || url.startsWith('https://')) {
+  // http:// → https:// 변환 (Mixed Content 방지)
+  if (url.startsWith('http://')) {
+    const httpsUrl = url.replace('http://', 'https://')
+    if (process.env.NODE_ENV === 'development') {
+      console.log('🔒 이미지 URL을 HTTPS로 변환:', {
+        original: url,
+        converted: httpsUrl,
+      })
+    }
+    return httpsUrl
+  }
+
+  // 이미 https면 그대로 반환
+  if (url.startsWith('https://')) {
     return url
   }
 

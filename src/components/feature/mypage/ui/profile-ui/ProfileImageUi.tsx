@@ -21,7 +21,7 @@ export default function ProfileImageUi({ imageUrl }: ProfileImageUiProps) {
         </div>
       </div>
       {/* 프로필 / 이미지 / 회원 - 회전 없음 ⭐ */}
-      {imageUrl && (
+      {fullImageUrl && fullImageUrl.length > 0 ? (
         <>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -40,8 +40,9 @@ export default function ProfileImageUi({ imageUrl }: ProfileImageUiProps) {
           />
           <DeleteProfileImageUi />
         </>
+      ) : (
+        <EditProfileImageUi />
       )}
-      {!imageUrl && <EditProfileImageUi />}
       <ProfileBaseUi />
     </>
   )

@@ -30,7 +30,7 @@ export const getProfileImageApiMock = async (): Promise<GetProfileImage> => {
   await new Promise((resolve) => setTimeout(resolve, 1000))
 
   return {
-    image_url: storedImage || '',
+    profileImgUrl: storedImage || '',
   }
 }
 
@@ -57,7 +57,7 @@ export const postProfileApiMock = async (
       setStoredImage(base64Url)
 
       resolve({
-        image_url: base64Url,
+        profileImgUrl: base64Url,
       })
     }
     reader.readAsDataURL(file)

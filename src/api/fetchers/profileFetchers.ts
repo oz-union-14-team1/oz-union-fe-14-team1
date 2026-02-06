@@ -10,19 +10,18 @@ import api from '@/utils/axios'
  * 🔧 프로필 이미지 Mock 모드 설정
  * ==========================================
  *
- * [현재 상태]: Mock 모드 활성화 (localStorage 사용)
+ * [현재 상태]: 실제 API 모드 활성화
  *
- * [백엔드 준비 완료 시]:
- * 1. 아래 USE_MOCK을 false로 변경
- * 2. 백엔드 Django MEDIA 설정 완료 확인
- *    - settings.py: MEDIA_URL, MEDIA_ROOT 설정
- *    - urls.py: static() 설정
- * 3. 테스트: 이미지 업로드 → 새로고침 → 이미지 유지 확인
+ * [백엔드 API 엔드포인트]:
+ * - GET /api/v1/user/me/image: 프로필 이미지 조회
+ * - POST /api/v1/user/me/image: 프로필 이미지 업로드
+ *
+ * [테스트]: 이미지 업로드 → 새로고침 → 이미지 유지 확인
  *
  * [참고]: docs/DJANGO_MEDIA_SETUP.md
  * ==========================================
  */
-const USE_MOCK = true // ← 백엔드 준비 완료 시 false로 변경
+const USE_MOCK = false // ✅ 실제 API 사용 중
 
 /**
  * 프로필 이미지 조회
@@ -36,6 +35,11 @@ export const getProfileImageApi = async (): Promise<GetProfileImage> => {
   const res = await api.get<GetProfileImage>(
     `${API_BASE_URL}${API_PATH.GET_PROFILE_IMAGE_API_PATH}`
   )
+
+  if (!res.data) {
+    throw new Error('프로필 이미지 정보를 불러올 수 없습니다.')
+  }
+
   return res.data
 }
 
@@ -59,5 +63,10 @@ export const postProfileApi = async (
       },
     }
   )
+
+  if (!res.data) {
+    throw new Error('프로필 이미지 업로드에 실패했습니다.')
+  }
+
   return res.data
 }

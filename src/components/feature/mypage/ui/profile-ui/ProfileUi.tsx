@@ -1,8 +1,5 @@
 import { MOCK_GENRES } from '@/constants'
-import {
-  GetUserMe,
-  GetUserProfileImage,
-} from '@/types/api-response/user-response'
+import { GetUserMe } from '@/types/api-response/user-response'
 
 import {
   ProfileBackgroundUi,
@@ -15,15 +12,17 @@ import {
   ProfileMobileNameUi,
 } from '.'
 
-function ProfileDesktopUi({
-  image_url,
-  nickname,
-}: Pick<GetUserMe, 'nickname'> & Pick<GetUserProfileImage, 'image_url'>) {
+type ProfileUiProps = {
+  nickname: GetUserMe['nickname']
+  imageUrl: string
+}
+
+function ProfileDesktopUi({ imageUrl, nickname }: ProfileUiProps) {
   return (
     <div className="relative">
       <ProfileDesktopGlowUi />
       <div className="group relative flex h-auto w-auto cursor-pointer flex-col items-center justify-center">
-        <ProfileImageUi imageUrl={image_url} />
+        <ProfileImageUi imageUrl={imageUrl} />
       </div>
       <ProfileDesktopNameUi nickname={nickname} />
       <ProfileGenresDesktopUi
@@ -45,16 +44,13 @@ function ProfileDesktopUi({
   )
 }
 
-function ProfileMobileUi({
-  image_url,
-  nickname,
-}: Pick<GetUserMe, 'nickname'> & Pick<GetUserProfileImage, 'image_url'>) {
+function ProfileMobileUi({ imageUrl, nickname }: ProfileUiProps) {
   return (
     <div className="relative flex flex-col items-center">
       <ProfileMobileGlowUi />
       <div className="relative flex h-40.75 w-40.75 flex-col items-center justify-center">
         <div className="group relative z-10 h-40.75 w-40.75 cursor-pointer">
-          <ProfileImageUi imageUrl={image_url} />
+          <ProfileImageUi imageUrl={imageUrl} />
         </div>
         <ProfileBackgroundUi />
       </div>
