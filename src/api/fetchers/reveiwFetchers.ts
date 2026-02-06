@@ -1,4 +1,4 @@
-import { API_BASE_URL, API_PATH, MSW_BASE_URL } from '@/constants/apiPath'
+import { API_BASE_URL, API_PATH } from '@/constants/apiPath'
 import { ReviewDetail } from '@/types/api-response/review-response'
 import { api } from '@/utils'
 
@@ -29,7 +29,7 @@ export const deleteReview = async ({
   reviewId: string | number
 }) => {
   await api.delete(
-    `${MSW_BASE_URL}${API_PATH.REVIEW_PATCH_DELETE_API_PATH(String(reviewId))}`
+    `${API_BASE_URL}${API_PATH.REVIEW_PATCH_DELETE_API_PATH(String(reviewId))}`
   )
 }
 
@@ -43,7 +43,7 @@ export const patchReview = async ({
   rating: number
 }) => {
   await api.patch(
-    `${MSW_BASE_URL}${API_PATH.REVIEW_PATCH_DELETE_API_PATH(String(reviewId))}`,
+    `${API_BASE_URL}${API_PATH.REVIEW_PATCH_DELETE_API_PATH(String(reviewId))}`,
     {
       content,
       rating,
