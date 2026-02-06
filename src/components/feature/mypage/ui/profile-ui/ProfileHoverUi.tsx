@@ -5,6 +5,7 @@ import { Pencil, X } from 'lucide-react'
 import { ChangeEvent, useRef, useState } from 'react'
 
 import { postProfileApi } from '@/api/fetchers/profileFetchers'
+import useDeleteProfileImage from '@/api/queries/useDeleteProfileImage'
 import { IMAGE_ERROR_MESSAGES, IMAGE_UPLOAD_CONFIG } from '@/constants'
 import useToast from '@/hooks/useToast'
 import { cn, validateFileSize, validateFileType } from '@/utils'
@@ -115,7 +116,8 @@ function EditProfileImageUi() {
 }
 
 function DeleteProfileImageUi() {
-  const { triggerToast } = useToast()
+  const { mutate: deleteImage } = useDeleteProfileImage()
+
   const handleDelete = (e: React.MouseEvent) => {
     e.stopPropagation()
 
@@ -126,17 +128,7 @@ function DeleteProfileImageUi() {
       return
     }
 
-    try {
-      // TODO: 서버에 이미지 삭제 요청
-
-      // TODO: API 호출
-      // await api.delete('/profile/image')
-
-      triggerToast('success', IMAGE_ERROR_MESSAGES.DELETE_SUCCESS)
-    } catch (error) {
-      console.error('이미지 삭제 실패:', error)
-      triggerToast('error', IMAGE_ERROR_MESSAGES.DELETE_FAILED)
-    }
+    deleteImage()
   }
 
   return (
