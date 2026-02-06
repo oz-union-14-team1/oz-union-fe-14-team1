@@ -8,7 +8,7 @@ export {
   PROFILE_TEXT,
 } from './profile'
 export { ROUTES_PATHS } from './routesPaths'
-export { SECTION_TITLES } from './sectionTitle'
+export * from './sectionTitle'
 export { SIGNUP_FIELDS } from './signupFields'
 export { PASSWORD_CONFIRM_FIELDS } from './authFields'
 export { PLAYTYPE_EMOJI } from './playtypeEmoji'

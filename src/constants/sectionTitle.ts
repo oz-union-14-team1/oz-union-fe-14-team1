@@ -1,18 +1,32 @@
-export const SECTION_TITLES = {
+import { ROUTES_PATHS } from './routesPaths'
+
+export const COMMON_SECTION_TITLES = {
   NEW_RELEASE: {
-    title: '새로운 게임을 발견하세요',
-    href: '/games/new-release',
+    title: '🔎 새로 나온 게임',
   },
-  RECOMMENDATION: {
-    title: '선호기반 추천 리스트',
-    href: 'games/recommend',
+} as const
+
+// 비회원 전용 섹션
+export const GUEST_SECTION_TITLES = {
+  RECOMMEND_LOGIN_CTA: {
+    title: '✨ 로그인하고 취향 추천 받기',
+    href: ROUTES_PATHS.LOGIN_PAGE,
   },
-  MYFAVORITES: {
-    title: '찜한 게임과 비슷한 추천',
-    href: '/games/my-favorites',
+  POPULAR: {
+    title: '🕹️ 지금 인기 게임',
   },
-  GENREGAME: {
-    title: '찜한 게임과 비슷한 추천',
-    href: '/games/genre',
+  INTRODUCE: {
+    title: '🚀 이런 게임은 어떠세요',
+  },
+} as const
+
+// 회원 전용 섹션
+export const USER_SECTION_TITLE = {
+  PREFERENCE: {
+    // aiTendency로 불러올 예정
+    getTitle: (tendency: string) => `${tendency}님을 위한 추천`,
+  },
+  WHISHLIST: {
+    title: '❤️ 찜한 게임 기반 추천',
   },
 } as const
