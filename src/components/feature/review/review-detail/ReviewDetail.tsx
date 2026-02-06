@@ -1,16 +1,16 @@
 'use client'
 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import { useGetUserMe } from '@/api/queries/useGetUserMe'
+import { getUserInfoApi, UserInfo } from '@/api/fetchers/userInfoFetchers'
 import DefaultProfile from '@/assets/images/profile/profile.jpg'
 import { Button } from '@/components/common'
 import { ReviewCard } from '@/components/feature/review'
 import ReveiwDetailCommentArea from '@/components/feature/review/review-detail/ReveiwDetailCommentArea'
 import ReviewDeleteButton from '@/components/feature/review/review-detail/ReviewDeleteButton'
 import ReviewDetailReviewEditForm from '@/components/feature/review/review-detail/ReviewDetailReviewEditForm'
-import { cn, getDayDiffFromNow } from '@/utils'
+import { getDayDiffFromNow } from '@/utils'
 
 import type { ReviewDetail } from '@/types/api-response/review-response'
 
@@ -25,6 +25,7 @@ export default function ReviewDetail({
 }: ReviewDetailProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [isImageError, setIsImageError] = useState(false)
+  const [userData, setUserData] = useState<UserInfo>()
 
   const {
     createdAt,
@@ -34,9 +35,14 @@ export default function ReviewDetail({
     rating,
   } = reviewDetail
 
-  const { data: userData } = useGetUserMe()
+  useEffect(() => {
+    // useQuery를 사용한 훅을 사용하니 캐싱된 데이터와 충돌이 일어나 그냥 fetch 했습니다.
+    getUserInfoApi().then((data) => {
+      setUserData(data)
+    })
+  }, [])
 
-  const isAuthor = !!(userData && userData.id === authorId)
+  const isAuthor = userData?.id === authorId
 
   return (
     <ReviewCard className="flex w-full flex-col items-start gap-4 p-4">
@@ -57,29 +63,26 @@ export default function ReviewDetail({
           <span className="text-sm">{`${getDayDiffFromNow(createdAt)}일 전`}</span>
         </div>
 
-        <div
-          className={cn(
-            'flex flex-row items-center justify-center gap-2',
-            isAuthor ? 'visible' : 'hidden'
-          )}
-        >
-          <Button
-            variant={'gray'}
-            size="sm"
-            onClick={() => {
-              if (isAuthor) {
-                setIsEditing(true)
-              }
-            }}
-          >
-            수정
-          </Button>
-          <ReviewDeleteButton
-            reviewId={reviewId}
-            gameId={gameId}
-            isAuthor={isAuthor}
-          />
-        </div>
+        {isAuthor ? (
+          <div className="flex flex-row items-center justify-center gap-2">
+            <Button
+              variant={'gray'}
+              size="sm"
+              onClick={() => {
+                if (isAuthor) {
+                  setIsEditing(true)
+                }
+              }}
+            >
+              수정
+            </Button>
+            <ReviewDeleteButton
+              reviewId={reviewId}
+              gameId={gameId}
+              isAuthor={isAuthor}
+            />
+          </div>
+        ) : null}
       </div>
 
       {isEditing ? (
