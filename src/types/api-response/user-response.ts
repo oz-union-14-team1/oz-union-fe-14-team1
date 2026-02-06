@@ -22,3 +22,8 @@ export type GetProfileImage = GetUserProfileImage
 
 // [POST] /api/v1/user/me/profile-image 업로드 응답
 export type PostProfileImage = GetUserProfileImage
+
+// [DELETE] /api/v1/user/me/image 삭제 응답
+export type DeleteProfileImage = {
+  message: string
+}
