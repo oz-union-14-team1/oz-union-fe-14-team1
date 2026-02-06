@@ -15,7 +15,7 @@ export const formatDate = (dateString: string) => {
 export default function MyReviewListWelcomeUi() {
   const { data: userInfo } = useGetUserMe()
   // 회원가입 날짜가 없으면 현재 날짜 사용
-  const signupDate = userInfo?.createdAt || new Date().toISOString()
+  const signupDate = userInfo?.created_at || new Date().toISOString()
 
   return (
     <div>
