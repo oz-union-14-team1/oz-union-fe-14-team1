@@ -8,7 +8,7 @@ export default function GameReviewPage() {
     images: [],
     intro: '젤다의전설은 유명한 게임입니다',
     platforms: ['닌텐도'],
-    releasedAt: new Date('2024'),
+    releasedAt: '2024',
     developer: '닌텐도',
     publisher: '퍼블리셔',
     genres: [],

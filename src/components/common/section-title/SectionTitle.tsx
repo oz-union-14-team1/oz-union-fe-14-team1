@@ -20,7 +20,7 @@ export default function SectionTitle({
   )
 
   return (
-    <h2 className="flex items-center gap-2 font-bold text-text-light">
+    <h2 className="flex items-center gap-2 text-base font-bold text-text-light md:text-xl">
       {href ? (
         <Link href={href} className="flex items-center gap-1 hover:underline">
           {content}

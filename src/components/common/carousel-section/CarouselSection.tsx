@@ -1,11 +1,11 @@
 'use client'
 
 import useCarousel from '@/hooks/useCarousel'
-import { Game } from '@/types/game'
+import { Game } from '@/types/api-response/game-response'
 import { cn } from '@/utils'
 
 import CarouselNav from '../carousel-nav/CarouselNav'
-import { GameCard } from '../game-card'
+import GameCard from '../game-card/GameCard'
 import SectionTitle from '../section-title/SectionTitle'
 
 type CarouselSectionProps = {
@@ -28,7 +28,7 @@ export function CarouselSection({
 
   return (
     <section className={className}>
-      <div className="mb-1 flex items-center justify-between">
+      <div className="mb-2 flex items-center justify-between px-2 md:mb-5">
         <SectionTitle title={title} href={href} showArrow={showArrow} />
         <CarouselNav
           onPrev={scrollPrev}
@@ -40,11 +40,11 @@ export function CarouselSection({
       <div
         ref={ref}
         onScroll={updateNavState}
-        className="scrollbar-hide flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth"
+        className="scrollbar-hide flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth"
       >
         {games.map((game) => (
           <div
-            key={game.gameId}
+            key={game.id}
             className={cn(
               'shrink-0 snap-start',
               'basis-[calc(33.333%-11px)]',
@@ -53,10 +53,11 @@ export function CarouselSection({
             )}
           >
             <GameCard
-              key={game.gameId}
-              id={game.gameId}
-              name={game.gameName}
-              imgUrl={game.imgUrl}
+              key={game.id}
+              id={game.id}
+              name={game.name}
+              image={game.image}
+              variant="default"
             />
           </div>
         ))}
