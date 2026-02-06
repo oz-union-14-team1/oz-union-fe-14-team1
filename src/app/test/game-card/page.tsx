@@ -1,15 +1,15 @@
-import { GameCard } from '@/components/common/game-card'
-import { MOCK_GAMES } from '@/mocks'
+import GameCard from '@/components/common/game-card/GameCard'
+import { MOCK_GAME } from '@/mocks/data/mockGameList'
 
 export default function GameCardTestPage() {
   return (
     <div className="mx-auto flex max-w-(--width-container) flex-wrap justify-start gap-2">
-      {MOCK_GAMES.map((game) => (
+      {MOCK_GAME.map((game) => (
         <GameCard
           key={`grid-${game.id}`}
           id={game.id}
           name={game.name}
-          imgUrl={game.images[0] || ''}
+          image={game.image || ''}
         />
       ))}
     </div>

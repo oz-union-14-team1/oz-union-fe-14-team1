@@ -8,11 +8,10 @@ import {
   usePostWishlist,
 } from '@/api/queries/useWishlistMutations'
 import { useToast } from '@/hooks'
-import { GameId } from '@/types'
 import { cn } from '@/utils'
 
 type HeartButtonUiProps = {
-  gameId: GameId
+  gameId: number
 }
 
 export function HeartButtonUi({ gameId }: HeartButtonUiProps) {
@@ -62,7 +61,7 @@ export function HeartButtonUi({ gameId }: HeartButtonUiProps) {
       aria-label="찜하기"
       onClick={handleWishlistClick}
       className={cn(
-        'absolute top-5 right-5 z-10 size-9 cursor-pointer overflow-hidden rounded-full border border-white/20 bg-black/60 backdrop-blur-md transition-all duration-300',
+        'absolute top-1 right-5 z-10 size-9 cursor-pointer overflow-hidden rounded-full border border-white/20 bg-black/60 backdrop-blur-md transition-all duration-300',
         'flex flex-col items-center justify-center',
         'hover:scale-110 hover:border-white/40 hover:bg-black/80 hover:shadow-[0_4px_12px_rgba(168,85,247,0.4)]',
         wishlisted ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'

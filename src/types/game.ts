@@ -1,11 +1,10 @@
 export type GameId = number | string
 
 export type Game = {
-  gameId: GameId
-  gameName: string
-  imgUrl: string
-  genreId?: number[]
-  tagId?: number[]
-  release?: string
-  score?: number
+  id: GameId
+  name: string
+  image: string
+  tag?: string[]
+  releaseeAt?: string
+  platforms?: string[]
 }

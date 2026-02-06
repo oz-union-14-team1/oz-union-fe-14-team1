@@ -37,7 +37,9 @@ export const GameReview = ({ gameDetail: data }: GameReviewProps) => {
 
         <div className="flex flex-col gap-1">
           <span className={labelStyle}>출시일</span>
-          <span className={valueStyle}>{data.releasedAt.toDateString()}</span>
+          <span className={valueStyle}>
+            {new Date(data.releasedAt).toDateString()}
+          </span>
         </div>
         <hr />
         <div>{data.intro}</div>

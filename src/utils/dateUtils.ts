@@ -1,3 +1,5 @@
+import { Game } from '@/types/api-response/game-response'
+
 export const getDayDiffFromNow = (createdAt: string | Date) => {
   const now = new Date()
   const createdDate = new Date(createdAt)
@@ -8,3 +10,11 @@ export const getDayDiffFromNow = (createdAt: string | Date) => {
 
   return diffDays
 }
+
+export const getLatestGames = (games: Game[]) =>
+  [...games]
+    .sort(
+      (a, b) =>
+        new Date(b.releasedAt).getTime() - new Date(a.releasedAt).getTime()
+    )
+    .slice(0, 6)

@@ -21,7 +21,7 @@ const MOCK_DETAIL_DATA = {
   publisher: '퍼블릭',
   platforms: ['닌텐도'],
   created_at: '2026-02-03T07:04:51.094Z',
-  releasedAt: new Date('2026-02-03'),
+  releasedAt: '2026-02-03',
   images: ['https://...'],
 }
 

@@ -1,21 +1,44 @@
-import { API_BASE_URL, API_PATH, MSW_BASE_URL } from '@/constants/apiPath'
-import {
-  GameDetail,
-  GameFilterParams,
-  GameList,
-} from '@/types/api-response/game-response'
+import { API_BASE_URL, API_PATH } from '@/constants/apiPath'
+import { GameDetail, GameList } from '@/types/api-response/game-response'
 import { camelApi } from '@/utils/axios'
 
-export const getGames = async (params?: GameFilterParams) => {
-  const res = await camelApi.get<GameList>(`${MSW_BASE_URL}${API_PATH.GAMES}`, {
-    params,
-  })
+/**
+ * 전체 게임 목록
+ */
+export const getGames = async (): Promise<GameList> => {
+  const res = await camelApi.get<GameList>(`${API_BASE_URL}${API_PATH.GAMES}`)
   return res.data
 }
 
+/**
+ * 게임상세
+ */
 export const getGameDetail = async (gameId: number) => {
   const res = await camelApi.get<GameDetail>(
     `${API_BASE_URL}${API_PATH.GAME_DETAIL(gameId)}`
+  )
+  return res.data
+}
+
+/**
+ * 선호 장르 기반 추천 게임목록
+ * - 로그인 필요
+ * - preference에서 설정된 태그/장르 기반
+ */
+export const getRecommendByPreference = async (): Promise<GameList> => {
+  const res = await camelApi.get<GameList>(
+    `${API_BASE_URL}${API_PATH.GAMES_RECOMMEND_PREFERENCE}`
+  )
+  return res.data
+}
+
+/**
+ * Wishlist 기반 추천 게임 목록
+ * - 로그인 필요
+ */
+export const getRecommendByWishlist = async (): Promise<GameList> => {
+  const res = await camelApi.get<GameList>(
+    `${API_BASE_URL}${API_PATH.GAMES_RECOMMEND_WISHLIST}`
   )
   return res.data
 }

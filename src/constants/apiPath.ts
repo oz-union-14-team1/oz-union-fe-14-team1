@@ -7,8 +7,10 @@ export const API_PATH = {
     `/community/reviews/${review_id}`,
   REVIEW_DETAIL_API_PATH: (review_id: string) =>
     `/community/reviews/${review_id}/comments`,
-  GAMES: '/games',
+  GAMES: '/game/',
   GAME_DETAIL: (gameId: number) => `/game/${gameId}`,
+  GAMES_RECOMMEND_PREFERENCE: `/game/recommend/preference`,
+  GAMES_RECOMMEND_WISHLIST: '/game/recommend/wishlist',
   LOGIN_API_PATH: '/user/login',
   SIGNUP_API_PATH: '/user/signup',
   LOGIN_REFRESH_API_PATH: '/user/token/refresh',

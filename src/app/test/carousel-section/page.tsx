@@ -1,10 +1,12 @@
 import { CarouselSection } from '@/components/common/carousel-section/CarouselSection'
-import { SECTION_TITLES } from '@/constants'
+import {
+  COMMON_SECTION_TITLES,
+  GUEST_SECTION_TITLES,
+  USER_SECTION_TITLE,
+} from '@/constants'
 import { DUMMY_GAMES } from '@/mocks'
 
 export default function CarouselTestPage() {
-  const { NEW_RELEASE, RECOMMENDATION, MYFAVORITES } = SECTION_TITLES
-
   return (
     <main className="min-h-screen bg-neutral-900 p-8">
       <h1 className="mb-10 text-2xl font-bold text-white">
@@ -14,8 +16,7 @@ export default function CarouselTestPage() {
       <div className="mb-12">
         <p className="mb-4 text-sm text-neutral-400">1. 기본(arrow 있음)</p>
         <CarouselSection
-          title={NEW_RELEASE.title}
-          href={NEW_RELEASE.href}
+          {...COMMON_SECTION_TITLES.NEW_RELEASE}
           games={DUMMY_GAMES}
         />
       </div>
@@ -23,8 +24,7 @@ export default function CarouselTestPage() {
       <div className="mb-12">
         <p className="mb-4 text-sm text-neutral-400">2. 동적타이틀(선호기반)</p>
         <CarouselSection
-          title={RECOMMENDATION.title}
-          href={RECOMMENDATION.href}
+          {...GUEST_SECTION_TITLES.POPULAR}
           games={DUMMY_GAMES}
         />
       </div>
@@ -32,8 +32,7 @@ export default function CarouselTestPage() {
       <div className="mb-12">
         <p className="mb-4 text-sm text-neutral-400">3. arrow 없음</p>
         <CarouselSection
-          title={MYFAVORITES.title}
-          href={MYFAVORITES.href}
+          {...USER_SECTION_TITLE.WHISHLIST}
           showArrow={false}
           games={DUMMY_GAMES}
         />

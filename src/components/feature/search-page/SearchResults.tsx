@@ -3,9 +3,9 @@
 import { useSearchParams } from 'next/navigation'
 
 import Badge from '@/components/common/badge/Badge'
-import { GameCard } from '@/components/common/game-card'
+import GameCard from '@/components/common/game-card/GameCard'
 import { SearchEmptyUi } from '@/components/feature/search-page'
-import { MOCK_GAMES } from '@/mocks'
+import { MOCK_GAME } from '@/mocks/data/mockGameList'
 import { Game } from '@/types/api-response/game-response'
 import { getTagVariant } from '@/utils/getTagVariant'
 
@@ -16,7 +16,7 @@ function SearchResults() {
 
   const filterList = filters ? filters.split(',').filter(Boolean) : []
 
-  const games = MOCK_GAMES.filter((game: Game) => {
+  const games = MOCK_GAME.filter((game: Game) => {
     const matchesQuery =
       !query || String(game.id).toLowerCase().includes(query.toLowerCase())
 
@@ -72,7 +72,7 @@ function SearchResults() {
                 <GameCard
                   id={game.id}
                   name={game.name}
-                  imgUrl={game.images[0] || ''}
+                  image={game.image || ''}
                 />
               </div>
             </div>
