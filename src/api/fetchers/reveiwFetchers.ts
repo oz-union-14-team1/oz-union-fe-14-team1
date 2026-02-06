@@ -1,4 +1,4 @@
-import { API_BASE_URL, API_PATH, MSW_BASE_URL } from '@/constants/apiPath'
+import { API_BASE_URL, API_PATH } from '@/constants/apiPath'
 import { ReviewDetail } from '@/types/api-response/review-response'
 import { api } from '@/utils'
 
