@@ -11,9 +11,12 @@ import {
 } from './ui'
 
 export default function WishList() {
-  const { data: wishlistGames = [], isLoading } = useGetWishlist()
+  const { data: wishlistData = [], isLoading } = useGetWishlist()
   const { emblaRef, canScrollPrev, canScrollNext, scrollPrev, scrollNext } =
     useWishlistCarousel()
+
+  // 배열인지 확인하고 안전하게 처리
+  const wishlistGames = Array.isArray(wishlistData) ? wishlistData : []
 
   if (isLoading) {
     return (
