@@ -26,4 +26,6 @@ export const API_PATH = {
     `/game/wishlist/${wishlistId}`,
   GET_PROFILE_IMAGE_API_PATH: '/user/me/image',
   POST_PROFILE_IMAGE_API_PATH: '/user/me/image',
+  CHECK_EMAIL_API_PATH: '/user/check-email',
+  CHECK_NICKNAME_API_PATH: '/user/check-nickname',
 } as const
