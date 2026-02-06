@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { Button } from '@/components'
 import { Avatar, ReviewCard } from '@/components/feature/review'
@@ -11,6 +11,11 @@ import { Textarea } from '@/components/feature/review/Textarea'
 import { GameReview } from '@/components/layout/review/GameReview'
 import { ReviewDetail } from '@/types/api-response/review-response'
 
+const MOCK_AI_DATA = {
+  god_points: ['장점을 불러오는 중입니다'],
+  bad_points: ['단점을 불러오는 중입니다'],
+  total_review: '요약중입니다',
+}
 const MOCK_DETAIL_DATA = {
   id: 1,
   name: '젤다의 전설',
@@ -51,17 +56,35 @@ const MOCK_REVIEW_DATA: ReviewDetail = {
 }
 
 export default function ReviewPage() {
-  const game = MOCK_DETAIL_DATA
-  const review = MOCK_REVIEW_DATA
   const [isEditing, setIsEditing] = useState(false)
+  const [game] = useState(MOCK_DETAIL_DATA)
+  const [review] = useState(MOCK_REVIEW_DATA)
+  const [aiData, setAiData] = useState(MOCK_AI_DATA)
   const handleButtonClick = () => {
     setIsEditing(!isEditing)
   }
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const resAi = await fetch(
+          'http://43.200.124.13:8000/api/v1/community/summary/1'
+        )
+
+        if (resAi.ok) {
+          const airesult = await resAi.json()
+          setAiData(airesult)
+        }
+      } catch (error) {
+        console.error('데이터 로드 실패:', error)
+      }
+    }
+    fetchData()
+  }, [])
   return (
     <div className="mx-auto flex w-full max-w-300 gap-10 px-4 py-10">
       <div className="flex flex-1 flex-col gap-5">
-        <ImageCard game={game} />
+        {game && <ImageCard game={game} />}
         <div className="flex items-center gap-2">
           <Star size={16} />
           <span className="font-bold text-white">4.8</span>
@@ -73,7 +96,10 @@ export default function ReviewPage() {
         <h1 className="text-4xl font-bold text-white">{game.name}</h1>
 
         {/* AI답변 */}
-        <AiSummary className="flex w-200 flex-col gap-2 rounded-xl border p-6" />
+        <AiSummary
+          {...aiData}
+          className="flex w-200 flex-col gap-2 rounded-xl border p-6"
+        />
         <Button
           variant="main"
           onClick={handleButtonClick}
