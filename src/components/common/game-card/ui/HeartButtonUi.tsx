@@ -2,7 +2,12 @@
 
 import { Heart } from 'lucide-react'
 
-import { useWishlistStore } from '@/store/useWishlistStore'
+import { useGetWishlist } from '@/api/queries/useGetWishlist'
+import {
+  useDeleteWishlist,
+  usePostWishlist,
+} from '@/api/queries/useWishlistMutations'
+import { useToast } from '@/hooks'
 import { GameId } from '@/types'
 import { cn } from '@/utils'
 
@@ -11,13 +16,44 @@ type HeartButtonUiProps = {
 }
 
 export function HeartButtonUi({ gameId }: HeartButtonUiProps) {
-  const { toggleWishlist, isWishlisted } = useWishlistStore()
-  const wishlisted = isWishlisted(gameId)
+  const { data: wishlistGames = [] } = useGetWishlist()
+  const { mutate: addWishlist } = usePostWishlist()
+  const { mutate: removeWishlist } = useDeleteWishlist()
+  const { triggerToast } = useToast()
+
+  const gameIdNum = typeof gameId === 'string' ? parseInt(gameId, 10) : gameId
+
+  // 위시리스트 항목 찾기 (game 필드로 비교)
+  const wishlistItem = wishlistGames.find((item) => item.game === gameIdNum)
+  const wishlisted = !!wishlistItem
 
   const handleWishlistClick = (e: React.MouseEvent) => {
     e.preventDefault()
     e.stopPropagation()
-    toggleWishlist(gameId)
+
+    if (wishlisted && wishlistItem) {
+      // 위시리스트 항목 ID로 삭제
+      removeWishlist(wishlistItem.id, {
+        onSuccess: () => {
+          triggerToast('success', '위시리스트에서 제거되었습니다.')
+        },
+        onError: () => {
+          triggerToast('error', '위시리스트 제거에 실패했습니다.')
+        },
+      })
+    } else {
+      addWishlist(
+        { game: gameIdNum },
+        {
+          onSuccess: () => {
+            triggerToast('success', '위시리스트에 추가되었습니다.')
+          },
+          onError: () => {
+            triggerToast('error', '위시리스트 추가에 실패했습니다.')
+          },
+        }
+      )
+    }
   }
 
   return (

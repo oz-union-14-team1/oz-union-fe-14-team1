@@ -1,11 +1,11 @@
 'use client'
 
 import { GameCard } from '@/components/common/game-card'
-import { Game } from '@/types/api-response/game-response'
+import { WishlistGame } from '@/types/api-response/wishlist-response'
 
 type WishListCarouselUiProps = {
   emblaRef: (node: HTMLDivElement | null) => void
-  wishlistGames: Game[]
+  wishlistGames: WishlistGame[]
   canScrollPrev: boolean
   canScrollNext: boolean
 }
@@ -26,9 +26,9 @@ export default function WishListCarouselUi({
       )}
       <div className="overflow-hidden py-0 md:py-4" ref={emblaRef}>
         <div className="flex -space-x-8 md:gap-6 md:space-x-0 md:pl-4">
-          {wishlistGames.map((game, index) => (
+          {wishlistGames.map((item, index) => (
             <div
-              key={game.id}
+              key={item.id}
               className="animate-in fade-in slide-in-from-bottom-4 flex-[0_0_auto] scale-[0.8] md:scale-100"
               style={{
                 animationDelay: `${index * 100}ms`,
@@ -36,9 +36,9 @@ export default function WishListCarouselUi({
               }}
             >
               <GameCard
-                id={game.id}
-                name={game.name}
-                imgUrl={game.image || ''}
+                id={item.game}
+                name={item.game_name}
+                imgUrl={item.game_image || ''}
               />
             </div>
           ))}

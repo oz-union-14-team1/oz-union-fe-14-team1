@@ -19,4 +19,8 @@ export const API_PATH = {
   USER_LOGOUT_API_PATH: '/user/logout',
   GET_PROFILE_IMAGE_API_PATH: '/user/me/image',
   POST_PROFILE_IMAGE_API_PATH: '/user/me/image',
+  GET_WISHLIST_API_PATH: '/game/wishlist',
+  POST_WISHLIST_API_PATH: '/game/wishlist',
+  DELETE_WISHLIST_API_PATH: (wishlistId: number) =>
+    `/game/wishlist/${wishlistId}`,
 } as const
