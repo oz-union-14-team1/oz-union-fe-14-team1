@@ -2,10 +2,11 @@
 
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { loginApi } from '@/api/fetchers/authFetchers'
 import { getUserInfoApi } from '@/api/fetchers/userInfoFetchers'
+import { useUserTendency } from '@/api/queries/usePreference'
 import { compoundLogoColumn } from '@/assets'
 import { BaseInput, Button, LoginFormValues, loginSchema } from '@/components'
 import { ROUTES_PATHS } from '@/constants'
@@ -23,6 +24,8 @@ export default function LoginForm() {
     id: '',
     password: '',
   })
+  const { data: tendency, isLoading, refetch } = useUserTendency()
+  const [shouldCheckTendency, setShouldCheckTendency] = useState(false)
 
   const handleSubmit = async () => {
     const { id, password } = form
@@ -41,11 +44,32 @@ export default function LoginForm() {
       setUser(userInfo)
 
       triggerToast('success', '로그인 성공')
-      router.replace(ROUTES_PATHS.MAIN_PAGE)
-    } catch {
+
+      setShouldCheckTendency(true)
+      await refetch()
+    } catch (error) {
+      console.log('로그인 실패:', error)
       triggerToast('error', '아이디 또는 비밀번호가 올바르지 않습니다.')
     }
   }
+
+  /*
+   * 로그인 후 온보딩 여부 체크 → 라우팅
+   */
+  useEffect(() => {
+    if (!shouldCheckTendency) {
+      console.log('tendency:', tendency)
+      return
+    }
+    if (tendency) {
+      router.replace(ROUTES_PATHS.MAIN_PAGE)
+    } else if (tendency === null) {
+      console.log('tendency1:', tendency)
+      return
+    } else {
+      router.replace(ROUTES_PATHS.RECOMMEND.TAG)
+    }
+  }, [tendency, isLoading, shouldCheckTendency, router])
 
   const handleChange = (field: keyof LoginFormValues, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }))
