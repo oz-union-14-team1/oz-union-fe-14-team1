@@ -7,13 +7,10 @@ import logo from '@/assets/images/logo/logo.svg'
 import logoText from '@/assets/images/logo/logotext.svg'
 import notFoundImage from '@/assets/images/notFoundImage.png'
 
-import { GENRE_ASSETS } from './genreAssets'
-
 export {
   compoundLogoColumn,
   compoundLogoRow,
   discordIcon,
-  GENRE_ASSETS,
   googleIcon,
   googleLogo,
   logo,
