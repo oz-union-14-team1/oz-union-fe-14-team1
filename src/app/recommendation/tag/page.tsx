@@ -1,13 +1,10 @@
+'use client'
+
+import { useAllTags } from '@/api/queries/usePreference'
 import { OnboardingHeader, TagSelector } from '@/components'
-import { MOCK_TAGS } from '@/mocks'
 
-async function getTags() {
-  // TODO: API 연동
-  return MOCK_TAGS
-}
-
-export default async function TagPage() {
-  const tags = await getTags()
+export default function TagPage() {
+  const { data: tags = [] } = useAllTags()
 
   return (
     <>
@@ -28,7 +25,7 @@ export default async function TagPage() {
         }
         description={
           <>
-            선택한 태그를 기반으로{' '}
+            선택한 태그를 기반으로
             <span className="font-bold text-white">
               취향에 딱 맞는 게임을 추천
             </span>

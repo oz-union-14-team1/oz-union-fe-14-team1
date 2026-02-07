@@ -1,12 +1,12 @@
+'use client'
+
+import { useAllGenres } from '@/api/queries/usePreference'
 import { GenreSelector, OnboardingHeader } from '@/components'
-import { MOCK_GENRES } from '@/mocks'
+import { filterAndMapGenres } from '@/utils/genreHelper'
 
-async function getGenres() {
-  return MOCK_GENRES
-}
-
-export default async function GenrePage() {
-  const genres = await getGenres()
+export default function GenrePage() {
+  const { data: allGenres = [] } = useAllGenres()
+  const genres = filterAndMapGenres(allGenres)
 
   return (
     <>
@@ -15,7 +15,7 @@ export default async function GenrePage() {
         currentStep={2}
         title={
           <>
-            이 플레이 타입에{' '}
+            이 플레이 타입에
             <span className="font-bold text-text-light">어울리는 장르</span>를
             골라보세요
           </>
@@ -27,7 +27,7 @@ export default async function GenrePage() {
         }
         description={
           <>
-            당신의{' '}
+            당신의
             <span className="font-bold text-white">
               플레이 스타일과 잘 어울리는 장르
             </span>
