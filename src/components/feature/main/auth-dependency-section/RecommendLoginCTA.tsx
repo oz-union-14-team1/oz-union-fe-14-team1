@@ -5,12 +5,6 @@ import Link from 'next/link'
 import { useGames } from '@/api/queries/useGameQueries'
 import GameCard from '@/components/common/game-card/GameCard'
 import { GUEST_SECTION_TITLES } from '@/constants/sectionTitle'
-// import { MOCK_GAME } from '@/mocks/data/mockGameList'
-// import { Game } from '@/types/api-response/game-response'
-
-// type RecommendLoginCTAProps = {
-//   games?: Game[]
-// }
 
 export default function RecommendLoginCTA() {
   // TODO: API 연결

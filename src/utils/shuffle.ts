@@ -8,3 +8,10 @@ export function shuffle<T>(array: T[]) {
 
   return result
 }
+
+/**
+ * 배열에서 N개추출
+ */
+export function getRandomItems<T>(array: T[], count: number): T[] {
+  return shuffle(array).slice(0, count)
+}

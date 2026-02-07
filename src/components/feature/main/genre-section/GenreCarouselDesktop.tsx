@@ -1,13 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { GENRE_ASSETS } from '@/assets'
 import { ROUTES_PATHS } from '@/constants'
-import { Genre } from '@/types'
 import { cn } from '@/utils'
+import { getGenreAsset } from '@/utils/genreHelper'
 
 import CardOverlay from './CardOverlay'
 import GenreSectionNav from './GenreSectionNav'
+
+import type { Genre } from '@/types/api-response/onboarding-response'
 
 type DesktopCarouselProps = {
   genres: Genre[]
@@ -37,15 +38,15 @@ export default function GenreCarouselDesktop({
             )}
           >
             <Image
-              src={GENRE_ASSETS[genre.slug].horizontal}
-              alt={genre.name}
+              src={getGenreAsset(genre.slug).horizontal}
+              alt={genre.genre}
               fill
               className="hidden object-cover transition-transform duration-300 group-hover/card:scale-105 md:block"
               style={{
-                objectPosition: GENRE_ASSETS[genre.slug].position ?? 'center',
+                objectPosition: getGenreAsset(genre.slug).position ?? 'center',
               }}
             />
-            <CardOverlay label={genre.name} />
+            <CardOverlay label={genre.genre} />
           </Link>
         ))}
       </div>

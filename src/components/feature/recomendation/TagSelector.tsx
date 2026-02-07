@@ -2,18 +2,15 @@
 
 import { useEffect, useState } from 'react'
 
-import Tag from '@/components/common/tag/Tag'
+import { Tag as TagButton } from '@/components/common'
 import { useOnboardingStore } from '@/store/useOnboardingStore'
 import { cn } from '@/utils'
 import { shuffle } from '@/utils/shuffle'
 
-type TagData = {
-  id: string
-  name: string
-}
+import type { Tag } from '@/types/api-response/onboarding-response'
 
 type TagSelectorProps = {
-  tags: TagData[]
+  tags: Tag[]
 }
 
 export function TagSelector({ tags }: TagSelectorProps) {
@@ -24,6 +21,10 @@ export function TagSelector({ tags }: TagSelectorProps) {
     setShuffledTags(shuffle(tags))
   }, [tags])
 
+  const isTagSelected = (tagId: number) => {
+    return selectedTags.some((t) => t.id === tagId)
+  }
+
   return (
     <>
       <div
@@ -33,11 +34,11 @@ export function TagSelector({ tags }: TagSelectorProps) {
         )}
       >
         {shuffledTags.map((tag) => (
-          <Tag
+          <TagButton
             key={tag.id}
-            label={tag.name}
-            isSelected={selectedTags.includes(tag.id)}
-            onClick={() => toggleTag(tag.id)}
+            label={tag.tag}
+            isSelected={isTagSelected(tag.id)}
+            onClick={() => toggleTag(tag)}
           />
         ))}
       </div>

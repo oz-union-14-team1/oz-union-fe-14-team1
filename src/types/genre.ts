@@ -1,24 +1,27 @@
-export type Genre = {
-  id: number
-  name: string
-  slug: GenreSlug
-}
+import { Genre } from './api-response/onboarding-response'
 
 export type GenreWithMeta = Genre & {
   description: string
   backgroundImage: string
 }
-
+export type GenreAsset = {
+  vertical: string
+  horizontal: string
+  position: 'center' | 'top' | 'bottom'
+}
 export type GenreSlug =
   | 'adventure'
   | 'action'
-  | 'shooting'
-  | 'rpg'
+  | 'shooter'
+  | 'role-playing-games-rpg'
   | 'simulation'
+  | 'strategy'
   | 'puzzle'
-  | 'roguelike'
-  | 'survival'
-  | 'arcade'
+  | 'platformer'
+  | 'fighting'
   | 'racing'
-  | 'horror'
+  | 'arcade'
   | 'sports'
+  | 'massively-multiplayer'
+  | 'indie'
+  | 'casual'

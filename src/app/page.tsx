@@ -1,6 +1,5 @@
 import { GenreCarouselSection, HeroBanner } from '@/components'
-import { GuestSection } from '@/components/feature/main/user-section/GuestSection'
-import { MemberSection } from '@/components/feature/main/user-section/MemberSection'
+import { MainContent } from '@/components/feature/main/MainContent'
 import { MOCK_GENRES } from '@/mocks'
 import { MOCK_BANNERS } from '@/mocks/mockBanner'
 
@@ -22,8 +21,7 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col gap-5 md:gap-10">
-        <GuestSection />
-        <MemberSection />
+        <MainContent />
       </div>
     </main>
   )

@@ -4,11 +4,12 @@ import { useMemo, useState } from 'react'
 
 import { DotIndicator } from '@/components'
 import { DESKTOP_ITEMS, MOBILE_ITEMS } from '@/constants'
-import { Genre } from '@/types'
 import { countArray } from '@/utils'
 
 import GenreCarouselDesktop from './GenreCarouselDesktop'
 import GenreCarouselMobile from './GenreCarouselMobile'
+
+import type { Genre } from '@/types/api-response/onboarding-response'
 
 type GenreCarouselProps = {
   genres: Genre[]
@@ -37,7 +38,7 @@ export default function GenreCarouselSection({ genres }: GenreCarouselProps) {
 
   return (
     <section>
-      <h2 className="mb-4 text-base font-bold md:text-xl">
+      <h2 className="mb-4 px-4 text-base font-bold md:text-xl">
         🎮 장르별 게임 둘러보기
       </h2>
 

@@ -4,30 +4,32 @@ import {
   useRecommendByPreference,
   useRecommendByWhishlist,
 } from '@/api/queries/useGameQueries'
+import { useUserTendency } from '@/api/queries/usePreference'
 import { CarouselSection } from '@/components/common'
 import { USER_SECTION_TITLE } from '@/constants'
+import { useAuthStore } from '@/store/useAuthStore'
 
 const FALLBACK_START = 6
 const FALLBACK_END = 13
 
 export function MemberSection() {
-  const { data: preference } = useRecommendByPreference(true)
-  const { data: wishlist } = useRecommendByWhishlist(true)
+  const { user, accessToken, isInitialized } = useAuthStore((state) => state)
+  const isLoggedIn = isInitialized && !!user && !!accessToken
 
-  const preferenceGames = preference?.results ?? []
-  const wishlistGames = wishlist?.results ?? []
+  const { data: preferenceGames = [] } = useRecommendByPreference(isLoggedIn)
+  const { data: wishlistGames = [] } = useRecommendByWhishlist(isLoggedIn)
+  const { data: tendency } = useUserTendency()
+
   const hasWishlist = wishlistGames.length > 0
   const fallbackGames = preferenceGames.slice(FALLBACK_START, FALLBACK_END)
 
-  // TODO: aiTendency API 연결예정
-  const tendency = '" 낭만가 RPG 탐험가 " '
+  const preferenceTitle = tendency
+    ? USER_SECTION_TITLE.PREFERENCE.getTitle(tendency)
+    : '🎮 당신을 위한 추천'
 
   return (
     <section className="flex flex-col gap-5 md:gap-10">
-      <CarouselSection
-        title={USER_SECTION_TITLE.PREFERENCE.getTitle(tendency)}
-        games={preferenceGames}
-      />
+      <CarouselSection title={preferenceTitle} games={preferenceGames} />
       <CarouselSection
         {...USER_SECTION_TITLE.WHISHLIST}
         title={

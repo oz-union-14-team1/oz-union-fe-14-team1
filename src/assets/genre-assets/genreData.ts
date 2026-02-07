@@ -1,13 +1,9 @@
-import { GenreSlug } from '@/types'
+import {
+  FALLBACK_IMG_HORIZONTAL,
+  FALLBACK_IMG_VERTICAL,
+} from '@/constants/fallback'
 
-export const GENRE_ASSETS: Record<
-  GenreSlug,
-  {
-    vertical: string
-    horizontal: string
-    position: string
-  }
-> = {
+export const GENRE_ASSETS = {
   adventure: {
     vertical: '/images/genres/vertical/adventure.png',
     horizontal: '/images/genres/horizontal/adventure.png',
@@ -18,12 +14,12 @@ export const GENRE_ASSETS: Record<
     horizontal: '/images/genres/horizontal/action.png',
     position: 'top',
   },
-  shooting: {
+  shooter: {
     vertical: '/images/genres/vertical/shooting.png',
     horizontal: '/images/genres/horizontal/shooting.png',
     position: 'top',
   },
-  rpg: {
+  'role-playing-games-rpg': {
     vertical: '/images/genres/vertical/rpg.png',
     horizontal: '/images/genres/horizontal/rpg2.png',
     position: 'center',
@@ -33,9 +29,9 @@ export const GENRE_ASSETS: Record<
     horizontal: '/images/genres/horizontal/simulation.png',
     position: 'center',
   },
-  roguelike: {
-    vertical: '/images/genres/vertical/roguelike.png',
-    horizontal: '/images/genres/horizontal/roguelike.png',
+  strategy: {
+    vertical: '/images/genres/vertical/strategy.png',
+    horizontal: '/images/genres/horizontal/strategy.png',
     position: 'center',
   },
   puzzle: {
@@ -43,17 +39,16 @@ export const GENRE_ASSETS: Record<
     horizontal: '/images/genres/horizontal/puzzle.png',
     position: 'center',
   },
-  survival: {
-    vertical: '/images/genres/vertical/survival.png',
-    horizontal: '/images/genres/horizontal/survival.png',
+  platformer: {
+    vertical: '/images/genres/vertical/platformer.png',
+    horizontal: '/images/genres/horizontal/platform.png',
     position: 'center',
   },
-  horror: {
-    vertical: '/images/genres/vertical/horror.png',
-    horizontal: '/images/genres/horizontal/horror2.png',
+  fighting: {
+    vertical: '/images/genres/vertical/fighting.png',
+    horizontal: '/images/genres/horizontal/fighting.png',
     position: 'center',
   },
-
   racing: {
     vertical: '/images/genres/vertical/racing.png',
     horizontal: '/images/genres/horizontal/racing.png',
@@ -69,4 +64,29 @@ export const GENRE_ASSETS: Record<
     horizontal: '/images/genres/horizontal/sports.png',
     position: 'center',
   },
+  'massively-multiplayer': {
+    vertical: '/images/genres/vertical/mmo.png',
+    horizontal: 'images/genres/vertical/mmo.png',
+    position: 'center',
+  },
+  indie: {
+    vertical: '/images/genres/vertical/indie.png',
+    horizontal: '/images/genres/vertical/indie.png',
+    position: 'center',
+  },
+  casual: {
+    vertical: '/images/genres/vertical/casual.png',
+    horizontal: '/images/genres/horizontal/casual.png',
+    position: 'center',
+  },
+} as const
+
+export type GenreSlug = keyof typeof GENRE_ASSETS
+
+export const DEFAULT_GENRE_IMAGE = {
+  vertical: FALLBACK_IMG_VERTICAL,
+  horizontal: FALLBACK_IMG_HORIZONTAL,
+  position: 'center',
 }
+
+export const EXCLUDED_SLUGS = ['indie', 'casual', 'strategy'] as const

@@ -43,6 +43,7 @@ export const useRecommendByPreference = (isLoggedIn: boolean) => {
   return useQuery({
     queryKey: QUERY_KEYS.GAME_RECOMMEND_PREFERENCE,
     queryFn: getRecommendByPreference,
+    select: (data) => data?.results ?? [],
     enabled: isLoggedIn,
   })
 }
@@ -54,6 +55,7 @@ export const useRecommendByWhishlist = (isLoggedIn: boolean) => {
   return useQuery({
     queryKey: QUERY_KEYS.GAME_RECOMMEND_WISHLIST,
     queryFn: getRecommendByWishlist,
+    select: (data) => data?.results ?? [],
     enabled: isLoggedIn,
   })
 }

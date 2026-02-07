@@ -20,7 +20,6 @@ import {
   ROUTES_PATHS,
   SIGNUP_FIELDS,
 } from '@/constants'
-import { RECOMMEND_PATHS } from '@/constants/routesPaths'
 import {
   usePhoneVerificationTimer,
   useToast,
@@ -243,7 +242,6 @@ export default function UserInfoUpdateClient() {
           handleVerifyCode={phoneTimer.handleVerifyCode}
           idValue="userInfoUpdate"
         />
-
         <div className="mt-5 flex w-full gap-4">
           <Button
             type="submit"
@@ -264,7 +262,7 @@ export default function UserInfoUpdateClient() {
       </form>
       <Button
         type="button"
-        onClick={() => router.push(RECOMMEND_PATHS.TAG)}
+        onClick={() => router.push(ROUTES_PATHS.RECOMMEND.TAG)}
         variant="purple"
         className="mt-5 w-full cursor-pointer bg-gradient-main text-sm shadow-tag-inactive hover:bg-main-purple/70 md:text-lg"
       >

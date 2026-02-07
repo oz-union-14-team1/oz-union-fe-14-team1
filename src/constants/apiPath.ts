@@ -11,7 +11,7 @@ export const API_PATH = {
   REVIEW_DETAIL_API_PATH: (review_id: string) =>
     `/community/reviews/${review_id}/comments`,
   GET_MY_REVIEWS_API_PATH: '/community/reviews/me',
-  GAMES: '/games',
+  GAMES: '/game/',
   GAME_DETAIL: (gameId: number) => `/game/${gameId}`,
   GAMES_RECOMMEND_PREFERENCE: `/game/recommend/preference`,
   GAMES_RECOMMEND_WISHLIST: '/game/recommend/wishlist',
@@ -22,6 +22,7 @@ export const API_PATH = {
   MAIN_PAGE: '/',
   FIND_ID_API_PATH: '/user/find-account',
   USER_DELETE_API_PATH: '/user/me/delete',
+
   USER_LOGOUT_API_PATH: '/user/logout',
   GET_WISHLIST_API_PATH: '/game/wishlist',
   POST_WISHLIST_API_PATH: '/game/wishlist',
@@ -33,4 +34,9 @@ export const API_PATH = {
   CHECK_NICKNAME_API_PATH: '/user/check-nickname',
   DELETE_PROFILE_IMAGE_API_PATH: '/user/me/image',
   GOOGLE_LOGIN_API_PATH: '/user/google/login',
+
+  ONBOARDING_TAGS: '/user/preference/tags',
+  ONBOARDING_GENRES: '/user/preference/genres',
+  ONBOARDING_PREFERENCE: '/user/preference/',
+  ONBOARDING_AI_TENDENCY: '/community/summary/user/tendency',
 } as const

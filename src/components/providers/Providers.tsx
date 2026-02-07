@@ -15,6 +15,11 @@ export default function Providers({ children }: ProvidersProps) {
 
   useEffect(() => {
     const initMSW = async () => {
+      if (process.env.NEXT_PUBLIC_USE_MSW !== 'true') {
+        setIsMSWReady(true)
+        return
+      }
+
       const { worker } = await import('@/mocks/browser')
       await worker.start({ onUnhandledRequest: 'bypass' })
       setIsMSWReady(true)

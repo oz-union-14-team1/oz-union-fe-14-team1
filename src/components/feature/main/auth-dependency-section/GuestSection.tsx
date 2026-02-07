@@ -20,8 +20,6 @@ export function GuestSection() {
   const games = data?.results ?? []
   const popularGames = games.slice(0, 6)
 
-  console.log('games query:', { data })
-
   const latestGames = useMemo(() => getLatestGames(games), [games])
   return (
     <section className="flex flex-col gap-5 md:gap-10">
