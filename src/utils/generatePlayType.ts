@@ -9,11 +9,9 @@ import { PlayTypeResult, TraitScores } from '@/types'
 
 import { buildDescription } from './buildDescription'
 
-const TAG_ID_MAP = Object.fromEntries(
-  MOCK_TAGS.map((tag) => [tag.id, tag.name])
-)
+const TAG_ID_MAP = Object.fromEntries(MOCK_TAGS.map((tag) => [tag.id, tag.id]))
 const GENRE_ID_MAP = Object.fromEntries(
-  MOCK_GENRES.map((genre) => [genre.id, genre.name])
+  MOCK_GENRES.map((genre) => [genre.id, genre.genre])
 )
 
 /**
