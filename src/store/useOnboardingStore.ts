@@ -1,31 +1,51 @@
 import { create } from 'zustand'
 
-type OnboardingState = {
-  selectedTags: string[]
-  selectedGenres: number[]
+import type { Genre, Tag } from '@/types/api-response/onboarding-response'
 
-  toggleTag: (tagId: string) => void
-  toggleGenre: (genreId: number) => void
+type OnboardingState = {
+  selectedTags: Tag[]
+  selectedGenres: Genre[]
+  aiTendency: string | null
+
+  toggleTag: (tag: Tag) => void
+  toggleGenre: (genre: Genre) => void
+  setAiTendency: (tendency: string) => void
   reset: () => void
 }
 
 export const useOnboardingStore = create<OnboardingState>((set) => ({
   selectedTags: [],
   selectedGenres: [],
+  aiTendency: null,
 
-  toggleTag: (tagId) =>
-    set((state) => ({
-      selectedTags: state.selectedTags.includes(tagId)
-        ? state.selectedTags.filter((id) => id !== tagId)
-        : [...state.selectedTags, tagId],
-    })),
+  toggleTag: (tag) =>
+    set((state) => {
+      const tagExists = state.selectedTags.find((t) => t.id === tag.id)
+      if (tagExists) {
+        return {
+          selectedTags: state.selectedTags.filter((t) => t.id !== tag.id),
+        }
+      }
+      return { selectedTags: [...state.selectedTags, tag] }
+    }),
 
-  toggleGenre: (genreId) =>
-    set((state) => ({
-      selectedGenres: state.selectedGenres.includes(genreId)
-        ? state.selectedGenres.filter((id) => id !== genreId)
-        : [...state.selectedGenres, genreId],
-    })),
+  toggleGenre: (genre) =>
+    set((state) => {
+      const genreExists = state.selectedGenres.find((g) => g.id === genre.id)
+      if (genreExists) {
+        return {
+          selectedGenres: state.selectedGenres.filter((g) => g.id !== genre.id),
+        }
+      }
+      return { selectedGenres: [...state.selectedGenres, genre] }
+    }),
 
-  reset: () => set({ selectedTags: [], selectedGenres: [] }),
+  setAiTendency: (tendency) => set({ aiTendency: tendency }),
+
+  reset: () =>
+    set({
+      selectedTags: [],
+      selectedGenres: [],
+      aiTendency: null,
+    }),
 }))
