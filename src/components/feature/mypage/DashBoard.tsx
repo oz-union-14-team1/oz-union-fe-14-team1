@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 
-import { RECOMMEND_PATHS } from '@/constants/routesPaths'
+import { ROUTES_PATHS } from '@/constants/routesPaths'
 
 import { DashBoardCardUi } from './index'
 
@@ -38,7 +38,7 @@ export default function DashBoard({
       </div>
 
       <div className="flex-1">
-        <Link href={RECOMMEND_PATHS.TAG} className="block h-full">
+        <Link href={ROUTES_PATHS.RECOMMEND.TAG} className="block h-full">
           <button
             type="button"
             className="group flex h-full w-full flex-col items-center transition-all duration-300 hover:scale-105 active:scale-95"
