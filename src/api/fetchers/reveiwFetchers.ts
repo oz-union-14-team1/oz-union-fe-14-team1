@@ -30,6 +30,17 @@ export const getAiReveiwSummary = async (gameId: string) => {
   return res.data
 }
 
+export const postReview = async (
+  gameId: string,
+  content: string,
+  rating: number
+) => {
+  await api.post(`${API_BASE_URL}${API_PATH.REVIEWS(gameId)}`, {
+    content,
+    rating,
+  })
+}
+
 export const postReviewComment = async ({
   reviewId,
   content,

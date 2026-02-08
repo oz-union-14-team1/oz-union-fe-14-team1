@@ -1,10 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { use, useState } from 'react'
+import { use, useEffect, useState } from 'react'
 
 import useAiSummary from '@/api/queries/useAiSummary'
 import { useGameDetail } from '@/api/queries/useGameQueries'
+import { useGetUserMe } from '@/api/queries/useGetUserMe'
 import useReviewList from '@/api/queries/useReviewList'
 import { Button } from '@/components'
 import { Avatar, ReviewCard } from '@/components/feature/review'
@@ -13,6 +14,8 @@ import { ImageCard } from '@/components/feature/review/ImageCard'
 import { Star } from '@/components/feature/review/Star'
 import { Textarea } from '@/components/feature/review/Textarea'
 import { GameReview } from '@/components/layout/review/GameReview'
+import { useToast } from '@/hooks'
+import { useAuthStore } from '@/store/useAuthStore'
 
 type ReviewPageProps = {
   params: Promise<{ gameId: string }>
@@ -26,6 +29,17 @@ export default function ReviewPage({ params }: ReviewPageProps) {
   const { data: game } = useGameDetail(Number(gameId))
   const { data: review } = useReviewList(gameId, 1)
   const { data: aiData, status: aiReviewStatus } = useAiSummary(gameId)
+
+  const { data: userData, refetch, isError } = useGetUserMe()
+  const accessToken = useAuthStore((state) => state.accessToken)
+
+  const { triggerToast } = useToast()
+
+  useEffect(() => {
+    if (isError && accessToken) {
+      refetch()
+    }
+  }, [isError, accessToken, refetch])
 
   return (
     <div className="mx-auto flex w-full flex-col-reverse items-center justify-center gap-10 px-4 py-10 lg:flex-row lg:items-start">
@@ -68,24 +82,26 @@ export default function ReviewPage({ params }: ReviewPageProps) {
         <Button
           variant="main"
           onClick={() => {
-            setIsEditing((prev) => !prev)
+            if (userData) {
+              setIsEditing((prev) => !prev)
+            } else {
+              triggerToast('warning', '로그인 이후 이용 할 수 있습니다!')
+            }
           }}
           className="w-fit rounded-xl bg-gray-700 px-4 py-2 text-white"
         >
           {isEditing ? '닫기' : '리뷰 추가'}
         </Button>
 
-        {isEditing && (
-          <form className="flex flex-col gap-3">
-            <Textarea
-              name="review-content"
-              className="w-full rounded-xl border-none p-4"
-              placeholder="리뷰 내용을 입력해주세요..."
-              rows={4}
-            />
-            <div className="flex justify-end"></div>
-          </form>
-        )}
+        <Textarea
+          name="review-content"
+          className="w-full rounded-xl border-none p-4"
+          placeholder="리뷰 내용을 입력해주세요..."
+          rows={4}
+          gameId={gameId}
+          isOpen={isEditing}
+          setIsOpen={setIsEditing}
+        />
 
         {review?.results?.map((comment) => (
           <Link href={`/review/${gameId}/${comment.id}`} key={comment.id}>
