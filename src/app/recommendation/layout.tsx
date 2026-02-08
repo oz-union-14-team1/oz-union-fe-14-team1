@@ -32,7 +32,6 @@ export default function RecommendationLayout({
     }
 
     if (tendency) {
-      console.log('→ 온보딩 이미 완료, 메인으로')
       router.replace(ROUTES_PATHS.MAIN_PAGE)
       return
     }
