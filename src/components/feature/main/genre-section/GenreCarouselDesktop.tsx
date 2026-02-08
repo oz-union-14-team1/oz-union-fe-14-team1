@@ -45,6 +45,7 @@ export default function GenreCarouselDesktop({
                 src={asset.horizontal}
                 alt={genre.genre}
                 fill
+                sizes="(max-width: 768px) 100vw, 434px"
                 className="hidden object-cover transition-transform duration-300 group-hover/card:scale-105 md:block"
                 style={{ objectPosition: asset.position ?? 'center' }}
               />

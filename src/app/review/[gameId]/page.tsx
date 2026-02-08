@@ -53,7 +53,7 @@ export default function ReviewPage({ params }: ReviewPageProps) {
           <aside className="flex w-full flex-col gap-2 lg:hidden">
             <div className="flex h-43.75 w-full flex-col items-center justify-center rounded-card bg-gradient-main">
               <p className="text-12 font-bold text-white">{game?.avgScore}</p>
-              <Star size={24} readonly value={game?.avgScore} />
+              <Star size={16} readonly value={game?.avgScore} />
             </div>
             {game && <GameReview gameDetail={game} />}
           </aside>
