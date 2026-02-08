@@ -1,11 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
-import {
-  getGameDetail,
-  getGames,
-  getRecommendByPreference,
-  getRecommendByWishlist,
-} from '@/api/fetchers/gameFetchers'
+import { getGameDetail, getGames } from '@/api/fetchers/gameFetchers'
 
 const QUERY_KEYS = {
   GAMES: ['game'] as const,
@@ -33,29 +28,5 @@ export const useGameDetail = (gameId: number) => {
     queryKey: QUERY_KEYS.GAME_DETAIL(gameId),
     queryFn: () => getGameDetail(gameId),
     enabled: !!gameId,
-  })
-}
-
-/**
- * 선호 장르 기반 추천(로그인 필요)
- */
-export const useRecommendByPreference = (isLoggedIn: boolean) => {
-  return useQuery({
-    queryKey: QUERY_KEYS.GAME_RECOMMEND_PREFERENCE,
-    queryFn: getRecommendByPreference,
-    select: (data) => data?.results ?? [],
-    enabled: isLoggedIn,
-  })
-}
-
-/**
- * Whishlist 기반 추천(로그인 필요)
- */
-export const useRecommendByWhishlist = (isLoggedIn: boolean) => {
-  return useQuery({
-    queryKey: QUERY_KEYS.GAME_RECOMMEND_WISHLIST,
-    queryFn: getRecommendByWishlist,
-    select: (data) => data?.results ?? [],
-    enabled: isLoggedIn,
   })
 }
