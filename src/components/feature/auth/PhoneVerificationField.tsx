@@ -18,6 +18,7 @@ type Props = {
   handleSendCode: () => void
   handleVerifyCode: () => void
   idValue: 'signup' | 'findId' | 'findPassword' | 'userInfoUpdate'
+  required?: boolean
 }
 
 export const VERIFY_BUTTON_CLASS =
@@ -49,12 +50,14 @@ export default function PhoneVerificationField({
   handleSendCode,
   handleVerifyCode,
   idValue,
+  required = true,
 }: Props) {
   return (
     <>
       <div className="flex flex-col gap-1">
         <p className="text-xs md:text-sm">
-          휴대폰 번호<span className="pl-2 text-red-400/80">*</span>
+          휴대폰 번호
+          {required && <span className="pl-2 text-red-400/80">*</span>}
         </p>
         <div className="relative md:flex md:gap-2">
           <BaseInput
@@ -88,7 +91,7 @@ export default function PhoneVerificationField({
       </div>
       <div className="flex flex-col gap-1">
         <p className="text-sm">
-          인증번호<span className="pl-2 text-red-400/80">*</span>
+          인증번호{required && <span className="pl-2 text-red-400/80">*</span>}
         </p>
         <div className="relative md:flex md:gap-2">
           <BaseInput

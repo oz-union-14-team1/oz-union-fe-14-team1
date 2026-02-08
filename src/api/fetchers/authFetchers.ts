@@ -31,6 +31,7 @@ export const refreshTokenApi = async () => {
   const res = await api.get<RefreshResponse>(
     `${API_BASE_URL}${API_PATH.LOGIN_REFRESH_API_PATH}`
   )
+
   return res.data.accessToken
 }
 
@@ -135,6 +136,5 @@ export const checkNickNameApi = async (
     `${API_BASE_URL}${API_PATH.CHECK_NICKNAME_API_PATH}`,
     data
   )
-  console.log('res : ' + res)
   return res.data
 }

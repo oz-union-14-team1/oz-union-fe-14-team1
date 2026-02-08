@@ -25,6 +25,7 @@ import {
   useToast,
   useUserInfoUpdateSubmit,
 } from '@/hooks'
+import { useAuthStore } from '@/store/useAuthStore'
 import { cn } from '@/utils'
 
 const EMPTY_FORM: UserInfoUpdateSchemaValues = {
@@ -45,11 +46,15 @@ export default function UserInfoUpdateClient() {
   const router = useRouter()
   const { triggerToast } = useToast()
   const { submit, isPending } = useUserInfoUpdateSubmit()
-
+  const { isInitialized } = useAuthStore()
   const [isNickNameChecked, setIsNickNameChecked] = useState(false)
   const [form, setForm] = useState<UserInfoUpdateSchemaValues>(EMPTY_FORM)
 
-  const USER_INFO_FIELD_KEYS = ['name', 'birthday'] as const
+  /**
+   * 백엔드팀에서 생년월일은 생성하지 않았다고 함
+   * const USER_INFO_FIELD_KEYS = ['name', 'birthday'] as const
+   */
+  const USER_INFO_FIELD_KEYS = ['name'] as const
 
   const USER_INFO_FIELDS = SIGNUP_FIELDS.filter((field) =>
     USER_INFO_FIELD_KEYS.includes(
@@ -74,7 +79,7 @@ export default function UserInfoUpdateClient() {
   const baseUserInfo = userMe
 
   const phoneTimer = usePhoneVerificationTimer({
-    duration: 10 /** TODO: 180초 */,
+    duration: 180,
     onExpire: () => triggerToast('error', '인증 시간이 만료되었습니다.'),
   })
 
@@ -139,8 +144,16 @@ export default function UserInfoUpdateClient() {
     }
   }
 
-  if (isLoading || !form || !baseUserInfo) {
+  if (!isInitialized) {
+    return <div>인증 확인중...</div>
+  }
+
+  if (isLoading) {
     return <div>로딩중...</div>
+  }
+
+  if (!baseUserInfo) {
+    return <div>유저 정보를 불러올 수 없습니다.</div>
   }
 
   return (
@@ -169,19 +182,21 @@ export default function UserInfoUpdateClient() {
           onChange={(value) => handleChange('nickName', value)}
           onCheck={handleNickNameCheckClick}
           isChecked={isNickNameChecked}
+          required={false}
         />
         {PASSWORD_CONFIRM_FIELDS.map((field) => (
           <FormField
             key={field.key}
             label={`NEW ` + field.label}
-            required={field.required}
+            required={false}
             password={field.password}
           >
             <BaseInput
               id={`userInfoUpdate-${field.key}`}
-              type={field.type}
+              type="password"
+              name={`new-${field.key}`}
               placeholder={field.placeholder}
-              value={form[field.key]}
+              value={form[field.key] ?? ''}
               className={cn(INPUT_CLASS, 'w-full')}
               onChange={(e) => handleChange(field.key, e.target.value)}
             />
@@ -191,7 +206,7 @@ export default function UserInfoUpdateClient() {
           <FormField
             key={field.key}
             label={field.label}
-            required={field.required}
+            required={false}
             password={field.password}
           >
             <BaseInput
@@ -206,7 +221,7 @@ export default function UserInfoUpdateClient() {
             />
           </FormField>
         ))}
-        <FormField label="성별" required>
+        <FormField label="성별" required={false}>
           <div className="flex gap-5">
             {['남성', '여성'].map((gender) => (
               <button
@@ -241,6 +256,7 @@ export default function UserInfoUpdateClient() {
           handleSendCode={phoneTimer.handleSendCode}
           handleVerifyCode={phoneTimer.handleVerifyCode}
           idValue="userInfoUpdate"
+          required={false}
         />
         <div className="mt-5 flex w-full gap-4">
           <Button

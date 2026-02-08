@@ -14,7 +14,10 @@ export const userInfoUpdateSchema = z
   .object({
     nickName: nickNameRule,
     password: passwordRule.optional(),
-    passwordConfirm: z.string().optional(),
+    passwordConfirm: z
+      .string()
+      .transform((v) => v.trim())
+      .optional(),
     name: z.string().min(1, '이름을 입력해 주세요.'),
     birthday: birthdayRule,
     gender: z.enum(['남성', '여성'], {
@@ -31,6 +34,11 @@ export const userInfoUpdateSchema = z
       if (!data.password && !data.passwordConfirm) {
         return true
       }
+
+      if (!data.password || !data.passwordConfirm) {
+        return false
+      }
+
       return data.password === data.passwordConfirm
     },
     {

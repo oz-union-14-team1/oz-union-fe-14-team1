@@ -15,34 +15,22 @@ type FormFieldProps = {
  */
 export default function FormField({
   label,
-  required,
+  required = true,
   password = false,
   children,
 }: FormFieldProps) {
-  if (password) {
-    return (
-      <div className="flex flex-col gap-1">
-        <div className="flex items-end gap-4">
-          <span className="text-xs md:text-sm">
-            {label}
-            {required && <span className="pl-2 text-red-400/90">*</span>}
-          </span>
-          <span className="text-xs text-red-400/90 md:text-sm">
-            8~20자의 영문 대소문자, 숫자, 특수문자 포함
-          </span>
-        </div>
-        {children}
-      </div>
-    )
-  }
-
   return (
     <div className="flex w-full flex-col gap-1">
-      <div className="flex">
+      <div className="flex items-end gap-4">
         <span className="text-xs md:text-sm">
           {label}
           {required && <span className="pl-2 text-red-400/90">*</span>}
         </span>
+        {password && (
+          <span className="text-xs text-red-400/90 md:text-sm">
+            8~20자의 영문 대소문자, 숫자, 특수문자 포함
+          </span>
+        )}
       </div>
       {children}
     </div>
