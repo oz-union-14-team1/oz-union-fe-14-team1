@@ -12,7 +12,7 @@ export const ROUTES_PATHS = {
   GENRE_BASE: '/genre',
   GENRE_DETAIL: (slug: string) => `/genre/${slug}`,
 
-  GAME_DETAIL: (id: number | string) => `/game/${id}`,
+  GAME_DETAIL: (id: number | string) => `/review/${id}`,
 
   MY_PAGE: '/mypage',
   USER_DELETE_PAGE: '/mypage/user-delete',
