@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { GENRE_ASSETS } from '@/assets/genre-assets/genreData'
 import { GENRE_NAMES_KR } from '@/assets/genre-assets/genreName'
 import GenreHeader from '@/components/feature/genre/GenreHeader'
+import GenreList from '@/components/feature/genre/GenreList'
 import { GENRE_META } from '@/constants/genreMeta'
 import { GenreSlug } from '@/types'
 
@@ -34,6 +35,9 @@ export default async function GenreDetailPage({
         backgroundImgUrl={backgroundImage}
         bgPosition={meta.bgPosition}
       />
+      <div className="mx-auto my-5 max-w-345 md:my-16">
+        <GenreList genreSlug={genreSlug} genreName={genreName} />
+      </div>
     </main>
   )
 }

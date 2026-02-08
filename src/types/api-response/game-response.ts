@@ -1,7 +1,7 @@
 export type Game = {
   id: number
   name: string
-  tag?: string[]
+  tags?: string[]
   image?: string
   releasedAt: string
   platforms?: string[]

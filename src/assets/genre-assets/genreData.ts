@@ -66,12 +66,12 @@ export const GENRE_ASSETS = {
   },
   'massively-multiplayer': {
     vertical: '/images/genres/vertical/mmo.png',
-    horizontal: 'images/genres/vertical/mmo.png',
+    horizontal: '/images/genres/vertical/mmo.png',
     position: 'center',
   },
   indie: {
     vertical: '/images/genres/vertical/indie.png',
-    horizontal: '/images/genres/vertical/indie.png',
+    horizontal: '/images/genres/horizontal/indie.png',
     position: 'center',
   },
   casual: {

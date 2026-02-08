@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import { ROUTES_PATHS } from '@/constants'
 import { FALLBACK_IMG_VERTICAL } from '@/constants/fallback'
 import { cn } from '@/utils'
 
@@ -86,5 +87,5 @@ export default function GameCard({
     return Card
   }
 
-  return <Link href={`/game/${id}`}>{Card}</Link>
+  return <Link href={ROUTES_PATHS.GAME_DETAIL(id)}>{Card}</Link>
 }

@@ -2,30 +2,31 @@
 
 import { useMemo, useState } from 'react'
 
+import { useGenres } from '@/api/queries/usGenres'
 import { DotIndicator } from '@/components'
+import GameLoader from '@/components/common/game-loader/GameLoader'
 import { DESKTOP_ITEMS, MOBILE_ITEMS } from '@/constants'
 import { countArray } from '@/utils'
+import { filterAndMapGenres } from '@/utils/genreHelper'
 
 import GenreCarouselDesktop from './GenreCarouselDesktop'
 import GenreCarouselMobile from './GenreCarouselMobile'
 
-import type { Genre } from '@/types/api-response/onboarding-response'
-
-type GenreCarouselProps = {
-  genres: Genre[]
-}
-
-export default function GenreCarouselSection({ genres }: GenreCarouselProps) {
+export default function GenreCarouselSection() {
   const [mobilePage, setMobilePage] = useState(0)
   const [desktopPage, setDesktopPage] = useState(0)
 
-  const mobilePages = useMemo(() => countArray(genres, MOBILE_ITEMS), [genres])
+  const { data: apiGenres, isLoading } = useGenres()
+  const genres = useMemo(
+    () => (apiGenres ? filterAndMapGenres(apiGenres) : []),
+    [apiGenres]
+  )
 
+  const mobilePages = useMemo(() => countArray(genres, MOBILE_ITEMS), [genres])
   const desktopPages = useMemo(
     () => countArray(genres, DESKTOP_ITEMS),
     [genres]
   )
-
   const currentGenres = desktopPages[desktopPage] ?? []
 
   const handlePrevPage = () => {
@@ -34,6 +35,10 @@ export default function GenreCarouselSection({ genres }: GenreCarouselProps) {
 
   const handleNextPage = () => {
     setDesktopPage((prev) => Math.min(prev + 1, desktopPages.length - 1))
+  }
+
+  if (isLoading) {
+    return <GameLoader />
   }
 
   return (
