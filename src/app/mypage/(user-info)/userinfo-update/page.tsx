@@ -29,6 +29,7 @@ export default function UserInfoUpdatePage() {
         <div className="relative my-2 flex items-center">
           <div className="flex-1 border-t border-white" />
         </div>
+
         <p className="flex justify-center text-sm md:text-lg">
           <span className="pr-2">이제 이 세계를 떠나실 건가요..?</span>
           <span>

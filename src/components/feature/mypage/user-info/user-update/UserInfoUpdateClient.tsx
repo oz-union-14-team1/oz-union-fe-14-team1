@@ -3,7 +3,11 @@
 import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
 
-import { checkNickNameApi } from '@/api/fetchers/authFetchers'
+import {
+  checkNickNameApi,
+  sendCodeApi,
+  verifyCodeApi,
+} from '@/api/fetchers/authFetchers'
 import { UserInfo } from '@/api/fetchers/userInfoFetchers'
 import { useGetUserMe } from '@/api/queries/useGetUserMe'
 import {
@@ -12,6 +16,8 @@ import {
   DuplicateCheckField,
   FormField,
   INPUT_CLASS,
+  phoneOnlySchema,
+  PhoneVerificationField,
   UserInfoUpdateSchemaValues,
 } from '@/components'
 import {
@@ -143,6 +149,51 @@ export default function UserInfoUpdateClient() {
     }
   }
 
+  const handleSendCodeWithValidation = async () => {
+    const result = phoneOnlySchema.safeParse({
+      phone: form.phone,
+    })
+
+    if (!result.success) {
+      triggerToast('error', result.error.issues[0].message)
+      return
+    }
+
+    try {
+      const res = await sendCodeApi({
+        phone_number: form.phone,
+        purpose: 'update_phone',
+      })
+      setForm((prev) => ({ ...prev, phoneCode: res.code }))
+
+      phoneTimer.handleSendCode()
+
+      triggerToast('success', '인증번호가 전송되었습니다.')
+    } catch {
+      phoneTimer.reset()
+
+      triggerToast('error', '인증번호 전송이 실패하였습니다.')
+    }
+  }
+
+  const handleVerifyCode = async () => {
+    try {
+      await verifyCodeApi({
+        phone_number: form.phone,
+        code: form.phoneCode ?? '',
+        purpose: 'update_phone',
+      })
+
+      phoneTimer.handleVerifyCode()
+    } catch {
+      phoneTimer.reset()
+
+      setForm((prev) => ({ ...prev, phoneCode: '' }))
+
+      triggerToast('error', '인증번호가 올바르지 않습니다.')
+    }
+  }
+
   if (!isInitialized) {
     return <div>인증 확인중...</div>
   }
@@ -201,27 +252,6 @@ export default function UserInfoUpdateClient() {
             />
           </FormField>
         ))}
-        {USER_INFO_FIELDS.map((field) => (
-          <FormField
-            key={field.key}
-            label={field.label}
-            required={false}
-            password={field.password}
-          >
-            <BaseInput
-              id={`userInfoUpdate-${field.key}`}
-              type={field.type}
-              placeholder={field.placeholder}
-              // value={form[field.key as 'name' | 'birthday']}
-              value={form[field.key as 'name']}
-              className={cn(INPUT_CLASS, 'w-full')}
-              onChange={(e) =>
-                // handleChange(field.key as 'name' | 'birthday', e.target.value)
-                handleChange(field.key as 'name', e.target.value)
-              }
-            />
-          </FormField>
-        ))}
         <FormField label="성별" required={false}>
           <div className="flex gap-5">
             {['남성', '여성'].map((gender) => (
@@ -245,8 +275,27 @@ export default function UserInfoUpdateClient() {
             ))}
           </div>
         </FormField>
-        {/* 
-        * 백엔드에서 휴대전화 업데이트 하지 않는다고 하여 필드 주석처리
+        {USER_INFO_FIELDS.map((field) => (
+          <FormField
+            key={field.key}
+            label={field.label}
+            required={false}
+            password={field.password}
+          >
+            <BaseInput
+              id={`userInfoUpdate-${field.key}`}
+              type={field.type}
+              placeholder={field.placeholder}
+              // value={form[field.key as 'name' | 'birthday']}
+              value={form[field.key as 'name']}
+              className={cn(INPUT_CLASS, 'w-full')}
+              onChange={(e) =>
+                // handleChange(field.key as 'name' | 'birthday', e.target.value)
+                handleChange(field.key as 'name', e.target.value)
+              }
+            />
+          </FormField>
+        ))}
         <PhoneVerificationField
           phone={form.phone}
           code={form.phoneCode ?? ''}
@@ -256,12 +305,11 @@ export default function UserInfoUpdateClient() {
           isCodeVerified={phoneTimer.isCodeVerified}
           remainingTime={phoneTimer.remainingTime}
           formatTime={phoneTimer.formatTime}
-          handleSendCode={phoneTimer.handleSendCode}
-          handleVerifyCode={phoneTimer.handleVerifyCode}
+          handleSendCode={handleSendCodeWithValidation}
+          handleVerifyCode={handleVerifyCode}
           idValue="userInfoUpdate"
           required={false}
         />
-        /> */}
         <div className="mt-5 flex w-full gap-4">
           <Button
             type="submit"

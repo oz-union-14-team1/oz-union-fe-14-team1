@@ -178,14 +178,11 @@ export type ResetPasswordConfirmResponse = {
 export const findPasswordConfirmApi = async (
   data: ResetPasswordConfirmRequest
 ): Promise<ResetPasswordConfirmResponse> => {
-  console.log('비밀번호 재설정 확정 : ' + JSON.stringify(data, null, 2))
   const res = await api.post<ResetPasswordConfirmResponse>(
     `${API_BASE_URL}${API_PATH.PASSWORD_RESET_CONFIRM_API_PATH}`,
     data
   )
-  console.log(
-    '비밀번호 재설정 확정리스폰스 : ' + JSON.stringify(res.data, null, 2)
-  )
+
   return res.data
 }
 

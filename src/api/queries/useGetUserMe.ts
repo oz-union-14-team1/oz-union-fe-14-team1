@@ -19,6 +19,7 @@ export const useGetUserMe = (options?: UseGetUserMeOptions) => {
     enabled: isInitialized && !!accessToken,
     retry: false,
   })
+
   const { onSuccess } = options ?? {}
 
   useEffect(() => {

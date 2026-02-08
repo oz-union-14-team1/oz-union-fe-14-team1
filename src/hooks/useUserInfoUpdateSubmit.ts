@@ -72,9 +72,10 @@ export default function useUserInfoUpdateSubmit() {
       nickname: form.nickName,
       name: form.name,
       phoneNumber: form.phone,
-      birthday: form.birthday,
+      // birthday: form.birthday,
       gender: form.gender === '여성' ? 'F' : 'M',
-      password: form.password || undefined,
+      new_password: form.password || undefined,
+      new_password_confirm: form.passwordConfirm || undefined,
     }
 
     try {
