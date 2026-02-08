@@ -40,7 +40,7 @@ export default function SignupForm() {
     name: '',
     id: '',
     nickName: '',
-    birthday: '',
+    // birthday: '',
     gender: '남성',
     phone: '',
     phoneCode: '',
@@ -86,23 +86,17 @@ export default function SignupForm() {
       triggerToast('error', result.error.issues[0].message)
       return
     }
+    if (!isIdChecked) {
+      triggerToast('error', '아이디 중복 확인을 해주세요.')
+      return
+    }
+    if (!isNickNameChecked) {
+      triggerToast('error', '닉네임 중복 확인을 해주세요.')
+      return
+    }
 
-    if (!result.success) {
-      if (!isIdChecked) {
-        triggerToast('error', '아이디 중복 확인을 해주세요.')
-        return
-      }
-
-      if (!isNickNameChecked) {
-        triggerToast('error', '닉네임 중복 확인을 해주세요.')
-        return
-      }
-
-      if (!phoneTimer.isCodeVerified) {
-        triggerToast('error', '휴대폰 인증을 완료해 주세요.')
-
-        return
-      }
+    if (!phoneTimer.isCodeVerified) {
+      triggerToast('error', '휴대폰 인증을 완료해 주세요.')
 
       return
     }
@@ -289,6 +283,7 @@ export default function SignupForm() {
             password={field.password}
           >
             <BaseInput
+              name={field.key}
               id={`signup-${field.key}`}
               type={field.type}
               placeholder={field.placeholder}

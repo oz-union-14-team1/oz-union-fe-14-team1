@@ -5,6 +5,11 @@ export const BACK_API_URL = process.env.NEXT_PUBLIC_BACK_API_URL ?? ''
 export const GOOGLE_CLIENT_ID_URL =
   process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? ''
 
+export const DISCORD_CLIENT_ID_URL =
+  process.env.NEXT_PUBLIC_DISCORD_CLIENT_ID ?? ''
+export const _DISCORD_CLIENT_SECRET =
+  process.env.NEXT_PUBLIC_DISCORD_CLIENT_SECRET ?? ''
+
 export const API_PATH = {
   REVIEWS: (gameId: string | number) => `/community/${gameId}/reviews`,
   AI_SUMMARY: (gameId: string | number) => `/community/summary/${gameId}`,
@@ -36,6 +41,7 @@ export const API_PATH = {
   CHECK_NICKNAME_API_PATH: '/user/check-nickname',
   DELETE_PROFILE_IMAGE_API_PATH: '/user/me/image',
   GOOGLE_LOGIN_API_PATH: '/user/google/login',
+  DISCORD_LOGIN_API_PATH: '/user/discord/login',
   ONBOARDING_TAGS: '/user/preference/tags',
   ONBOARDING_GENRES: '/user/preference/genres',
   ONBOARDING_PREFERENCE: '/user/preference/',

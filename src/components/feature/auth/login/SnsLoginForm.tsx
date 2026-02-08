@@ -4,29 +4,25 @@ import Image from 'next/image'
 
 import { discordIcon, googleLogo } from '@/assets'
 import {
+  API_BASE_URL,
   API_PATH,
   BACK_API_URL,
+  DISCORD_CLIENT_ID_URL,
   GOOGLE_CLIENT_ID_URL,
 } from '@/constants/apiPath'
-import { useToast } from '@/hooks'
 
 /**
  * SNS 로그인 폼 컴포넌트
  */
 export default function SnsLoginForm() {
-  const redirectUri = `${BACK_API_URL}${API_PATH.GOOGLE_LOGIN_API_PATH}`
+  const redirectGoogleUri = `${API_BASE_URL}${API_PATH.GOOGLE_LOGIN_API_PATH}`
 
-  const googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID_URL}&redirect_uri=${redirectUri}&response_type=code&scope=email profile`
+  const googleLoginUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID_URL}&redirect_uri=${redirectGoogleUri}&response_type=code&scope=email profile`
 
-  const { triggerToast } = useToast()
+  const redirectDiscordUri = `${BACK_API_URL}${API_PATH.DISCORD_LOGIN_API_PATH}`
 
-  const handleDiscordLogin = async () => {
-    /**
-     * TODO: 디스코드 로그인 API 연동
-     */
+  const discordLoginUrl = `https://accounts.discord.com/o/oauth2/v2/auth?client_id=${DISCORD_CLIENT_ID_URL}&redirect_uri=${redirectDiscordUri}&response_type=code&scope=email profile`
 
-    triggerToast('success', '디스코드 로그인 성공')
-  }
   return (
     <div className="flex items-center justify-center gap-5">
       <a href={googleLoginUrl}>
@@ -36,14 +32,13 @@ export default function SnsLoginForm() {
           className="w-13 cursor-pointer"
         />
       </a>
-      <button type="button">
+      <a href={discordLoginUrl}>
         <Image
           src={discordIcon}
           alt="discordIcon"
           className="h-13 w-13 cursor-pointer rounded-full bg-main-purple p-2"
-          onClick={handleDiscordLogin}
         />
-      </button>
+      </a>
     </div>
   )
 }

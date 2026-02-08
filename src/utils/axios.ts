@@ -40,10 +40,6 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
       return response
     },
 
-    /**
-     * 응답 인터셉터
-     * - 401 에러시
-     */
     async (error: AxiosError) => {
       const original = error.config as CustomAxiosRequestConfig
 
@@ -79,22 +75,32 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
               useAuthStore.getState().setToken(newToken)
               return newToken
             })
-            .finally(() => {
-              refreshing = null
-            })
         }
 
         const newToken = await refreshing
 
+        if (!newToken) {
+          return Promise.reject()
+        }
+
         original.headers?.set('Authorization', `Bearer ${newToken}`)
 
         return instance(original)
-      } catch (error) {
+      } catch {
         const store = useAuthStore.getState()
 
-        store.clear()
+        if (
+          axios.isAxiosError(error) &&
+          error.response?.status === 401 &&
+          original.url?.includes(API_PATH.LOGIN_REFRESH_API_PATH)
+        ) {
+          store.clear()
+          return Promise.resolve()
+        }
 
         return Promise.reject(error)
+      } finally {
+        refreshing = null
       }
     }
   )

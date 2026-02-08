@@ -8,7 +8,6 @@ import { useToast } from '@/hooks'
 import { useAuthStore } from '@/store/useAuthStore'
 
 export default function LoginSuccessPage() {
-  console.log('LoginSuccessPage')
   const router = useRouter()
   const searchParams = useSearchParams()
   const { setToken } = useAuthStore()
@@ -20,7 +19,7 @@ export default function LoginSuccessPage() {
 
     if (token) {
       setToken(token)
-      triggerToast('success', '로그인 성공!')
+      triggerToast('success', '소셜 로그인 성공!')
 
       router.replace(ROUTES_PATHS.MAIN_PAGE)
       return
