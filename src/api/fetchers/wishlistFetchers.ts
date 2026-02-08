@@ -5,14 +5,14 @@ import {
   PostWishlistRequest,
   PostWishlistResponse,
 } from '@/types/api-response/wishlist-response'
-import api from '@/utils/axios'
+import camelApi from '@/utils/axios'
 
 /**
  * 위시리스트 조회
  * GET /api/v1/game/wishlist
  */
 export const getWishlistApi = async (): Promise<GetWishlist> => {
-  const res = await api.get<GetWishlist>(
+  const res = await camelApi.get<GetWishlist>(
     `${API_BASE_URL}${API_PATH.GET_WISHLIST_API_PATH}`
   )
   return res.data
@@ -25,7 +25,7 @@ export const getWishlistApi = async (): Promise<GetWishlist> => {
 export const postWishlistApi = async (
   data: PostWishlistRequest
 ): Promise<PostWishlistResponse> => {
-  const res = await api.post<PostWishlistResponse>(
+  const res = await camelApi.post<PostWishlistResponse>(
     `${API_BASE_URL}${API_PATH.POST_WISHLIST_API_PATH}`,
     data
   )
@@ -37,10 +37,10 @@ export const postWishlistApi = async (
  * DELETE /api/v1/game/wishlist/{id}
  */
 export const deleteWishlistApi = async (
-  wishlistId: number
+  game: number
 ): Promise<DeleteWishlistResponse> => {
-  const res = await api.delete<DeleteWishlistResponse>(
-    `${API_BASE_URL}${API_PATH.DELETE_WISHLIST_API_PATH(wishlistId)}`
+  const res = await camelApi.delete<DeleteWishlistResponse>(
+    `${API_BASE_URL}${API_PATH.DELETE_WISHLIST_API_PATH(game)}`
   )
   return res.data
 }

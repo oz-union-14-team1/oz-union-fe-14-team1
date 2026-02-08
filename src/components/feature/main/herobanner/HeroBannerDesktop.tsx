@@ -66,6 +66,7 @@ export default function HeroBannerDesktop({
               src={banner.imgUrl}
               alt={banner.title}
               fill
+              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 288px"
               className="object-cover"
             />
             <div className="absolute inset-0 bg-black/85" />

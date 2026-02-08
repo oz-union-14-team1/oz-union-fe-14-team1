@@ -49,6 +49,7 @@ export default function GenreCarouselMobile({
                   src={getGenreAsset(genre.genre).vertical}
                   alt={genre.genre}
                   fill
+                  sizes="(max-width: 768px) 100vw, 434px"
                   className="object-cover"
                 />
                 <CardOverlay label={genre.genre} />

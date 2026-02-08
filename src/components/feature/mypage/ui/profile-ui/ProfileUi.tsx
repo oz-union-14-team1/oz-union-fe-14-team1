@@ -1,4 +1,6 @@
-import { MOCK_GENRES } from '@/constants'
+'use client'
+
+import { useGetPrefernece } from '@/api/queries/useGetUserPreference'
 import { GetUserMe } from '@/types/api-response/user-response'
 
 import {
@@ -18,6 +20,18 @@ type ProfileUiProps = {
 }
 
 function ProfileDesktopUi({ imageUrl, nickname }: ProfileUiProps) {
+  const { data } = useGetPrefernece()
+
+  const mergedPreferences = [
+    ...(data?.genres ?? []).map((g) => ({
+      id: g.id,
+      name: g.genre,
+    })),
+    ...(data?.tags ?? []).map((t) => ({
+      id: t.id,
+      name: t.tag,
+    })),
+  ]
   return (
     <div className="relative">
       <ProfileDesktopGlowUi />
@@ -32,10 +46,10 @@ function ProfileDesktopUi({ imageUrl, nickname }: ProfileUiProps) {
       />
       <ProfileBackgroundUi />
       <div className="absolute top-30 left-41 z-2 flex flex-wrap items-center gap-2">
-        {MOCK_GENRES.map((genre) => (
+        {mergedPreferences.map((items) => (
           <ProfileGenresDesktopUi
-            key={genre}
-            genre={genre}
+            key={`pref-${items.id}`}
+            genre={items.name}
             className="px-4 py-1.5 text-sm"
           />
         ))}
@@ -45,6 +59,19 @@ function ProfileDesktopUi({ imageUrl, nickname }: ProfileUiProps) {
 }
 
 function ProfileMobileUi({ imageUrl, nickname }: ProfileUiProps) {
+  const { data } = useGetPrefernece()
+
+  const mergedPreferences = [
+    ...(data?.genres ?? []).map((g) => ({
+      id: g.id,
+      name: g.genre,
+    })),
+    ...(data?.tags ?? []).map((t) => ({
+      id: t.id,
+      name: t.tag,
+    })),
+  ]
+
   return (
     <div className="relative flex flex-col items-center">
       <ProfileMobileGlowUi />
@@ -61,10 +88,10 @@ function ProfileMobileUi({ imageUrl, nickname }: ProfileUiProps) {
         className="z-7 mt-5 block px-4 py-2 text-sm"
       />
       <div className="z-7 mt-5 flex w-[70vw] flex-wrap items-center justify-center gap-2">
-        {MOCK_GENRES.map((genre) => (
+        {mergedPreferences.map((items) => (
           <ProfileGenresMobileUi
-            key={genre}
-            genre={genre}
+            key={`pref-${items.id}`}
+            genre={items.name}
             className="px-3 py-1.5 text-xs"
           />
         ))}
