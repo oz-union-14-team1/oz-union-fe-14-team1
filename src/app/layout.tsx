@@ -1,11 +1,12 @@
 import { Suspense } from 'react'
 
 import { Header } from '@/components/layout'
+import Footer from '@/components/layout/Footer'
 import Providers from '@/components/providers/Providers'
 
-import type { Metadata } from 'next'
-
 import './globals.css'
+
+import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -26,6 +27,7 @@ export default function RootLayout({
           </Suspense>
           {children}
         </Providers>
+        <Footer />
       </body>
     </html>
   )
