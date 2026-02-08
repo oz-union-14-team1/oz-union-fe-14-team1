@@ -6,11 +6,15 @@ import { GuestSection } from './auth-dependency-section/GuestSection'
 import { MemberSection } from './auth-dependency-section/MemberSection'
 
 export function MainContent() {
-  const { user, isInitialized } = useAuthStore((state) => state)
+  const { isInitialized, accessToken } = useAuthStore()
 
   if (!isInitialized) {
     return null
   }
 
-  return user ? <MemberSection /> : <GuestSection />
+  if (!accessToken) {
+    return <GuestSection />
+  }
+
+  return <MemberSection />
 }

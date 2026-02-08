@@ -11,8 +11,8 @@ const FALLBACK_START = 6
 const FALLBACK_END = 13
 
 export function MemberSection() {
-  const { user, accessToken, isInitialized } = useAuthStore((state) => state)
-  const isLoggedIn = isInitialized && !!user && !!accessToken
+  const { accessToken, isInitialized } = useAuthStore((state) => state)
+  const isLoggedIn = isInitialized && !!accessToken
 
   const { data: preferenceGames = [] } = useRecommendByPreference(isLoggedIn)
   const { data: wishlistGames = [] } = useRecommendByWhishlist(isLoggedIn)

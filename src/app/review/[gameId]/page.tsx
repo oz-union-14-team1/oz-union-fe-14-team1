@@ -23,23 +23,25 @@ type ReviewPageProps = {
 
 export default function ReviewPage({ params }: ReviewPageProps) {
   const [isEditing, setIsEditing] = useState(false)
+  const { triggerToast } = useToast()
 
   const { gameId } = use(params)
 
-  const { data: game } = useGameDetail(Number(gameId))
-  const { data: review } = useReviewList(gameId, 1)
-  const { data: aiData, status: aiReviewStatus } = useAiSummary(gameId)
+  const gameQuery = useGameDetail(Number(gameId))
+  const reviewQuery = useReviewList(gameId, 1)
+  const aiSummaryQuery = useAiSummary(gameId)
+  const userMeQuery = useGetUserMe()
 
-  const { data: userData, refetch, isError } = useGetUserMe()
-  const accessToken = useAuthStore((state) => state.accessToken)
+  const { isInitialized } = useAuthStore()
 
-  const { triggerToast } = useToast()
+  if (!isInitialized) {
+    return null
+  }
 
-  useEffect(() => {
-    if (isError && accessToken) {
-      refetch()
-    }
-  }, [isError, accessToken, refetch])
+  const { data: game } = gameQuery
+  const { data: review } = reviewQuery
+  const { data: aiData, status: aiReviewStatus } = aiSummaryQuery
+  const { data: userData } = userMeQuery
 
   return (
     <div className="mx-auto flex w-full flex-col-reverse items-center justify-center gap-10 px-4 py-10 lg:flex-row lg:items-start">
