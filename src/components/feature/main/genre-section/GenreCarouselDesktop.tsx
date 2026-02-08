@@ -28,27 +28,30 @@ export default function GenreCarouselDesktop({
   return (
     <div className="group/carousel relative hidden md:block">
       <div className="flex gap-8">
-        {genres.map((genre) => (
-          <Link
-            key={genre.id}
-            href={ROUTES_PATHS.GENRE_DETAIL(genre.slug)}
-            className={cn(
-              `group/card relative aspect-3/4 w-full overflow-hidden rounded-xl`,
-              `md:aspect-video md:w-108.5 md:rounded-[20px]`
-            )}
-          >
-            <Image
-              src={getGenreAsset(genre.slug).horizontal}
-              alt={genre.genre}
-              fill
-              className="hidden object-cover transition-transform duration-300 group-hover/card:scale-105 md:block"
-              style={{
-                objectPosition: getGenreAsset(genre.slug).position ?? 'center',
-              }}
-            />
-            <CardOverlay label={genre.genre} />
-          </Link>
-        ))}
+        {genres.map((genre) => {
+          const asset = getGenreAsset(genre.slug)
+          console.log(genre.slug, '→', asset.horizontal)
+
+          return (
+            <Link
+              key={genre.id}
+              href={ROUTES_PATHS.GENRE_DETAIL(genre.slug)}
+              className={cn(
+                `group/card relative aspect-3/4 w-full overflow-hidden rounded-xl`,
+                `md:aspect-video md:w-108.5 md:rounded-[20px]`
+              )}
+            >
+              <Image
+                src={asset.horizontal}
+                alt={genre.genre}
+                fill
+                className="hidden object-cover transition-transform duration-300 group-hover/card:scale-105 md:block"
+                style={{ objectPosition: asset.position ?? 'center' }}
+              />
+              <CardOverlay label={genre.genre} />
+            </Link>
+          )
+        })}
       </div>
       <GenreSectionNav
         direction="prev"
