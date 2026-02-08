@@ -29,6 +29,7 @@ export const API_PATH = {
   MAIN_PAGE: '/',
   FIND_ID_API_PATH: '/user/find-account',
   USER_DELETE_API_PATH: '/user/me/delete',
+  GAMES_SEARCH: '/game/search',
 
   USER_PREFERENCE: '/user/preference/',
   USER_LOGOUT_API_PATH: '/user/logout',
