@@ -1,9 +1,15 @@
 'use client'
 
+import { isAxiosError } from 'axios'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { findIdApi } from '@/api/fetchers/authFetchers'
+import {
+  findIdApi,
+  findPasswordRequestApi,
+  sendCodeApi,
+  verifyCodeApi,
+} from '@/api/fetchers/authFetchers'
 import {
   Button,
   DuplicateCheckField,
@@ -38,14 +44,6 @@ export default function FindAccountForm({
   mode,
   onError,
 }: FindAccountFormProps) {
-  /**
-   * TODO: 이메일/비밀번호 상태 관리 (useState)
-   * TODO: 입력값 유효성 검사
-   * TODO: 로그인 API 연결
-   * TODO: 에러 메시지 처리
-   * TODO: 로그인 성공 시 토큰 저장
-   * TODO: 로그인 후 페이지 이동 처리
-   */
   const router = useRouter()
   const { triggerToast } = useToast()
   const findIdStore = useFindIdStore()
@@ -74,7 +72,7 @@ export default function FindAccountForm({
       triggerToast('error', '인증 시간이 만료되었습니다.')
     },
     onVerified: () => {
-      handleSubmit()
+      triggerToast('success', '인증이 완료 되었습니다.')
     },
   })
 
@@ -85,7 +83,7 @@ export default function FindAccountForm({
     if (!result.success) {
       const message = result.error.issues[0].message
       onError(message)
-      triggerToast('error', '아이디 찾기에 실패하였습니다.')
+      triggerToast('error', message)
       return
     }
 
@@ -98,42 +96,88 @@ export default function FindAccountForm({
         await handleFindPassword()
       }
     } catch {
+      phoneTimer.reset()
       triggerToast('error', '요청 처리 중 오류가 발생했습니다.')
     }
   }
 
   const handleFindId = async () => {
-    const data = await findIdApi({
-      phone_number: form.phone,
-    })
+    try {
+      const data = await findIdApi({
+        phone_number: form.phone,
+      })
 
-    if (!data.exists || !data.identifier) {
-      triggerToast('error', '아이디를 찾을 수 없습니다.')
-      return
+      if (!data.exists || !data.identifier) {
+        triggerToast('error', data.message || '아이디를 찾을 수 없습니다.')
+        phoneTimer.reset()
+
+        setForm((prev) => ({ ...prev, phoneCode: '' }))
+
+        return
+      }
+
+      findIdStore.setIdentifier(data.identifier)
+
+      triggerToast('success', data.message)
+
+      router.push(ROUTES_PATHS.FIDN_ID_RESULT_PAGE)
+    } catch (error) {
+      let message = '아이디 찾기에 실패했습니다.'
+
+      if (isAxiosError(error)) {
+        message =
+          error.response?.data?.message ||
+          error.response?.data?.error_detail ||
+          message
+
+        phoneTimer.reset()
+
+        setForm((prev) => ({ ...prev, phoneCode: '' }))
+      }
+
+      triggerToast('error', message)
     }
-
-    findIdStore.setIdentifier(data.identifier)
-
-    triggerToast('success', data.message)
-
-    router.push(ROUTES_PATHS.FIDN_ID_RESULT_PAGE)
   }
 
   const handleFindPassword = async () => {
-    /**
-     * TODO: 비밀번호 찾기 API 수정 후에 연동 구현 예정
-     *    await findPasswordApi({
-     *    id: form.id!,
-     *    phone: form.phone,    
-    })
-     */
+    if (!('id' in form)) {
+      return
+    }
 
-    triggerToast('success', '비밀번호 재설정 페이지로 이동합니다.')
+    try {
+      const data = await findPasswordRequestApi({
+        identifier: form.id,
+        phone_number: form.phone,
+        code: form.phoneCode,
+      })
+      triggerToast('success', data.message)
 
-    router.push(ROUTES_PATHS.FIND_PASSWORD_RESULT_PAGE)
+      router.push(ROUTES_PATHS.FIND_PASSWORD_RESULT_PAGE)
+    } catch (error) {
+      let message = '요청 처리 중 오류가 발생했습니다.'
+
+      if (isAxiosError(error)) {
+        const data = error.response?.data
+
+        message = data?.detail || data?.message || data?.error_detail || message
+
+        phoneTimer.reset()
+
+        setForm((prev) => ({ ...prev, phoneCode: '' }))
+      }
+
+      triggerToast('error', message)
+    }
   }
 
-  const handleSendCodeWithValidation = () => {
+  const getPurpose = () => {
+    if (isFindMode) {
+      return 'find_account'
+    }
+    return 'password_reset'
+  }
+
+  const handleSendCodeWithValidation = async () => {
     const result = phoneOnlySchema.safeParse({
       phone: form.phone,
     })
@@ -144,11 +188,47 @@ export default function FindAccountForm({
       return
     }
 
-    setForm((prev) => ({ ...prev, phoneCode: '' }))
+    try {
+      const res = await sendCodeApi({
+        phone_number: form.phone,
+        purpose: getPurpose(),
+      })
+      setForm((prev) => ({ ...prev, phoneCode: res.code }))
 
-    onError(null)
+      onError(null)
 
-    phoneTimer.handleSendCode()
+      phoneTimer.handleSendCode()
+
+      triggerToast('success', '인증번호가 전송되었습니다.')
+    } catch {
+      phoneTimer.reset()
+
+      onError('인증번호 전송에 실패했습니다.')
+
+      triggerToast('error', '인증번호 전송이 실패하였습니다.')
+    }
+  }
+
+  const handleVerifyCode = async () => {
+    try {
+      await verifyCodeApi({
+        phone_number: form.phone,
+        code: form.phoneCode,
+        purpose: getPurpose(),
+      })
+
+      phoneTimer.handleVerifyCode()
+
+      onError(null)
+    } catch {
+      phoneTimer.reset()
+
+      setForm((prev) => ({ ...prev, phoneCode: '' }))
+
+      onError(null)
+
+      triggerToast('error', '인증번호가 올바르지 않습니다.')
+    }
   }
 
   return (
@@ -181,7 +261,7 @@ export default function FindAccountForm({
           remainingTime={phoneTimer.remainingTime}
           formatTime={phoneTimer.formatTime}
           handleSendCode={handleSendCodeWithValidation}
-          handleVerifyCode={phoneTimer.handleVerifyCode}
+          handleVerifyCode={handleVerifyCode}
           idValue={isFindMode ? 'findId' : 'findPassword'}
         />
         <div className="mt-10 flex w-full flex-col">

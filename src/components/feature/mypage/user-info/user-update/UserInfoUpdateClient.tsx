@@ -3,7 +3,11 @@
 import { useRouter } from 'next/navigation'
 import { useCallback, useState } from 'react'
 
-import { checkNickNameApi } from '@/api/fetchers/authFetchers'
+import {
+  checkNickNameApi,
+  sendCodeApi,
+  verifyCodeApi,
+} from '@/api/fetchers/authFetchers'
 import { UserInfo } from '@/api/fetchers/userInfoFetchers'
 import { useGetUserMe } from '@/api/queries/useGetUserMe'
 import {
@@ -12,6 +16,7 @@ import {
   DuplicateCheckField,
   FormField,
   INPUT_CLASS,
+  phoneOnlySchema,
   PhoneVerificationField,
   UserInfoUpdateSchemaValues,
 } from '@/components'
@@ -32,7 +37,6 @@ const EMPTY_FORM: UserInfoUpdateSchemaValues = {
   nickName: '',
   name: '',
   phone: '',
-  birthday: '',
   gender: '남성',
   password: '',
   passwordConfirm: '',
@@ -68,7 +72,7 @@ export default function UserInfoUpdateClient() {
       nickName: data.nickname,
       name: data.name,
       phone: data.phoneNumber,
-      birthday: data.birthday ?? '',
+      // birthday: data.birthday ?? '',
       gender: data.gender === 'F' ? '여성' : '남성',
     })
   }, [])
@@ -91,6 +95,7 @@ export default function UserInfoUpdateClient() {
       if (!prev) {
         return prev
       }
+
       return { ...prev, [field]: value }
     })
 
@@ -108,7 +113,7 @@ export default function UserInfoUpdateClient() {
     const mappedBaseUserInfo: UserInfoUpdateSchemaValues = {
       nickName: baseUserInfo.nickname,
       name: baseUserInfo.name,
-      birthday: baseUserInfo.birthday ?? '',
+      // birthday: baseUserInfo.birthday ?? '',
       phone: baseUserInfo.phoneNumber,
       gender: baseUserInfo.gender === 'M' ? '남성' : '여성',
     }
@@ -141,6 +146,51 @@ export default function UserInfoUpdateClient() {
     } catch {
       triggerToast('error', '닉네임 중복 확인에 실패했습니다.')
       setIsNickNameChecked(false)
+    }
+  }
+
+  const handleSendCodeWithValidation = async () => {
+    const result = phoneOnlySchema.safeParse({
+      phone: form.phone,
+    })
+
+    if (!result.success) {
+      triggerToast('error', result.error.issues[0].message)
+      return
+    }
+
+    try {
+      const res = await sendCodeApi({
+        phone_number: form.phone,
+        purpose: 'update_phone',
+      })
+      setForm((prev) => ({ ...prev, phoneCode: res.code }))
+
+      phoneTimer.handleSendCode()
+
+      triggerToast('success', '인증번호가 전송되었습니다.')
+    } catch {
+      phoneTimer.reset()
+
+      triggerToast('error', '인증번호 전송이 실패하였습니다.')
+    }
+  }
+
+  const handleVerifyCode = async () => {
+    try {
+      await verifyCodeApi({
+        phone_number: form.phone,
+        code: form.phoneCode ?? '',
+        purpose: 'update_phone',
+      })
+
+      phoneTimer.handleVerifyCode()
+    } catch {
+      phoneTimer.reset()
+
+      setForm((prev) => ({ ...prev, phoneCode: '' }))
+
+      triggerToast('error', '인증번호가 올바르지 않습니다.')
     }
   }
 
@@ -202,25 +252,6 @@ export default function UserInfoUpdateClient() {
             />
           </FormField>
         ))}
-        {USER_INFO_FIELDS.map((field) => (
-          <FormField
-            key={field.key}
-            label={field.label}
-            required={false}
-            password={field.password}
-          >
-            <BaseInput
-              id={`userInfoUpdate-${field.key}`}
-              type={field.type}
-              placeholder={field.placeholder}
-              value={form[field.key as 'name' | 'birthday']}
-              className={cn(INPUT_CLASS, 'w-full')}
-              onChange={(e) =>
-                handleChange(field.key as 'name' | 'birthday', e.target.value)
-              }
-            />
-          </FormField>
-        ))}
         <FormField label="성별" required={false}>
           <div className="flex gap-5">
             {['남성', '여성'].map((gender) => (
@@ -244,6 +275,27 @@ export default function UserInfoUpdateClient() {
             ))}
           </div>
         </FormField>
+        {USER_INFO_FIELDS.map((field) => (
+          <FormField
+            key={field.key}
+            label={field.label}
+            required={false}
+            password={field.password}
+          >
+            <BaseInput
+              id={`userInfoUpdate-${field.key}`}
+              type={field.type}
+              placeholder={field.placeholder}
+              // value={form[field.key as 'name' | 'birthday']}
+              value={form[field.key as 'name']}
+              className={cn(INPUT_CLASS, 'w-full')}
+              onChange={(e) =>
+                // handleChange(field.key as 'name' | 'birthday', e.target.value)
+                handleChange(field.key as 'name', e.target.value)
+              }
+            />
+          </FormField>
+        ))}
         <PhoneVerificationField
           phone={form.phone}
           code={form.phoneCode ?? ''}
@@ -253,8 +305,8 @@ export default function UserInfoUpdateClient() {
           isCodeVerified={phoneTimer.isCodeVerified}
           remainingTime={phoneTimer.remainingTime}
           formatTime={phoneTimer.formatTime}
-          handleSendCode={phoneTimer.handleSendCode}
-          handleVerifyCode={phoneTimer.handleVerifyCode}
+          handleSendCode={handleSendCodeWithValidation}
+          handleVerifyCode={handleVerifyCode}
           idValue="userInfoUpdate"
           required={false}
         />

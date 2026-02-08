@@ -19,7 +19,11 @@ export const userInfoUpdateSchema = z
       .transform((v) => v.trim())
       .optional(),
     name: z.string().min(1, '이름을 입력해 주세요.'),
-    birthday: birthdayRule,
+    /**
+     * 백엔드 요청으로 생일 필드 제거
+     * birthday: birthdayRule,
+     */
+
     gender: z.enum(['남성', '여성'], {
       message: '성별을 선택해 주세요.',
     }),

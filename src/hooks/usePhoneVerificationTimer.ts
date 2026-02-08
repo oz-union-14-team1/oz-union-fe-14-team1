@@ -22,39 +22,29 @@ type UsePhoneVerificationTimerProps = {
  */
 export default function usePhoneVerificationTimer({
   onExpire,
-  duration = 10 /** TODO:180초 */,
+  duration = 180,
   onVerified,
 }: UsePhoneVerificationTimerProps) {
   const [isCodeSent, setIsCodeSent] = useState(false)
   const [isCodeVerified, setIsCodeVerified] = useState(false)
   const [remainingTime, setRemainingTime] = useState(0)
 
+  const reset = () => {
+    setIsCodeSent(false)
+    setIsCodeVerified(false)
+    setRemainingTime(0)
+  }
+
   const handleSendCode = useCallback(() => {
-    /**
-     * TODO: 휴대폰 번호 인증번호 전송 API 연동
-     * TODO: 유효시간 시간 변경 10초 -> 180초
-     */
-    alert('휴대폰 번호 인증번호 전송')
     setIsCodeSent(true)
     setIsCodeVerified(false)
     setRemainingTime(duration)
   }, [duration])
 
   const handleVerifyCode = useCallback(() => {
-    /**
-     * TODO: 휴대폰 번호 인증번호 확인 API 연동
-     * TODO: API 통해서 인증번호 확인 됐을 때와 아닐 때 분기
-     */
     if (!isCodeSent) {
       return
     }
-
-    setIsCodeVerified(false)
-    setIsCodeSent(true)
-
-    /**
-     * TODO: 인증 성공 시
-     */
     setIsCodeVerified(true)
     setIsCodeSent(false)
     setRemainingTime(0)
@@ -109,5 +99,6 @@ export default function usePhoneVerificationTimer({
     handleSendCode,
     handleVerifyCode,
     formatTime,
+    reset,
   }
 }

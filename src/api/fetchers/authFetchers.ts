@@ -136,5 +136,100 @@ export const checkNickNameApi = async (
     `${API_BASE_URL}${API_PATH.CHECK_NICKNAME_API_PATH}`,
     data
   )
+
+  return res.data
+}
+
+export type FindPasswordRequest = {
+  identifier: string
+  phone_number: string
+  code?: string
+}
+
+export type FindPasswordResponse = {
+  message: string
+}
+
+/**
+ * 비밀번호 재설정 요청 API
+ */
+export const findPasswordRequestApi = async (
+  data: FindPasswordRequest
+): Promise<FindPasswordResponse> => {
+  const res = await api.post<FindPasswordResponse>(
+    `${API_BASE_URL}${API_PATH.PASSWORD_RESET_REQUEST_API_PATH}`,
+    data
+  )
+  return res.data
+}
+
+export type ResetPasswordConfirmRequest = {
+  new_password: string
+  new_password_confirm: string
+}
+
+export type ResetPasswordConfirmResponse = {
+  message: string
+}
+
+/**
+ * 비밀번호 재설정 확정 API
+ */
+export const findPasswordConfirmApi = async (
+  data: ResetPasswordConfirmRequest
+): Promise<ResetPasswordConfirmResponse> => {
+  const res = await api.post<ResetPasswordConfirmResponse>(
+    `${API_BASE_URL}${API_PATH.PASSWORD_RESET_CONFIRM_API_PATH}`,
+    data
+  )
+
+  return res.data
+}
+
+export type SendCodeRequest = {
+  phone_number: string
+  purpose: 'find_account' | 'password_reset' | 'update_phone'
+}
+
+export type SendCodeResponse = {
+  message: string
+  code: string
+}
+
+/**
+ * 인증번호 전송 버튼에 대한 api
+ */
+export const sendCodeApi = async (
+  data: SendCodeRequest
+): Promise<SendCodeResponse> => {
+  const res = await api.post<SendCodeResponse>(
+    `${API_BASE_URL}${API_PATH.PHONENUMBER_SEND_API_PATH}`,
+    data
+  )
+
+  return res.data
+}
+
+export type VerifyCodeRequest = {
+  phone_number: string
+  code: string
+  purpose: SendCodeRequest['purpose']
+}
+
+export type VerifyCodeResponse = {
+  message: string
+}
+
+/**
+ * 인증번호 확인 버튼에 대한 api
+ */
+export const verifyCodeApi = async (
+  data: VerifyCodeRequest
+): Promise<VerifyCodeResponse> => {
+  const res = await api.post<VerifyCodeResponse>(
+    `${API_BASE_URL}${API_PATH.CODE_VERIFY_API_PATH}`,
+    data
+  )
+
   return res.data
 }

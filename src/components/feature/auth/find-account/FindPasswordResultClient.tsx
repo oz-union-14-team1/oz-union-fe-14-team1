@@ -1,8 +1,10 @@
 'use client'
 
+import { isAxiosError } from 'axios'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
+import { findPasswordConfirmApi } from '@/api/fetchers/authFetchers'
 import {
   BaseInput,
   Button,
@@ -15,6 +17,15 @@ import { cn } from '@/utils'
 
 import FormField from '../FormField'
 import { INPUT_CLASS } from '../SignupForm'
+
+type ApiErrorResponse = {
+  error_detail?: string
+  errors?: {
+    non_field_errors?: string[]
+    [key: string]: string[] | undefined
+  }
+  code?: string
+}
 
 /**
  * 패스워드 찾기 결과 컴포넌트
@@ -35,7 +46,7 @@ export default function FindPasswordResultClient() {
     setForm((prev) => ({ ...prev, [field]: value }))
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const result = newPasswordSchema.safeParse(form)
 
     if (!result.success) {
@@ -47,11 +58,31 @@ export default function FindPasswordResultClient() {
 
     setError(null)
 
-    /**
-     * TODO: 비밀번호 변경 API 연동
-     * TODO: credentials: 'include'
-     */
-    router.push(ROUTES_PATHS.LOGIN_PAGE)
+    try {
+      const data = await findPasswordConfirmApi({
+        new_password: form.password,
+        new_password_confirm: form.passwordConfirm,
+      })
+
+      triggerToast('success', data.message)
+
+      router.push(ROUTES_PATHS.LOGIN_PAGE)
+    } catch (error: unknown) {
+      let message = '비밀번호 변경에 실패했습니다.'
+
+      if (isAxiosError<ApiErrorResponse>(error)) {
+        const data = error.response?.data
+
+        if (data?.errors?.non_field_errors?.length) {
+          message = data.errors.non_field_errors[0]
+        } else {
+          message = data?.error_detail ?? message
+        }
+      }
+
+      setError(message)
+      triggerToast('error', message)
+    }
   }
 
   return (

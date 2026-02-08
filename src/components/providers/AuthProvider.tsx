@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react'
 
-import { refreshTokenApi } from '@/api/fetchers/authFetchers'
 import { useAuthStore } from '@/store/useAuthStore'
 
 /**
@@ -16,9 +15,6 @@ export default function AuthProvider({
   children: React.ReactNode
 }) {
   const initialized = useRef(false)
-
-  const setToken = useAuthStore((s) => s.setToken)
-  const clear = useAuthStore((s) => s.clear)
   const setInitialized = useAuthStore((s) => s.setInitialized)
 
   useEffect(() => {
@@ -27,22 +23,7 @@ export default function AuthProvider({
     }
     initialized.current = true
 
-    const initAuth = async () => {
-      try {
-        const token = await refreshTokenApi()
-
-        if (token) {
-          setToken(token)
-        }
-      } catch (err) {
-        console.error('Refresh failed:', err)
-        clear()
-      } finally {
-        setInitialized(true)
-      }
-    }
-
-    initAuth()
-  }, [setToken, clear, setInitialized])
+    setInitialized(true)
+  }, [setInitialized])
   return children
 }

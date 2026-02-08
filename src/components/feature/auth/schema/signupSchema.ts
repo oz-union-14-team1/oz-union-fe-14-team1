@@ -79,7 +79,10 @@ export const signupSchema = z
     password: passwordRule,
     passwordConfirm: z.string().transform((v) => v.trim()),
     name: z.string().min(1, '이름을 입력해 주세요.'),
-    birthday: birthdayRule,
+    /**
+     * 백엔드팀에서 사용하지 않아서 주석처리
+     * birthday: birthdayRule,
+     */
     gender: z.enum(['남성', '여성'], {
       message: '성별을 선택해 주세요.',
     }),

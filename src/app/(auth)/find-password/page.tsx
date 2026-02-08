@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
-import { compoundLogoColumn } from '@/assets'
-import { FindAccountContainer } from '@/components'
+import compoundLogoColumn from '@/assets/images/logo/compoundLogoColumn.svg'
+import FindAccountContainer from '@/components/feature/auth/find-account/FindAccountContainer'
 
 export default function FindPasswordPage() {
   return (
