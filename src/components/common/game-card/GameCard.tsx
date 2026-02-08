@@ -52,16 +52,18 @@ export default function GameCard({
         {/* blur background */}
         <Image
           src={image || FALLBACK_IMG_VERTICAL}
-          alt=""
+          alt="fallback"
           fill
+          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 288px"
           className="scale-110 object-cover opacity-30 blur-xl"
         />
 
         {/* 실제 이미지 */}
         <Image
           src={image || FALLBACK_IMG_VERTICAL}
-          alt={name}
+          alt={name || 'fallback'}
           fill
+          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 288px"
           className={cn(
             'object-cover transition-transform duration-500',
             isInteractive && 'group-hover:scale-110'
