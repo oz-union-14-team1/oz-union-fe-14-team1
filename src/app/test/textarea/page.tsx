@@ -1,9 +1,5 @@
-import { Textarea } from '@/components/feature/review/Textarea'
+// import { Textarea } from '@/components/feature/review/Textarea'
 
 export default function TextareaTestPage() {
-  return (
-    <div>
-      <Textarea />
-    </div>
-  )
+  return <div>{/* <Textarea /> */}</div>
 }
