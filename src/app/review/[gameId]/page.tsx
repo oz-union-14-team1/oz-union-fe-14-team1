@@ -28,9 +28,19 @@ export default function ReviewPage({ params }: ReviewPageProps) {
   const { data: aiData, status: aiReviewStatus } = useAiSummary(gameId)
 
   return (
-    <div className="mx-auto flex w-full max-w-300 gap-10 px-4 py-10">
-      <div className="flex flex-1 flex-col gap-5">
-        {game && <ImageCard game={game} />}
+    <div className="mx-auto flex w-full flex-col-reverse items-center justify-center gap-10 px-4 py-10 lg:flex-row lg:items-start">
+      <div className="flex w-full max-w-200 flex-col gap-5">
+        <div className="flex w-full flex-col items-center">
+          {game && <ImageCard game={game} className="w-full" />}
+
+          <aside className="flex w-full flex-col gap-2 lg:hidden">
+            <div className="flex h-43.75 w-full flex-col items-center justify-center rounded-card bg-gradient-main">
+              <p className="text-12 font-bold text-white">{game?.avgScore}</p>
+              <Star size={24} readonly value={game?.avgScore} />
+            </div>
+            {game && <GameReview gameDetail={game} />}
+          </aside>
+        </div>
 
         <div className="flex items-center gap-2">
           <Star size={16} value={game?.avgScore} readonly />
@@ -52,7 +62,7 @@ export default function ReviewPage({ params }: ReviewPageProps) {
                   aiData?.totalReview,
                 ].join(' ')
           }
-          className="flex w-200 flex-col gap-2 rounded-xl border p-6"
+          className="flex-2 flex-col gap-2 rounded-xl border p-6"
         />
 
         <Button
@@ -79,7 +89,7 @@ export default function ReviewPage({ params }: ReviewPageProps) {
 
         {review?.results?.map((comment) => (
           <Link href={`/review/${gameId}/${comment.id}`} key={comment.id}>
-            <ReviewCard className="h-50 w-200 rounded-xl border p-8">
+            <ReviewCard className="h-50 w-full max-w-200 rounded-xl border p-8">
               <div className="flex items-center gap-1">
                 <Avatar
                   avatar={comment.author}
@@ -107,8 +117,8 @@ export default function ReviewPage({ params }: ReviewPageProps) {
         ))}
       </div>
 
-      <aside className="w-80 shrink-0">
-        <div className="mt-7 flex h-43.75 w-90 flex-col items-center justify-center rounded-card bg-gradient-main">
+      <aside className="hidden w-80 flex-col gap-2 lg:flex">
+        <div className="flex h-43.75 w-full flex-col items-center justify-center rounded-card bg-gradient-main">
           <p className="text-12 font-bold text-white">{game?.avgScore}</p>
           <Star size={24} readonly value={game?.avgScore} />
         </div>
