@@ -13,6 +13,7 @@ export default function GameReviewPage() {
     publisher: '퍼블리셔',
     genres: [],
     tags: [],
+    avg_score: 0,
   }
 
   return (

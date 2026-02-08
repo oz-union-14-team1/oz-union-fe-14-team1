@@ -87,26 +87,6 @@ const MOCK_REVIEWS = [
       '힐링 게임이라고 하는데 제 취향은 아니었습니다. 반복적인 작업이 지루하게 느껴졌어요. 농사, 낚시 등이 단조롭고 시간이 너무 오래 걸립니다.',
     createdAt: '2023-11-28',
   },
-  {
-    id: 1,
-    game_name: 'Grand Theft Auto V',
-    content: '리뷰 테스트',
-    rating: 5,
-    like_count: 0,
-    created_at: '2026-02-02T17:01:05.010484+09:00',
-    comments: [
-      {
-        id: 101,
-        content: '정말 최고의 게임입니다!',
-        author: {
-          id: 4,
-          nickname: '댓글러1',
-          profile_image_url: '',
-        },
-        created_at: '2026-02-02T17:01:05.010484+09:00',
-      },
-    ],
-  },
 ]
 
 export default MOCK_REVIEWS
