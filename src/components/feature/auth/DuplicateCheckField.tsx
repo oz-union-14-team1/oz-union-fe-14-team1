@@ -16,6 +16,7 @@ type Props = {
   id: string
   isUserUpdateMode?: boolean
   isFindPasswordMode?: boolean
+  required?: boolean
 }
 
 /**
@@ -38,12 +39,13 @@ export default function DuplicateCheckField({
   id,
   isUserUpdateMode = false,
   isFindPasswordMode = false,
+  required = true,
 }: Props) {
   return (
     <div className="flex flex-col gap-1">
       <p className="text-sm">
         {label}
-        <span className="pl-2 text-red-400/90">*</span>
+        {required && <span className="pl-2 text-red-400/90">*</span>}
       </p>
       <div className="flex md:items-end">
         <div className="relative w-full md:flex md:gap-2">

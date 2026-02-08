@@ -82,9 +82,7 @@ export default function useUserInfoUpdateSubmit() {
 
       router.push(ROUTES_PATHS.MY_PAGE)
     } catch {
-      /**
-       * mutation에서 처리
-       * */
+      console.log('회원 정보 수정 에러 발생')
     }
   }
 

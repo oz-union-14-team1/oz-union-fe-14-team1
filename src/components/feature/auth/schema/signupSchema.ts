@@ -7,14 +7,16 @@ const noTripleRepeat = /^(?!.*(.)\1\1).*$/
 
 export const passwordRule = z
   .string()
-  .regex(
-    passwordRegex,
-    '비밀번호는 8~20자, 대/소문자, 숫자, 특수문자를 포함해야 합니다.'
+  .transform((v) => v.trim())
+  .pipe(
+    z
+      .string()
+      .regex(
+        passwordRegex,
+        '비밀번호는 8~20자, 대/소문자, 숫자, 특수문자를 포함해야 합니다.'
+      )
+      .regex(noTripleRepeat, '같은 문자를 3번 이상 사용할 수 없습니다.')
   )
-  .regex(noTripleRepeat, '같은 문자를 3번 이상 사용할 수 없습니다.')
-  .refine((pw) => !pw.includes(' '), {
-    message: '공백은 사용할 수 없습니다.',
-  })
 
 const nicknameRegex = /^[가-힣a-zA-Z0-9]{2,16}$/
 
@@ -75,7 +77,7 @@ export const signupSchema = z
     id: z.string().min(1, '아이디를 입력해 주세요.'),
     nickName: nickNameRule,
     password: passwordRule,
-    passwordConfirm: z.string(),
+    passwordConfirm: z.string().transform((v) => v.trim()),
     name: z.string().min(1, '이름을 입력해 주세요.'),
     birthday: birthdayRule,
     gender: z.enum(['남성', '여성'], {
