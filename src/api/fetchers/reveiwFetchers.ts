@@ -1,5 +1,9 @@
 import { API_BASE_URL, API_PATH } from '@/constants/apiPath'
-import { ReviewDetail } from '@/types/api-response/review-response'
+import {
+  AiReviewSummary,
+  ReviewDetail,
+  ReviewList,
+} from '@/types/api-response/review-response'
 import { api } from '@/utils'
 
 export const getReviewDetail = async (reviewId: string) => {
@@ -8,6 +12,33 @@ export const getReviewDetail = async (reviewId: string) => {
   )
 
   return res.data
+}
+
+export const getReviewList = async (gameId: string, page = 1) => {
+  const res = await api.get<ReviewList>(
+    `${API_BASE_URL}${API_PATH.REVIEWS(gameId)}?page=${page}`
+  )
+
+  return res.data
+}
+
+export const getAiReveiwSummary = async (gameId: string) => {
+  const res = await api.get<AiReviewSummary>(
+    `${API_BASE_URL}${API_PATH.AI_SUMMARY(gameId)}`
+  )
+
+  return res.data
+}
+
+export const postReview = async (
+  gameId: string,
+  content: string,
+  rating: number
+) => {
+  await api.post(`${API_BASE_URL}${API_PATH.REVIEWS(gameId)}`, {
+    content,
+    rating,
+  })
 }
 
 export const postReviewComment = async ({

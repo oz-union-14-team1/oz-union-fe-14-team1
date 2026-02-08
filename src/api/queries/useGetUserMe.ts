@@ -19,10 +19,6 @@ export const useGetUserMe = (options?: UseGetUserMeOptions) => {
     enabled: isInitialized && !!accessToken,
     retry: false,
   })
-  console.log('AUTH', {
-    accessToken,
-    isInitialized,
-  })
   const { onSuccess } = options ?? {}
 
   useEffect(() => {

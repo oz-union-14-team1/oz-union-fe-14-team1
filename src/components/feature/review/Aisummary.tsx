@@ -9,7 +9,7 @@ export default function AiSummary({ content, className }: AisummaryProps) {
   return (
     <div
       className={cn(
-        'h-30px flex w-160 flex-col gap-4 rounded-xl border border-white/10 bg-surface-elevated p-6 shadow-sm',
+        'h-30px flex w-full max-w-200 flex-col gap-4 rounded-xl border border-white/10 bg-surface-elevated p-6 shadow-sm',
         className
       )}
     >
