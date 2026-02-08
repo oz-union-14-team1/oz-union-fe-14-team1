@@ -23,6 +23,7 @@ export type GameDetail = Omit<Game, 'image' | 'platforms'> & {
   releasedAt: string
   platforms: string[]
   images: string[]
+  avg_score: number
 }
 
 /*

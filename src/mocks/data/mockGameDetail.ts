@@ -12,6 +12,7 @@ export const MOCK_GAME_DETAIL: GameDetail[] = [
     developer: 'Warhorse Studios',
     publisher: 'Deep Silver',
     platforms: ['PC', 'PlayStation 5', 'Xbox Series X/S'],
+    avg_score: 0,
   },
   {
     id: 2,
@@ -24,6 +25,7 @@ export const MOCK_GAME_DETAIL: GameDetail[] = [
     developer: 'Firaxis Games',
     publisher: '2K Games',
     platforms: ['PC'],
+    avg_score: 0,
   },
   {
     id: 3,
@@ -37,6 +39,7 @@ export const MOCK_GAME_DETAIL: GameDetail[] = [
     developer: 'Rogue Factor',
     publisher: 'Nacon',
     platforms: ['PC', 'PlayStation 5', 'Xbox Series X/S'],
+    avg_score: 0,
   },
   {
     id: 4,
@@ -50,6 +53,7 @@ export const MOCK_GAME_DETAIL: GameDetail[] = [
     developer: 'EA Tiburon',
     publisher: 'Electronic Arts',
     platforms: ['PC', 'PlayStation 5', 'Xbox Series X/S'],
+    avg_score: 0,
   },
   {
     id: 5,
@@ -62,6 +66,7 @@ export const MOCK_GAME_DETAIL: GameDetail[] = [
     developer: 'Innersloth',
     publisher: 'Innersloth',
     platforms: ['PC', 'iOS', 'Android', 'Nintendo Switch'],
+    avg_score: 0,
   },
   {
     id: 6,
@@ -74,6 +79,7 @@ export const MOCK_GAME_DETAIL: GameDetail[] = [
     developer: 'Bloober Team',
     publisher: 'Konami',
     platforms: ['PlayStation 5'],
+    avg_score: 0,
   },
   {
     id: 7,
@@ -92,7 +98,9 @@ export const MOCK_GAME_DETAIL: GameDetail[] = [
       'Xbox One',
       'Xbox Series X/S',
     ],
+    avg_score: 0,
   },
+
   {
     id: 8,
     name: 'Batman Arkham Knight',
@@ -104,6 +112,7 @@ export const MOCK_GAME_DETAIL: GameDetail[] = [
     developer: 'Rocksteady Studios',
     publisher: 'Warner Bros. Interactive Entertainment',
     platforms: ['PC', 'PlayStation 4', 'Xbox One'],
+    avg_score: 0,
   },
   {
     id: 9,
@@ -117,6 +126,7 @@ export const MOCK_GAME_DETAIL: GameDetail[] = [
     developer: 'Massive Entertainment',
     publisher: 'Ubisoft',
     platforms: ['PC', 'PlayStation 5', 'Xbox Series X/S'],
+    avg_score: 0,
   },
   {
     id: 10,
@@ -135,5 +145,6 @@ export const MOCK_GAME_DETAIL: GameDetail[] = [
       'Xbox One',
       'Xbox Series X/S',
     ],
+    avg_score: 0,
   },
 ]

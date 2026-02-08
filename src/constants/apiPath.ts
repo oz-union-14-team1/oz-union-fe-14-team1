@@ -6,6 +6,8 @@ export const GOOGLE_CLIENT_ID_URL =
   process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? ''
 
 export const API_PATH = {
+  REVIEWS: (gameId: string | number) => `/community/${gameId}/reviews`,
+  AI_SUMMARY: (gameId: string | number) => `/community/summary/${gameId}`,
   REVIEW_PATCH_DELETE_API_PATH: (review_id: string) =>
     `/community/reviews/${review_id}`,
   REVIEW_DETAIL_API_PATH: (review_id: string) =>
