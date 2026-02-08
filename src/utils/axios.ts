@@ -37,67 +37,27 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
   instance.interceptors.response.use(
     (response) => {
       response.data = convertToCamelCase(response.data)
+
       return response
     },
 
     async (error: AxiosError) => {
       const original = error.config as CustomAxiosRequestConfig
-
-      if (!original) {
+      if (error.response?.status !== 401 || original._retry) {
         return Promise.reject(error)
       }
 
-      if (error.response?.status !== 401) {
-        return Promise.reject(error)
-      }
-
-      if (original._retry) {
-        return Promise.reject(error)
-      }
       original._retry = true
 
-      if (original.url === API_PATH.LOGIN_REFRESH_API_PATH) {
-        useAuthStore.getState().clear()
-        return Promise.reject(error)
-      }
-
       try {
-        if (!refreshing) {
-          refreshing = refreshApi
-            .get(API_PATH.LOGIN_REFRESH_API_PATH)
-            .then((res) => {
-              const newToken = res.data.accessToken ?? res.data.access_token
-
-              if (!newToken) {
-                throw new Error('accessToken이 없습니다.')
-              }
-
-              useAuthStore.getState().setToken(newToken)
-              return newToken
-            })
-        }
-
-        const newToken = await refreshing
-
-        if (!newToken) {
-          return Promise.reject()
-        }
-
+        const res = await refreshApi.get(API_PATH.LOGIN_REFRESH_API_PATH)
+        const newToken = res.data.accessToken
+        console.log('intercep : ' + newToken)
+        useAuthStore.getState().setToken(newToken)
         original.headers?.set('Authorization', `Bearer ${newToken}`)
 
         return instance(original)
       } catch {
-        const store = useAuthStore.getState()
-
-        if (
-          axios.isAxiosError(error) &&
-          error.response?.status === 401 &&
-          original.url?.includes(API_PATH.LOGIN_REFRESH_API_PATH)
-        ) {
-          store.clear()
-          return Promise.resolve()
-        }
-
         return Promise.reject(error)
       } finally {
         refreshing = null
