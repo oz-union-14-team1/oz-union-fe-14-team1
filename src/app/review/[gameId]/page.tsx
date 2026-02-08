@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import { Button } from '@/components'
 import { Avatar, ReviewCard } from '@/components/feature/review'
@@ -9,97 +9,120 @@ import { ImageCard } from '@/components/feature/review/ImageCard'
 import { Star } from '@/components/feature/review/Star'
 import { Textarea } from '@/components/feature/review/Textarea'
 import { GameReview } from '@/components/layout/review/GameReview'
+import { API_BASE_URL, API_PATH } from '@/constants/apiPath'
+import { GameDetail } from '@/types/api-response/game-response'
 import { ReviewDetail } from '@/types/api-response/review-response'
 
-const MOCK_AI_DATA = {
-  god_points: ['장점을 불러오는 중입니다'],
-  bad_points: ['단점을 불러오는 중입니다'],
-  total_review: '요약중입니다',
-}
-const MOCK_DETAIL_DATA = {
-  id: 1,
-  name: '젤다의 전설',
-  intro: '이게임은 정말 좋은게임입니다',
-  developer: '닌텐도',
-  genres: ['어드밴처'],
-  tags: ['모험'],
-  publisher: '퍼블릭',
-  platforms: ['닌텐도'],
-  created_at: '2026-02-03T07:04:51.094Z',
-  releasedAt: '2026-02-03',
-  images: ['https://...'],
-}
-
-const MOCK_REVIEW_DATA: ReviewDetail = {
-  id: 1,
-  content: '리뷰 테스트',
-  rating: 5,
-  likeCount: 0,
-  author: {
-    id: 2000,
-    nickname: 'anonyumouise',
-    profileImgUrl: '',
-  },
-  createdAt: new Date('2026-02-02T17:01:05.010484+09:00'),
-  comments: [
-    {
-      id: 101,
-      content: '정말 최고의 게임입니다!',
-      author: {
-        id: 4,
-        nickname: '댓글러1',
-        profileImgUrl: '',
-      },
-      createdAt: new Date('2026-02-02T17:01:05.010484+09:00'),
-    },
-  ],
-}
-
-export default function ReviewPage() {
+export default function ReviewPage({ params }: { params: { gameId: string } }) {
   const [isEditing, setIsEditing] = useState(false)
-  const [game] = useState(MOCK_DETAIL_DATA)
-  const [review] = useState(MOCK_REVIEW_DATA)
-  const [aiData, setAiData] = useState(MOCK_AI_DATA)
-  const handleButtonClick = () => {
-    setIsEditing(!isEditing)
-  }
+  const [text, setText] = useState('')
+  const [game, setGame] = useState<GameDetail | null>(null)
+  const [review, setReview] = useState<ReviewDetail | null>(null)
+  const [aiData, setAiData] = useState({
+    good_points: [] as string[],
+    bad_points: [] as string[],
+    total_review: '',
+  })
+
+  const fetchData = useCallback(async () => {
+    try {
+      const [resAi, resReview, resGame] = await Promise.all([
+        fetch(`${API_BASE_URL}${API_PATH.AI_SUMMARY(params.gameId)}`),
+        fetch(`${API_BASE_URL}${API_PATH.REVIEWS(params.gameId)}`),
+        fetch(`${API_BASE_URL}${API_PATH.GAME_DETAIL(Number(params.gameId))}`),
+      ])
+
+      if (resAi.ok) {
+        setAiData(await resAi.json())
+      }
+      if (resReview.ok) {
+        setReview(await resReview.json())
+      }
+      if (resGame.ok) {
+        setGame(await resGame.json())
+      }
+    } catch (error) {
+      console.error('데이터 로드 실패:', error)
+    }
+  }, [params.gameId])
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const resAi = await fetch(
-          'http://43.200.124.13:8000/api/v1/community/summary/1'
-        )
+    let isSubscribed = true
 
-        if (resAi.ok) {
-          const airesult = await resAi.json()
-          setAiData(airesult)
-        }
-      } catch (error) {
-        console.error('데이터 로드 실패:', error)
+    const executeFetch = async () => {
+      if (params.gameId && isSubscribed) {
+        await fetchData()
       }
     }
-    fetchData()
-  }, [])
+
+    executeFetch()
+
+    return () => {
+      isSubscribed = false
+    }
+  }, [fetchData, params.gameId])
+
+  const handleButtonClick = () => setIsEditing(!isEditing)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (!text.trim()) {
+      alert('내용을 입력해주세요')
+      return
+    }
+
+    try {
+      const response = await fetch(
+        `${API_BASE_URL}${API_PATH.REVIEWS(params.gameId)}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            content: text,
+          }),
+        }
+      )
+
+      if (response.ok) {
+        alert('리뷰가 성공적으로 등록되었습니다!')
+        setText('')
+        setIsEditing(false)
+        fetchData()
+      } else {
+        const errorData = await response.json()
+        alert(`등록 실패: ${errorData.message || '알 수 없는 오류'}`)
+      }
+    } catch (error) {
+      console.error('리뷰 등록 중 에러 발생:', error)
+      alert('서버와 통신 중 문제가 발생했습니다.')
+    }
+  }
+
   return (
     <div className="mx-auto flex w-full max-w-300 gap-10 px-4 py-10">
       <div className="flex flex-1 flex-col gap-5">
         {game && <ImageCard game={game} />}
+
         <div className="flex items-center gap-2">
           <Star size={16} />
-          <span className="font-bold text-white">4.8</span>
-          <span className="text-sm text-gray-400"></span>
-          {review.rating}리뷰
+          <span className="font-bold text-white">
+            {game?.avg_score ? Number(game.avg_score).toFixed(1) : '0.0'}
+          </span>
+          <span className="text-sm text-gray-400">
+            ({review?.comments?.length || 0} 리뷰)
+          </span>
         </div>
 
-        {/* 게임이름 */}
-        <h1 className="text-4xl font-bold text-white">{game.name}</h1>
+        <h1 className="text-4xl font-bold text-white">{game?.name}</h1>
 
-        {/* AI답변 */}
         <AiSummary
           {...aiData}
           className="flex w-200 flex-col gap-2 rounded-xl border p-6"
         />
+
         <Button
           variant="main"
           onClick={handleButtonClick}
@@ -107,15 +130,21 @@ export default function ReviewPage() {
         >
           {isEditing ? '닫기' : '댓글 추가'}
         </Button>
+
         {isEditing && (
-          <Textarea
-            className="w-full rounded-xl border-none p-4"
-            placeholder="리뷰 내용을 입력해주세요..."
-            rows={4}
-          />
+          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+            <Textarea
+              name="review-content"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              className="w-full rounded-xl border-none p-4"
+              placeholder="리뷰 내용을 입력해주세요..."
+              rows={4}
+            />
+            <div className="flex justify-end"></div>
+          </form>
         )}
 
-        {/* 리뷰카드 */}
         {review?.comments?.map((comment) => (
           <ReviewCard
             key={comment.id}
@@ -144,11 +173,15 @@ export default function ReviewPage() {
           </ReviewCard>
         ))}
       </div>
+
       <aside className="w-80 shrink-0">
         <div className="mt-7 flex h-43.75 w-90 flex-col items-center justify-center rounded-card bg-gradient-main">
+          <p className="text-12 font-bold text-white">
+            {game?.avg_score ? Number(game.avg_score).toFixed(1) : ''}
+          </p>
           <Star size={24} />
         </div>
-        <GameReview gameDetail={game} />
+        {game && <GameReview gameDetail={game} />}
       </aside>
     </div>
   )
