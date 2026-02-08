@@ -1,3 +1,5 @@
+'use client'
+
 import { useGetPrefernece } from '@/api/queries/useGetUserPreference'
 import { GetUserMe } from '@/types/api-response/user-response'
 
