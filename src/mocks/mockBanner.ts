@@ -1,4 +1,4 @@
-import { Banner } from '@/types/carousel'
+import { Banner } from '@/types/banner'
 
 export const MOCK_BANNERS: Banner[] = [
   {

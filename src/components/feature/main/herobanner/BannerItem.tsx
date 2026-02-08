@@ -1,7 +1,9 @@
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { Badge } from '@/components/common'
-import { Banner } from '@/types/carousel'
+import { ROUTES_PATHS } from '@/constants'
+import { Banner } from '@/types/banner'
 import { cn, getTagVariant } from '@/utils'
 
 type BannerItemProps = {
@@ -17,7 +19,10 @@ export default function BannerItem({
   const isDesktop = variant === 'desktop'
 
   return (
-    <>
+    <Link
+      href={ROUTES_PATHS.GAME_DETAIL(banner.id)}
+      className="relative block h-full w-full"
+    >
       <Image
         src={banner.imgUrl}
         alt={banner.title}
@@ -63,6 +68,6 @@ export default function BannerItem({
           ))}
         </div>
       </div>
-    </>
+    </Link>
   )
 }

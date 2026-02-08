@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 import { MAIN_BANNER_OFFSET, MAX_SIDE_BANNERS } from '@/constants'
 import { useRotation } from '@/hooks'
-import { Banner } from '@/types/carousel'
+import { Banner } from '@/types/banner'
 
 import BannerItem from './BannerItem'
 
