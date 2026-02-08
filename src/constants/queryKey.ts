@@ -4,4 +4,5 @@ export const QUERY_KEYS = {
   GAME_RECOMMEND_PREFERENCE: ['game', 'recommend', 'preference'] as const,
   GAME_RECOMMEND_WISHLIST: ['game', 'recommend', 'whishlist'] as const,
   GAME_LIST: (params: { page: number }) => ['game', 'list', params] as const,
+  USER_PREFERENCE: ['preference'] as const,
 } as const
