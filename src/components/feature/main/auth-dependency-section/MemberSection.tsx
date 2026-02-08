@@ -1,10 +1,8 @@
 'use client'
 
-import {
-  useRecommendByPreference,
-  useRecommendByWhishlist,
-} from '@/api/queries/useGameQueries'
 import { useUserTendency } from '@/api/queries/usePreference'
+import { useRecommendByPreference } from '@/api/queries/useRecommendByPreference'
+import { useRecommendByWhishlist } from '@/api/queries/useRecommendByWishlist'
 import { CarouselSection } from '@/components/common'
 import { USER_SECTION_TITLE } from '@/constants'
 import { useAuthStore } from '@/store/useAuthStore'

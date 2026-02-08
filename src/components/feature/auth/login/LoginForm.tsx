@@ -58,13 +58,11 @@ export default function LoginForm() {
    */
   useEffect(() => {
     if (!shouldCheckTendency) {
-      console.log('tendency:', tendency)
       return
     }
     if (tendency) {
       router.replace(ROUTES_PATHS.MAIN_PAGE)
     } else if (tendency === null) {
-      console.log('tendency1:', tendency)
       return
     } else {
       router.replace(ROUTES_PATHS.RECOMMEND.TAG)
