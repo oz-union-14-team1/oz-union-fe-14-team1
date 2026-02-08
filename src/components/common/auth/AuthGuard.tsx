@@ -8,8 +8,7 @@ import { useAuthStore } from '@/store/useAuthStore'
 
 export default function AuthGuard({ children }: { children: React.ReactNode }) {
   const router = useRouter()
-  const accessToken = useAuthStore((s) => s.accessToken)
-  const isInitialized = useAuthStore((s) => s.isInitialized)
+  const { accessToken, isInitialized } = useAuthStore()
 
   useEffect(() => {
     if (!isInitialized) {
@@ -28,5 +27,6 @@ export default function AuthGuard({ children }: { children: React.ReactNode }) {
   if (!accessToken) {
     return null
   }
+
   return <>{children}</>
 }

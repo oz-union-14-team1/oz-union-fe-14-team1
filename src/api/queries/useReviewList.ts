@@ -15,7 +15,7 @@ export default function useReviewList(
 ) {
   return useQuery({
     ...options,
-    queryKey: ['review', 'list', page],
+    queryKey: ['review', 'list', gameId, page],
     queryFn: async () => {
       const data = await getReviewList(gameId, page)
       return data
