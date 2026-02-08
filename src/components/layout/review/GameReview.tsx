@@ -11,7 +11,7 @@ export const GameReview = ({ gameDetail: data }: GameReviewProps) => {
   const valueStyle = 'text-lg text-white font-semibold'
 
   return (
-    <div className="my-5 h-150 w-90 rounded-xl border border-gray-700 bg-surface-elevated p-6 shadow-lg">
+    <div className="my-5 w-90 rounded-xl border border-gray-700 bg-surface-elevated p-6 shadow-lg">
       <h2 className="mb-4 text-xl font-bold text-white">게임 정보</h2>
 
       <div className="grid-cols grid gap-y-4 border-t border-gray-800 pt-4">

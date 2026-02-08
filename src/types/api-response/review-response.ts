@@ -38,3 +38,9 @@ export type ReveiwComment = {
 export type ReviewDetail = Review & {
   comments: ReveiwComment[]
 }
+
+export type AiReviewSummary = {
+  goodPoints: string[]
+  badPoints: string[]
+  totalReview: string
+}
