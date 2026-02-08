@@ -37,8 +37,8 @@ export default function WishListCarouselUi({
             >
               <GameCard
                 id={item.game}
-                name={item.game_name}
-                image={item.game_image}
+                name={item.gameName}
+                image={item.gameImage}
               />
             </div>
           ))}

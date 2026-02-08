@@ -1,13 +1,13 @@
 /**
- * 위시리스트 API 응답 타입 (실제 백엔드 명세)
+ * 위시리스트 API 응답 타입
  */
 
 export type WishlistGame = {
-  id: number // 위시리스트 항목 ID
-  game: number // 게임 ID
-  game_name: string
-  game_image: string
-  created_at: string
+  id: number
+  game: number
+  gameName: string
+  gameImage: string
+  createdAt: string
 }
 
 export type GetWishlist = WishlistGame[]
@@ -21,5 +21,5 @@ export type PostWishlistResponse = {
 }
 
 export type DeleteWishlistResponse = {
-  message?: string
+  detail?: string
 }
