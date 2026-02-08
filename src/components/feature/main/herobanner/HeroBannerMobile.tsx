@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 import { SWIPE_THRESHOLD } from '@/constants'
 import { useRotation } from '@/hooks'
-import { Banner } from '@/types/carousel'
+import { Banner } from '@/types/banner'
 
 import BannerItem from './BannerItem'
 import DotIndicator from './DotIndicator'
