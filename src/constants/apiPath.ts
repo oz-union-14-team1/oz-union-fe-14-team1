@@ -36,9 +36,12 @@ export const API_PATH = {
   CHECK_NICKNAME_API_PATH: '/user/check-nickname',
   DELETE_PROFILE_IMAGE_API_PATH: '/user/me/image',
   GOOGLE_LOGIN_API_PATH: '/user/google/login',
-
   ONBOARDING_TAGS: '/user/preference/tags',
   ONBOARDING_GENRES: '/user/preference/genres',
   ONBOARDING_PREFERENCE: '/user/preference/',
   ONBOARDING_AI_TENDENCY: '/community/summary/user/tendency',
+  PASSWORD_RESET_REQUEST_API_PATH: '/user/password/reset/request',
+  PASSWORD_RESET_CONFIRM_API_PATH: '/user/password/reset/confirm',
+  PHONENUMBER_SEND_API_PATH: '/user/code/send',
+  CODE_VERIFY_API_PATH: '/user/code/verify',
 } as const

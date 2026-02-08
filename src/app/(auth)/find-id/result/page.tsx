@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { compoundLogoColumn } from '@/assets'
-import { FindIdResultClient } from '@/components'
+import compoundLogoColumn from '@/assets/images/logo/compoundLogoColumn.svg'
+import FindIdResultClient from '@/components/feature/auth/find-account/FindIdResultClient'
 import { ROUTES_PATHS } from '@/constants'
 
 /**

@@ -12,7 +12,6 @@ import {
   DuplicateCheckField,
   FormField,
   INPUT_CLASS,
-  PhoneVerificationField,
   UserInfoUpdateSchemaValues,
 } from '@/components'
 import {
@@ -32,7 +31,6 @@ const EMPTY_FORM: UserInfoUpdateSchemaValues = {
   nickName: '',
   name: '',
   phone: '',
-  birthday: '',
   gender: '남성',
   password: '',
   passwordConfirm: '',
@@ -68,7 +66,7 @@ export default function UserInfoUpdateClient() {
       nickName: data.nickname,
       name: data.name,
       phone: data.phoneNumber,
-      birthday: data.birthday ?? '',
+      // birthday: data.birthday ?? '',
       gender: data.gender === 'F' ? '여성' : '남성',
     })
   }, [])
@@ -91,6 +89,7 @@ export default function UserInfoUpdateClient() {
       if (!prev) {
         return prev
       }
+
       return { ...prev, [field]: value }
     })
 
@@ -108,7 +107,7 @@ export default function UserInfoUpdateClient() {
     const mappedBaseUserInfo: UserInfoUpdateSchemaValues = {
       nickName: baseUserInfo.nickname,
       name: baseUserInfo.name,
-      birthday: baseUserInfo.birthday ?? '',
+      // birthday: baseUserInfo.birthday ?? '',
       phone: baseUserInfo.phoneNumber,
       gender: baseUserInfo.gender === 'M' ? '남성' : '여성',
     }
@@ -213,10 +212,12 @@ export default function UserInfoUpdateClient() {
               id={`userInfoUpdate-${field.key}`}
               type={field.type}
               placeholder={field.placeholder}
-              value={form[field.key as 'name' | 'birthday']}
+              // value={form[field.key as 'name' | 'birthday']}
+              value={form[field.key as 'name']}
               className={cn(INPUT_CLASS, 'w-full')}
               onChange={(e) =>
-                handleChange(field.key as 'name' | 'birthday', e.target.value)
+                // handleChange(field.key as 'name' | 'birthday', e.target.value)
+                handleChange(field.key as 'name', e.target.value)
               }
             />
           </FormField>
@@ -244,6 +245,8 @@ export default function UserInfoUpdateClient() {
             ))}
           </div>
         </FormField>
+        {/* 
+        * 백엔드에서 휴대전화 업데이트 하지 않는다고 하여 필드 주석처리
         <PhoneVerificationField
           phone={form.phone}
           code={form.phoneCode ?? ''}
@@ -258,6 +261,7 @@ export default function UserInfoUpdateClient() {
           idValue="userInfoUpdate"
           required={false}
         />
+        /> */}
         <div className="mt-5 flex w-full gap-4">
           <Button
             type="submit"

@@ -97,7 +97,7 @@ export default function PhoneVerificationField({
           <BaseInput
             id={cn(idValue, '-phone-code')}
             type="text"
-            value={code}
+            value={code ?? ''}
             placeholder="인증번호를 입력해 주세요."
             onChange={(e) => onCodeChange(e.target.value)}
             disabled={!isCodeSent || isCodeVerified}

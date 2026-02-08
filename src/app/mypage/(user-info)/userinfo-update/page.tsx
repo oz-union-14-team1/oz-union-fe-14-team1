@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { compoundLogoRow } from '@/assets'
-import { UserInfoUpdateClient } from '@/components'
+import compoundLogoRow from '@/assets/images/logo/compoundLogoRow.svg'
+import UserInfoUpdateClient from '@/components/feature/mypage/user-info/user-update/UserInfoUpdateClient'
 import { ROUTES_PATHS } from '@/constants/routesPaths'
 
 /**

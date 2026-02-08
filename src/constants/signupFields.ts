@@ -32,11 +32,14 @@ export const SIGNUP_FIELDS: FieldConfig[] = [
     placeholder: '이름을 입력해 주세요.',
     required: true,
   },
-  {
-    key: 'birthday',
-    label: '생년월일',
-    type: 'text',
-    placeholder: '8자리 입력해주세요 (ex.20260101)',
-    required: true,
-  },
+  /**
+   * 백엔드팀 요청으로 생년월일 제거
+   *   {
+        key: 'birthday',
+        label: '생년월일',
+        type: 'text',
+        placeholder: '8자리 입력해주세요 (ex.20260101)',
+        required: false,
+      },
+   */
 ]

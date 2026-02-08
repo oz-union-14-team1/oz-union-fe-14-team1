@@ -16,6 +16,10 @@ export type UserInfo = {
 export const getUserInfoApi = async (): Promise<UserInfo> => {
   const res = await api.get(`${API_BASE_URL}${API_PATH.USER_ME_API_PATH}`)
 
+  if (!res.data) {
+    throw new Error('User 데이터가 비었습니다.')
+  }
+
   return res.data
 }
 
