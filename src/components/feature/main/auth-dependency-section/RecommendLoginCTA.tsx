@@ -7,9 +7,8 @@ import GameCard from '@/components/common/game-card/GameCard'
 import { GUEST_SECTION_TITLES } from '@/constants/sectionTitle'
 
 export default function RecommendLoginCTA() {
-  // TODO: API 연결
   const { data } = useGames()
-  const games = data?.results ?? []
+  const games = data ?? []
   const backgroundGames = games.slice(0, 6)
   const { title, href } = GUEST_SECTION_TITLES.RECOMMEND_LOGIN_CTA
 
@@ -44,7 +43,7 @@ export default function RecommendLoginCTA() {
 
       <div className="absolute bg-background/80" />
 
-      <div className="relative z-10 flex flex-col items-center justify-center py-12 text-center">
+      <div className="relative z-10 flex flex-col items-center justify-center py-3 text-center">
         <p className="text-lg font-bold text-text-light">
           당신의 플레이 타입을 발견해보세요.
         </p>
