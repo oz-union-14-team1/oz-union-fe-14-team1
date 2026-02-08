@@ -13,5 +13,7 @@ export const useRecommendByPreference = (isLoggedIn: boolean) => {
     queryFn: getRecommendByPreference,
     select: (data) => data?.results ?? [],
     enabled: isLoggedIn,
+    staleTime: 1000 * 60 * 5,
+    refetchOnMount: true,
   })
 }

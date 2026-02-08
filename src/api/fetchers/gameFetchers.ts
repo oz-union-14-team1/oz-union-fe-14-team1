@@ -1,15 +1,20 @@
 import { API_BASE_URL, API_PATH } from '@/constants/apiPath'
-import { GameDetail, GameList } from '@/types/api-response/game-response'
+import { Game, GameDetail, GameList } from '@/types/api-response/game-response'
 import { camelApi } from '@/utils/axios'
 
 /**
  * 전체 게임 목록
  */
-export const getGames = async (): Promise<GameList> => {
-  const res = await camelApi.get<GameList>(`${API_BASE_URL}${API_PATH.GAMES}`)
-  return res.data
-}
+export const getGames = async (): Promise<Game[]> => {
+  const [page1, page2] = await Promise.all([
+    camelApi.get<GameList>(`${API_BASE_URL}${API_PATH.GAMES}?page_size=40`),
+    camelApi.get<GameList>(
+      `${API_BASE_URL}${API_PATH.GAMES}?page=2&page_size=40`
+    ),
+  ])
 
+  return [...page1.data.results, ...page2.data.results]
+}
 /**
  * 게임상세
  */

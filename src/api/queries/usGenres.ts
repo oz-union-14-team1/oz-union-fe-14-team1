@@ -24,7 +24,7 @@ export const useGamesByGenre = (genreSlug: GenreSlug) => {
     queryKey: [...QUERY_KEYS.GAMES, 'genre', genreSlug] as const,
     queryFn: getGames,
     select: (data) =>
-      data.results.filter((game) =>
+      data.filter((game) =>
         game.tags?.some(
           (tag) =>
             tag.toLowerCase().includes(genreSlug) ||

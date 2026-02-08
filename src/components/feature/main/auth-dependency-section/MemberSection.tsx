@@ -1,14 +1,12 @@
 'use client'
 
+import { useRandomGames } from '@/api/queries/useGameQueries'
 import { useUserTendency } from '@/api/queries/usePreference'
 import { useRecommendByPreference } from '@/api/queries/useRecommendByPreference'
 import { useRecommendByWhishlist } from '@/api/queries/useRecommendByWishlist'
 import { CarouselSection } from '@/components/common'
 import { USER_SECTION_TITLE } from '@/constants'
 import { useAuthStore } from '@/store/useAuthStore'
-
-const FALLBACK_START = 6
-const FALLBACK_END = 13
 
 export function MemberSection() {
   const { accessToken, isInitialized } = useAuthStore((state) => state)
@@ -18,8 +16,10 @@ export function MemberSection() {
   const { data: wishlistGames = [] } = useRecommendByWhishlist(isLoggedIn)
   const { data: tendency } = useUserTendency()
 
+  const preferenceIds = preferenceGames.map((g) => g.id)
+  const { data: fallbackGames = [] } = useRandomGames(preferenceIds)
+
   const hasWishlist = wishlistGames.length > 0
-  const fallbackGames = preferenceGames.slice(FALLBACK_START, FALLBACK_END)
 
   const preferenceTitle = tendency
     ? USER_SECTION_TITLE.PREFERENCE.getTitle(tendency)

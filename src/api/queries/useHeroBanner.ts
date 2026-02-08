@@ -12,7 +12,7 @@ export const useHeroBanner = () => {
     queryFn: getGames,
   })
 
-  const gameIds = gameList?.results.slice(0, 5).map((game) => game.id) || []
+  const gameIds = gameList?.slice(0, 5).map((game) => game.id) || []
 
   const GameDetailQueries = useQueries({
     queries: gameIds.map((gameId) => ({
