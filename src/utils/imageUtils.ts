@@ -21,12 +21,6 @@ export const getFullImageUrl = (url: string): string => {
   // http:// → https:// 변환 (Mixed Content 방지)
   if (url.startsWith('http://')) {
     const httpsUrl = url.replace('http://', 'https://')
-    if (process.env.NODE_ENV === 'development') {
-      console.log('🔒 이미지 URL을 HTTPS로 변환:', {
-        original: url,
-        converted: httpsUrl,
-      })
-    }
     return httpsUrl
   }
 

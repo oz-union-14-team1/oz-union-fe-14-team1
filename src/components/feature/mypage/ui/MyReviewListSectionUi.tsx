@@ -12,7 +12,7 @@ export default function MyReviewListSectionUi({
     <div className="group flex items-start justify-start gap-4 md:gap-6 lg:gap-10">
       <div className="-mt-1.5 hidden w-16 shrink-0 md:block md:w-20">
         <p className="text-sm font-medium text-text-secondary transition-all duration-300 group-hover:text-sub-cyan">
-          {formatDate(review.created_at)}
+          {formatDate(review.createdAt)}
         </p>
       </div>
       <div className="flex shrink-0 flex-col items-center justify-center">

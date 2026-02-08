@@ -51,7 +51,10 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
 
       try {
         const res = await refreshApi.get(API_PATH.LOGIN_REFRESH_API_PATH)
-        const newToken = res.data.accessToken
+        const newToken = res.data.accessToken ?? res.data.access_token
+        if (!newToken) {
+          throw new Error('no accessToken')
+        }
         console.log('intercep : ' + newToken)
         useAuthStore.getState().setToken(newToken)
         original.headers?.set('Authorization', `Bearer ${newToken}`)

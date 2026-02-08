@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { use, useEffect, useState } from 'react'
+import { use, useState } from 'react'
 
 import useAiSummary from '@/api/queries/useAiSummary'
 import { useGameDetail } from '@/api/queries/useGameQueries'
@@ -14,6 +14,7 @@ import { ImageCard } from '@/components/feature/review/ImageCard'
 import { Star } from '@/components/feature/review/Star'
 import { Textarea } from '@/components/feature/review/Textarea'
 import { GameReview } from '@/components/layout/review/GameReview'
+import { ROUTES_PATHS } from '@/constants'
 import { useToast } from '@/hooks'
 import { useAuthStore } from '@/store/useAuthStore'
 
@@ -80,20 +81,27 @@ export default function ReviewPage({ params }: ReviewPageProps) {
           }
           className="flex-2 flex-col gap-2 rounded-xl border p-6"
         />
-
-        <Button
-          variant="main"
-          onClick={() => {
-            if (userData) {
-              setIsEditing((prev) => !prev)
-            } else {
-              triggerToast('warning', '로그인 이후 이용 할 수 있습니다!')
-            }
-          }}
-          className="w-fit rounded-xl bg-gray-700 px-4 py-2 text-white"
-        >
-          {isEditing ? '닫기' : '리뷰 추가'}
-        </Button>
+        <div className="flex justify-between">
+          <Button
+            variant="main"
+            onClick={() => {
+              if (userData) {
+                setIsEditing((prev) => !prev)
+              } else {
+                triggerToast('warning', '로그인 이후 이용 할 수 있습니다!')
+              }
+            }}
+            className="w-fit rounded-xl bg-gray-700 px-4 py-2 text-white"
+          >
+            {isEditing ? '닫기' : '리뷰 추가'}
+          </Button>
+          <Link
+            href={ROUTES_PATHS.MAIN_PAGE}
+            className="rounded-xl bg-gray-700 px-4 py-2 hover:bg-btn-main-hover"
+          >
+            홈으로
+          </Link>
+        </div>
 
         <Textarea
           name="review-content"

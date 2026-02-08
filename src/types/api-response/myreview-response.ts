@@ -3,12 +3,21 @@ export type MyReview = {
   author: {
     id: number
     nickname: string
-    profile_img_url: string
+    profileImgUrl: string
   }
   content: string
   rating: number
-  like_count: number
-  created_at: string
+  likeCount: number
+  createdAt: string
+  gameTitle: string
+  gameGenres: string[]
 }
 
-export type GetMyReviews = MyReview[]
+export type GetMyReviews = {
+  count: number
+  next: string | null
+  previous: string | null
+  results: MyReview[]
+}
+
+// export type GetMyReviews = MyReview[]
