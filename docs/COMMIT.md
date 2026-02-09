@@ -59,4 +59,4 @@ feat: 다크 모드 구현(#17)
 
 ---
 
-<p align="right"><a href="../README.md">⬅️ Back to README</a></p>
+<p align="right"><a href="./README.md">⬅️ Back to README</a></p>
