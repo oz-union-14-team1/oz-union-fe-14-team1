@@ -73,4 +73,4 @@ refactor/15--restructure-components
 
 ---
 
-<p align="right"><a href="../README.md">⬅️ Back to README</a></p>
+<p align="right"><a href="./README.md">⬅️ Back to README</a></p>
