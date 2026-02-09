@@ -1,18 +1,16 @@
 import { ThumbsDown, ThumbsUp } from 'lucide-react'
-import Link from 'next/link'
+// import Link from 'next/link'
 
+// import { ROUTES_PATHS } from '@/constants'
 import { MyReview } from '@/types/api-response/myreview-response'
 
 import { formatDate } from './MyReviewListWelcomeUi'
 
 export default function MyReviewListCardUi({ review }: { review: MyReview }) {
-  const REVIEW_DETAIL_URL = `/review/${review.id}`
-
   return (
-    <Link
-      href={REVIEW_DETAIL_URL}
-      className="-mt-28 flex min-h-50 max-w-full flex-1 flex-col items-start justify-start gap-2 overflow-hidden bg-background px-3 py-4 opacity-60 shadow-[0_10px_40px_rgba(0,0,0,0.3)] transition-all duration-300 group-hover:scale-[1.02] group-hover:opacity-100 group-hover:shadow-[0_15px_60px_rgba(0,0,0,0.4)] md:-mt-30 md:min-h-60 md:gap-4 md:px-4 md:py-6 lg:gap-10 lg:px-8"
-    >
+    <div className="-mt-28 flex min-h-50 max-w-full flex-1 flex-col items-start justify-start gap-2 overflow-hidden bg-background px-3 py-4 opacity-60 shadow-[0_10px_40px_rgba(0,0,0,0.3)] transition-all duration-300 group-hover:scale-[1.02] group-hover:opacity-100 group-hover:shadow-[0_15px_60px_rgba(0,0,0,0.4)] md:-mt-30 md:min-h-60 md:gap-4 md:px-4 md:py-6 lg:gap-10 lg:px-8">
+      {/* <Link */}
+      {/* href={ROUTES_PATHS.GAME_DETAIL(review.id)} */}
       <div className="flex items-center gap-2 md:hidden">
         <p className="text-[10px] font-medium text-text-secondary transition-all duration-300">
           {formatDate(review.createdAt)}
@@ -87,7 +85,16 @@ export default function MyReviewListCardUi({ review }: { review: MyReview }) {
             {review.content}
           </p>
         </div>
+        <div className="flex-1">
+          <p className="mb-0.5 text-xs font-thin text-sub-cyan md:mb-1 md:text-sm lg:text-base">
+            Game Title
+          </p>
+          <p className="truncate text-sm font-medium text-text-primary md:text-base lg:text-lg">
+            {review.gameTitle}
+          </p>
+        </div>
       </div>
-    </Link>
+      {/* </Link> */}
+    </div>
   )
 }
