@@ -2,35 +2,27 @@
 
 import { useSearchParams } from 'next/navigation'
 
+import { useSearchGames } from '@/api/queries/useSearchGame'
 import Badge from '@/components/common/badge/Badge'
 import GameCard from '@/components/common/game-card/GameCard'
 import { SearchEmptyUi } from '@/components/feature/search-page'
-import { MOCK_GAME } from '@/mocks/data/mockGameList'
-import { Game } from '@/types/api-response/game-response'
 import { getTagVariant } from '@/utils/getTagVariant'
 
 function SearchResults() {
   const searchParams = useSearchParams()
-  const query = searchParams.get('query')
-  const filters = searchParams.get('filters')
+  const query = searchParams.get('query') ?? ''
 
-  const filterList = filters ? filters.split(',').filter(Boolean) : []
+  const page = Number(searchParams.get('page') ?? 1)
 
-  const games = MOCK_GAME.filter((game: Game) => {
-    const matchesQuery =
-      !query || String(game.id).toLowerCase().includes(query.toLowerCase())
+  const { data, isLoading } = useSearchGames(query, page)
+  const games = data?.results ?? []
 
-    const matchesFilters =
-      filterList.length === 0 ||
-      filterList.some((filter) => {
-        const filterId = Number(filter)
-
-        return String(game.id).includes(String(filterId))
-        // || game.tagId?.includes(filterId)
-      })
-
-    return matchesQuery && matchesFilters
-  })
+  if (!query || !games.length) {
+    return <SearchEmptyUi />
+  }
+  if (isLoading) {
+    return <div>로딩중...</div>
+  }
 
   return (
     <main className="mx-auto my-14 max-w-345 px-4">
@@ -46,20 +38,17 @@ function SearchResults() {
           </div>
         )}
 
-        {filters && filterList.length > 0 && (
-          <div className="space-y-2">
-            <p className="text-sm text-text-secondary">적용된 필터</p>
-            <div className="flex flex-wrap gap-2">
-              {filterList.map((filter, index) => (
-                <Badge
-                  key={`${filter}-${index}`}
-                  variant={getTagVariant(index + 1)}
-                  size="md"
-                >
-                  {filter}
-                </Badge>
-              ))}
-            </div>
+        {query && (
+          <div className="flex flex-wrap gap-2">
+            {query.split(',').map((q, index) => (
+              <Badge
+                key={`search-${q}-${index}`}
+                variant={getTagVariant(index)}
+                size="md"
+              >
+                #{q}
+              </Badge>
+            ))}
           </div>
         )}
       </div>
