@@ -19,34 +19,34 @@
 ### 🖥 데스크톱
 
 **메인 페이지 / 온보딩 / 추천 흐름**
-[회원가입]
-[<video controls src="회원가입.mov" title="Title"></video>](https://github.com/user-attachments/assets/1675e24c-c736-40ea-9736-c0b1abb09df7)
 
-[회원정보수정]
-[<video controls src="회원정보수정.mov" title="Title"></video>](https://github.com/user-attachments/assets/0b3bd4e2-3abd-4cd1-8895-78f21cd59a2b)
+아! controls 속성이 빠져있네요. 프로필수정/취향분석 온보딩에는 controls를 넣어줬는데, 회원가입 플로우에는 빠진 것 같아요.
+이렇게 수정해보세요:
+markdown<div align="center">
 
-[회원탈퇴]
-[<video controls src="회원탈퇴1.mov" title="Title"></video>](https://github.com/user-attachments/assets/27e617b7-4075-4fac-ad29-c5d4a9167ce5)
+|                                                       회원가입                                                       |                                                     회원정보수정                                                     |                                                       회원탈퇴                                                       |
+| :------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------: |
+| <video src="https://github.com/user-attachments/assets/1675e24c-c736-40ea-9736-c0b1abb09df7" width="290" controls /> | <video src="https://github.com/user-attachments/assets/0b3bd4e2-3abd-4cd1-8895-78f21cd59a2b" width="290" controls /> | <video src="https://github.com/user-attachments/assets/27e617b7-4075-4fac-ad29-c5d4a9167ce5" width="290" controls /> |
 
-[프로필수정]
-[<video controls src="프로필수정.mov" title="Title"></video>](https://github.com/user-attachments/assets/2119f46e-711a-4156-94de-d21596763dab)
+</div>
 
-[취향분석 온보딩]
-[<video controls src="onboarding-1.mov" title="Title"></video>](https://github.com/user-attachments/assets/0e633388-36fa-4600-a866-9d325e57dc8c)
+|                                                      프로필수정                                                      |                                                   취향분석 온보딩                                                    |
+| :------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------: |
+| <video src="https://github.com/user-attachments/assets/2119f46e-711a-4156-94de-d21596763dab" width="400" controls /> | <video src="https://github.com/user-attachments/assets/0e633388-36fa-4600-a866-9d325e57dc8c" width="400" controls /> |
 
-[메인페이지 - 로그인 전]
-![alt text](image-2.png)
+<div align="center">
 
-[메인페이지 - 로그인 후]
-![alt mainpage](image.png)
+|                      메인페이지 - 로그인 전                       |                     메인페이지 - 로그인 후                      |
+| :---------------------------------------------------------------: | :-------------------------------------------------------------: |
+| <img src="image-2.png" alt="메인페이지 로그인 전" height="400" /> | <img src="image.png" alt="메인페이지 로그인 후" height="400" /> |
+
+</div>
 
 [장르별 상세페이지]
 ![alt genredetail](image-1.png)
 
 [리뷰상세페이지]
 ![alt text](image-3.png)
-
-[리뷰 댓글 반응형]
 
 ---
 
@@ -104,7 +104,7 @@
 
 ## 🌐 배포 링크
 
-> ### 🔗 [Live Demo](oz-union-fe-14-team1-main.vercel.app)
+> ### 🔗 [Live Demo](https://oz-union-fe-14-team1.vercel.app/)
 
 ---
 
@@ -144,7 +144,7 @@ pnpm dev
 
 ```bash
 ID: test@playtype.com
-PW: test1234
+PW: Test1234!
 ```
 
 ---
