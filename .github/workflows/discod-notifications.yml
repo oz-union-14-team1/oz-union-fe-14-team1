@@ -1,0 +1,90 @@
+name: Discord Notifications
+
+on:
+  pull_request:
+    types: [opened, review_requested, closed]
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      # PR 생성 알림
+      - name: Notify on PR Opened
+        if: github.event.action == 'opened'
+        run: |
+          curl -H "Content-Type: application/json" \
+            -X POST \
+            -d '{
+              "embeds": [{
+                "title": "🆕 새로운 PR이 생성되었습니다!",
+                "description": "[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})",
+                "color": 3447003,
+                "fields": [
+                  { "name": "👤 작성자", "value": "${{ github.event.pull_request.user.login }}", "inline": true },
+                  { "name": "🌿 브랜치", "value": "`${{ github.event.pull_request.head.ref }}` → `${{ github.event.pull_request.base.ref }}`", "inline": true },
+                  { "name": "📊 변경사항", "value": "+${{ github.event.pull_request.additions }} -${{ github.event.pull_request.deletions }}", "inline": true }
+                ],
+                "timestamp": "${{ github.event.pull_request.created_at }}"
+              }]
+            }' \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+      # 리뷰어 멘션 (중복 방지)
+      - name: Mention Reviewers
+        if: github.event.action == 'review_requested'
+        run: |
+          REVIEWERS_JSON='${{ toJSON(github.event.pull_request.requested_reviewers) }}'
+          FIRST_REVIEWER=$(echo "$REVIEWERS_JSON" | jq -r '.[0].login // empty')
+          CURRENT_REVIEWER="${{ github.event.requested_reviewer.login }}"
+
+          if [ "$CURRENT_REVIEWER" = "$FIRST_REVIEWER" ] || [ -z "$FIRST_REVIEWER" ]; then
+            MENTIONS=""
+            for login in $(echo "$REVIEWERS_JSON" | jq -r '.[] | .login'); do
+              case "$login" in
+                "chen4023")      MENTIONS="$MENTIONS <@683563560063991848>" ;;
+                "G-jjunny")      MENTIONS="$MENTIONS <@382857559532371968>" ;;
+                "SammyLee519")   MENTIONS="$MENTIONS <@1366576628494372905>" ;;
+                "sowonhub")      MENTIONS="$MENTIONS <@1402544152125898802>" ;;
+                "WoongBaeJeon")  MENTIONS="$MENTIONS <@1325430352843636736>" ;;
+                "lollonoaJoro")  MENTIONS="$MENTIONS <@738738910724882462>" ;;
+                *)               MENTIONS="$MENTIONS @$login" ;;
+              esac
+            done
+
+            curl -H "Content-Type: application/json" \
+              -X POST \
+              -d "{
+                \"content\": \"🔍 **리뷰 요청이 도착했습니다!** $MENTIONS\",
+                \"embeds\": [{
+                  \"title\": \"리뷰를 부탁드립니다! 👀\",
+                  \"description\": \"[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})\",
+                  \"color\": 16776960
+                }]
+              }" \
+              ${{ secrets.DISCORD_WEBHOOK_URL }}
+          fi
+
+      # PR 종료 / 병합
+      - name: Notify on PR Closed
+        if: github.event.action == 'closed'
+        run: |
+          if [ "${{ github.event.pull_request.merged }}" = "true" ]; then
+            STATUS="✅ 병합 완료!"
+            COLOR=65280
+          else
+            STATUS="❌ PR 닫힘"
+            COLOR=16711680
+          fi
+
+          curl -H "Content-Type: application/json" \
+            -X POST \
+            -d "{
+              \"embeds\": [{
+                \"title\": \"$STATUS\",
+                \"description\": \"[${{ github.event.pull_request.title }}](${{ github.event.pull_request.html_url }})\",
+                \"color\": $COLOR
+              }]
+            }" \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}

@@ -1,0 +1,13 @@
+// src/components/common/index.ts
+export * from './badge'
+export * from './button'
+export * from './carousel-nav'
+export * from './game-card'
+export * from './genre-card-ui'
+export * from './input'
+export * from './progress-bar'
+export * from './section-title'
+export * from './tag'
+export * from './toast'
+export * from './tag'
+export * from './carousel-section/CarouselSection'

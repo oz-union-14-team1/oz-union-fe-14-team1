@@ -1,0 +1,20 @@
+import Image from 'next/image'
+
+import compoundLogoColumn from '@/assets/images/logo/compoundLogoColumn.svg'
+import FindAccountContainer from '@/components/feature/auth/find-account/FindAccountContainer'
+
+export default function FindPasswordPage() {
+  return (
+    <div className="flex flex-col items-center">
+      <div className="flex flex-col">
+        <Image
+          src={compoundLogoColumn}
+          alt="PlayTypeLogo"
+          priority
+          className="mb-4 w-30 md:w-40"
+        />
+      </div>
+      <FindAccountContainer mode="password" />
+    </div>
+  )
+}

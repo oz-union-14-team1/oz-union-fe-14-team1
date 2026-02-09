@@ -1,0 +1,38 @@
+@import 'tailwindcss';
+@import './token.css';
+
+@custom-variant dark (&:is(.dark *));
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-light);
+  font-family: 'Pretendard', sans-serif;
+  min-width: 375px;
+}
+
+/* 스크롤바 숨기기 */
+html,
+body {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Prevent vaul top-drawer pseudo element from blocking header clicks */
+[data-vaul-drawer][data-vaul-drawer-direction='top']::after {
+  display: none;
+  content: none;
+}
