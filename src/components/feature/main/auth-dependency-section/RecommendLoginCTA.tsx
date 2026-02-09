@@ -29,7 +29,7 @@ export default function RecommendLoginCTA() {
         </h2>
       </div>
 
-      <div className="absolute grid grid-cols-6 gap-3 opacity-10 blur-sm">
+      <div className="absolute grid grid-cols-6 gap-3 opacity-10 blur-sm md:max-w-345">
         {backgroundGames.map((game) => (
           <GameCard
             key={game.id}

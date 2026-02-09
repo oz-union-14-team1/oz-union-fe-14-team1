@@ -12,7 +12,7 @@ type GameLoaderProps = {
 
 export default function GameLoader({
   message = '플레이타입 계산 중',
-  subMessage = 'AI가 당신의 플레이 성향을 분석하고 있어요..',
+  subMessage = '',
   showGlow = true,
 }: GameLoaderProps) {
   return (

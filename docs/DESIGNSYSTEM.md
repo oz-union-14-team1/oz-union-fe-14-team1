@@ -169,3 +169,5 @@ hover:shadow-active
 - 토큰 정의 파일: /styles/token.css
 
 - Tailwind 매핑: /tailwind.config.ts
+
+<p align="right"><a href="./README.md">⬅️ Back to README</a></p>

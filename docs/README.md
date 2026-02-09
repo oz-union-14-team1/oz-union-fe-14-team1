@@ -19,22 +19,46 @@
 ### 🖥 데스크톱
 
 **메인 페이지 / 온보딩 / 추천 흐름**
+[회원가입]
+<video controls src="회원가입.mov" title="Title"></video>
 
-(추가예정)
+[회원수정]
+<video controls src="회원정보수정.mov" title="Title"></video>
+
+[회원탈퇴]
+<video controls src="회원탈퇴1.mov" title="Title"></video>
+
+[프로필수정]
+<video controls src="프로필수정.mov" title="Title"></video>
+
+[취향분석 온보딩]
+<video controls src="onboarding-1.mov" title="Title"></video>
+[메인페이지 - 로그인 전]
+![alt text](image-2.png)
+
+[메인페이지 - 로그인 후]
+![alt mainpage](image.png)
+
+[장르별 상세페이지]
+![alt genredetail](image-1.png)
+
+[리뷰상세페이지]
+![alt text](image-3.png)
+
+[리뷰 댓글 반응형]
 
 ---
 
 ### 📱 모바일
 
 **모바일 최적화 UI 및 인터랙션**
-
-(추가예정)
+{추가예정}
 
 ---
 
 ## 🌐 배포 링크
 
-> ### 🔗 [Live Demo](추가예정)
+> ### 🔗 [Live Demo](oz-union-fe-14-team1-main.vercel.app)
 
 ---
 
@@ -138,6 +162,7 @@ AI 기반 분석 연동:
 ### 💬 리뷰 · 커뮤니티
 
 - 게임별 리뷰 작성 / 수정 / 삭제
+- 🤖 AI 기반 리뷰 요약 제공
 - 리뷰 댓글 작성 및 사용자 간 소통
 - 게임 중심 커뮤니티 구조 제공
 
@@ -145,6 +170,10 @@ AI 기반 분석 연동:
 1. 리뷰 기반 커뮤니티 기능
 게임 중심 리뷰 구조:
 각 게임을 기준으로 리뷰가 모이는 구조로 게임별 커뮤니티 경험 제공
+
+AI 리뷰 요약:
+게임별로 작성된 다수의 리뷰를 AI가 분석하여 핵심 의견을 요약 제공
+사용자들이 빠르게 게임의 전반적인 평가를 파악할 수 있도록 지원
 
 상호 소통 기능:
 리뷰에 댓글을 남기고 좋아요 / 싫어요 반응을 통해 사용자 간 의견 표현 및 피드백 가능
@@ -207,12 +236,13 @@ AI 기반 분석 연동:
 
 > 자세한 내용은 각 문서를 참고해주세요.
 
-| 문서                                  | 설명          |
-| ------------------------------------- | ------------- |
-| [BRANCH.md](./docs/BRANCH.md)         | 브랜치 전략   |
-| [COMMIT.md](./docs/COMMIT.md)         | 커밋 컨벤션   |
-| [CONVENTION.md](./docs/CONVENTION.md) | 코드 컨벤션   |
-| [STRUCTURE.md](./docs/STRUCTURE.md)   | 프로젝트 구조 |
+| 문서                                      | 설명          |
+| ----------------------------------------- | ------------- |
+| [BRANCH.md](./docs/BRANCH.md)             | 브랜치 전략   |
+| [COMMIT.md](./docs/COMMIT.md)             | 커밋 컨벤션   |
+| [CONVENTION.md](./docs/CONVENTION.md)     | 코드 컨벤션   |
+| [STRUCTURE.md](./docs/STRUCTURE.md)       | 프로젝트 구조 |
+| [DESIGNSYSTEM.md](./docs/DESIGNSYSTEM.md) | 디자인시스템  |
 
 ---
 
@@ -234,6 +264,7 @@ AI 기반 분석 연동:
 
 ## 🔚 마무리
 
-> **OZ Coding School Externship Project**
+> **OZ Coding School Frontend Bootcamp**  
+> **Team1 14기 합동 프로젝트**
 
 <p align="right"><a href="#-playtype-취향-기반-게임-추천-커뮤니티-플랫폼">⬆️ Back to Top</a></p>
