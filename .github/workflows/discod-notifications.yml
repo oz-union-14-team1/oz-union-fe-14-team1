@@ -43,12 +43,8 @@ jobs:
             MENTIONS=""
             for login in $(echo "$REVIEWERS_JSON" | jq -r '.[] | .login'); do
               case "$login" in
-                "chen4023")      MENTIONS="$MENTIONS <@683563560063991848>" ;;
-                "G-jjunny")      MENTIONS="$MENTIONS <@382857559532371968>" ;;
                 "SammyLee519")   MENTIONS="$MENTIONS <@1366576628494372905>" ;;
-                "sowonhub")      MENTIONS="$MENTIONS <@1402544152125898802>" ;;
                 "WoongBaeJeon")  MENTIONS="$MENTIONS <@1325430352843636736>" ;;
-                "lollonoaJoro")  MENTIONS="$MENTIONS <@738738910724882462>" ;;
                 *)               MENTIONS="$MENTIONS @$login" ;;
               esac
             done
