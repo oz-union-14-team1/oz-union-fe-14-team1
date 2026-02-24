@@ -4,7 +4,7 @@ import axios, {
   InternalAxiosRequestConfig,
 } from 'axios'
 
-import { API_BASE_URL, API_PATH } from '@/constants/apiPath'
+import { API_PATH } from '@/constants/apiPath'
 import { useAuthStore } from '@/store/useAuthStore'
 import { convertToCamelCase } from '@/utils/convertToCamelCase'
 
@@ -98,6 +98,9 @@ camelApi.interceptors.response.use((res) => {
  * refresh API
  */
 export const refreshApi = axios.create({
-  baseURL: API_BASE_URL,
+  /**
+   * msw로 인한 주석처리
+   * baseURL: API_BASE_URL,
+   */
   withCredentials: true,
 })

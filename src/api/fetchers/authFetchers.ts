@@ -12,10 +12,7 @@ type LoginResponse = {
 }
 
 export const loginApi = async (data: LoginRequest) => {
-  const res = await api.post<LoginResponse>(
-    `${API_BASE_URL}${API_PATH.LOGIN_API_PATH}`,
-    data
-  )
+  const res = await api.post<LoginResponse>(`${API_PATH.LOGIN_API_PATH}`, data)
 
   return res.data
 }
@@ -29,7 +26,7 @@ type RefreshResponse = {
  */
 export const refreshTokenApi = async () => {
   const res = await api.get<RefreshResponse>(
-    `${API_BASE_URL}${API_PATH.LOGIN_REFRESH_API_PATH}`
+    `${API_PATH.LOGIN_REFRESH_API_PATH}`
   )
 
   return res.data.accessToken
@@ -92,7 +89,7 @@ export const deleteUserApi = async (data: DeleteUserRequest) => {
  * 로그아웃 api
  */
 export const logoutApi = async (): Promise<void> => {
-  await api.post(`${API_BASE_URL}${API_PATH.USER_LOGOUT_API_PATH}`)
+  await api.post(`${API_PATH.USER_LOGOUT_API_PATH}`)
 }
 
 type CheckEmailRequest = {
