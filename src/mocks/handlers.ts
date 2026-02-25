@@ -1,3 +1,4 @@
+import { authHandlers } from '@/mocks/handlers/authHandlers'
 import { onboardingHandlers } from '@/mocks/handlers/onboardingHandler'
 import { reviewHandlers } from '@/mocks/handlers/reviewHandlers'
 import { testHandlers } from '@/mocks/handlers/testHandlers'
@@ -7,4 +8,5 @@ export const handlers = [
   ...reviewHandlers,
 
   ...onboardingHandlers,
+  ...authHandlers,
 ]
