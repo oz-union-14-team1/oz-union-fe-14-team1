@@ -21,7 +21,49 @@ const users = [
  */
 let currentToken = 'init-token'
 const createToken = () => `token-${Date.now()}`
+
+/**
+ * localStorage
+ */
 const localStorageKey = 'msw_demo_access_token'
+
+const canUseLocalStorage = () =>
+  typeof window !== 'undefined' && typeof window.localStorage !== 'undefined'
+
+const saveToken = (token: string) => {
+  if (!canUseLocalStorage()) {
+    return
+  }
+  window.localStorage.setItem(localStorageKey, token)
+}
+
+const getSavedToken = () => {
+  if (!canUseLocalStorage()) {
+    return null
+  }
+  return window.localStorage.getItem(localStorageKey)
+}
+
+const clearSavedToken = () => {
+  if (!canUseLocalStorage()) {
+    return
+  }
+  window.localStorage.removeItem(localStorageKey)
+}
+
+/**
+ * refresh보다 먼저 호출된 API(user/me)를 보호
+ */
+const restoreTokenIfNeeded = () => {
+  const saved = getSavedToken()
+  if (!saved) {
+    return
+  }
+
+  if (!currentToken || currentToken === 'init-token') {
+    currentToken = saved
+  }
+}
 
 export const authHandlers = [
   /**
@@ -52,10 +94,7 @@ export const authHandlers = [
     }
 
     currentToken = createToken()
-
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(localStorageKey, currentToken)
-    }
+    saveToken(currentToken)
 
     return HttpResponse.json({
       accessToken: currentToken,
@@ -69,10 +108,7 @@ export const authHandlers = [
   http.get(`${API_PATH.LOGIN_REFRESH_API_PATH}`, async () => {
     await delay(200)
 
-    const savedToken =
-      typeof window !== 'undefined'
-        ? window.localStorage.getItem(localStorageKey)
-        : null
+    const savedToken = getSavedToken()
 
     if (!savedToken) {
       return HttpResponse.json(
@@ -82,9 +118,7 @@ export const authHandlers = [
     }
 
     currentToken = createToken()
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem(localStorageKey, currentToken)
-    }
+    saveToken(currentToken)
 
     return HttpResponse.json({ accessToken: currentToken })
   }),
@@ -94,6 +128,8 @@ export const authHandlers = [
    */
   http.get(`${API_PATH.USER_ME_API_PATH}`, async ({ request }) => {
     await delay(200)
+
+    restoreTokenIfNeeded()
 
     const auth = request.headers.get('Authorization')
 
@@ -118,6 +154,8 @@ export const authHandlers = [
   http.post(`${API_PATH.USER_LOGOUT_API_PATH}`, async () => {
     await delay(100)
     currentToken = ''
+    clearSavedToken()
+
     return HttpResponse.json({ message: '로그아웃 완료' })
   }),
 ]
