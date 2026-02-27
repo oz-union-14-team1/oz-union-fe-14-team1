@@ -46,7 +46,7 @@ export default function ResultContent() {
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center">
-        <GameLoader />
+        <GameLoader showMessage={true} />
         <p className="mt-4 text-text-light">
           AI가 당신의 성향을 분석하고 있습니다...
         </p>

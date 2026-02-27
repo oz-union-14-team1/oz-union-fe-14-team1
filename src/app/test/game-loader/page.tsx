@@ -8,7 +8,7 @@ export default function GameLoaderTestPage() {
       <section className="space-y-8">
         <h2 className="text-lg font-semibold">Default</h2>
         <div className="flex justify-center rounded-lg bg-neutral-800 p-10">
-          <GameLoader />
+          <GameLoader showMessage={true} />
         </div>
       </section>
     </main>

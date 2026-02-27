@@ -8,12 +8,14 @@ type GameLoaderProps = {
   message?: string
   subMessage?: string
   showGlow?: boolean
+  showMessage?: boolean
 }
 
 export default function GameLoader({
   message = '플레이타입 계산 중',
   subMessage = '',
   showGlow = true,
+  showMessage = false,
 }: GameLoaderProps) {
   return (
     <div className="flex flex-col items-center gap-6">
@@ -29,17 +31,20 @@ export default function GameLoader({
           </>
         )}
       </div>
-
-      <div className="text-center">
-        <p className="mb-2 text-[clamp(1.125rem,2.2vw,1.75rem)] font-semibold tracking-tight text-text-light md:mb-4">
-          {message}
-        </p>
-        {subMessage && (
-          <p className="text-[clamp(0.825rem,1.2vw,1rem)] leading-relaxed text-text-light/70">
-            {subMessage}
-          </p>
-        )}
-      </div>
+      {showMessage && (
+        <>
+          <div className="text-center">
+            <p className="mb-2 text-[clamp(1.125rem,2.2vw,1.75rem)] font-semibold tracking-tight text-text-light md:mb-4">
+              {message}
+            </p>
+            {subMessage && (
+              <p className="text-[clamp(0.825rem,1.2vw,1rem)] leading-relaxed text-text-light/70">
+                {subMessage}
+              </p>
+            )}
+          </div>
+        </>
+      )}
     </div>
   )
 }
