@@ -38,7 +38,7 @@ export default function MyPage() {
             />
           </div>
 
-          <div className="w-full max-w-[600px] lg:max-w-3/7">
+          <div className="w-full max-w-150 lg:max-w-3/7">
             <DashBoard
               wishlistCount={wishlistCount}
               reviewCount={reviewCount}

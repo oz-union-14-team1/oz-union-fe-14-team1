@@ -16,7 +16,7 @@ function MyReviewList() {
       <div className="flex flex-col justify-center">
         <div className="mb-35 flex min-w-0 flex-1 items-center gap-2 md:gap-4">
           <div className="flex items-center gap-2 md:gap-3">
-            <div className="shrink-0 rounded-full bg-gradient-to-br from-main-purple/20 to-main-fuchsia/20 p-1.5 md:p-2">
+            <div className="shrink-0 rounded-full bg-linear-to-br from-main-purple/20 to-main-fuchsia/20 p-1.5 md:p-2">
               <MessageSquare className="h-4 w-4 fill-main-purple text-main-purple md:h-6 md:w-6" />
             </div>
             <h2 className="truncate text-lg font-bold text-text-light md:text-2xl">
@@ -35,7 +35,7 @@ function MyReviewList() {
     <div className="flex flex-col justify-center">
       <div className="mb-35 flex min-w-0 flex-1 items-center gap-2 md:gap-4">
         <div className="flex items-center gap-2 md:gap-3">
-          <div className="shrink-0 rounded-full bg-gradient-to-br from-main-purple/20 to-main-fuchsia/20 p-1.5 md:p-2">
+          <div className="shrink-0 rounded-full bg-linear-to-br from-main-purple/20 to-main-fuchsia/20 p-1.5 md:p-2">
             <MessageSquare className="h-4 w-4 fill-main-purple text-main-purple md:h-6 md:w-6" />
           </div>
           <h2 className="truncate text-lg font-bold text-text-light md:text-2xl">
