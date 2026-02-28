@@ -1,15 +1,14 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+// import { useRouter } from 'next/navigation'
+// import { useEffect } from 'react'
 
 import { useUserTendency } from '@/api/queries/usePreference'
 import { NavButton } from '@/components'
 import { ProgressBar } from '@/components/common'
-import AuthGuard from '@/components/common/auth/AuthGuard'
 import GameLoader from '@/components/common/game-loader/GameLoader'
-import { ROUTES_PATHS } from '@/constants'
+// import { ROUTES_PATHS } from '@/constants'
 import { cn } from '@/utils'
 
 const steps = ['tag', 'genre', 'result']
@@ -19,28 +18,28 @@ export default function RecommendationLayout({
 }: {
   children: React.ReactNode
 }) {
-  const router = useRouter()
+  // const router = useRouter()
   const pathname = usePathname()
   const currentStep = pathname.split('/').pop() || ''
   const stepIndex = steps.indexOf(currentStep) + 1
 
-  const { data: tendency, isLoading } = useUserTendency()
+  const { isLoading } = useUserTendency()
 
-  useEffect(() => {
-    if (currentStep === 'result') {
-      return
-    }
+  // useEffect(() => {
+  //   if (currentStep === 'result') {
+  //     return
+  //   }
 
-    if (tendency) {
-      router.replace(ROUTES_PATHS.MAIN_PAGE)
-      return
-    }
-  }, [tendency, currentStep, router])
+  //   if (tendency) {
+  //     router.replace(ROUTES_PATHS.MAIN_PAGE)
+  //     return
+  //   }
+  // }, [tendency, currentStep, router])
 
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <GameLoader />
+        <GameLoader message="플레이타입 계산중.." />
       </div>
     )
   }

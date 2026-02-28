@@ -1,15 +1,15 @@
 'use client'
 
 import Image from 'next/image'
-import { useRouter } from 'next/navigation'
+// import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { loginApi } from '@/api/fetchers/authFetchers'
 import { getUserInfoApi } from '@/api/fetchers/userInfoFetchers'
-import { useUserTendency } from '@/api/queries/usePreference'
+// import { useUserTendency } from '@/api/queries/usePreference'
 import { compoundLogoColumn } from '@/assets'
 import { BaseInput, Button, LoginFormValues, loginSchema } from '@/components'
-import { ROUTES_PATHS } from '@/constants'
+// import { ROUTES_PATHS } from '@/constants'
 import useToast from '@/hooks/useToast'
 import { useAuthStore } from '@/store/useAuthStore'
 
@@ -17,15 +17,15 @@ import { useAuthStore } from '@/store/useAuthStore'
  * 로그인 폼 컴포넌트
  */
 export default function LoginForm() {
-  const router = useRouter()
+  // const router = useRouter()
   const { triggerToast } = useToast()
   const { setToken, setUser } = useAuthStore()
   const [form, setForm] = useState<LoginFormValues>({
     id: '',
     password: '',
   })
-  const { data: tendency, isLoading, refetch } = useUserTendency()
-  const [shouldCheckTendency, setShouldCheckTendency] = useState(false)
+  // const { data: tendency, isLoading, refetch } = useUserTendency()
+  // const [shouldCheckTendency, setShouldCheckTendency] = useState(false)
 
   const handleSubmit = async () => {
     const { id, password } = form
@@ -45,8 +45,8 @@ export default function LoginForm() {
 
       triggerToast('success', '로그인 성공')
 
-      setShouldCheckTendency(true)
-      await refetch()
+      // setShouldCheckTendency(true)
+      // await refetch()
     } catch (error) {
       console.log('로그인 실패:', error)
       triggerToast('error', '아이디 또는 비밀번호가 올바르지 않습니다.')
@@ -56,18 +56,18 @@ export default function LoginForm() {
   /*
    * 로그인 후 온보딩 여부 체크 → 라우팅
    */
-  useEffect(() => {
-    if (!shouldCheckTendency) {
-      return
-    }
-    if (tendency) {
-      router.replace(ROUTES_PATHS.MAIN_PAGE)
-    } else if (tendency === null) {
-      return
-    } else {
-      router.replace(ROUTES_PATHS.RECOMMEND.TAG)
-    }
-  }, [tendency, isLoading, shouldCheckTendency, router])
+  // useEffect(() => {
+  //   if (!shouldCheckTendency) {
+  //     return
+  //   }
+  //   if (tendency) {
+  //     router.replace(ROUTES_PATHS.MAIN_PAGE)
+  //   } else if (tendency === null) {
+  //     return
+  //   } else {
+  //     router.replace(ROUTES_PATHS.RECOMMEND.TAG)
+  //   }
+  // }, [tendency, isLoading, shouldCheckTendency, router])
 
   const handleChange = (field: keyof LoginFormValues, value: string) => {
     setForm((prev) => ({ ...prev, [field]: value }))

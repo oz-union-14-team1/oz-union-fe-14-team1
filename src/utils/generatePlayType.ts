@@ -9,7 +9,9 @@ import { PlayTypeResult, TraitScores } from '@/types'
 
 import { buildDescription } from './buildDescription'
 
-const TAG_ID_MAP = Object.fromEntries(MOCK_TAGS.map((tag) => [tag.id, tag.id]))
+const TAG_ID_MAP = Object.fromEntries(
+  MOCK_TAGS.map((tag) => [tag.id, `#${tag.tag}`])
+)
 const GENRE_ID_MAP = Object.fromEntries(
   MOCK_GENRES.map((genre) => [genre.id, genre.genre])
 )
@@ -96,7 +98,7 @@ const getEmoji = (topTraits: string[]): string => {
  * 메인 함수: 플레이타입 결과 생성
  */
 export const generatePlayType = (
-  selectedTagIds: string[],
+  selectedTagIds: number[],
   selectedGenreIds: number[]
 ): PlayTypeResult => {
   const selectedTags = selectedTagIds
