@@ -1,5 +1,4 @@
 export * from './profile-ui'
-// src/components/feature/mypage/ui/index.ts
 export { default as DashBoardCardUi } from './DashBoardCardUi'
 export { default as WishListCarouselNavUi } from './WishListCarouselNavUi'
 export { default as WishListCarouselUi } from './WishListCarouselUi'
