@@ -27,9 +27,9 @@ export const onboardingHandlers = [
     `${MSW_BASE_URL}${API_PATH.ONBOARDING_PREFERENCE}`,
     async ({ request }) => {
       const body = (await request.json()) as PreferenceRequest
-      console.log('MSW: savePreference 호출됨', body)
 
       // tendency 에서 쓸 값 저장
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       ;((savedTagIds = body.Tags ?? []), (savedGenreIds = body.Genres ?? []))
 
       await delay(300)
@@ -40,7 +40,6 @@ export const onboardingHandlers = [
 
   http.get(`${MSW_BASE_URL}${API_PATH.ONBOARDING_AI_TENDENCY}`, async () => {
     const result = generatePlayType(savedTagIds, savedGenreIds)
-    console.log('MSW: AI Tendency 핸들러 실행됨', result)
 
     // ai 분석 딜레이
     await delay(2000)

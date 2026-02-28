@@ -23,7 +23,7 @@ export default function RecommendationLayout({
   const currentStep = pathname.split('/').pop() || ''
   const stepIndex = steps.indexOf(currentStep) + 1
 
-  const { data: tendency, isLoading } = useUserTendency()
+  const { isLoading } = useUserTendency()
 
   // useEffect(() => {
   //   if (currentStep === 'result') {
@@ -39,7 +39,7 @@ export default function RecommendationLayout({
   if (isLoading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <GameLoader showMessage={true} />
+        <GameLoader message="플레이타입 계산중.." />
       </div>
     )
   }
