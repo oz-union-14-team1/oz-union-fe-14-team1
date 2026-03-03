@@ -1,22 +1,14 @@
-import { http, HttpResponse, passthrough } from 'msw'
+import { http, HttpResponse } from 'msw'
 
 import { MOCK_GAME_DETAIL } from '@/mocks/data/mockGameDetail'
 import { MOCK_GAME } from '@/mocks/data/mockGameList'
 
 export const gameHandlers = [
-  http.get('*/game/', ({ request }) => {
-    const url = new URL(request.url)
-    const page = Number(url.searchParams.get('page') ?? 1)
-
-    const useMock = url.searchParams.get('mock')
-
-    if (useMock === 'true') {
-      return HttpResponse.json({
-        page,
-        results: MOCK_GAME,
-      })
-    }
-    return passthrough()
+  http.get('*/game/', () => {
+    return HttpResponse.json({
+      page: 1,
+      results: MOCK_GAME,
+    })
   }),
 
   http.get('*/game/:id', ({ params }) => {
