@@ -1,6 +1,11 @@
 export const MSW_BASE_URL = 'https://msw/api/v1'
 
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? ''
+const USE_MSW = process.env.NEXT_PUBLIC_USE_MSW === 'true'
+
+export const API_BASE_URL = USE_MSW
+  ? ''
+  : (process.env.NEXT_PUBLIC_API_BASE_URL ?? '')
+
 export const BACK_API_URL = process.env.NEXT_PUBLIC_BACK_API_URL ?? ''
 export const GOOGLE_CLIENT_ID_URL =
   process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID ?? ''
