@@ -1,8 +1,7 @@
-import { API_BASE_URL, API_PATH } from '@/constants/apiPath'
+import { API_PATH, MSW_BASE_URL } from '@/constants/apiPath'
 import { camelApi } from '@/utils'
 
 export const getPrefernece = async () => {
-  const res = await camelApi.get(`${API_BASE_URL}${API_PATH.USER_PREFERENCE}`)
-  console.log('preference 호출')
+  const res = await camelApi.get(`${MSW_BASE_URL}${API_PATH.USER_PREFERENCE}`)
   return res.data
 }
