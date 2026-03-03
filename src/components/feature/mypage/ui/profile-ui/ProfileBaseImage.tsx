@@ -4,7 +4,7 @@ import joystickIcon from '@/assets/icons/joystickIcon.svg'
 import { PROFILE_TEXT } from '@/constants'
 import { cn } from '@/utils'
 
-export default function ProfileBaseUi() {
+export default function ProfileBaseImage() {
   return (
     <div
       className={cn(

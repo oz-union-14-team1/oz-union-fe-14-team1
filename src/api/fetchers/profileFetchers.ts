@@ -23,7 +23,7 @@ import api from '@/utils/axios'
  * - DELETE /api/v1/user/me/image (프로필 이미지 삭제)
  * ==========================================
  */
-const USE_MOCK = false // 실제 API 사용
+const USE_MOCK = true
 
 /**
  * 프로필 이미지 조회
