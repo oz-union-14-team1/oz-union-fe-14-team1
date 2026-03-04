@@ -1,5 +1,4 @@
 import * as AvatarPrimitive from '@radix-ui/react-avatar'
-import * as React from 'react'
 
 import { ReviewAuthor } from '@/types/api-response/review-response'
 import { cn } from '@/utils'
