@@ -46,9 +46,9 @@ export const Textarea = ({
   return (
     <form
       onSubmit={handleSubmit}
-      className="h-100 w-full overflow-hidden rounded-2xl bg-surface-elevated px-8 py-10"
+      className="w-full rounded-2xl bg-surface-elevated px-8 py-10"
     >
-      <div className="flex flex-col items-end justify-between pb-5 lg:flex-row">
+      <div className="flex flex-row items-end justify-between pb-3">
         <h2 className="pb-5 text-2xl font-bold text-white">리뷰 작성하기</h2>
         <div className="flex flex-col items-end gap-1">
           <span className="text-sm text-gray-400">평점을 선택하세요</span>
@@ -56,26 +56,27 @@ export const Textarea = ({
         </div>
       </div>
 
-      <div className="rounded-2xl bg-text-dark p-4">
+      <div className="rounded-2xl bg-text-dark p-2">
         <textarea
           {...props}
           value={text}
           placeholder="이 게임에 대한 당신의 생각을 공유해주세요"
           onChange={(e) => setText(e.target.value)}
-          className={cn('h-24 w-full', className)}
+          className={cn('min-h-24 w-full resize-y', className)}
         />
       </div>
 
       <div className="mt-6 flex w-full justify-end gap-3">
         <Button
-          variant="outline"
+          variant="gray"
           onClick={onCancel}
           type="button"
           disabled={isPending}
+          className="cursor-pointer"
         >
           취소
         </Button>
-        <Button type="submit" disabled={isPending}>
+        <Button type="submit" disabled={isPending} className="cursor-pointer">
           리뷰 등록
         </Button>
       </div>

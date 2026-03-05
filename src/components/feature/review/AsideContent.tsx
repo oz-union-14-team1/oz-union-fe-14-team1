@@ -11,11 +11,16 @@ export default function AsideContent({
   game: GameDetail | undefined
   review: ReviewList | undefined
 }) {
+  const avgRating = review?.results?.length
+    ? review.results.reduce((sum, r) => sum + r.rating, 0) /
+      review.results.length
+    : 0
+
   return (
     <>
       <div className="flex w-full flex-col items-center justify-center gap-1 rounded-card bg-gradient-main py-5">
-        <p className="text-4xl font-bold text-white">{game?.avgScore}</p>
-        <Star size={24} readonly value={game?.avgScore} />
+        <p className="text-4xl font-bold text-white">{avgRating}</p>
+        <Star size={24} readonly value={avgRating} />
         <span className="text-sm text-white">
           ({review?.results?.length || 0} 리뷰)
         </span>

@@ -78,7 +78,7 @@ export default function ReviewPageClient({ params }: ReviewPageClientProps) {
                 triggerToast('warning', '로그인 이후 이용 할 수 있습니다!')
               }
             }}
-            className="w-fit rounded-xl bg-gray-700 px-4 py-2 text-white"
+            className="w-fit cursor-pointer rounded-xl bg-gray-700 px-4 py-2 text-white"
           >
             {isEditing ? '닫기' : '리뷰 추가'}
           </Button>
