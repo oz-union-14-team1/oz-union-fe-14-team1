@@ -10,15 +10,15 @@ export default function Home() {
 
   return (
     <main className="mx-auto my-5 max-w-345 md:my-16">
-      <section className="my-5 md:my-16">
+      <section className="mb-10 md:mb-16">
         <HeroBanner banners={banners} />
       </section>
 
-      <div className="mb-5">
+      <div className="mb-16 md:mb-16">
         <GenreCarouselSection />
       </div>
 
-      <div className="flex flex-col gap-5 md:gap-10">
+      <div className="mx-4 flex flex-col gap-5 md:gap-10">
         <MainContent />
       </div>
     </main>

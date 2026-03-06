@@ -26,7 +26,7 @@ export function MemberSection() {
     : '🎮 당신을 위한 추천'
 
   return (
-    <section className="flex flex-col gap-5 md:gap-10">
+    <section className="flex flex-col gap-10 md:gap-20">
       <CarouselSection title={preferenceTitle} games={preferenceGames} />
       <CarouselSection
         {...USER_SECTION_TITLE.WHISHLIST}

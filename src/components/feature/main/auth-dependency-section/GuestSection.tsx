@@ -21,7 +21,11 @@ export function GuestSection() {
 
   return (
     <section className="flex flex-col gap-5 md:gap-10">
-      <div className="mb:10 md:mb-20">{!isLogin && <RecommendLoginCTA />}</div>
+      {!isLogin && (
+        <div className="mb-6 md:mb-10">
+          <RecommendLoginCTA />
+        </div>
+      )}
 
       <CarouselSection
         {...GUEST_SECTION_TITLES.INTRODUCE}

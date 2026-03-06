@@ -10,7 +10,7 @@ export function ResponsiveText({ children, mobile }: ResponsiveTextProps) {
 
   return (
     <>
-      <span className="text-lg md:hidden">{mobile}</span>
+      <span className="md:hidden">{mobile}</span>
       <span className="hidden md:inline">{children}</span>
     </>
   )
