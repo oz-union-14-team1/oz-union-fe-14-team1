@@ -8,14 +8,13 @@ type ReviewPageProps = {
   className?: string
 }
 
-export default function ImageCardHeader({
+export default function ImageCard({
   game,
   className,
   ...props
 }: ReviewPageProps) {
   return (
     <div className={cn('flex flex-col gap-2', className)}>
-      <h3 className="text-lg font-bold text-white">{game.name}</h3>
       <Image
         src={game.images[0]}
         alt={game.name}
@@ -27,6 +26,3 @@ export default function ImageCardHeader({
     </div>
   )
 }
-
-const ImageCard = ImageCardHeader
-export { ImageCard }

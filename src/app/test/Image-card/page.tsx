@@ -1,4 +1,4 @@
-import { ImageCard } from '@/components/feature/review/ImageCard'
+import ImageCard from '@/components/feature/review/ImageCard'
 import { GameDetail } from '@/types/api-response/game-response'
 
 const GameData: Pick<GameDetail, 'images' | 'id' | 'name'> = {

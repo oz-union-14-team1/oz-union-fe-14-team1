@@ -1,6 +1,8 @@
+import axios from 'axios'
+
 import { API_BASE_URL } from '@/constants/apiPath'
 import { API_PATH } from '@/constants/apiPath'
-import api from '@/utils/axios'
+import api, { refreshApi } from '@/utils/axios'
 
 type LoginRequest = {
   email: string
@@ -24,12 +26,18 @@ type RefreshResponse = {
 /**
  * refresh 토큰 api
  */
-export const refreshTokenApi = async () => {
-  const res = await api.get<RefreshResponse>(
-    `${API_PATH.LOGIN_REFRESH_API_PATH}`
-  )
-
-  return res.data.accessToken
+export const refreshTokenApi = async (): Promise<string | null> => {
+  try {
+    const res = await refreshApi.get<RefreshResponse>(
+      `${API_PATH.LOGIN_REFRESH_API_PATH}`
+    )
+    return res.data.accessToken
+  } catch (e) {
+    if (axios.isAxiosError(e) && e.response?.status === 401) {
+      return null
+    }
+    throw e
+  }
 }
 
 export type SignupRequest = {

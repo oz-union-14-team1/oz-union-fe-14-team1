@@ -1,4 +1,4 @@
-import { GameReview } from '@/components/layout/review/GameReview'
+import { GameInfo } from '@/components/feature/review/GameInfo'
 import { GameDetail } from '@/types/api-response/game-response'
 
 export default function GameReviewPage() {
@@ -18,7 +18,7 @@ export default function GameReviewPage() {
 
   return (
     <div>
-      <GameReview gameDetail={data} />
+      <GameInfo gameDetail={data} />
     </div>
   )
 }
