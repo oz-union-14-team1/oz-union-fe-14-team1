@@ -30,7 +30,6 @@ export default function GenreCarouselDesktop({
       <div className="flex gap-8">
         {genres.map((genre) => {
           const asset = getGenreAsset(genre.slug)
-          console.log(genre.slug, '→', asset.horizontal)
 
           return (
             <Link
