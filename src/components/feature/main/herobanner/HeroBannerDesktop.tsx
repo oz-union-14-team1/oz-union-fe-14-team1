@@ -20,7 +20,7 @@ const hiddenBanner = 'opacity-0 z-0'
 
 export default function HeroBannerDesktop({
   banners,
-  interval = 3000,
+  interval = 1000,
   autoPlay = true,
 }: HeroBannerDesktopProps) {
   const { orderedBanner, pause, resume, jumpToSide } = useRotation({
@@ -40,11 +40,11 @@ export default function HeroBannerDesktop({
 
   return (
     <section
-      className="flex h-110 gap-4"
+      className="flex h-110 min-h-110 gap-4"
       onMouseEnter={pause}
       onMouseLeave={resume}
     >
-      <div className="relative flex-2 overflow-hidden">
+      <div className="relative aspect-video flex-2 overflow-hidden">
         {banners.map((banner, index) => (
           <div
             key={banner.id}
@@ -60,16 +60,16 @@ export default function HeroBannerDesktop({
           <div
             key={banner.id}
             onClick={() => handleSideBannerClick(index)}
-            className="relative flex-1 cursor-pointer overflow-hidden transition-all"
+            className="group relative min-h-0 flex-1 cursor-pointer overflow-hidden transition-opacity"
           >
             <Image
               src={banner.imgUrl}
               alt={banner.title}
               fill
-              sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 288px"
-              className="object-cover"
+              sizes="(min-width: 1024px) 33vw, 50vw"
+              className="object-cover object-[center_35%]"
             />
-            <div className="absolute inset-0 bg-black/85" />
+            <div className="absolute inset-0 bg-black/80 transition-colors duration-300 group-hover:bg-black/50" />
             <p className="absolute bottom-4 left-4 truncate text-lg font-semibold text-text-light hover:text-main-violet">
               {banner.title}
             </p>

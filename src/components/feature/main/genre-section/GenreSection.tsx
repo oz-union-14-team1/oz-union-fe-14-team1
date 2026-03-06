@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react'
 
-import { useGenres } from '@/api/queries/usGenres'
+import { useGenres } from '@/api/queries/useGenres'
 import { DotIndicator } from '@/components'
 import GameLoader from '@/components/common/game-loader/GameLoader'
 import { DESKTOP_ITEMS, MOBILE_ITEMS } from '@/constants'
@@ -43,20 +43,11 @@ export default function GenreCarouselSection() {
 
   return (
     <section>
-      <h2 className="mb-4 px-4 text-base font-bold md:text-xl">
+      <h2 className="mx-4 mb-4 text-base font-bold md:text-xl">
         🎮 장르별 게임 둘러보기
       </h2>
 
       <GenreCarouselMobile pages={mobilePages} onPageChange={setMobilePage} />
-      {mobilePages.length > 1 && (
-        <div className="mt-4 flex justify-center md:hidden">
-          <DotIndicator
-            total={mobilePages.length}
-            currentIndex={mobilePage}
-            onDotClick={setMobilePage}
-          />
-        </div>
-      )}
 
       <GenreCarouselDesktop
         genres={currentGenres}
