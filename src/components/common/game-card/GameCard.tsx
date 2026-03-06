@@ -13,7 +13,7 @@ type GameCardProps = {
   id: number
   name: string
   image?: string
-  variant?: 'default' | 'background' | 'compact'
+  variant?: 'default' | 'background' | 'compact' | 'grid'
 }
 
 /**
@@ -31,8 +31,8 @@ export default function GameCard({
   const isBackground = variant === 'background'
   const isCompact = variant === 'compact'
   const isInteractive = variant === 'default'
-
-  const cardSize = isCompact ? 'w-56' : 'w-72'
+  const isGrid = variant === 'grid'
+  const cardSize = isCompact ? 'w-56' : isGrid ? 'w-full' : 'w-72'
 
   const Card = (
     <div
@@ -65,7 +65,7 @@ export default function GameCard({
           fill
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 288px"
           className={cn(
-            'object-cover transition-transform duration-500',
+            'object-cover object-top-right transition-transform duration-500',
             isInteractive && 'group-hover:scale-110'
           )}
         />
