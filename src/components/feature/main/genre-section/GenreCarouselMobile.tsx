@@ -6,6 +6,7 @@ import { ROUTES_PATHS } from '@/constants'
 import useCarousel from '@/hooks/useCarousel'
 import { getGenreAsset } from '@/utils/genreHelper'
 
+import DotIndicator from '../herobanner/DotIndicator'
 import CardOverlay from './CardOverlay'
 
 import type { Genre } from '@/types/api-response/onboarding-response'
@@ -19,7 +20,7 @@ export default function GenreCarouselMobile({
   pages,
   onPageChange,
 }: MobileCarouselProps) {
-  const { ref, currentPage, updateNavState } = useCarousel({
+  const { ref, currentPage, updateNavState, scrollToPage } = useCarousel({
     usePageScroll: true,
   })
 
@@ -28,11 +29,11 @@ export default function GenreCarouselMobile({
   }, [currentPage, onPageChange])
 
   return (
-    <div className="px-4 md:hidden">
+    <div className="md:hidden">
       <div
         ref={ref}
         onScroll={updateNavState}
-        className="scrollbar-hide flex snap-x snap-mandatory overflow-x-auto"
+        className="scrollbar-hide flex snap-x snap-mandatory overflow-x-auto px-4"
       >
         {pages.map((pageGenres, pageIndex) => (
           <div
@@ -42,14 +43,14 @@ export default function GenreCarouselMobile({
             {pageGenres.map((genre) => (
               <Link
                 key={genre.id}
-                href={ROUTES_PATHS.GENRE_DETAIL(genre.genre)}
-                className="group/card relative aspect-3/4 flex-1 overflow-hidden rounded-default md:rounded-xl"
+                href={ROUTES_PATHS.GENRE_DETAIL(genre.slug)}
+                className="group/card relative aspect-3/4 flex-1 overflow-hidden rounded-default"
               >
                 <Image
-                  src={getGenreAsset(genre.genre).vertical}
+                  src={getGenreAsset(genre.slug).vertical}
                   alt={genre.genre}
                   fill
-                  sizes="(max-width: 768px) 100vw, 434px"
+                  sizes="100vw"
                   className="object-cover"
                 />
                 <CardOverlay label={genre.genre} />
@@ -58,6 +59,16 @@ export default function GenreCarouselMobile({
           </div>
         ))}
       </div>
+
+      {pages.length > 1 && (
+        <div className="mt-4 flex justify-center">
+          <DotIndicator
+            total={pages.length}
+            currentIndex={currentPage}
+            onDotClick={scrollToPage}
+          />
+        </div>
+      )}
     </div>
   )
 }
