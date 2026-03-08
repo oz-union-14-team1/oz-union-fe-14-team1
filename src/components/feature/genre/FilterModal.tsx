@@ -23,7 +23,7 @@ export default function FilterModal({
   currentFilters,
   onFilterChange,
 }: FilterModalProps) {
-  const [ModalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
   const [tempFilters, setTempFilters] =
     useState<GameFilterParams>(currentFilters)
   const [selectedPlatforms, setSelectedPlatforms] = useState<string[]>([])
@@ -73,7 +73,7 @@ export default function FilterModal({
         <SlidersHorizontalIcon size={16} className="text-text-light" />
         <span className="text-base text-text-light">필터</span>
       </button>
-      {ModalOpen && (
+      {modalOpen && (
         <div
           className={cn(
             `absolute top-12 left-0 z-50`,
