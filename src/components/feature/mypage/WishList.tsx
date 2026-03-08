@@ -1,7 +1,7 @@
 'use client'
 
-import { useGetWishlist } from '@/api/queries/useGetWishlist'
 import { useWishlistCarousel } from '@/hooks'
+import { useWishlistStore } from '@/store/useWishlistStore'
 
 import {
   WishListCarouselNavUi,
@@ -11,27 +11,9 @@ import {
 } from './ui'
 
 export default function WishList() {
-  const { data: wishlistData = [], isLoading } = useGetWishlist()
+  const wishlistGames = useWishlistStore((state) => state.wishlistGames)
   const { emblaRef, canScrollPrev, canScrollNext, scrollPrev, scrollNext } =
     useWishlistCarousel()
-
-  // 배열인지 확인하고 안전하게 처리
-  const wishlistGames = Array.isArray(wishlistData) ? wishlistData : []
-
-  if (isLoading) {
-    return (
-      <div className="relative w-full">
-        <div className="relative p-0 backdrop-blur-sm md:p-0">
-          <div className="mb-2 flex items-center justify-between gap-2 px-4 md:mb-6 md:px-8">
-            <WishListTitleUi wishlistCount={0} />
-          </div>
-          <div className="flex h-64 items-center justify-center">
-            <p className="text-muted-foreground">위시리스트를 불러오는 중...</p>
-          </div>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className="relative w-full">

@@ -3,7 +3,6 @@
 import { useGetMyReviews } from '@/api/queries/useGetMyReviews'
 import useGetProfileImage from '@/api/queries/useGetProfileImage'
 import { useGetUserMe } from '@/api/queries/useGetUserMe'
-import { useGetWishlist } from '@/api/queries/useGetWishlist'
 import AuthGuard from '@/components/common/auth/AuthGuard'
 import {
   DashBoard,
@@ -11,17 +10,17 @@ import {
   Profile,
   WishList,
 } from '@/components/feature/mypage'
+import { useWishlistStore } from '@/store/useWishlistStore'
 
 export default function MyPage() {
   const { data: userMe } = useGetUserMe()
-  const profileImageQuery = useGetProfileImage()
-  const { data: wishlistGames = [] } = useGetWishlist()
   const { data: myReviews = [] } = useGetMyReviews()
+  const profileImageQuery = useGetProfileImage()
+  const wishlistedGameIds = useWishlistStore((state) => state.wishlistGames)
 
-  const wishlistCount = Array.isArray(wishlistGames) ? wishlistGames.length : 0
+  const wishlistCount = wishlistedGameIds.length
   const reviewCount = Array.isArray(myReviews) ? myReviews.length : 0
 
-  // React Query가 성공하고 데이터가 있을 때만 이미지 URL 사용
   const profileImageUrl =
     profileImageQuery.isSuccess && profileImageQuery.data?.profileImgUrl
       ? profileImageQuery.data.profileImgUrl
