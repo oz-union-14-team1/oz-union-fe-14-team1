@@ -46,7 +46,15 @@ export default function GameCard({
       )}
     >
       {/* 위시리스트 버튼 */}
-      {!isBackground && <HeartButtonUi gameId={id} />}
+      {!isBackground && (
+        <HeartButtonUi
+          game={{
+            id: id,
+            name: name,
+            image: image as string,
+          }}
+        />
+      )}
 
       <div className="relative aspect-video w-full overflow-hidden rounded-md">
         {/* blur background */}

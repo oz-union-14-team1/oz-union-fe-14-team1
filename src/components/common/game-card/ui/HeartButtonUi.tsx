@@ -1,58 +1,45 @@
 'use client'
 
 import { Heart } from 'lucide-react'
+import { MouseEvent } from 'react'
 
-import { useGetWishlist } from '@/api/queries/useGetWishlist'
-import {
-  useDeleteWishlist,
-  usePostWishlist,
-} from '@/api/queries/useWishlistMutations'
 import { useToast } from '@/hooks'
+import { useWishlistStore } from '@/store/useWishlistStore'
 import { cn } from '@/utils'
 
 type HeartButtonUiProps = {
-  gameId: number
+  game: {
+    id: number
+    name: string
+    image: string
+  }
 }
 
-export function HeartButtonUi({ gameId }: HeartButtonUiProps) {
-  const { data: wishlistGames = [] } = useGetWishlist()
-  const { mutate: addWishlist } = usePostWishlist()
-  const { mutate: removeWishlist } = useDeleteWishlist()
+export function HeartButtonUi({ game }: HeartButtonUiProps) {
   const { triggerToast } = useToast()
 
-  const gameIdNum = typeof gameId === 'string' ? parseInt(gameId, 10) : gameId
+  const addWishlist = useWishlistStore((state) => state.addWishlist)
+  const removeWishlist = useWishlistStore((state) => state.removeWishlist)
+  const isWishlisted = useWishlistStore((state) => state.isWishlisted)
 
-  // 배열인지 확인 후 위시리스트 항목 찾기
-  const safeWishlistGames = Array.isArray(wishlistGames) ? wishlistGames : []
-  const wishlistItem = safeWishlistGames.find((item) => item.game === gameIdNum)
-  const wishlisted = !!wishlistItem
+  const wishlisted = isWishlisted(game.id)
 
-  const handleWishlistClick = (e: React.MouseEvent) => {
+  const handleWishlistClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     e.stopPropagation()
 
-    if (wishlisted && wishlistItem) {
-      // 위시리스트 항목 ID로 삭제
-      removeWishlist(wishlistItem.id, {
-        onSuccess: () => {
-          triggerToast('success', '위시리스트에서 제거되었습니다.')
-        },
-        onError: () => {
-          triggerToast('error', '위시리스트 제거에 실패했습니다.')
-        },
-      })
+    if (wishlisted) {
+      removeWishlist(game.id)
+      triggerToast('success', '위시리스트에서 제거되었습니다.')
     } else {
-      addWishlist(
-        { game: gameIdNum },
-        {
-          onSuccess: () => {
-            triggerToast('success', '위시리스트에 추가되었습니다.')
-          },
-          onError: () => {
-            triggerToast('error', '위시리스트 추가에 실패했습니다.')
-          },
-        }
-      )
+      addWishlist({
+        id: game.id,
+        game: game.id,
+        gameName: game.name,
+        gameImage: game.image,
+        createdAt: new Date().toISOString(),
+      })
+      triggerToast('success', '위시리스트에 추가되었습니다.')
     }
   }
 

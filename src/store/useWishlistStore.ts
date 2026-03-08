@@ -1,14 +1,10 @@
 'use client'
 
 /**
- * ==========================================
- * ⚠️ DEPRECATED: 이 파일은 더 이상 사용되지 않습니다
- * ==========================================
+ * Zustand 기반 위시리스트 관리
+ * useWishlistStore로 위시리스트 관리 진행.
  *
- * [마이그레이션 안내]
- * Zustand 기반 위시리스트 관리에서 백엔드 API 기반으로 전환되었습니다.
- *
- * [새로운 사용법]
+ * [백엔드서버api로 위시리스트 관리 및 사용법]
  * - 조회: useGetWishlist() from '@/api/queries/useGetWishlist'
  * - 추가: usePostWishlist() from '@/api/queries/useWishlistMutations'
  * - 삭제: useDeleteWishlist() from '@/api/queries/useWishlistMutations'
@@ -23,41 +19,45 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 import { GameId } from '@/types'
+import { WishlistGame } from '@/types/api-response/wishlist-response'
 
-/**
- * @deprecated 백엔드 API 기반 훅으로 전환되었습니다.
- * useGetWishlist, usePostWishlist, useDeleteWishlist 사용을 권장합니다.
- */
 type WishlistState = {
-  wishlistedGameIds: GameId[]
-  toggleWishlist: (gameId: GameId) => void
+  wishlistGames: WishlistGame[]
+  addWishlist: (game: WishlistGame) => void
+  removeWishlist: (gameId: GameId) => void
+  // toggleWishlist: (gameId: GameId) => void
   isWishlisted: (gameId: GameId) => boolean
   clearWishlist: () => void
 }
 
-/**
- * @deprecated 백엔드 API 기반 훅으로 전환되었습니다.
- * useGetWishlist, usePostWishlist, useDeleteWishlist 사용을 권장합니다.
- */
 export const useWishlistStore = create<WishlistState>()(
   persist(
     (set, get) => ({
-      wishlistedGameIds: [],
+      wishlistGames: [],
 
-      toggleWishlist: (gameId: GameId) => {
+      addWishlist: (game) => {
+        const exists = get().wishlistGames.some((g) => g.game === game.game)
+        if (exists) {
+          return
+        }
+
         set((state) => ({
-          wishlistedGameIds: state.wishlistedGameIds.includes(gameId)
-            ? state.wishlistedGameIds.filter((id) => id !== gameId)
-            : [...state.wishlistedGameIds, gameId],
+          wishlistGames: [...state.wishlistGames, game],
+        }))
+      },
+
+      removeWishlist: (gameId) => {
+        set((state) => ({
+          wishlistGames: state.wishlistGames.filter((g) => g.game !== gameId),
         }))
       },
 
       isWishlisted: (gameId: GameId) => {
-        return get().wishlistedGameIds.includes(gameId)
+        return get().wishlistGames.some((g) => g.game === gameId)
       },
 
       clearWishlist: () => {
-        set({ wishlistedGameIds: [] })
+        set({ wishlistGames: [] })
       },
     }),
     {

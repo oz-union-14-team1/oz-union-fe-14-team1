@@ -12,7 +12,7 @@ export default function WishListTitleUi({
   return (
     <div className="flex min-w-0 flex-1 items-center gap-2 md:gap-4">
       <div className="flex items-center gap-2 md:gap-3">
-        <div className="shrink-0 rounded-full bg-gradient-to-br from-pink-500/20 to-purple-500/20 p-1.5 md:p-2">
+        <div className="shrink-0 rounded-full bg-linear-to-br from-pink-500/20 to-purple-500/20 p-1.5 md:p-2">
           <Heart className="h-4 w-4 fill-pink-500 text-pink-500 md:h-6 md:w-6" />
         </div>
         <h2 className="truncate text-lg font-bold text-text-light md:text-2xl">
