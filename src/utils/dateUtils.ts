@@ -11,6 +11,7 @@ export const getDayDiffFromNow = (createdAt: string | Date) => {
   return diffDays
 }
 
+// 연도로 비교 후 최신게임 6개 추출
 export const getLatestGames = (games: Game[]) =>
   [...games]
     .sort(
@@ -18,3 +19,9 @@ export const getLatestGames = (games: Game[]) =>
         new Date(b.releasedAt).getTime() - new Date(a.releasedAt).getTime()
     )
     .slice(0, 6)
+
+// releasedAt에서 연도 추출 후 중복제거
+export const getUniqueYears = (games: Game[]) => {
+  const years = games.map((game) => Number(game.releasedAt.slice(0, 4)))
+  return [...new Set(years)].sort((a, b) => b - a)
+}
