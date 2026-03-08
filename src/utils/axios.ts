@@ -47,6 +47,11 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
         return Promise.reject(error)
       }
 
+      const token = useAuthStore.getState().accessToken
+      if (!token) {
+        return Promise.reject(error)
+      }
+
       original._retry = true
 
       try {

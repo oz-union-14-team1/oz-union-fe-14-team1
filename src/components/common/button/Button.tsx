@@ -29,6 +29,13 @@ const ButtonVariant = cva(
           'active:bg-btn-outline-active-fill',
           'disabled:border-btn-outline-disabled-stroke disabled:bg-white'
         ),
+        empty: cn(
+          'bg-muted border border-btn-outline-stroke text-btn-outline-stroke',
+          'hover:bg-btn-outline-hover-fill hover:text-text-dark',
+          'active:bg-btn-outline-active-fill',
+          'disabled:border-btn-outline-disabled-stroke disabled:bg-white'
+        ),
+
         gray: cn(
           'bg-btn-gray-default',
           'hover:bg-btn-gray-hover',
