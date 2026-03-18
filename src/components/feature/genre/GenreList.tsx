@@ -1,18 +1,22 @@
 'use client'
 
-import { useGamesByGenre } from '@/api/queries/useGenres'
 import GameCard from '@/components/common/game-card/GameCard'
 import GameLoader from '@/components/common/game-loader/GameLoader'
-import { GenreSlug } from '@/types'
+import { Game } from '@/types/api-response/game-response'
 
 type GenreListProps = {
-  genreSlug: GenreSlug
+  games: Game[]
+  isLoading: boolean
+  isError: boolean
   genreName: string
 }
 
-export default function GenreList({ genreSlug, genreName }: GenreListProps) {
-  const { data: games, isLoading, isError } = useGamesByGenre(genreSlug)
-
+export default function GenreList({
+  games,
+  isLoading,
+  isError,
+  genreName,
+}: GenreListProps) {
   if (isLoading) {
     return <GameLoader />
   }
