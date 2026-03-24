@@ -1,4 +1,5 @@
 import { GenreSlug } from '@/assets/genre-assets/genreData'
+import { API_PATH } from '@/constants/apiPath'
 import { Game } from '@/types/api-response/game-response'
 import { GameFilterParams } from '@/types/filter'
 import { SortValue } from '@/types/sort'
@@ -26,7 +27,7 @@ export const getGamesByGenre = async (
 
   const query = params.toString()
   const response = await camelApi.get(
-    `/game/genre/${slug}${query ? `?${query}` : ''}`
+    `${API_PATH.GAME_GENRE(slug)}${query ? `?${query}` : ''}`
   )
   return response.data
 }

@@ -25,6 +25,7 @@ export const API_PATH = {
   GET_MY_REVIEWS_API_PATH: '/community/reviews/me',
   GAMES: '/game/',
   GAME_DETAIL: (gameId: number) => `/game/${gameId}`,
+  GAME_GENRE: (slug: string) => `/game/genre/${slug}`,
   GAMES_RECOMMEND_PREFERENCE: `/game/recommend/preference`,
   GAMES_RECOMMEND_WISHLIST: '/game/recommend/wishlist',
   LOGIN_API_PATH: '/user/login',
