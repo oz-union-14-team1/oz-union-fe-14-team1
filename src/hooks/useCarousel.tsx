@@ -1,13 +1,17 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 
 type UseCarouselOptions = {
   scrollAmount?: number
   usePageScroll?: boolean
+  autoPlay?: boolean
+  interval?: number
 }
 
 export default function useCarousel({
   scrollAmount = 300,
   usePageScroll = false,
+  autoPlay,
+  interval,
 }: UseCarouselOptions = {}) {
   const ref = useRef<HTMLDivElement>(null)
   const [hasPrev, setHasPrev] = useState(false)
@@ -54,6 +58,16 @@ export default function useCarousel({
     const scrollLeft = page * ref.current.clientWidth
     ref.current.scrollTo({ left: scrollLeft, behavior: 'smooth' })
   }, [])
+
+  useEffect(() => {
+    if (!autoPlay) {
+      return
+    }
+    const timer = setInterval(() => {
+      scrollNext()
+    }, interval)
+    return () => clearInterval(timer)
+  }, [autoPlay, interval, scrollNext])
 
   return {
     ref,

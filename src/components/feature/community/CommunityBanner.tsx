@@ -1,7 +1,7 @@
 'use client'
 
 import useCarousel from '@/hooks/useCarousel'
-import { MOCK_BANNERS } from '@/mocks/mockBanner'
+import { MOCK_BANNERS } from '@/mocks/data/mockBanner'
 
 import CommunityBannerItem from './CommunityBannerItem'
 
@@ -9,6 +9,8 @@ export default function CommunityBanner() {
   const { ref, currentPage, scrollPrev, scrollNext, updateNavState } =
     useCarousel({
       usePageScroll: true,
+      autoPlay: true,
+      interval: 3000,
     })
 
   return (
