@@ -3,6 +3,8 @@ import { useQuery } from '@tanstack/react-query'
 import { QUERY_KEYS } from '@/constants/queryKey'
 import { GenreSlug } from '@/types'
 import { Game } from '@/types/api-response/game-response'
+import { GameFilterParams } from '@/types/filter'
+import { SortValue } from '@/types/sort'
 
 import { getGamesByGenre } from '../fetchers/genreFetchers'
 import { getGenres } from '../fetchers/onboardingFetchers'
@@ -20,9 +22,22 @@ export const useGenres = () => {
 /**
  * 장르별 게임리스트(장르상세페이지용)
  */
-export const useGamesByGenre = (genreSlug: GenreSlug) => {
+
+export const useGamesByGenre = (
+  genreSlug: GenreSlug,
+  sort: SortValue = '',
+  filters: GameFilterParams
+) => {
   return useQuery<Game[]>({
-    queryKey: [...QUERY_KEYS.GAMES, 'genre', genreSlug] as const,
-    queryFn: () => getGamesByGenre(genreSlug),
+    queryKey: [
+      ...QUERY_KEYS.GAMES,
+      'genre',
+      genreSlug,
+      sort,
+      filters.platforms?.join(',') ?? '',
+      filters.year ?? '',
+      filters.min_score ?? '',
+    ] as const,
+    queryFn: () => getGamesByGenre(genreSlug, sort, filters),
   })
 }

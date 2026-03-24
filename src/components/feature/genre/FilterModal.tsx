@@ -68,7 +68,7 @@ export default function FilterModal({
     <div className="relative">
       <button
         onClick={() => setModalOpen((prev) => !prev)}
-        className="relative flex items-center gap-3 rounded-sm border border-btn-outline-stroke bg-background px-3 py-2"
+        className="relative flex items-center gap-3 rounded-sm border border-btn-outline-stroke bg-background px-3 py-1"
       >
         <SlidersHorizontalIcon size={16} className="text-text-light" />
         <span className="text-base text-text-light">필터</span>
@@ -76,9 +76,9 @@ export default function FilterModal({
       {modalOpen && (
         <div
           className={cn(
-            `absolute top-12 left-0 z-50`,
+            `absolute top-10 left-0 z-50`,
             'h-auto w-81 rounded-md',
-            'shadow-[0px_4px_12px_1px rgba(0,0,0,0.35)] rounded-sm bg-text-inverse/70 backdrop-blur-md'
+            'rounded-sm bg-text-inverse/70 shadow-[0px_4px_12px_1px_rgba(0,0,0,0.35)] backdrop-blur-md'
           )}
         >
           <div className="flex flex-col gap-8 px-4 py-12">
