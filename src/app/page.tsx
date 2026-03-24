@@ -1,6 +1,6 @@
 import { GenreCarouselSection, HeroBanner } from '@/components'
 import { MainContent } from '@/components/feature/main/MainContent'
-import { MOCK_BANNERS } from '@/mocks/mockBanner'
+import { MOCK_BANNERS } from '@/mocks/data/mockBanner'
 
 /**
  * TODO: API연동 예정
