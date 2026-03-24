@@ -1,4 +1,4 @@
-import { API_BASE_URL, API_PATH } from '@/constants/apiPath'
+import { API_PATH, MSW_BASE_URL } from '@/constants/apiPath'
 import {
   Genre,
   PreferenceRequest,
@@ -9,7 +9,7 @@ import { getRandomItems } from '@/utils/shuffle'
 
 export const getTags = async (): Promise<Tag[]> => {
   const response = await camelApi.get<Tag[]>(
-    `${API_BASE_URL}${API_PATH.ONBOARDING_TAGS}`
+    `${MSW_BASE_URL}${API_PATH.ONBOARDING_TAGS}`
   )
 
   return getRandomItems(response.data, 30)
@@ -17,7 +17,7 @@ export const getTags = async (): Promise<Tag[]> => {
 
 export const getGenres = async (): Promise<Genre[]> => {
   const response = await camelApi.get<Genre[]>(
-    `${API_BASE_URL}${API_PATH.ONBOARDING_GENRES}`
+    `${MSW_BASE_URL}${API_PATH.ONBOARDING_GENRES}`
   )
   return getRandomItems(response.data, 12)
 }
@@ -27,7 +27,7 @@ export const getGenres = async (): Promise<Genre[]> => {
  */
 export const savePreference = async (data: PreferenceRequest) => {
   const response = await camelApi.post(
-    `${API_BASE_URL}${API_PATH.ONBOARDING_PREFERENCE}`,
+    `${MSW_BASE_URL}${API_PATH.ONBOARDING_PREFERENCE}`,
     data
   )
   return response.data
@@ -38,7 +38,7 @@ export const savePreference = async (data: PreferenceRequest) => {
  */
 export const getAiTendency = async (): Promise<string> => {
   const response = await camelApi.get(
-    `${API_BASE_URL}${API_PATH.ONBOARDING_AI_TENDENCY}`
+    `${MSW_BASE_URL}${API_PATH.ONBOARDING_AI_TENDENCY}`
   )
   return response.data.tendency
 }

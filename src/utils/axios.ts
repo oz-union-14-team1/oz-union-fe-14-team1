@@ -4,7 +4,7 @@ import axios, {
   InternalAxiosRequestConfig,
 } from 'axios'
 
-import { API_BASE_URL, API_PATH } from '@/constants/apiPath'
+import { API_PATH } from '@/constants/apiPath'
 import { useAuthStore } from '@/store/useAuthStore'
 import { convertToCamelCase } from '@/utils/convertToCamelCase'
 
@@ -44,6 +44,11 @@ const attachDefaultResponseInterceptor = (instance: AxiosInstance) => {
     async (error: AxiosError) => {
       const original = error.config as CustomAxiosRequestConfig
       if (error.response?.status !== 401 || original._retry) {
+        return Promise.reject(error)
+      }
+
+      const token = useAuthStore.getState().accessToken
+      if (!token) {
         return Promise.reject(error)
       }
 
@@ -98,6 +103,9 @@ camelApi.interceptors.response.use((res) => {
  * refresh API
  */
 export const refreshApi = axios.create({
-  baseURL: API_BASE_URL,
+  /**
+   * msw로 인한 주석처리
+   * baseURL: API_BASE_URL,
+   */
   withCredentials: true,
 })

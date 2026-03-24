@@ -6,7 +6,7 @@ import { cn } from '@/utils'
 import { getGenreAsset } from '@/utils/genreHelper'
 
 import CardOverlay from './CardOverlay'
-import GenreSectionNav from './GenreSectionNav'
+import SectionNav from './SectionNav'
 
 import type { Genre } from '@/types/api-response/onboarding-response'
 
@@ -30,7 +30,6 @@ export default function GenreCarouselDesktop({
       <div className="flex gap-8">
         {genres.map((genre) => {
           const asset = getGenreAsset(genre.slug)
-          console.log(genre.slug, '→', asset.horizontal)
 
           return (
             <Link
@@ -54,13 +53,13 @@ export default function GenreCarouselDesktop({
           )
         })}
       </div>
-      <GenreSectionNav
+      <SectionNav
         direction="prev"
         disabled={currentPage === 0}
         onClick={onPrev}
         className="hidden md:flex"
       />
-      <GenreSectionNav
+      <SectionNav
         direction="next"
         disabled={currentPage === totalPages - 1}
         onClick={onNext}

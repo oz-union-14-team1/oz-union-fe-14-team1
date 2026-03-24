@@ -34,7 +34,7 @@ export default function MyReviewListWelcomeUi() {
         <div className="-mt-25 ml-0 flex flex-1 flex-col items-start justify-center gap-4 md:ml-6 lg:ml-10">
           <Link
             href={ROUTES_PATHS.MAIN_PAGE}
-            className="group mt-2 inline-flex w-fit items-center gap-2 rounded-lg bg-gradient-to-r from-main-purple to-main-fuchsia px-4 py-2 text-sm font-medium text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]"
+            className="group mt-2 inline-flex w-fit items-center gap-2 rounded-lg bg-linear-to-r from-main-purple to-main-fuchsia px-4 py-2 text-sm font-medium text-white transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(168,85,247,0.4)]"
           >
             Let&apos;s Play!
             <ArrowRight

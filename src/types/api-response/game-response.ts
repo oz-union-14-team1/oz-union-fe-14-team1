@@ -14,26 +14,16 @@ export type GameList = {
 }
 
 /** GET /api/vi/games/{game_id} 응답 */
-export type GameDetail = Omit<Game, 'image' | 'platforms'> & {
+export type GameDetail = {
+  id: number
+  name: string
+  tags: string[] // optional → required
+  releasedAt: string
   intro: string
   developer: string
   publisher: string
   genres: string[]
-  tags: string[]
-  releasedAt: string
-  platforms: string[]
-  images: string[]
+  platforms: string[] // optional → required
+  images: string[] // image → images (복수)
   avgScore: number
 }
-
-/*
- * GET /games 요청 파라미터
- * 백엔드 명세서 확인 후 수정예정
- */
-// export type GameFilterParams = {
-//   genre_id?: string
-//   tag_id?: string
-//   year?: string
-//   min_score?: string
-//   page?: number
-// }

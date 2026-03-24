@@ -1,6 +1,8 @@
+import axios from 'axios'
+
 import { API_BASE_URL } from '@/constants/apiPath'
 import { API_PATH } from '@/constants/apiPath'
-import api from '@/utils/axios'
+import api, { refreshApi } from '@/utils/axios'
 
 type LoginRequest = {
   email: string
@@ -12,10 +14,7 @@ type LoginResponse = {
 }
 
 export const loginApi = async (data: LoginRequest) => {
-  const res = await api.post<LoginResponse>(
-    `${API_BASE_URL}${API_PATH.LOGIN_API_PATH}`,
-    data
-  )
+  const res = await api.post<LoginResponse>(`${API_PATH.LOGIN_API_PATH}`, data)
 
   return res.data
 }
@@ -27,12 +26,18 @@ type RefreshResponse = {
 /**
  * refresh 토큰 api
  */
-export const refreshTokenApi = async () => {
-  const res = await api.get<RefreshResponse>(
-    `${API_BASE_URL}${API_PATH.LOGIN_REFRESH_API_PATH}`
-  )
-
-  return res.data.accessToken
+export const refreshTokenApi = async (): Promise<string | null> => {
+  try {
+    const res = await refreshApi.get<RefreshResponse>(
+      `${API_PATH.LOGIN_REFRESH_API_PATH}`
+    )
+    return res.data.accessToken
+  } catch (e) {
+    if (axios.isAxiosError(e) && e.response?.status === 401) {
+      return null
+    }
+    throw e
+  }
 }
 
 export type SignupRequest = {
@@ -92,7 +97,7 @@ export const deleteUserApi = async (data: DeleteUserRequest) => {
  * 로그아웃 api
  */
 export const logoutApi = async (): Promise<void> => {
-  await api.post(`${API_BASE_URL}${API_PATH.USER_LOGOUT_API_PATH}`)
+  await api.post(`${API_PATH.USER_LOGOUT_API_PATH}`)
 }
 
 type CheckEmailRequest = {

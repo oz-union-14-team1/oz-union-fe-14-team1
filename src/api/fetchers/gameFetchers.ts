@@ -1,4 +1,4 @@
-import { API_BASE_URL, API_PATH } from '@/constants/apiPath'
+import { API_PATH, MSW_BASE_URL } from '@/constants/apiPath'
 import { Game, GameDetail, GameList } from '@/types/api-response/game-response'
 import { camelApi } from '@/utils/axios'
 
@@ -6,22 +6,14 @@ import { camelApi } from '@/utils/axios'
  * 전체 게임 목록
  */
 export const getGames = async (): Promise<Game[]> => {
-  const [page1, page2] = await Promise.all([
-    camelApi.get<GameList>(`${API_BASE_URL}${API_PATH.GAMES}?page_size=40`),
-    camelApi.get<GameList>(
-      `${API_BASE_URL}${API_PATH.GAMES}?page=2&page_size=40`
-    ),
-  ])
-
-  return [...page1.data.results, ...page2.data.results]
+  const res = await camelApi.get<GameList>(`${API_PATH.GAMES}`)
+  return res.data.results
 }
 /**
  * 게임상세
  */
 export const getGameDetail = async (gameId: number) => {
-  const res = await camelApi.get<GameDetail>(
-    `${API_BASE_URL}${API_PATH.GAME_DETAIL(gameId)}`
-  )
+  const res = await camelApi.get<GameDetail>(`${API_PATH.GAME_DETAIL(gameId)}`)
   return res.data
 }
 
@@ -32,7 +24,7 @@ export const getGameDetail = async (gameId: number) => {
  */
 export const getRecommendByPreference = async (): Promise<GameList> => {
   const res = await camelApi.get<GameList>(
-    `${API_BASE_URL}${API_PATH.GAMES_RECOMMEND_PREFERENCE}`
+    `${API_PATH.GAMES_RECOMMEND_PREFERENCE}`
   )
   return res.data
 }
@@ -43,7 +35,7 @@ export const getRecommendByPreference = async (): Promise<GameList> => {
  */
 export const getRecommendByWishlist = async (): Promise<GameList> => {
   const res = await camelApi.get<GameList>(
-    `${API_BASE_URL}${API_PATH.GAMES_RECOMMEND_WISHLIST}`
+    `${API_PATH.GAMES_RECOMMEND_WISHLIST}`
   )
   return res.data
 }

@@ -6,7 +6,8 @@ import TanstackQueryProvider from '@/components/providers/TanstackQueryProvider'
 import { ToastProvider } from '@/components/providers/ToastProvider'
 
 import AuthProvider from './AuthProvider'
-interface ProvidersProps {
+
+type ProvidersProps = {
   children: ReactNode
 }
 

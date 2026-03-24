@@ -1,7 +1,7 @@
 import { Github } from 'lucide-react'
 import Link from 'next/link'
 
-import { BACKEND_STACK, FRONTEND_STACK } from '@/constants/techStack'
+import { FRONTEND_STACK } from '@/constants/techStack'
 
 const baseTagStyle =
   'rounded-full border border-white/20 px-3 py-1 text-white/70 text-xs \
@@ -10,10 +10,6 @@ const baseTagStyle =
 const frontendHover =
   'hover:text-white hover:border-purple-400/70 hover:bg-gradient-main \
    hover:shadow-[0_0_18px_rgba(139,92,246,0.45)] hover:scale-105'
-
-const backendHover =
-  'hover:text-white hover:border-cyan-400/70 hover:bg-gradient-sub \
-   hover:shadow-[0_0_18px_rgba(34,211,238,0.45)] hover:scale-105'
 
 export default function Footer() {
   return (
@@ -52,7 +48,7 @@ export default function Footer() {
             <h3 className="mb-4 font-semibold text-white">Tech Stack</h3>
 
             <p className="mb-2 text-xs text-purple-400">Frontend</p>
-            <ul className="mb-4 flex flex-wrap gap-2 text-xs">
+            <ul className="mb-10 flex flex-wrap gap-2 text-xs">
               {FRONTEND_STACK.map((tech) => (
                 <li key={tech} className={`${baseTagStyle} ${frontendHover}`}>
                   {tech}
@@ -60,47 +56,29 @@ export default function Footer() {
               ))}
             </ul>
 
-            <p className="mb-2 text-xs text-cyan-400">Backend</p>
-            <ul className="flex flex-wrap gap-2 text-xs">
-              {BACKEND_STACK.map((tech) => (
-                <li key={tech} className={`${baseTagStyle} ${backendHover}`}>
-                  {tech}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* GitHub */}
-          <div>
-            <h3 className="mb-4 font-semibold text-white">Open Source</h3>
-            <div className="space-y-3 text-sm text-white/60">
-              <Link
-                href="https://github.com/oz-union-14-team1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 transition-colors hover:text-main-violet"
-              >
-                <Github size={16} />
-                Organization Repository
-              </Link>
-              <Link
-                href="https://github.com/oz-union-14-team1/oz-union-fe-14-team1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 transition-colors hover:text-main-violet"
-              >
-                <Github size={16} />
-                Frontend Repository
-              </Link>
-              <Link
-                href="https://github.com/oz-union-14-team1/oz-union-be-14-team1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 transition-colors hover:text-main-violet"
-              >
-                <Github size={16} />
-                Backend Repository
-              </Link>
+            {/* GitHub */}
+            <div>
+              <h3 className="mb-4 font-semibold text-white">Open Source</h3>
+              <div className="space-y-3 text-sm text-white/60">
+                <Link
+                  href="https://github.com/oz-union-14-team1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 transition-colors hover:text-main-violet"
+                >
+                  <Github size={16} />
+                  Organization Repository
+                </Link>
+                <Link
+                  href="https://github.com/oz-union-14-team1/oz-union-fe-14-team1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 transition-colors hover:text-main-violet"
+                >
+                  <Github size={16} />
+                  Frontend Repository
+                </Link>
+              </div>
             </div>
           </div>
         </div>

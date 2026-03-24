@@ -1,18 +1,22 @@
 'use client'
 
-import { useGamesByGenre } from '@/api/queries/usGenres'
 import GameCard from '@/components/common/game-card/GameCard'
 import GameLoader from '@/components/common/game-loader/GameLoader'
-import { GenreSlug } from '@/types'
+import { Game } from '@/types/api-response/game-response'
 
 type GenreListProps = {
-  genreSlug: GenreSlug
+  games: Game[]
+  isLoading: boolean
+  isError: boolean
   genreName: string
 }
 
-export default function GenreList({ genreSlug, genreName }: GenreListProps) {
-  const { data: games, isLoading, isError } = useGamesByGenre(genreSlug)
-
+export default function GenreList({
+  games,
+  isLoading,
+  isError,
+  genreName,
+}: GenreListProps) {
   if (isLoading) {
     return <GameLoader />
   }
@@ -24,10 +28,15 @@ export default function GenreList({ genreSlug, genreName }: GenreListProps) {
   }
 
   return (
-    <div className="grid grid-cols-2 gap-x-6 gap-y-10 md:grid-cols-3 lg:grid-cols-4">
+    <div className="mx-4 grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-6 md:px-0 lg:grid-cols-4">
       {games.map((game) => (
-        <div key={game.id}>
-          <GameCard id={game.id} name={game.name} image={game.image} />
+        <div key={game.id} className="overflow-hidden">
+          <GameCard
+            id={game.id}
+            name={game.name}
+            image={game.image}
+            variant="grid"
+          />
         </div>
       ))}
     </div>
