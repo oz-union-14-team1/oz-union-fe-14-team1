@@ -44,3 +44,23 @@ export type AiReviewSummary = {
   badPoints: string[]
   totalReview: string
 }
+
+/** GET /api/vi/community/reviews 응답 */
+export type CommunityReview = {
+  id: number
+  gameName: string
+  gameTitle: string
+  gameGenres: string[]
+  author: ReviewAuthor
+  content: string
+  rating: number
+  likeCount: number
+  createdAt: string
+}
+
+export type CommunityReviewList = {
+  count: number
+  next: string | null
+  previous: string | null
+  results: CommunityReview[]
+}

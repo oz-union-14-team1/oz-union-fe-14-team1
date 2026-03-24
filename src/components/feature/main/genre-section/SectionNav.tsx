@@ -2,16 +2,16 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 import { cn } from '@/utils'
 
-type GenreSectionNavDirection = 'prev' | 'next'
+type SectionNavDirection = 'prev' | 'next'
 
 type GenreSectionNavProps = {
-  direction: GenreSectionNavDirection
+  direction: SectionNavDirection
   onClick: () => void
   disabled?: boolean
   className?: string
 }
 
-export default function GenreSectionNav({
+export default function SectionNav({
   direction,
   onClick,
   disabled = false,

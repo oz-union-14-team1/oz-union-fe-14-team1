@@ -1,7 +1,7 @@
 import { cn } from '@/utils'
 
 type TagProps = {
-  label: string
+  label: React.ReactNode
   isSelected?: boolean
   onClick?: () => void
   className?: string
