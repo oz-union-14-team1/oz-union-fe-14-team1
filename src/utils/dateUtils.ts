@@ -11,6 +11,10 @@ export const getDayDiffFromNow = (createdAt: string | Date) => {
   return diffDays
 }
 
+export const formatDate = (dateStr: string) => {
+  return new Date(dateStr).toISOString().slice(0, 10)
+}
+
 // 연도로 비교 후 최신게임 6개 추출
 export const getLatestGames = (games: Game[]) =>
   [...games]
